@@ -3,202 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المصحف الذكي - واجهة عصرية</title>
+    <title>القسم الذكي - تتبع القرآن الكريم</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --primary: #1a3a5f; /* أزرق ملكي إسلامي */
-            --gold: #c5a059;    /* ذهبي هادئ */
-            --kids-bg: #f39c12;
-            --adults-bg: #27ae60;
-            --light-bg: #f4f7f6;
+            --primary: #1a3a5f; --gold: #c5a059; --kids: #f39c12; --adults: #27ae60; --bg: #f4f7f6;
         }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 100px; }
 
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--light-bg);
-            margin: 0;
-            padding-bottom: 50px;
-            color: #333;
+        /* الهيدر الجديد مع اللوجو والعنوان */
+        .header { 
+            background: var(--primary); 
+            padding: 20px 20px 60px 20px; 
+            color: white; 
+            border-radius: 0 0 50px 50px; 
+            text-align: center; 
+            position: relative;
         }
-
-        /* شريط المتابعة */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 6px;
-            background: #ccc;
-            z-index: 1000;
-        }
-        .progress-bar {
-            height: 100%;
-            background: var(--gold);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        .header {
-            background: var(--primary);
-            padding: 40px 20px;
-            color: white;
-            border-radius: 0 0 50px 50px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; color: var(--gold); }
-
-        .video-wrapper {
-            width: 90%;
-            max-width: 650px;
-            margin: -30px auto 30px;
-            background: #000;
-            border-radius: 25px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            border: 3px solid white;
-        }
-
-        /* تنسيق الأقسام الكبيرة */
-        .main-category {
-            width: 90%;
-            max-width: 550px;
-            margin: 15px auto;
+        .logo-img {
+            width: 80px; height: 80px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
             background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 5px;
+            object-fit: contain;
+        }
+        .header h1 { font-family: 'Amiri', serif; font-size: 2rem; margin: 5px 0; color: var(--gold); }
+        .header p { font-size: 0.9rem; opacity: 0.9; margin: 0; }
+
+        /* إطار الفيديو الاحترافي */
+        .video-container {
+            width: 90%; max-width: 600px; margin: -40px auto 25px;
+            background: #000; border-radius: 25px;
+            position: relative; overflow: hidden;
+            aspect-ratio: 16/9; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 5px solid white;
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* البطاقات والأقسام المنزلقة */
+        .main-card {
+            width: 92%; max-width: 500px; margin: 15px auto;
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
             border: 1px solid #eee;
         }
+        .tab-trigger {
+            padding: 18px 22px; display: flex; justify-content: space-between;
+            align-items: center; cursor: pointer; font-weight: bold; font-size: 1.1rem;
+        }
+        .kids-head { border-right: 8px solid var(--kids); color: var(--kids); }
+        .adults-head { border-right: 8px solid var(--adults); color: var(--adults); }
 
-        .category-trigger {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: background 0.3s;
+        .tab-content { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: #fafafa; }
+        .inner-padding { padding: 20px; }
+
+        .label { display: block; font-size: 0.85rem; color: #7f8c8d; margin: 15px 0 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .button {
+            background: white; border: 1px solid #e0e0e0; padding: 14px;
+            border-radius: 15px; text-align: center; cursor: pointer;
+            font-size: 0.95rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .button:hover { border-color: var(--gold); background: #fffdf9; }
+        .button:active { transform: scale(0.96); background: #f9f9f9; }
+
+        /* زر التفسير المميز */
+        .interpret-btn {
+            grid-column: span 2; background: #f0f7ff; border: 1.5px dashed var(--primary);
+            font-weight: bold; color: var(--primary); margin-top: 10px;
         }
 
-        .kids-trigger { color: var(--kids-bg); border-right: 8px solid var(--kids-bg); }
-        .adults-trigger { color: var(--adults-bg); border-right: 8px solid var(--adults-bg); }
-
-        /* النافذة المنزلقة */
-        .category-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            background: #fafafa;
+        /* زر المكافأة النهائي */
+        .finish-area { margin-top: 50px; text-align: center; padding: 20px; }
+        .finish-btn {
+            background: linear-gradient(to left, var(--adults), #2ecc71); color: white; border: none;
+            padding: 16px 60px; border-radius: 50px; font-size: 1.2rem;
+            font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+            transition: 0.3s;
         }
+        .finish-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(46, 204, 113, 0.4); }
 
-        .sub-section { padding: 15px; }
-        .sub-title {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-            display: block;
-        }
-
-        .grid-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .btn-opt {
-            background: white;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-
-        .btn-opt:hover { background: #f0f0f0; border-color: var(--gold); }
-
-        .full-width { grid-column: span 2; background: #f9f9f9; font-weight: bold; }
-
+        .arrow { transition: 0.3s; font-size: 0.8rem; opacity: 0.6; }
         .rotate { transform: rotate(180deg); }
-        .arrow { transition: transform 0.3s; }
-
     </style>
 </head>
 <body>
 
-<div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
-
 <div class="header">
+    <img src="logo.png" alt="لوغو" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2904/2904843.png'">
     <h1>سورة المَسَد</h1>
-    <p>واجهة التعليم الذكي</p>
+    <p>القسم الذكي - من كتاب تتبع القرآن الكريم</p>
 </div>
 
-<div class="video-wrapper">
-    <iframe id="player" src="https://www.youtube.com/embed/Y7Y_C90G7_A5" allowfullscreen></iframe>
+<div class="video-container">
+    <iframe id="mainPlayer" src="https://www.youtube.com/embed/Y7Y_C90G7_A8" allowfullscreen></iframe>
 </div>
 
-<div class="main-category">
-    <div class="category-trigger kids-trigger" onclick="toggleSection('kidsContent', this)">
+<div class="main-card">
+    <div class="tab-trigger kids-head" onclick="toggleTab('kidsTab', this)">
         <span>قسم الأطفال 🧒</span>
         <span class="arrow">▼</span>
     </div>
-    <div id="kidsContent" class="category-content">
-        <div class="sub-section">
-            <span class="sub-title">تحفيظ الأطفال</span>
-            <div class="grid-options">
-                <div class="btn-opt" onclick="loadVid('wh_Hg-QPZ3c', 30)">🎤 قارئ الأطفال</div>
-                <div class="btn-opt" onclick="loadVid('pcqlr-Dy7Bo', 60)">🔁 تكرار السورة</div>
-                <div class="btn-opt full-width" onclick="loadVid('_z8FzYCU1FM', 100)">🎬 قصة السورة كرتون</div>
+    <div id="kidsTab" class="tab-content">
+        <div class="inner-padding">
+            <span class="label">تعليم الحفظ</span>
+            <div class="btn-grid">
+                <div class="button" onclick="playVid('wh_Hg-QPZ3c')">🎤 قارئ الأطفال</div>
+                <div class="button" onclick="playVid('pcqlr-Dy7Bo')">🔁 تكرار السورة</div>
+                <div class="button interpret-btn" onclick="playVid('_z8FzYCU1FM')">🎬 قصة السورة (كرتون)</div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="main-category">
-    <div class="category-trigger adults-trigger" onclick="toggleSection('adultsContent', this)">
+<div class="main-card">
+    <div class="tab-trigger adults-head" onclick="toggleTab('adultsTab', this)">
         <span>قسم الكبار 🧔</span>
         <span class="arrow">▼</span>
     </div>
-    <div id="adultsContent" class="category-content">
-        <div class="sub-section">
-            <span class="sub-title">رواية حفص عن عاصم</span>
-            <div class="grid-options">
-                <div class="btn-opt" onclick="loadVid('QRnSYpl9Axo', 25)">🎙️ فارس عباد</div>
-                <div class="btn-opt" onclick="loadVid('UxmM87DGXuM', 25)">🎙️ مشاري العفاسي</div>
+    <div id="adultsTab" class="tab-content">
+        <div class="inner-padding">
+            <span class="label">رواية حفص عن عاصم</span>
+            <div class="btn-grid">
+                <div class="button" onclick="playVid('QRnSYpl9Axo')">🎙️ فارس عباد</div>
+                <div class="button" onclick="playVid('UxmM87DGXuM')">🎙️ مشاري العفاسي</div>
             </div>
 
-            <span class="sub-title" style="margin-top:15px;">رواية ورش عن نافع</span>
-            <div class="grid-options">
-                <div class="btn-opt" onclick="loadVid('SA0GPRxNDus', 50)">🇩🇿 ياسين الجزائري</div>
-                <div class="btn-opt" onclick="loadVid('88GnucV9_wU', 50)">📜 محمود الحصري</div>
+            <span class="label" style="margin-top:20px;">رواية ورش عن نافع</span>
+            <div class="btn-grid">
+                <div class="button" onclick="playVid('SA0GPRxNDus')">🇩🇿 ياسين الجزائري</div>
+                <div class="button" onclick="playVid('88GnucV9_wU')">📜 محمود الحصري</div>
             </div>
 
-            <span class="sub-title" style="margin-top:15px;">التفسير والبيان</span>
-            <div class="grid-options">
-                <div class="btn-opt full-width" onclick="loadVid('M_9I_T6I1Sg', 100)">📚 تفسير السورة (رسمي)</div>
-            </div>
+            <span class="label" style="margin-top:20px;">التفسير والبيان</span>
+            <div class="button interpret-btn" onclick="playVid('M_9I_T6I1Sg')">📚 تفسير السورة (رسمي)</div>
         </div>
     </div>
 </div>
 
+<div class="finish-area">
+    <button class="finish-btn" onclick="celebrate()">لقد أنهيت السورة! 🎊</button>
+</div>
+
 <script>
-    function toggleSection(id, el) {
+    function toggleTab(id, el) {
         const content = document.getElementById(id);
         const arrow = el.querySelector('.arrow');
         
-        // غلق الأقسام الأخرى (اختياري)
-        document.querySelectorAll('.category-content').forEach(c => {
-            if(c.id !== id) {
-                c.style.maxHeight = null;
-                c.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
+        // إغلاق القسم الآخر تلقائياً (اختياري لجمال الواجهة)
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            if(tab.id !== id) {
+                tab.style.maxHeight = null;
+                tab.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
             }
         });
 
@@ -211,15 +175,19 @@
         }
     }
 
-    function loadVid(id, progress) {
-        document.getElementById('player').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
-        document.getElementById('myBar').style.width = progress + "%";
-        
-        if(progress === 100) {
-            setTimeout(() => {
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            }, 500);
-        }
+    function playVid(id) {
+        document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+        // تمرير الصفحة للأعلى قليلاً لرؤية الفيديو
+        window.scrollTo({top: 50, behavior: 'smooth'});
+    }
+
+    function celebrate() {
+        confetti({ 
+            particleCount: 150, 
+            spread: 70, 
+            origin: { y: 0.8 },
+            colors: ['#c5a059', '#1a3a5f', '#27ae60']
+        });
     }
 </script>
 
