@@ -1,82 +1,22 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة المسد - المصحف الذكي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <style>
-        :root { --primary: #2c3e50; --kids: #f39c12; --adults: #27ae60; --bg: #f8f9fa; }
-        body { font-family: 'Tajawal', sans-serif; background: var(--bg); margin: 0; padding-bottom: 40px; }
-        .header { background: linear-gradient(135deg, var(--primary), #34495e); padding: 35px 20px; color: white; border-radius: 0 0 40px 40px; text-align: center; }
-        .header h1 { font-family: 'Amiri', serif; font-size: 2.2rem; margin: 0; }
-        .video-box { width: 92%; max-width: 600px; margin: -30px auto 20px; background: #000; border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        iframe { width: 100%; height: 100%; border: none; }
-        .tabs { display: flex; justify-content: center; gap: 10px; margin: 20px; }
-        .tab-btn { padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; background: #dcdde1; transition: 0.3s; }
-        .active-kids { background: var(--kids); color: white; }
-        .active-adults { background: var(--adults); color: white; }
-        .grid { display: none; grid-template-columns: 1fr 1fr; gap: 12px; width: 90%; max-width: 500px; margin: 0 auto; }
-        .active-grid { display: grid; }
-        .card { background: white; padding: 15px; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; text-align: center; }
-        .card-title { font-size: 0.8rem; font-weight: bold; color: #2d3436; margin-top: 5px; }
-        .section-label { grid-column: span 2; color: #7f8c8d; font-size: 0.85rem; margin: 10px 0; text-align: right; border-right: 3px solid var(--kids); padding-right: 8px; }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <h1>سورة المَسَد</h1>
-    <p>بوابتك لتعلم القرآن الكريم</p>
-</div>
-
-<div class="video-box">
-    <iframe id="mainPlayer" src="https://www.youtube.com/embed/88GnucV9_wU" allowfullscreen></iframe>
-</div>
-
-<div class="tabs">
-    <button id="kBtn" class="tab-btn active-kids" onclick="setMode('kids')">قسم الأطفال 🧒</button>
-    <button id="aBtn" class="tab-btn" onclick="setMode('adults')">قسم الكبار 🧔</button>
-</div>
-
-<div id="kGrid" class="grid active-grid">
-    <div class="section-label" style="border-right-color: var(--kids)">تحفيظ وتكرار</div>
-    <div class="card" onclick="play('wh_Hg-QPZ3c')">📖 الحصري (معلم)</div>
-    <div class="card" onclick="play('pcqlr-Dy7Bo')">🔁 تكرار للأطفال</div>
-    <div class="section-label" style="border-right-color: var(--kids)">فهم السورة</div>
-    <div class="card" style="grid-column: span 2;" onclick="play('_z8FzYCU1FM')">🎥 قصة السورة (كرتون)</div>
-</div>
-
 <div id="aGrid" class="grid">
-    <div class="section-label" style="border-right-color: var(--adults)">رواية ورش</div>
-    <div class="card" onclick="play('SA0GPRxNDus')">🇩🇿 ياسين الجزائري</div>
-    <div class="card" onclick="play('88GnucV9_wU')">📜 الحصري (ورش)</div>
+    <div class="section-label" style="border-right-color: var(--adults)">رواية ورش (الجزائر)</div>
+    <div class="card" onclick="play('SA0GPRxNDus')"> <span class="card-icon">🇩🇿</span>
+        <div class="card-title">ياسين الجزائري</div>
+    </div>
+    <div class="card" onclick="play('88GnucV9_wU')"> <span class="card-icon">📜</span>
+        <div class="card-title">الحصري (ورش)</div>
+    </div>
     
     <div class="section-label" style="border-right-color: var(--adults)">رواية حفص</div>
-    <div class="card" onclick="play('QRnSYpl9Axo')">🎙️ فارس عباد</div>
-    <div class="card" onclick="play('UxmM87DGXuM')">✨ مشاري العفاسي</div>
+    <div class="card" onclick="play('QRnSYpl9Axo')"> <span class="card-icon">🎙️</span>
+        <div class="card-title">فارس عباد</div>
+    </div>
+    <div class="card" onclick="play('UxmM87DGXuM')"> <span class="card-icon">✨</span>
+        <div class="card-title">مشاري العفاسي</div>
+    </div>
     
     <div class="section-label" style="border-right-color: var(--adults)">التفسير الرسمي</div>
-    <div class="card" style="grid-column: span 2;" onclick="play('M_9I_T6I1Sg')">📚 تفسير السعدي (رسمي)</div>
+    <div class="card" style="grid-column: span 2;" onclick="play('M_9I_T6I1Sg')"> <span class="card-icon">📚</span>
+        <div class="card-title">تفسير السعدي (رسمي)</div>
+    </div>
 </div>
-
-<button onclick="celebrate()" style="margin:30px auto; display:block; background:#27ae60; color:white; border:none; padding:15px 40px; border-radius:50px; font-weight:bold; cursor:pointer;">تم الحفظ بحمد الله 🎊</button>
-
-<script>
-    function setMode(m) {
-        document.getElementById('kBtn').className = m==='kids' ? 'tab-btn active-kids' : 'tab-btn';
-        document.getElementById('aBtn').className = m==='adults' ? 'tab-btn active-adults' : 'tab-btn';
-        document.getElementById('kGrid').style.display = m==='kids' ? 'grid' : 'none';
-        document.getElementById('aGrid').style.display = m==='adults' ? 'grid' : 'none';
-    }
-    function play(id) {
-        document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
-        window.scrollTo({top: 50, behavior: 'smooth'});
-    }
-    function celebrate() {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-    }
-</script>
-</body>
-</html>
