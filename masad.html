@@ -3,216 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتابي الذكي - سورة المسد</title>
+    <title>المصحف الذكي - سورة المسد</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    
     <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #00cec9;
-            --accent: #fd79a8;
-            --bg: #f9fbfd;
-            --card-bg: #ffffff;
-        }
+        :root { --primary: #2c3e50; --secondary: #2980b9; --kids-color: #e67e22; --adults-color: #27ae60; --bg: #f8f9fa; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg); margin: 0; padding-bottom: 40px; }
+        
+        .header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 40px 20px; color: white; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; }
 
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #2d3436;
-        }
+        .video-box { width: 92%; max-width: 650px; margin: -35px auto 20px auto; background: #000; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); aspect-ratio: 16/9; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* رأس الصفحة */
-        .header {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 30px 20px 60px 20px;
-            color: white;
-            text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+        .tabs { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .tab-btn { padding: 12px 25px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; background: #dcdde1; transition: 0.3s; }
+        .tab-btn.active-kids { background: var(--kids-color); color: white; }
+        .tab-btn.active-adults { background: var(--adults-color); color: white; }
 
-        .header h1 {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            margin: 0;
-        }
+        .content-section { display: none; width: 90%; max-width: 550px; margin: 0 auto; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .active-section { display: grid; animation: slideUp 0.4s ease; }
 
-        /* منطقة الفيديو */
-        .video-container {
-            width: 90%;
-            max-width: 500px;
-            background: #000;
-            margin-top: -40px;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            aspect-ratio: 16/9;
-            position: relative;
-        }
+        .card { background: white; padding: 15px; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; text-align: center; border: 2px solid transparent; transition: 0.2s; }
+        .card:hover { border-color: var(--secondary); }
+        .card-icon { font-size: 30px; display: block; margin-bottom: 5px; }
+        .card-title { font-size: 0.85rem; font-weight: bold; color: #34495e; }
 
-        #mainPlayer {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-        }
+        .section-title { grid-column: span 2; font-size: 1rem; color: #7f8c8d; margin: 10px 0 5px 0; text-align: right; border-right: 4px solid var(--secondary); padding-right: 10px; }
 
-        .player-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: white;
-            background: #2d3436;
-            text-align: center;
-            padding: 20px;
-        }
+        .finish-btn { margin-top: 30px; background: #27ae60; color: white; border: none; padding: 15px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3); }
 
-        /* شبكة البطاقات */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            width: 90%;
-            max-width: 500px;
-            margin: 25px 0;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 3px solid transparent;
-        }
-
-        .card:active {
-            transform: scale(0.9);
-            background: #f0f0f0;
-        }
-
-        .card.active {
-            border-color: var(--primary);
-            background: #f1f0ff;
-        }
-
-        .card-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .card-text {
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        /* زر الإنجاز */
-        .done-btn {
-            background: linear-gradient(to right, #00b894, #55efc4);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin: 20px 0;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,184,148,0.3);
-        }
-
-        /* فوتر بسيط */
-        .footer {
-            font-size: 0.8rem;
-            color: #b2bec3;
-            margin-bottom: 30px;
-        }
-
-        /* انيميشن خفيف */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate { animation: fadeIn 0.6s ease forwards; }
-
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1 class="animate">سورة المَسَد</h1>
-        <p class="animate" style="animation-delay: 0.2s;">استمع، تتبع، واحفظ</p>
+<div class="header">
+    <h1>سورة المَسَد</h1>
+    <p>تتبع، تعلم، واحفظ</p>
+</div>
+
+<div class="video-box">
+    <iframe id="mainPlayer" src="https://www.youtube.com/embed/videoseries?list=PL6863001C6DB4543E" allowfullscreen></iframe>
+</div>
+
+<div class="tabs">
+    <button id="kidsBtn" class="tab-btn active-kids" onclick="showTab('kids')">قسم الأطفال 🧒</button>
+    <button id="adultsBtn" class="tab-btn" onclick="showTab('adults')">قسم الكبار 🧔</button>
+</div>
+
+<div id="kidsSection" class="content-section active-section">
+    <div class="section-title">تعليم الحفظ</div>
+    <div class="card" onclick="playVid('HAtHAbWp3kE')"> <span class="card-icon">👨‍🏫</span>
+        <div class="card-title">المصحف المعلم</div>
     </div>
-
-    <div class="video-container animate" style="animation-delay: 0.4s;">
-        <div id="placeholder" class="player-placeholder">
-            <span style="font-size: 50px;">🌟</span>
-            <p>اضغط على أحد الخيارات في الأسفل للبدء</p>
-        </div>
-        <iframe id="mainPlayer" src="" allow="autoplay; fullscreen"></iframe>
+    <div class="card" onclick="playVid('p_2L_7_jYv4')"> <span class="card-icon">🔁</span>
+        <div class="card-title">تكرار الحفظ</div>
     </div>
-
-    <div class="grid animate" style="animation-delay: 0.6s;">
-        <div class="card" onclick="loadContent(this, 'https://drive.google.com/file/d/119rt9BUQFnPkkApsl_6aUEaBNWNFfGs3/preview')">
-            <span class="card-icon">📖</span>
-            <span class="card-text">تلاوة بصرية</span>
-        </div>
-        
-        <div class="card" onclick="loadContent(this, 'https://drive.google.com/file/d/13lna4UxCy43xgsbXyseFnX6KblwJSJAu/preview')">
-            <span class="card-icon">🧒</span>
-            <span class="card-text">تكرار المعلم</span>
-        </div>
-
-        <div class="card" style="grid-column: span 2;" onclick="loadContent(this, 'https://drive.google.com/file/d/1h4b4qUxsDG2jnKf_zxk2uqbeSdFx6L_x/preview')">
-            <span class="card-icon">🎧</span>
-            <span class="card-text">التفسير الميسر</span>
-        </div>
+    <div class="section-title">الفهم والتدبر</div>
+    <div class="card" style="grid-column: span 2;" onclick="playVid('L4x09mBfO18')"> <span class="card-icon">🎥</span>
+        <div class="card-title">قصة السورة للأطفال</div>
     </div>
+</div>
 
-    <button class="done-btn animate" style="animation-delay: 0.8s;" onclick="celebrate()">لقد أنهيت كتابة السورة! 🎉</button>
+<div id="adultsSection" class="content-section">
+    <div class="section-title">اختر القارئ</div>
+    <div class="card" onclick="playVid('D9_vjSj8mE0')"> <span class="card-icon">🎙️</span>
+        <div class="card-title">فارس عباد</div>
+    </div>
+    <div class="card" onclick="playVid('1L9G-Gv054A')"> <span class="card-icon">🇩🇿</span>
+        <div class="card-title">ياسين الجزائري</div>
+    </div>
+    <div class="card" onclick="playVid('Y7Y_C90G7_A')"> <span class="card-icon">📜</span>
+        <div class="card-title">محمود الحصري</div>
+    </div>
+    <div class="section-title">التفسير والتدبر</div>
+    <div class="card" style="grid-column: span 2;" onclick="playVid('H1H8f7G7E5k')"> <span class="card-icon">📚</span>
+        <div class="card-title">تفسير السورة (الكبار)</div>
+    </div>
+</div>
 
-    <div class="footer">كتاب القرآن الذكي - 2024</div>
+<button class="finish-btn" onclick="celebrate()">لقد أنهيت السورة! 🎊</button>
 
-    <script>
-        function loadContent(element, url) {
-            // إخفاء الـ Placeholder وإظهار الـ Iframe
-            document.getElementById('placeholder').style.display = 'none';
-            const player = document.getElementById('mainPlayer');
-            player.style.display = 'block';
-            player.src = url;
+<script>
+    function showTab(mode) {
+        const kBtn = document.getElementById('kidsBtn');
+        const aBtn = document.getElementById('adultsBtn');
+        const kSec = document.getElementById('kidsSection');
+        const aSec = document.getElementById('adultsSection');
 
-            // تحديث شكل البطاقات (إضافة حدود للبطاقة المختارة)
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-            element.classList.add('active');
-
-            // سكرول للأعلى ليشاهد الطفل الفيديو
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        if(mode === 'kids') {
+            kBtn.classList.add('active-kids'); aBtn.classList.remove('active-adults');
+            kSec.classList.add('active-section'); aSec.classList.remove('active-section');
+        } else {
+            aBtn.classList.add('active-adults'); kBtn.classList.remove('active-kids');
+            aSec.classList.add('active-section'); kSec.classList.remove('active-section');
         }
+    }
 
-        function celebrate() {
-            // تشغيل المفرقعات (Confetti)
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#6c5ce7', '#00cec9', '#fd79a8', '#feca57']
-            });
+    function playVid(id) {
+        document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/" + id + "?rel=0&autoplay=1";
+        window.scrollTo({top: 50, behavior: 'smooth'});
+    }
 
-            // يمكن إضافة صوت تصفيق هنا أيضاً
-            alert("ما شاء الله! أنت بطل.. واصل الحفظ");
-        }
-    </script>
+    function celebrate() {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+</script>
+
 </body>
 </html>
