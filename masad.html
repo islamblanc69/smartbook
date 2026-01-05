@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المصحف الذكي - سورة المسد</title>
+    <title>سورة المسد - المصحف الذكي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -28,11 +28,11 @@
 
 <div class="header">
     <h1>سورة المَسَد</h1>
-    <p>اختر القارئ وابدأ الحفظ</p>
+    <p>بوابتك لتعلم القرآن الكريم</p>
 </div>
 
 <div class="video-box">
-    <iframe id="mainPlayer" src="https://www.youtube.com/embed/wh_Hg-QPZ3c" allowfullscreen></iframe>
+    <iframe id="mainPlayer" src="https://www.youtube.com/embed/88GnucV9_wU" allowfullscreen></iframe>
 </div>
 
 <div class="tabs">
@@ -42,24 +42,26 @@
 
 <div id="kGrid" class="grid active-grid">
     <div class="section-label" style="border-right-color: var(--kids)">تحفيظ وتكرار</div>
-    <div class="card" onclick="play('wh_Hg-QPZ3c')">📖 المصحف المعلم</div>
+    <div class="card" onclick="play('wh_Hg-QPZ3c')">📖 الحصري (معلم)</div>
     <div class="card" onclick="play('pcqlr-Dy7Bo')">🔁 تكرار للأطفال</div>
     <div class="section-label" style="border-right-color: var(--kids)">فهم السورة</div>
     <div class="card" style="grid-column: span 2;" onclick="play('_z8FzYCU1FM')">🎥 قصة السورة (كرتون)</div>
 </div>
 
 <div id="aGrid" class="grid">
-    <div class="section-label" style="border-right-color: var(--adults)">رواية ورش (الجزائر)</div>
+    <div class="section-label" style="border-right-color: var(--adults)">رواية ورش</div>
     <div class="card" onclick="play('SA0GPRxNDus')">🇩🇿 ياسين الجزائري</div>
     <div class="card" onclick="play('88GnucV9_wU')">📜 الحصري (ورش)</div>
+    
     <div class="section-label" style="border-right-color: var(--adults)">رواية حفص</div>
     <div class="card" onclick="play('QRnSYpl9Axo')">🎙️ فارس عباد</div>
     <div class="card" onclick="play('UxmM87DGXuM')">✨ مشاري العفاسي</div>
-    <div class="section-label" style="border-right-color: var(--adults)">التفسير</div>
-    <div class="card" style="grid-column: span 2;" onclick="play('NW68o3k4KmY')">📚 تفسير وأسباب النزول</div>
+    
+    <div class="section-label" style="border-right-color: var(--adults)">التفسير الرسمي</div>
+    <div class="card" style="grid-column: span 2;" onclick="play('M_9I_T6I1Sg')">📚 تفسير السعدي (رسمي)</div>
 </div>
 
-<button onclick="celebrate()" style="margin-top:30px; background:#27ae60; color:white; border:none; padding:15px 40px; border-radius:50px; font-weight:bold; cursor:pointer;">تم الحفظ بحمد الله 🎊</button>
+<button onclick="celebrate()" style="margin:30px auto; display:block; background:#27ae60; color:white; border:none; padding:15px 40px; border-radius:50px; font-weight:bold; cursor:pointer;">تم الحفظ بحمد الله 🎊</button>
 
 <script>
     function setMode(m) {
