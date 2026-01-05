@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المعلم الذكي - سورة المسد</title>
+    <title>تتبع القرآن - سورة المسد</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -28,7 +28,7 @@
         .interpret-btn { grid-column: span 2; background: #f0f7ff; border: 1.5px dashed var(--primary); font-weight: bold; color: var(--primary); margin-top: 15px; }
         .finish-area { margin-top: 60px; text-align: center; }
         .finish-btn { background: linear-gradient(to left, var(--adults), #2ecc71); color: white; border: none; padding: 18px 70px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3); transition: 0.4s; }
-        .is-finished { background: var(--gold) !important; box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4) !important; }
+        .is-finished { background: var(--gold) !important; }
         .arrow { transition: 0.3s; font-size: 0.9rem; }
         .rotate { transform: rotate(180deg); }
     </style>
@@ -36,13 +36,13 @@
 <body onload="checkProgress()">
 
 <div class="header">
-    <img src="image.png" alt="لوغو الموقع" class="logo-img">
+    <img src="image.png" alt="لوغو" class="logo-img">
     <div class="site-subtitle">تتبع القرآن الكريم - سورة المسد</div>
     <h1>سورة المَسَد</h1>
 </div>
 
 <div class="video-container">
-    <iframe id="mainPlayer" src="https://youtu.be/1d5Oz-LIx_8" allowfullscreen></iframe>
+    <iframe id="mainPlayer" src="https://www.youtube.com/embed/egZOjxkXuec" allowfullscreen></iframe>
 </div>
 
 <div class="main-card">
@@ -52,11 +52,10 @@
     </div>
     <div id="kidsTab" class="tab-content">
         <div class="inner-padding">
-            <span class="label">المصحف المعلم والتكرار</span>
+            <span class="label">تحفيظ للأطفال</span>
             <div class="btn-grid">
                 <div class="button" onclick="playVid('egZOjxkXuec')">🎤 المنشاوي معلم</div>
-                <div class="button" onclick="playVid('pcqlr-Dy7Bo')">🔁 تكرار السورة</div>
-                <div class="button interpret-btn" onclick="playVid('_z8FzYCU1FM')">🎬 تفسير السورة (كرتون)</div>
+                <div class="button interpret-btn" onclick="playVid('_z8FzYCU1FM')">🎬 تفسير السورة للأطفال</div>
             </div>
         </div>
     </div>
@@ -69,20 +68,21 @@
     </div>
     <div id="adultsTab" class="tab-content">
         <div class="inner-padding">
-            <span class="label">قراءات مختارة (حفص)</span>
+            <span class="label">قراءات (حفص وورش)</span>
             <div class="btn-grid">
-                <div class="button" onclick="playVid('QRnSYpl9Axo')">🎙️ فارس عباد</div>
+                <div class="button" onclick="playVid('QRnSYpl9Axo')">🎙️ حفص (فارس عباد)</div>
+                <div class="button" onclick="playVid('SA0GPRxNDus')">🇩🇿 ورش (ياسين الجزائري)</div>
+                <div class="button" style="grid-column: span 2;" onclick="playVid('-cF2DWuNB1E')">📜 ورش (محمود الحصري)</div>
             </div>
-            <span class="label">قراءات مختارة (ورش)</span>
+
+            <span class="label">تكرار السورة (للحفظ)</span>
             <div class="btn-grid">
-                <div class="button" onclick="playVid('SA0GPRxNDus')">🇩🇿 ياسين الجزائري</div>
-                <div class="button" onclick="playVid('-cF2DWuNB1E')">📜 محمود الحصري</div>
+                <div class="button" onclick="playVid('yZnWaYTbWTU')">🔁 تكرار حفص</div>
+                <div class="button" onclick="playVid('88GnucV9_wU')">🔁 تكرار ورش</div>
             </div>
-            <span class="label">التفسير والتكرار</span>
-            <div class="btn-grid">
-                <div class="button interpret-btn" onclick="playVid('xztsuWtMBaM')">📚 تفسير السورة (الشعراوي)</div>
-                <div class="button interpret-btn" onclick="playVid('yZnWaYTbWTU')">🔁 تكرار (فارس عباد)</div>
-            </div>
+
+            <span class="label">التفسير</span>
+            <div class="button interpret-btn" onclick="playVid('xztsuWtMBaM')">📚 تفسير الشيخ الشعراوي</div>
         </div>
     </div>
 </div>
@@ -113,7 +113,7 @@
     }
 
     function playVid(id) {
-        document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+        document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
         window.scrollTo({top: 50, behavior: 'smooth'});
     }
 
@@ -130,20 +130,13 @@
     }
 
     function checkProgress() {
-        if (localStorage.getItem('finish_' + surahId) === 'true') {
-            updateBtnStyle(true);
-        }
+        if (localStorage.getItem('finish_' + surahId) === 'true') { updateBtnStyle(true); }
     }
 
     function updateBtnStyle(finished) {
         const btn = document.getElementById('finishBtn');
-        if (finished) {
-            btn.innerHTML = "تم الحفظ بنجاح ✅ (اضغط للإلغاء)";
-            btn.classList.add('is-finished');
-        } else {
-            btn.innerHTML = "لقد أنهيت السورة! 🎊";
-            btn.classList.remove('is-finished');
-        }
+        btn.innerHTML = finished ? "تم الحفظ بنجاح ✅ (إلغاء)" : "لقد أنهيت السورة! 🎊";
+        if(finished) btn.classList.add('is-finished'); else btn.classList.remove('is-finished');
     }
 </script>
 
