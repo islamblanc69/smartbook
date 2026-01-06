@@ -94,10 +94,6 @@
             font-size: 1.8rem;
         }
         
-        .section-title i {
-            font-size: 2rem;
-        }
-        
         /* أشرطة القارئ */
         .reciter-tabs {
             display: flex;
@@ -130,23 +126,54 @@
         }
         
         /* مشغلات الفيديو والصوت */
-        .media-container {
-            position: relative;
+        .video-container {
             width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
+            height: 300px;
             margin: 20px 0;
             border-radius: 15px;
             overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
         
-        .media-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-placeholder {
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #3b82f6;
+        }
+        
+        .watch-btn {
+            padding: 12px 30px;
+            background: #3b82f6;
+            color: white;
             border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .watch-btn:hover {
+            background: #2563eb;
+            transform: scale(1.05);
         }
         
         .audio-player {
@@ -164,6 +191,51 @@
             gap: 15px;
             margin-top: 15px;
             flex-wrap: wrap;
+        }
+        
+        .custom-audio-player {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .custom-audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .audio-btn {
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+        
+        .audio-btn:hover {
+            background: #2563eb;
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #3b82f6;
+            width: 0%;
+            transition: width 0.1s linear;
         }
         
         /* زر السورة المكتوبة */
@@ -343,6 +415,19 @@
             border-radius: 5px;
             font-weight: bold;
         }
+        
+        /* مشغل الصوت المحسن */
+        .audio-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .time-display {
+            font-family: monospace;
+            color: #64748b;
+        }
     </style>
 </head>
 <body>
@@ -386,12 +471,17 @@
                 
                 <!-- فيديو معلم الأطفال -->
                 <h3>🎬 فيديو تعليمي للأطفال:</h3>
-                <div class="media-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/0Z0eRCePZ_s?rel=0&modestbranding=1" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div style="font-size: 4rem;">▶️</div>
+                        <h4>تعليم سورة الفاتحة للأطفال</h4>
+                        <p>اضغط على الزر لمشاهدة الفيديو التعليمي</p>
+                        <a href="https://www.youtube.com/watch?v=0Z0eRCePZ_s" 
+                           target="_blank" 
+                           class="watch-btn">
+                            📺 مشاهدة على يوتيوب
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- تفسير مبسط للأطفال -->
@@ -437,13 +527,33 @@
                     </button>
                 </div>
                 
-                <!-- مشغل الصوت -->
+                <!-- مشغل الصوت المحسن -->
                 <div class="audio-player">
-                    <h4>🔊 الآن تشغيل: <span id="current-reciter">محمود الحصري</span></h4>
-                    <audio id="audio-player" controls style="width: 100%; margin: 15px 0;">
-                        <source src="https://cdn.islamic.network/quran/audio/64/ar.husary/1.mp3" type="audio/mpeg">
-                        متصفحك لا يدعم مشغل الصوت.
-                    </audio>
+                    <div class="audio-info">
+                        <h4>🔊 الآن تشغيل: <span id="current-reciter">محمود الحصري</span></h4>
+                        <div class="time-display" id="time-display">0:00 / 0:00</div>
+                    </div>
+                    
+                    <div class="custom-audio-player">
+                        <div class="progress-container" onclick="seekAudio(event)">
+                            <div class="progress-bar" id="audio-progress"></div>
+                        </div>
+                        
+                        <div class="custom-audio-controls">
+                            <button class="audio-btn" onclick="togglePlay()" id="play-btn">
+                                <span>▶️</span> تشغيل
+                            </button>
+                            <button class="audio-btn" onclick="stopAudio()">
+                                <span>⏹️</span> إيقاف
+                            </button>
+                            <div style="flex-grow: 1;"></div>
+                            <div style="color: #64748b; font-size: 0.9rem;">
+                                الحجم: <input type="range" min="0" max="100" value="50" 
+                                       oninput="changeVolume(this.value)" 
+                                       style="vertical-align: middle;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- زر عرض السورة للكبار -->
@@ -470,7 +580,7 @@
                         ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ﴿٦﴾
                     </div>
                     <div style="font-size: 1.5rem; color: #1e40af;">
-                        صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ ﴿٧﴾
+                        صِرَٰطَ ٱلَّذِينَ أَنۡعَمتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ ﴿٧﴾
                     </div>
                 </div>
             </section>
@@ -524,7 +634,7 @@
             reasons: "سورة الفاتحة هي أول سورة نزلت كاملة، وتسمى بأم الكتاب وأم القرآن. نزلت لتكون أساس الصلاة التي هي عماد الدين، وهي السورة التي افتتح بها المصحف الشريف."
         };
 
-        // بيانات القراء
+        // بيانات القراء مع روابط مباشرة للصوت
         const reciters = {
             hussary: {
                 name: "محمود الحصري",
@@ -574,6 +684,12 @@
             }
         ];
 
+        // متغيرات مشغل الصوت
+        let audioPlayer = null;
+        let currentReciter = 'hussary';
+        let isPlaying = false;
+        let updateInterval = null;
+
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             // تعبئة معلومات السورة
@@ -585,9 +701,25 @@
             // إنشاء أسئلة الاختبار
             createQuizQuestions();
             
+            // تهيئة مشغل الصوت
+            initAudioPlayer();
+            
             // تشغيل القارئ الأول
             playReciter('hussary');
         });
+
+        // تهيئة مشغل الصوت
+        function initAudioPlayer() {
+            audioPlayer = new Audio();
+            audioPlayer.preload = 'auto';
+            audioPlayer.volume = 0.5;
+            
+            // أحداث مشغل الصوت
+            audioPlayer.addEventListener('loadedmetadata', updateDuration);
+            audioPlayer.addEventListener('timeupdate', updateProgress);
+            audioPlayer.addEventListener('ended', onAudioEnded);
+            audioPlayer.addEventListener('error', onAudioError);
+        }
 
         // تبديل عرض السورة
         function toggleSurahText(type) {
@@ -607,9 +739,11 @@
 
         // تشغيل القارئ المحدد
         function playReciter(reciterId) {
+            // إيقاف الصوت الحالي
+            stopAudio();
+            
             const reciter = reciters[reciterId];
-            const audioPlayer = document.getElementById('audio-player');
-            const currentReciterSpan = document.getElementById('current-reciter');
+            currentReciter = reciterId;
             
             // تحديث زر القارئ النشط
             document.querySelectorAll('.reciter-btn').forEach(btn => {
@@ -619,11 +753,125 @@
             
             // تغيير المصدر وعرض اسم القارئ
             audioPlayer.src = reciter.audio;
-            currentReciterSpan.textContent = reciter.name;
+            document.getElementById('current-reciter').textContent = reciter.name;
             
-            // تشغيل الصوت
+            // إعادة تعيين المشغل
+            document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
+            isPlaying = false;
+            document.getElementById('audio-progress').style.width = '0%';
+            document.getElementById('time-display').textContent = '0:00 / 0:00';
+            
+            // تحميل الصوت
             audioPlayer.load();
-            audioPlayer.play();
+        }
+
+        // تبديل التشغيل/الإيقاف المؤقت
+        function togglePlay() {
+            const playBtn = document.getElementById('play-btn');
+            
+            if (!audioPlayer.src) {
+                playReciter('hussary');
+                return;
+            }
+            
+            if (isPlaying) {
+                audioPlayer.pause();
+                playBtn.innerHTML = '<span>▶️</span> تشغيل';
+                clearInterval(updateInterval);
+            } else {
+                audioPlayer.play()
+                    .then(() => {
+                        playBtn.innerHTML = '<span>⏸️</span> إيقاف مؤقت';
+                        isPlaying = true;
+                        startProgressUpdate();
+                    })
+                    .catch(error => {
+                        console.error('خطأ في تشغيل الصوت:', error);
+                        alert('⚠️ تعذر تشغيل الصوت. يرجى التأكد من اتصال الإنترنت أو اختيار قارئ آخر.');
+                    });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // إيقاف الصوت
+        function stopAudio() {
+            if (audioPlayer) {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+                isPlaying = false;
+                document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
+                clearInterval(updateInterval);
+                document.getElementById('audio-progress').style.width = '0%';
+            }
+        }
+
+        // تغيير مستوى الصوت
+        function changeVolume(value) {
+            if (audioPlayer) {
+                audioPlayer.volume = value / 100;
+            }
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            if (audioPlayer.duration) {
+                const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                document.getElementById('audio-progress').style.width = progress + '%';
+                
+                // تحديث الوقت المعروض
+                const currentTime = formatTime(audioPlayer.currentTime);
+                const duration = formatTime(audioPlayer.duration);
+                document.getElementById('time-display').textContent = `${currentTime} / ${duration}`;
+            }
+        }
+
+        // تحديث المدة
+        function updateDuration() {
+            const duration = formatTime(audioPlayer.duration);
+            const currentTime = formatTime(audioPlayer.currentTime);
+            document.getElementById('time-display').textContent = `${currentTime} / ${duration}`;
+        }
+
+        // تقدم إلى وقت معين عند النقر على شريط التقدم
+        function seekAudio(event) {
+            if (audioPlayer.duration) {
+                const progressBar = event.currentTarget;
+                const clickPosition = event.offsetX;
+                const progressBarWidth = progressBar.offsetWidth;
+                const seekTime = (clickPosition / progressBarWidth) * audioPlayer.duration;
+                
+                audioPlayer.currentTime = seekTime;
+                updateProgress();
+            }
+        }
+
+        // عند انتهاء الصوت
+        function onAudioEnded() {
+            document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
+            isPlaying = false;
+            clearInterval(updateInterval);
+        }
+
+        // عند حدوث خطأ في الصوت
+        function onAudioError() {
+            console.error('خطأ في تحميل الصوت:', audioPlayer.error);
+            alert('⚠️ تعذر تحميل الصوت. يرجى التأكد من اتصال الإنترنت أو اختيار قارئ آخر.');
+            stopAudio();
+        }
+
+        // بدء تحديث التقدم
+        function startProgressUpdate() {
+            clearInterval(updateInterval);
+            updateInterval = setInterval(updateProgress, 100);
+        }
+
+        // تنسيق الوقت
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
         // إنشاء أسئلة الاختبار
@@ -707,7 +955,7 @@
             scoreCircle.style.setProperty('--percentage', `${percentage}%`);
             
             // تحديد العنوان والرسالة حسب النتيجة
-            let title, message;
+let title, message;
             if (percentage >= 90) {
                 title = "ممتاز! 🎉";
                 message = "إنجاز رائع! أنت على دراية ممتازة بسورة الفاتحة.";
