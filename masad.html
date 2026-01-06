@@ -3,182 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحفيظ القرآن - سورة المسد</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <title>سورة المسد - الواجهة المستقبلية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-main: #f8fafc;
-            --accent-gold: #fbbf24;
-            --accent-kids: #f472b6;
-            --accent-adults: #34d399;
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #39ff14;
+            --dark-space: #050505;
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--text-main);
-            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark-space);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
             margin: 0;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
-
-        /* الهيدر */
-        .header { text-align: center; padding: 30px 0; }
-        .logo { width: 80px; height: 80px; border-radius: 22px; margin-bottom: 15px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); border: 2px solid var(--accent-gold); }
-        .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; color: var(--accent-gold); }
-
-        /* مشغل الفيديو */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            background: #000;
-            margin-bottom: 30px;
-        }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-        /* البطاقات */
-        .section-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* الأزرار */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        
-        .btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 14px;
-            border-radius: 16px;
-            color: #fff;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s all;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            font-size: 0.95rem;
+            min-height: 100vh;
         }
 
-        .btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); border-color: var(--accent-gold); }
-        
-        .btn-full { grid-column: span 2; }
-        .btn-kids { border-left: 4px solid var(--accent-kids); }
-        .btn-adults { border-left: 4px solid var(--accent-adults); }
+        .cyber-container {
+            width: 95%;
+            max-width: 500px;
+            padding: 20px;
+        }
 
-        .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; text-align: right; }
+        /* الهيدر المستقبلي */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
 
-        /* زر الإنجاز */
-        .done-section { text-align: center; margin-top: 30px; }
-        .done-btn {
-            background: var(--accent-adults);
-            color: #064e3b;
-            border: none;
-            padding: 16px 50px;
-            border-radius: 100px;
-            font-size: 1.1rem;
+        .logo-frame {
+            position: relative;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .logo-img {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: #000;
+            display: block;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 15px 0 5px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        /* مشغل الفيديو السينمائي */
+        .screen-monitor {
+            border: 2px solid rgba(0, 242, 255, 0.3);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+            background: #000;
+            aspect-ratio: 16/9;
+            margin-bottom: 25px;
+        }
+
+        .screen-monitor iframe {
+            width: 100%; height: 100%; border: none;
+        }
+
+        /* البطاقات البرمجية */
+        .cyber-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 4px solid var(--neon-blue);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .card-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        /* الأزرار النيون */
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .cyber-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-btn:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .btn-kids { border-color: var(--neon-purple); color: #e0aaff; }
+        .btn-kids:hover { border-color: var(--neon-purple); box-shadow: 0 0 15px var(--neon-purple); }
+
+        .btn-wide { grid-column: span 2; }
+
+        /* زر الإنجاز الفضائي */
+        .core-action {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .core-btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             cursor: pointer;
-            transition: 0.4s;
-            box-shadow: 0 10px 20px rgba(52, 211, 153, 0.2);
+            transition: 0.5s;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
         }
-        .done-btn.active { background: var(--accent-gold); color: #78350f; }
+
+        .core-btn.locked {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            background: rgba(0, 242, 255, 0.2);
+            animation: none;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(57, 255, 20, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+        }
 
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="cyber-container">
     <div class="header">
-        <img src="image.png" class="logo" alt="logo">
-        <h1>سورة المسد</h1>
+        <div class="logo-frame">
+            <img src="image.png" class="logo-img" alt="Station Logo">
+        </div>
+        <h1>SURAH AL-MASAD</h1>
     </div>
 
-    <div class="video-wrapper">
-        <iframe id="tv" src="https://www.youtube.com/embed/CHuzxjvc_xI" allowfullscreen></iframe>
+    <div class="screen-monitor">
+        <iframe id="main-screen" src="https://www.youtube.com/embed/nS_Gv-V4hU0" allowfullscreen></iframe>
     </div>
 
-    <div class="section-card">
-        <div class="section-title" style="color: var(--accent-kids);">🧒 ركن الأشبال</div>
-        <div class="grid">
-            <button class="btn btn-kids" onclick="load('CHuzxjvc_xI')">🎤 المنشاوي معلم</button>
-            <button class="btn btn-kids" onclick="load('_z8FzYCU1FM')">🎬 تفسير أطفالنا</button>
+    <div class="cyber-card" style="border-right-color: var(--neon-purple);">
+        <span class="card-tag">// Kids Protocol</span>
+        <div class="control-grid">
+            <button class="cyber-btn btn-kids" onclick="cmd('CHuzxjvc_xI')">🎤 المنشاوي معلم</button>
+            <button class="cyber-btn btn-kids" onclick="cmd('_z8FzYCU1FM')">🎬 تفسير أطفالنا</button>
         </div>
     </div>
 
-    <div class="section-card">
-        <div class="section-title" style="color: var(--accent-adults);">🧔 ركن الكبار</div>
-        <div class="grid">
-            <div class="label-sm">الاستماع للقراءات</div>
-            <button class="btn btn-adults" onclick="load('QRnSYpl9Axo')">حفص - عباد</button>
-            <button class="btn btn-adults" onclick="load('SA0GPRxNDus')">ورش - ياسين</button>
-            <button class="btn btn-adults btn-full" onclick="load('-cF2DWuNB1E')">ورش - الحصري</button>
-            
-            <div class="label-sm">تكرار الحفظ</div>
-            <button class="btn btn-adults" onclick="load('wCJJssWWPNc')">🔁 تكرار حفص</button>
-            <button class="btn btn-adults" onclick="load('88GnucV9_wU')">🔁 تكرار ورش</button>
+    <div class="cyber-card">
+        <span class="card-tag">// Adult Interface</span>
+        <div class="control-grid">
+            <button class="cyber-btn" onclick="cmd('QRnSYpl9Axo')">حفص - فارس عباد</button>
+            <button class="cyber-btn" onclick="cmd('SA0GPRxNDus')">ورش - ياسين</button>
+            <button class="cyber-btn btn-wide" onclick="cmd('-cF2DWuNB1E')">ورش - محمود الحصري</button>
+            <button class="cyber-btn" onclick="cmd('wCJJssWWPNc')">🔁 تكرار حفص</button>
+            <button class="cyber-btn" onclick="cmd('88GnucV9_wU')">🔁 تكرار ورش</button>
         </div>
     </div>
 
-    <div class="done-section">
-        <button id="finish" class="done-btn" onclick="finish()">تم الحفظ بنجاح 🎊</button>
+    <div class="core-action">
+        <button id="mission-btn" class="core-btn" onclick="completeMission()">إكمال المهمة</button>
     </div>
 </div>
 
 <script>
-    const sid = "masad_glass_v1";
-    
-    function load(id) {
-        document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
-        window.scrollTo({top: 100, behavior: 'smooth'});
+    const STORAGE_KEY = "surah_masad_cyber";
+
+    function cmd(id) {
+        const screen = document.getElementById('main-screen');
+        screen.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&modestbranding=1&rel=0";
+        window.scrollTo({top: 50, behavior: 'smooth'});
     }
 
-    function finish() {
-        const btn = document.getElementById('finish');
-        const isDone = localStorage.getItem(sid) === 'y';
-        
-        if (!isDone) {
-            localStorage.setItem(sid, 'y');
-            btn.classList.add('active');
-            btn.innerText = "أحسنت! مبارك الحفظ ✅";
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+    function completeMission() {
+        const btn = document.getElementById('mission-btn');
+        const completed = localStorage.getItem(STORAGE_KEY) === 'true';
+
+        if (!completed) {
+            localStorage.setItem(STORAGE_KEY, 'true');
+            btn.classList.add('locked');
+            btn.innerText = "تمت المهمة بنجاح ✅";
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                colors: ['#00f2ff', '#bc13fe', '#39ff14'],
+                origin: { y: 0.7 }
+            });
         } else {
-            localStorage.removeItem(sid);
-            btn.classList.remove('active');
-            btn.innerText = "تم الحفظ بنجاح 🎊";
+            localStorage.removeItem(STORAGE_KEY);
+            btn.classList.remove('locked');
+            btn.innerText = "إكمال المهمة";
         }
     }
 
     window.onload = () => {
-        if(localStorage.getItem(sid) === 'y') {
-            const btn = document.getElementById('finish');
-            btn.classList.add('active');
-            btn.innerText = "أحسنت! مبارك الحفظ ✅";
+        if(localStorage.getItem(STORAGE_KEY) === 'true') {
+            const btn = document.getElementById('mission-btn');
+            btn.classList.add('locked');
+            btn.innerText = "تمت المهمة بنجاح ✅";
         }
     }
 </script>
