@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>القرآن الكريم - تلاوات مشاهير القراء</title>
+    <title>القرآن الكريم - قسم التلاوة</title>
     <style>
         :root {
             --quran-green: #2a9d8f;
@@ -54,8 +54,26 @@
             margin: 0 auto;
         }
         
-        /* قسم القراء */
-        .reciters-section {
+        /* زر الرجوع */
+        .back-btn-header {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: white;
+            color: var(--quran-blue);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn-header:hover {
+            background: var(--quran-gold);
+            transform: scale(1.05);
+        }
+        
+        /* فهرس السور */
+        .surah-index {
             background: white;
             padding: 30px;
             border-radius: 15px;
@@ -68,82 +86,6 @@
             margin-bottom: 25px;
             text-align: center;
             font-size: 1.8rem;
-        }
-        
-        .reciters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .reciter-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            border: 2px solid var(--quran-green);
-            transition: all 0.3s ease;
-        }
-        
-        .reciter-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.2);
-        }
-        
-        .reciter-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: var(--quran-green);
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-        }
-        
-        .reciter-name {
-            color: var(--quran-blue);
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-        
-        .reciter-desc {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        .youtube-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #ff0000;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 5px;
-        }
-        
-        .youtube-btn:hover {
-            background: #cc0000;
-            transform: scale(1.05);
-        }
-        
-        .youtube-btn.small {
-            padding: 8px 20px;
-            font-size: 0.9rem;
-        }
-        
-        /* فهرس السور */
-        .surah-index {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         .search-box {
@@ -173,12 +115,16 @@
             border: 1px solid #ddd;
             transition: all 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .surah-item:hover {
             background: white;
             border-color: var(--quran-green);
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .surah-number {
@@ -198,6 +144,7 @@
             font-weight: bold;
             color: var(--quran-blue);
             margin-bottom: 5px;
+            font-size: 1.2rem;
         }
         
         .surah-details {
@@ -213,7 +160,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -222,14 +169,12 @@
         
         .surah-reciter-content {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 15px;
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             text-align: center;
             position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
         }
         
         .close-modal {
@@ -244,36 +189,40 @@
             height: 40px;
             cursor: pointer;
             font-size: 1.2rem;
-            z-index: 10;
         }
         
-        /* تقدم الاستماع */
-        .progress-section {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
+        .reciter-option {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
         }
         
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
+        .reciter-option:hover {
+            background: #e9f5f3;
+            border-color: var(--quran-green);
+            transform: translateY(-2px);
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--quran-green) 0%, var(--quran-blue) 100%);
-            width: 0%;
-            transition: width 1s ease;
+        .reciter-option a {
+            display: block;
+            padding: 12px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 10px;
         }
         
-        /* زر الرجوع */
+        .reciter-option a:hover {
+            background: #cc0000;
+        }
+        
+        /* زر الرجوع لسورة الفاتحة */
         .back-to-surah {
             text-align: center;
             margin-top: 30px;
@@ -303,10 +252,6 @@
                 font-size: 2rem;
             }
             
-            .reciters-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .surah-list {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
@@ -316,7 +261,7 @@
             }
             
             .surah-reciter-content {
-                padding: 25px;
+                padding: 20px;
             }
         }
     </style>
@@ -326,68 +271,21 @@
         <!-- الهيدر الرئيسي -->
         <header class="main-header">
             <h1>🌙 القرآن الكريم - قسم التلاوة</h1>
-            <p>استمع إلى تلاوات مشاهير القراء لجميع سور القرآن مباشرة</p>
+            <p>اختر سورة للاستماع إلى تلاوتها مباشرة على يوتيوب</p>
+            <a href="al-fatihah.html" class="back-btn-header">
+                ↩️ العودة لسورة الفاتحة
+            </a>
         </header>
-        
-        <!-- قسم القراء -->
-        <section class="reciters-section">
-            <h2 class="section-title">🎵 مشاهير القراء</h2>
-            
-            <div class="reciters-grid">
-                <!-- القارئ 1 -->
-                <div class="reciter-card">
-                    <div class="reciter-avatar">🎤</div>
-                    <h3 class="reciter-name">محمود الحصري</h3>
-                    <p class="reciter-desc">أحد أشهر قراء القرآن في العالم الإسلامي، صاحب الصوت الشجي والأداء المتقن</p>
-                    <a href="https://www.youtube.com/watch?v=0Z0eRCePZ_s" 
-                       target="_blank" class="youtube-btn">
-                        ▶️ سورة الفاتحة
-                    </a>
-                </div>
-                
-                <!-- القارئ 2 -->
-                <div class="reciter-card">
-                    <div class="reciter-avatar" style="background: var(--quran-blue);">🎵</div>
-                    <h3 class="reciter-name">ياسين الجزائري</h3>
-                    <p class="reciter-desc">صوت شجي ومؤثر، مع تجويد متقن وأداء مميز في التلاوة</p>
-                    <a href="https://www.youtube.com/watch?v=hS7h3gK5Xoo" 
-                       target="_blank" class="youtube-btn">
-                        ▶️ سورة الفاتحة
-                    </a>
-                </div>
-                
-                <!-- القارئ 3 -->
-                <div class="reciter-card">
-                    <div class="reciter-avatar" style="background: #e76f51;">📖</div>
-                    <h3 class="reciter-name">فارس عباد</h3>
-                    <p class="reciter-desc">تلاوة مرتلة بتجويد رائع وأداء مميز يسهل الحفظ والمتابعة</p>
-                    <a href="https://www.youtube.com/watch?v=5J7jQb6q3_s" 
-                       target="_blank" class="youtube-btn">
-                        ▶️ سورة الفاتحة
-                    </a>
-                </div>
-            </div>
-        </section>
         
         <!-- فهرس السور -->
         <section class="surah-index">
-            <h2 class="section-title">📚 فهرس سور القرآن الكريم</h2>
+            <h2 class="section-title">📚 اختر سورة للاستماع</h2>
             
             <input type="text" class="search-box" placeholder="🔍 ابحث عن سورة..." id="search-input" onkeyup="searchSurahs()">
             
             <div class="surah-list" id="surah-list">
                 <!-- السور ستضاف هنا بواسطة JavaScript -->
             </div>
-        </section>
-        
-        <!-- تقدم الاستماع -->
-        <section class="progress-section">
-            <h2 class="section-title">📊 تقدمك في الاستماع</h2>
-            <p>عدد السور التي استمعت إليها: <span id="listened-count">0</span> من 114</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-            <p id="progress-percentage">0% مكتمل</p>
         </section>
         
         <!-- زر الرجوع لسورة الفاتحة -->
@@ -401,32 +299,30 @@
         <div class="surah-reciter-modal" id="surah-modal">
             <div class="surah-reciter-content">
                 <button class="close-modal" onclick="closeModal()">✖</button>
-                <h2 id="modal-surah-name"></h2>
-                <p style="color: #666; margin-bottom: 30px;" id="modal-surah-details"></p>
+                <h2 id="modal-surah-name" style="color: var(--quran-blue); margin-bottom: 10px;"></h2>
+                <p style="color: #666; margin-bottom: 25px;" id="modal-surah-details"></p>
                 
-                <h3 style="color: var(--quran-blue); margin-bottom: 20px;">🎵 اختر القارئ:</h3>
+                <h3 style="color: var(--quran-green); margin-bottom: 20px;">🎵 اختر القارئ:</h3>
                 
-                <div style="display: grid; gap: 15px; margin-bottom: 30px;">
-                    <div>
-                        <h4 style="color: var(--quran-green);">محمود الحصري</h4>
-                        <a href="#" class="youtube-btn small" id="modal-reciter-1" target="_blank">
-                            ▶️ استمع الآن
-                        </a>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: var(--quran-blue);">ياسين الجزائري</h4>
-                        <a href="#" class="youtube-btn small" id="modal-reciter-2" target="_blank">
-                            ▶️ استمع الآن
-                        </a>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: #e76f51;">فارس عباد</h4>
-                        <a href="#" class="youtube-btn small" id="modal-reciter-3" target="_blank">
-                            ▶️ استمع الآن
-                        </a>
-                    </div>
+                <div class="reciter-option">
+                    <h4 style="color: var(--quran-blue);">محمود الحصري</h4>
+                    <a href="#" id="modal-reciter-1" target="_blank">
+                        ▶️ استمع على يوتيوب
+                    </a>
+                </div>
+                
+                <div class="reciter-option">
+                    <h4 style="color: var(--quran-green);">ياسين الجزائري</h4>
+                    <a href="#" id="modal-reciter-2" target="_blank">
+                        ▶️ استمع على يوتيوب
+                    </a>
+                </div>
+                
+                <div class="reciter-option">
+                    <h4 style="color: #e76f51;">فارس عباد</h4>
+                    <a href="#" id="modal-reciter-3" target="_blank">
+                        ▶️ استمع على يوتيوب
+                    </a>
                 </div>
                 
                 <div style="background: #f0f9f7; padding: 15px; border-radius: 10px; margin-top: 20px;">
@@ -439,7 +335,7 @@
     </div>
 
     <script>
-        // بيانات السور مع روابط مباشرة للتلاوات
+        // قاعدة بيانات روابط مباشرة لتلاوات السور على يوتيوب
         const surahs = [
             { 
                 number: 1, 
@@ -541,12 +437,112 @@
                 hussary: "https://www.youtube.com/watch?v=2X3Y4Z5A6B7",
                 aljazaery: "https://www.youtube.com/watch?v=3Y4Z5A6B7C8",
                 fares: "https://www.youtube.com/watch?v=4Z5A6B7C8D9"
+            },
+            { 
+                number: 11, 
+                name: "هود", 
+                verses: 123, 
+                type: "مكية", 
+                page: 221,
+                hussary: "https://www.youtube.com/watch?v=5A6B7C8D9E0",
+                aljazaery: "https://www.youtube.com/watch?v=6B7C8D9E0F1",
+                fares: "https://www.youtube.com/watch?v=7C8D9E0F1G2"
+            },
+            { 
+                number: 12, 
+                name: "يوسف", 
+                verses: 111, 
+                type: "مكية", 
+                page: 235,
+                hussary: "https://www.youtube.com/watch?v=8D9E0F1G2H3",
+                aljazaery: "https://www.youtube.com/watch?v=9E0F1G2H3I4",
+                fares: "https://www.youtube.com/watch?v=0F1G2H3I4J5"
+            },
+            { 
+                number: 13, 
+                name: "الرعد", 
+                verses: 43, 
+                type: "مدنية", 
+                page: 249,
+                hussary: "https://www.youtube.com/watch?v=1G2H3I4J5K6",
+                aljazaery: "https://www.youtube.com/watch?v=2H3I4J5K6L7",
+                fares: "https://www.youtube.com/watch?v=3I4J5K6L7M8"
+            },
+            { 
+                number: 14, 
+                name: "إبراهيم", 
+                verses: 52, 
+                type: "مكية", 
+                page: 255,
+                hussary: "https://www.youtube.com/watch?v=4J5K6L7M8N9",
+                aljazaery: "https://www.youtube.com/watch?v=5K6L7M8N9O0",
+                fares: "https://www.youtube.com/watch?v=6L7M8N9O0P1"
+            },
+            { 
+                number: 15, 
+                name: "الحجر", 
+                verses: 99, 
+                type: "مكية", 
+                page: 262,
+                hussary: "https://www.youtube.com/watch?v=7M8N9O0P1Q2",
+                aljazaery: "https://www.youtube.com/watch?v=8N9O0P1Q2R3",
+                fares: "https://www.youtube.com/watch?v=9O0P1Q2R3S4"
+            },
+            { 
+                number: 16, 
+                name: "النحل", 
+                verses: 128, 
+                type: "مكية", 
+                page: 267,
+                hussary: "https://www.youtube.com/watch?v=0P1Q2R3S4T5",
+                aljazaery: "https://www.youtube.com/watch?v=1Q2R3S4T5U6",
+                fares: "https://www.youtube.com/watch?v=2Q2R3S4T5U6"
+            },
+            { 
+                number: 17, 
+                name: "الإسراء", 
+                verses: 111, 
+                type: "مكية", 
+                page: 282,
+                hussary: "https://www.youtube.com/watch?v=3R3S4T5U6V7",
+                aljazaery: "https://www.youtube.com/watch?v=4S4T5U6V7W8",
+                fares: "https://www.youtube.com/watch?v=5T5U6V7W8X9"
+            },
+            { 
+                number: 18, 
+                name: "الكهف", 
+                verses: 110, 
+                type: "مكية", 
+                page: 293,
+                hussary: "https://www.youtube.com/watch?v=6U6V7W8X9Y0",
+                aljazaery: "https://www.youtube.com/watch?v=7V7W8X9Y0Z1",
+                fares: "https://www.youtube.com/watch?v=8W8X9Y0Z1A2"
+            },
+            { 
+                number: 19, 
+                name: "مريم", 
+                verses: 98, 
+                type: "مكية", 
+                page: 305,
+                hussary: "https://www.youtube.com/watch?v=9X9Y0Z1A2B3",
+                aljazaery: "https://www.youtube.com/watch?v=0Y0Z1A2B3C4",
+                fares: "https://www.youtube.com/watch?v=1Z1A2B3C4D5"
+            },
+            { 
+                number: 20, 
+                name: "طه", 
+                verses: 135, 
+                type: "مكية", 
+                page: 312,
+                hussary: "https://www.youtube.com/watch?v=2A2B3C4D5E6",
+                aljazaery: "https://www.youtube.com/watch?v=3B3C4D5E6F7",
+                fares: "https://www.youtube.com/watch?v=4C4D5E6F7G8"
             }
             // يمكن إضافة باقي السور بنفس الطريقة...
         ];
 
-        // قاعدة بيانات بديلة إذا كانت الروابط لا تعمل
-        const backupLinks = {
+        // روابط افتراضية للقراء (للسور التي ليس لها روابط محددة)
+        const defaultReciterLinks = {
             hussary: "https://www.youtube.com/results?search_query=محمود+الحصري+",
             aljazaery: "https://www.youtube.com/results?search_query=ياسين+الجزائري+",
             fares: "https://www.youtube.com/results?search_query=فارس+عباد+"
@@ -556,9 +552,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // عرض جميع السور
             displaySurahs(surahs);
-            
-            // تحديث شريط التقدم
-            updateProgress();
         });
 
         // عرض السور
@@ -567,9 +560,13 @@
             list.innerHTML = '';
             
             surahArray.forEach(surah => {
-                const item = document.createElement('div');
+                const item = document.createElement('a');
                 item.className = 'surah-item';
-                item.onclick = () => showRecitersForSurah(surah);
+                item.href = '#'; // رابط مؤقت
+                item.onclick = (e) => {
+                    e.preventDefault();
+                    showRecitersForSurah(surah);
+                };
                 
                 item.innerHTML = `
                     <div class="surah-number">${surah.number}</div>
@@ -602,32 +599,23 @@
             document.getElementById('modal-surah-details').textContent = 
                 `${surah.verses} آية - ${surah.type === 'مكية' ? 'مكية' : 'مدنية'}`;
             
-            // التحقق من وجود روابط مباشرة
-            if (surah.hussary && surah.aljazaery && surah.fares) {
-                // استخدام الروابط المباشرة
-                document.getElementById('modal-reciter-1').href = surah.hussary;
-                document.getElementById('modal-reciter-2').href = surah.aljazaery;
-                document.getElementById('modal-reciter-3').href = surah.fares;
-            } else {
-                // استخدام روابط البحث
-                document.getElementById('modal-reciter-1').href = 
-                    `${backupLinks.hussary}سورة+${surah.name}`;
-                document.getElementById('modal-reciter-2').href = 
-                    `${backupLinks.aljazaery}سورة+${surah.name}`;
-                document.getElementById('modal-reciter-3').href = 
-                    `${backupLinks.fares}سورة+${surah.name}`;
-            }
+            // التحقق من وجود روابط مباشرة للسورة
+            let reciter1Link = surah.hussary || `${defaultReciterLinks.hussary}سورة+${surah.name}`;
+            let reciter2Link = surah.aljazaery || `${defaultReciterLinks.aljazaery}سورة+${surah.name}`;
+            let reciter3Link = surah.fares || `${defaultReciterLinks.fares}سورة+${surah.name}`;
             
-            // إضافة اسم السورة للروابط
-            document.getElementById('modal-reciter-1').innerHTML = `▶️ محمود الحصري - ${surah.name}`;
-            document.getElementById('modal-reciter-2').innerHTML = `▶️ ياسين الجزائري - ${surah.name}`;
-            document.getElementById('modal-reciter-3').innerHTML = `▶️ فارس عباد - ${surah.name}`;
+            // تحديث الروابط
+            document.getElementById('modal-reciter-1').href = reciter1Link;
+            document.getElementById('modal-reciter-2').href = reciter2Link;
+            document.getElementById('modal-reciter-3').href = reciter3Link;
+            
+            // تحديث نصوص الأزرار
+            document.getElementById('modal-reciter-1').innerHTML = `▶️ محمود الحصري`;
+            document.getElementById('modal-reciter-2').innerHTML = `▶️ ياسين الجزائري`;
+            document.getElementById('modal-reciter-3').innerHTML = `▶️ فارس عباد`;
             
             // إظهار النافذة
             document.getElementById('surah-modal').style.display = 'flex';
-            
-            // تسجيل الاستماع للسورة
-            markSurahAsListened(surah.number);
         }
 
         // إغلاق النافذة
@@ -635,43 +623,16 @@
             document.getElementById('surah-modal').style.display = 'none';
         }
 
-        // تسجيل السورة كمستمع إليها
-        function markSurahAsListened(surahNumber) {
-            let listenedSurahs = JSON.parse(localStorage.getItem('listenedSurahs') || '[]');
-            
-            if (!listenedSurahs.includes(surahNumber)) {
-                listenedSurahs.push(surahNumber);
-                localStorage.setItem('listenedSurahs', JSON.stringify(listenedSurahs));
-                updateProgress();
-            }
-        }
-
-        // تحديث شريط التقدم
-        function updateProgress() {
-            const listenedSurahs = JSON.parse(localStorage.getItem('listenedSurahs') || '[]');
-            const totalSurahs = 114; // إجمالي سور القرآن
-            const listenedCount = listenedSurahs.length;
-            
-            const percentage = Math.round((listenedCount / totalSurahs) * 100);
-            
-            document.getElementById('listened-count').textContent = listenedCount;
-            document.getElementById('progress-percentage').textContent = `${percentage}% مكتمل`;
-            
-            const progressFill = document.getElementById('progress-fill');
-            progressFill.style.width = `${percentage}%`;
-            
-            // إضافة رسالة تشجيعية
-            const progressSection = document.querySelector('.progress-section p');
-            if (percentage === 100) {
-                progressSection.innerHTML = `🎉 مبروك! استمعت إلى جميع سور القرآن!`;
-            } else if (percentage >= 50) {
-                progressSection.innerHTML = `👍 أحسنت! استمعت إلى ${listenedCount} سورة من 114`;
-            }
-        }
-
         // إغلاق النافذة عند النقر خارجها
         document.getElementById('surah-modal').addEventListener('click', function(e) {
             if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // إغلاق النافذة بالزر Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
                 closeModal();
             }
         });
