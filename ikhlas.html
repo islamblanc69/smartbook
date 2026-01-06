@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الفاتحة - القرآن التفاعلي</title>
+    <title>سورة الناس - القرآن التفاعلي</title>
     <link rel="icon" href="image.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,8 +12,6 @@
             --quran-gold: #e9c46a;
             --quran-blue: #1a5f7a;
             --quran-cream: #fef9e7;
-            --progress-color: #4CAF50;
-            --progress-bg: #e0e0e0;
         }
         
         * {
@@ -71,6 +69,13 @@
             font-size: 1.2rem;
         }
         
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
         .header h1 {
             font-size: 2rem;
             margin-bottom: 10px;
@@ -79,24 +84,6 @@
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
-        }
-        
-        /* زر قسم التلاوة في الهيدر */
-        .tilaawa-header-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 30px;
-            background: white;
-            color: var(--quran-blue);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .tilaawa-header-btn:hover {
-            background: var(--quran-gold);
-            transform: scale(1.05);
         }
         
         /* قسم التحكم */
@@ -134,78 +121,6 @@
             background: var(--quran-green);
             color: white;
             transform: translateY(-2px);
-        }
-        
-        /* شريط التقدم */
-        .progress-section {
-            padding: 15px 20px;
-            background: white;
-            border-bottom: 1px solid #eee;
-            display: none;
-        }
-        
-        .progress-section.visible {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .progress-container {
-            margin-bottom: 15px;
-        }
-        
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .progress-bar {
-            height: 12px;
-            background-color: var(--progress-bg);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--quran-green), var(--quran-blue));
-            border-radius: 6px;
-            width: 0%;
-            transition: width 1s ease-in-out;
-        }
-        
-        /* مؤقت خطة الحفظ */
-        .timer-container {
-            background: #e8f4f8;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 15px;
-        }
-        
-        .timer-display {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--quran-blue);
-            margin: 10px 0;
-        }
-        
-        .timer-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        
-        .timer-btn {
-            padding: 8px 20px;
-            background: var(--quran-green);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
         }
         
         /* المحتوى */
@@ -254,7 +169,7 @@
         /* السورة كما في المصحف */
         .quran-text {
             font-family: 'Traditional Arabic', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             line-height: 3;
             text-align: center;
             color: #1a365d;
@@ -287,40 +202,6 @@
             justify-content: center;
             font-weight: bold;
             font-size: 1.1rem;
-        }
-        
-        /* زر قسم التلاوة في المحتوى */
-        .tilaawa-section {
-            background: #e8f4f8;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            text-align: center;
-        }
-        
-        .section-title {
-            color: var(--quran-blue);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-        
-        .tilaawa-btn {
-            display: inline-block;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, var(--quran-green) 0%, var(--quran-blue) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
-        }
-        
-        .tilaawa-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.4);
         }
         
         /* اختبار الحفظ البسيط */
@@ -403,6 +284,41 @@
             color: var(--quran-blue);
         }
         
+        /* تفسير السورة */
+        .tafsir-section {
+            background: #f5f7fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #d1e0e0;
+            margin: 25px 0;
+        }
+        
+        .tafsir-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .tafsir-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-gold);
+        }
+        
+        .tafsir-verse {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tafsir-verse:last-child {
+            border-bottom: none;
+        }
+        
         /* أسئلة الفهم */
         .understanding-questions {
             background: #fff9db;
@@ -422,57 +338,6 @@
             min-height: 100px;
         }
         
-        /* تفسير السورة */
-        .tafsir-section {
-            background: #f5f7fa;
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px solid #d1e0e0;
-        }
-        
-        .tafsir-accordion {
-            margin-top: 20px;
-        }
-        
-        .tafsir-item {
-            margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .tafsir-header {
-            background: var(--quran-blue);
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .tafsir-content {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .tafsir-content.open {
-            padding: 20px;
-            max-height: 1000px;
-        }
-        
-        .tafsir-source {
-            background: #e8f4f8;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
         /* نتيجة الاختبار */
         .result-box {
             background: #d4edda;
@@ -485,38 +350,6 @@
         
         .result-box.visible {
             display: block;
-        }
-        
-        /* أزرار المشاركة */
-        .share-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .share-btn {
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .share-btn.twitter { background: #1DA1F2; }
-        .share-btn.whatsapp { background: #25D366; }
-        .share-btn.facebook { background: #1877F2; }
-        .share-btn.copy { background: var(--quran-green); }
-        
-        .share-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
         }
         
         /* زر الإغلاق */
@@ -549,16 +382,12 @@
             }
             
             .quran-text {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 line-height: 2.5;
             }
             
             .surah-info-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .share-buttons {
-                flex-direction: column;
             }
         }
         
@@ -626,32 +455,6 @@
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        
-        /* مؤشر التحميل */
-        .loader {
-            text-align: center;
-            padding: 30px;
-            display: none;
-        }
-        
-        .loader.visible {
-            display: block;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--quran-green);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -660,39 +463,13 @@
         <div class="header">
             <div class="logo-container">
                 <div class="logo">
-                    📖
+                    <!-- استخدم الصورة image.png -->
+                    <img src="image.png" alt="لوغو مكتبة إسلام عنابة" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
                 </div>
                 <div>
-                    <h1>سورة الفاتحة</h1>
-                    <p>أم القرآن - السبع المثاني</p>
+                    <h1>سورة الناس</h1>
+                    <p>المعوذة الثانية - آخر سورة في القرآن الكريم</p>
                 </div>
-            </div>
-            <a href="index.html" class="tilaawa-header-btn">
-                🔊 قسم التلاوة
-            </a>
-        </div>
-        
-        <!-- شريط التقدم -->
-        <div class="progress-section" id="progress-section">
-            <div class="progress-container">
-                <div class="progress-label">
-                    <span>تقدم حفظ السورة</span>
-                    <span id="progress-percentage">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-            
-            <div class="timer-container" id="timer-container">
-                <h4>⏰ مؤقت خطة الحفظ</h4>
-                <div class="timer-display" id="timer-display">15:00</div>
-                <div class="timer-buttons">
-                    <button class="timer-btn" onclick="startTimer()">بدء</button>
-                    <button class="timer-btn" onclick="pauseTimer()">إيقاف</button>
-                    <button class="timer-btn" onclick="resetTimer()">إعادة</button>
-                </div>
-                <p id="timer-message">حدد هدفك اليومي من خطة الحفظ</p>
             </div>
         </div>
         
@@ -708,11 +485,11 @@
                 <button class="control-btn" onclick="showSection('surah-info')">
                     <span>ℹ️</span> معلومات السورة
                 </button>
-                <button class="control-btn" onclick="showSection('surah-tafsir')">
-                    <span>📚</span> تفسير السورة
-                </button>
                 <button class="control-btn" onclick="showSection('surah-story')">
                     <span>📖</span> قصة السورة
+                </button>
+                <button class="control-btn" onclick="showSection('tafsir-section')">
+                    <span>📚</span> تفسير السورة
                 </button>
                 <button class="control-btn" onclick="showSection('quiz')">
                     <span>🧠</span> اختبار الحفظ
@@ -729,59 +506,30 @@
             <!-- خطة الحفظ البسيطة -->
             <div id="mind-map" class="hidden-content">
                 <div class="simple-mind-map">
-                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة الفاتحة</h2>
+                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة الناس</h2>
                     
-                    <div class="map-step" data-time="15">
+                    <div class="map-step">
                         <span class="step-number">١</span>
                         <h3>اليوم الأول: الآيات ١-٣</h3>
-                        <p>حفظ: البسملة + الحمد لله رب العالمين + الرحمن الرحيم</p>
-                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
-                        <button class="timer-btn" style="margin-top: 10px;" onclick="setTimer(15, 'اليوم الأول: الآيات ١-٣')">بدء المؤقت</button>
+                        <p>حفظ: قل أعوذ برب الناس + ملك الناس + إله الناس</p>
+                        <p>⏰ الوقت المقترح: 10 دقائق</p>
                     </div>
                     
-                    <div class="map-step" data-time="10">
+                    <div class="map-step">
                         <span class="step-number">٢</span>
-                        <h3>اليوم الثاني: الآية ٤</h3>
-                        <p>حفظ: مالك يوم الدين</p>
+                        <h3>اليوم الثاني: الآيات ٤-٦</h3>
+                        <p>حفظ: من شر الوسواس الخناس + الذي يوسوس في صدور الناس + من الجنة والناس</p>
                         <p>مع التكرار اليومي للآيات السابقة</p>
                         <p>⏰ الوقت المقترح: 10 دقائق</p>
-                        <button class="timer-btn" style="margin-top: 10px;" onclick="setTimer(10, 'اليوم الثاني: الآية ٤')">بدء المؤقت</button>
                     </div>
                     
-                    <div class="map-step" data-time="20">
+                    <div class="map-step">
                         <span class="step-number">٣</span>
-                        <h3>اليوم الثالث: الآيات ٥-٦</h3>
-                        <p>حفظ: إياك نعبد وإياك نستعين + اهدنا الصراط المستقيم</p>
-                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
-                        <button class="timer-btn" style="margin-top: 10px;" onclick="setTimer(20, 'اليوم الثالث: الآيات ٥-٦')">بدء المؤقت</button>
-                    </div>
-                    
-                    <div class="map-step" data-time="15">
-                        <span class="step-number">٤</span>
-                        <h3>اليوم الرابع: الآية ٧</h3>
-                        <p>حفظ: صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين</p>
-                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
-                        <button class="timer-btn" style="margin-top: 10px;" onclick="setTimer(15, 'اليوم الرابع: الآية ٧')">بدء المؤقت</button>
-                    </div>
-                    
-                    <div class="map-step" data-time="30">
-                        <span class="step-number">٥</span>
-                        <h3>اليوم الخامس: المراجعة</h3>
-                        <p>تسميع السورة كاملة ٣ مرات</p>
+                        <h3>اليوم الثالث: المراجعة</h3>
+                        <p>تسميع السورة كاملة ٥ مرات</p>
                         <p>التدرب على التلاوة الصحيحة</p>
-                        <p>⏰ الوقت المقترح: 30 دقيقة</p>
-                        <button class="timer-btn" style="margin-top: 10px;" onclick="setTimer(30, 'اليوم الخامس: المراجعة')">بدء المؤقت</button>
+                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
                     </div>
-                </div>
-                
-                <!-- زر المشاركة -->
-                <div class="share-buttons">
-                    <button class="share-btn whatsapp" onclick="shareResult('whatsapp')">
-                        <i class="fab fa-whatsapp"></i> مشاركة عبر واتساب
-                    </button>
-                    <button class="share-btn copy" onclick="copyProgress()">
-                        <i class="fas fa-copy"></i> نسخ التقدم
-                    </button>
                 </div>
                 
                 <button class="close-section-btn" onclick="hideSection('mind-map')">
@@ -792,54 +540,40 @@
             <!-- السورة كما في المصحف -->
             <div id="quran-text" class="hidden-content">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <h2 style="color: var(--quran-blue);">📖 سورة الفاتحة كما في المصحف</h2>
-                    <p style="color: #666; margin-top: 10px;">يمكنك القراءة والنقل منها</p>
+                    <h2 style="color: var(--quran-blue);">📖 سورة الناس كاملة</h2>
+                    <p style="color: #666; margin-top: 10px;">سورة مكية - عدد آياتها: 6 آيات</p>
                 </div>
                 
                 <div class="quran-text">
                     <div class="verse">
                         <div class="verse-number">١</div>
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                        قُلْ أَعُوذُ بِرَبِّ النَّاسِ
                     </div>
                     
                     <div class="verse">
                         <div class="verse-number">٢</div>
-                        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+                        مَلِكِ النَّاسِ
                     </div>
                     
                     <div class="verse">
                         <div class="verse-number">٣</div>
-                        الرَّحْمَٰنِ الرَّحِيمِ
+                        إِلَٰهِ النَّاسِ
                     </div>
                     
                     <div class="verse">
                         <div class="verse-number">٤</div>
-                        مَالِكِ يَوْمِ الدِّينِ
+                        مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ
                     </div>
                     
                     <div class="verse">
                         <div class="verse-number">٥</div>
-                        إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+                        الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ
                     </div>
                     
                     <div class="verse">
                         <div class="verse-number">٦</div>
-                        اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+                        مِنَ الْجِنَّةِ وَالنَّاسِ
                     </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٧</div>
-                        صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-                    </div>
-                </div>
-                
-                <!-- زر قسم التلاوة في المحتوى -->
-                <div class="tilaawa-section">
-                    <h3 class="section-title">🎵 للاستماع إلى التلاوة</h3>
-                    <p>اضغط على الزر للذهاب إلى قسم التلاوات بصوت مشاهير القراء</p>
-                    <a href="index.html" class="tilaawa-btn">
-                        🔊 قسم التلاوة
-                    </a>
                 </div>
                 
                 <button class="close-section-btn" onclick="hideSection('quran-text')">
@@ -850,13 +584,13 @@
             <!-- معلومات السورة -->
             <div id="surah-info" class="hidden-content">
                 <div style="text-align: center; margin-bottom: 25px;">
-                    <h2 style="color: var(--quran-blue);">ℹ️ معلومات عن سورة الفاتحة</h2>
+                    <h2 style="color: var(--quran-blue);">ℹ️ معلومات عن سورة الناس</h2>
                 </div>
                 
                 <div class="surah-info-grid">
                     <div class="info-box">
-                        <div class="info-label">رقم الصفحة في المصحف</div>
-                        <div class="info-value">1</div>
+                        <div class="info-label">رقم السورة في المصحف</div>
+                        <div class="info-value">114</div>
                     </div>
                     
                     <div class="info-box">
@@ -866,32 +600,32 @@
                     
                     <div class="info-box">
                         <div class="info-label">عدد الآيات</div>
-                        <div class="info-value">7 آيات</div>
+                        <div class="info-value">6 آيات</div>
                     </div>
                     
                     <div class="info-box">
                         <div class="info-label">عدد الكلمات</div>
-                        <div class="info-value">25 كلمة</div>
+                        <div class="info-value">20 كلمة</div>
                     </div>
                     
                     <div class="info-box">
                         <div class="info-label">عدد الحروف</div>
-                        <div class="info-value">113 حرفاً</div>
+                        <div class="info-value">80 حرفاً</div>
                     </div>
                     
                     <div class="info-box">
                         <div class="info-label">ترتيب النزول</div>
-                        <div class="info-value">5</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">ترتيب السورة</div>
-                        <div class="info-value">1</div>
+                        <div class="info-value">21</div>
                     </div>
                     
                     <div class="info-box">
                         <div class="info-label">مدة التلاوة</div>
-                        <div class="info-value">دقيقة واحدة</div>
+                        <div class="info-value">30 ثانية</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">الاسم الآخر</div>
+                        <div class="info-value">المعوذة الثانية</div>
                     </div>
                 </div>
                 
@@ -900,58 +634,24 @@
                 </button>
             </div>
             
-            <!-- تفسير السورة -->
-            <div id="surah-tafsir" class="hidden-content">
-                <div class="tafsir-section">
-                    <h2 style="color: var(--quran-blue); margin-bottom: 25px; text-align: center;">
-                        📚 تفسير سورة الفاتحة - إسلام ويب
-                    </h2>
-                    
-                    <div class="loader" id="tafsir-loader">
-                        <div class="spinner"></div>
-                        <p>جاري تحميل التفسير...</p>
-                    </div>
-                    
-                    <div class="tafsir-accordion" id="tafsir-accordion">
-                        <!-- التفسير سيتم تحميله هنا -->
-                    </div>
-                    
-                    <div class="tafsir-source">
-                        <p><strong>المصدر:</strong> موقع إسلام ويب - تفسير القرآن الكريم</p>
-                        <p><em>تم اختصار التفسير وتلخيصه لتسهيل الفهم والحفظ</em></p>
-                    </div>
-                </div>
-                
-                <!-- زر المشاركة -->
-                <div class="share-buttons">
-                    <button class="share-btn copy" onclick="copyTafsir()">
-                        <i class="fas fa-copy"></i> نسخ التفسير
-                    </button>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('surah-tafsir')">
-                    إغلاق التفسير
-                </button>
-            </div>
-            
             <!-- قصة السورة -->
             <div id="surah-story" class="hidden-content">
                 <div class="story-section">
                     <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
-                        📖 قصة وفضائل سورة الفاتحة
+                        📖 قصة وفضائل سورة الناس
                     </h2>
                     
-                    <h3 style="color: var(--quran-blue); margin-top: 15px;">✨ لماذا سميت بأم القرآن؟</h3>
-                    <p>لأنها تجمع معاني القرآن الكريم كله، وقد سماها النبي صلى الله عليه وسلم "أم القرآن" و"السبع المثاني".</p>
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">✨ سبب النزول:</h3>
+                    <p>نزلت سورة الناس مع سورة الفلق بعد أن سحر النبي ﷺ، فأمره جبريل بالاستعاذة بهاتين السورتين.</p>
                     
                     <h3 style="color: var(--quran-blue); margin-top: 15px;">🎯 فضائلها العظيمة:</h3>
-                    <p>1. أعظم سورة في القرآن كما ورد في الحديث الصحيح</p>
-                    <p>2. لا تصح الصلاة بدون قراءتها</p>
-                    <p>3. تسمى بالشافية والكافية</p>
-                    <p>4. قراءتها عبادة وسبب لقبول الدعاء</p>
+                    <p>1. من المعوذات التي تحمي من الشرور والعين والسحر</p>
+                    <p>2. كانت آخر سورة نزلت من القرآن الكريم</p>
+                    <p>3. تقال في الرقية والتحصين من الشيطان</p>
+                    <p>4. قراءتها قبل النوم تحمي بإذن الله</p>
                     
-                    <h3 style="color: var(--quran-blue); margin-top: 15px;">💡 سبب النزول:</h3>
-                    <p>نزلت سورة الفاتحة في مكة لتكون أساس الصلاة، وهي أول سورة نزلت كاملة.</p>
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">💡 لماذا سميت بسورة الناس؟</h3>
+                    <p>لأنها تبدأ بالأمر بالاستعاذة برب الناس، وتتحدث عن الاستعاذة من شر شياطين الإنس والجن.</p>
                 </div>
                 
                 <button class="close-section-btn" onclick="hideSection('surah-story')">
@@ -959,11 +659,65 @@
                 </button>
             </div>
             
+            <!-- تفسير السورة -->
+            <div id="tafsir-section" class="hidden-content">
+                <div class="tafsir-section">
+                    <h2 class="tafsir-title">📚 تفسير سورة الناس - الآية بالآية</h2>
+                    
+                    <div class="tafsir-content">
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الأولى: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> قل -يا محمد- ألجأ وأعتصم برب الناس وخالقهم ومدبر أمورهم.</p>
+                            <p><strong>المعنى:</strong> الأمر بالاستعاذة بالله من كل شر، والبدء باسم الرب الذي يتولى عباده.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الثانية: "مَلِكِ النَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> مالك الناس المتصرف فيهم، الذي لا يعجزه شيء، ولا يخرج أحد عن ملكه.</p>
+                            <p><strong>المعنى:</strong> تذكير بأن الله هو الملك الحقيقي الذي بيده كل شيء.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الثالثة: "إِلَٰهِ النَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> معبود الناس الحق الذي لا يستحق العبادة سواه.</p>
+                            <p><strong>المعنى:</strong> إثبات الألوهية لله وحده، وأنه المستحق للعبادة دون سواه.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الرابعة: "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> من شر الموسوس الذي يوسوس في الصدور ثم يخنس ويختفي عند ذكر الله.</p>
+                            <p><strong>المعنى:</strong> الاستعاذة من الشيطان الذي يوسوس في القلوب ويغري بالمعاصي.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الخامسة: "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> الذي يلقي الشكوك والخواطر السيئة في قلوب الناس.</p>
+                            <p><strong>المعنى:</strong> بيان طريقة الشيطان في الإغواء والتأثير على النفوس.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية السادسة: "مِنَ الْجِنَّةِ وَالنَّاسِ"</h3>
+                            <p><strong>التفسير:</strong> من شياطين الجن وشياطين الإنس الذين يوسوسون ويأمرون بالشر.</p>
+                            <p><strong>المعنى:</strong> أن الشر قد يأتي من شياطين الجن أو من شياطين الإنس.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <h4 style="color: var(--quran-blue);">🎯 ملخص التفسير:</h4>
+                        <p>سورة الناس تعلّمنا الاستعاذة بالله من كل شر، خاصة من وسوسة الشيطان التي قد تأتي من الجن أو الإنس. وهي تحصين كامل للمسلم عندما يقرأها مع الإخلاص واليقين.</p>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('tafsir-section')">
+                    إغلاق التفسير
+                </button>
+            </div>
+            
             <!-- اختبار الحفظ -->
             <div id="quiz" class="hidden-content">
                 <div class="simple-quiz">
                     <h2 style="color: var(--quran-blue); margin-bottom: 20px; text-align: center;">
-                        🧠 اختبار حفظ سورة الفاتحة
+                        🧠 اختبار حفظ سورة الناس
                     </h2>
                     
                     <div id="quiz-container">
@@ -982,16 +736,6 @@
                     <div id="quiz-result" class="result-box">
                         <!-- نتيجة الاختبار ستظهر هنا -->
                     </div>
-                    
-                    <!-- زر المشاركة -->
-                    <div class="share-buttons" id="quiz-share-buttons" style="display: none;">
-                        <button class="share-btn whatsapp" onclick="shareQuizResult('whatsapp')">
-                            <i class="fab fa-whatsapp"></i> مشاركة النتيجة
-                        </button>
-                        <button class="share-btn copy" onclick="copyQuizResult()">
-                            <i class="fas fa-copy"></i> نسخ النتيجة
-                        </button>
-                    </div>
                 </div>
                 
                 <button class="close-section-btn" onclick="hideSection('quiz')">
@@ -1003,7 +747,7 @@
             <div id="understanding" class="hidden-content">
                 <div class="understanding-questions">
                     <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
-                        💭 أسئلة فهم سورة الفاتحة
+                        💭 أسئلة فهم سورة الناس
                     </h2>
                     
                     <div id="understanding-container">
@@ -1050,87 +794,65 @@
     </div>
 
     <script>
-        // === البيانات ===
+        // === بيانات سورة الناس ===
         const memoryQuestions = [
             {
-                question: "ما هي الآية الأولى في سورة الفاتحة؟",
-                options: ["بسم الله الرحمن الرحيم", "الحمد لله رب العالمين", "الرحمن الرحيم", "مالك يوم الدين"],
+                question: "ما هي الآية الأولى في سورة الناس؟",
+                options: ["قل أعوذ برب الناس", "ملك الناس", "إله الناس", "من شر الوسواس الخناس"],
                 correct: 0,
-                explanation: "الآية الأولى هي: 'بسم الله الرحمن الرحيم'"
+                explanation: "الآية الأولى هي: 'قل أعوذ برب الناس'"
             },
             {
-                question: "كم عدد آيات سورة الفاتحة؟",
+                question: "كم عدد آيات سورة الناس؟",
                 options: ["5 آيات", "6 آيات", "7 آيات", "8 آيات"],
-                correct: 2,
-                explanation: "سورة الفاتحة تتكون من 7 آيات"
-            },
-            {
-                question: "أكمل الآية: 'إياك نعبد و________'",
-                options: ["نخشى", "نستعين", "نرجو", "نخاف"],
                 correct: 1,
-                explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
+                explanation: "سورة الناس تتكون من 6 آيات"
             },
             {
-                question: "ما هي الآية التي تلي 'مالك يوم الدين'؟",
-                options: ["الحمد لله رب العالمين", "الرحمن الرحيم", "إياك نعبد وإياك نستعين", "اهدنا الصراط المستقيم"],
+                question: "أكمل الآية: 'من شر الوسواس ________'",
+                options: ["الخناس", "الناس", "الجن", "الشيطان"],
+                correct: 0,
+                explanation: "الآية الكاملة: 'من شر الوسواس الخناس'"
+            },
+            {
+                question: "ما هي الآية التي تلي 'إله الناس'؟",
+                options: ["قل أعوذ برب الناس", "ملك الناس", "من شر الوسواس الخناس", "الذي يوسوس في صدور الناس"],
                 correct: 2,
-                explanation: "بعد 'مالك يوم الدين' تأتي 'إياك نعبد وإياك نستعين'"
+                explanation: "بعد 'إله الناس' تأتي 'من شر الوسواس الخناس'"
             },
             {
-                question: "أكمل الآية: 'اهدنا الصراط ________'",
-                options: ["الواسع", "المستقيم", "الحق", "السهل"],
+                question: "أكمل الآية: 'من الجنة ________'",
+                options: ["والشياطين", "والناس", "والشياطين والناس", "والجن"],
                 correct: 1,
-                explanation: "الآية الكاملة: 'اهدنا الصراط المستقيم'"
+                explanation: "الآية الكاملة: 'من الجنة والناس'"
             }
         ];
         
         const understandingQuestions = [
             {
-                question: "لماذا سميت سورة الفاتحة بأم القرآن؟",
-                modelAnswer: "لأنها تجمع معاني القرآن الكريم كله، فهي تحتوي على الثناء على الله، وإثبات الربوبية والألوهية، والعبادة والاستعانة، وطلب الهداية إلى الصراط المستقيم."
+                question: "ما معنى 'الوسواس الخناس'؟ ولماذا سمي بهذا الاسم؟",
+                modelAnswer: "الوسواس: الشيطان الذي يوسوس في صدور الناس. الخناس: الذي يخنس ويختفي وينكسر عند ذكر الله. سمي خناساً لأنه يختفي ويتأخر عند ذكر الله والاستعاذة به."
             },
             {
-                question: "ما معنى 'الرحمن الرحيم' وما الفرق بينهما؟",
-                modelAnswer: "الرحمن: اسم يدل على سعة رحمة الله لجميع الخلق. الرحيم: اسم يدل على رحمة الله الخاصة بالمؤمنين."
+                question: "لماذا تكرر لفظ 'الناس' ثلاث مرات في بداية السورة؟",
+                modelAnswer: "لتأكيد شمول ربوبية الله وملكه وألوهيته لجميع الناس، وأنه رب الجميع وملك الجمين وإله الجميع، فلا ملجأ منه إلا إليه."
             },
             {
-                question: "ما أهمية طلب الهداية في كل صلاة؟",
-                modelAnswer: "للتذكير بأن الهداية من الله، وللحاجة الدائمة إليها، وللتجديد الدائم للعزم على اتباع الحق."
+                question: "ما الحكمة من نزول سورة الناس؟ وكيف نستفيد منها في حياتنا؟",
+                modelAnswer: "نزلت للتحصين من وسوسة الشيطان. نستفيد منها بالمداومة على قراءتها صباحاً ومساءً وقبل النوم، والاستعاذة بالله من شر شياطين الجن والإنس، والثقة بأن الله هو الحافظ والمعين."
             }
         ];
         
-        // === تحسينات: التخزين المحلي ===
-        const storageKeys = {
-            progress: 'quran_al_fatiha_progress',
-            quizResults: 'quran_al_fatiha_quiz_results',
-            timerSettings: 'quran_al_fatiha_timer'
-        };
-        
-        // === تحسينات: المؤقت ===
-        let timerInterval = null;
-        let timerSeconds = 900; // 15 دقيقة افتراضياً
-        let timerRunning = false;
-        let currentTimerLabel = '';
-        
-        // === تحسينات: شريط التقدم ===
-        let userProgress = {
-            memorizedVerses: 0,
-            totalVerses: 7,
-            lastStudyDate: null,
-            studyDays: 0,
-            quizScore: 0
-        };
-        
         // === التحكم في الأقسام ===
-        let currentSection = null;
+        let currentSection = 'quran-text'; // تظهر السورة مباشرة
         
         function showSection(sectionId) {
-            // إخفاء القسم الحالي إذا كان مفتوحاً
-            if (currentSection) {
-                hideSection(currentSection);
-            }
+            // إخفاء جميع الأقسام
+            document.querySelectorAll('.hidden-content').forEach(section => {
+                section.classList.remove('visible');
+            });
             
-            // إظهار القسم الجديد
+            // إظهار القسم المطلوب
             const section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('visible');
@@ -1144,12 +866,6 @@
                     initQuiz();
                 } else if (sectionId === 'understanding') {
                     initUnderstanding();
-                } else if (sectionId === 'surah-tafsir') {
-                    loadTafsir();
-                } else if (sectionId === 'mind-map') {
-                    showProgressSection();
-                    loadProgress();
-                    updateProgressBar();
                 }
             }
         }
@@ -1158,302 +874,9 @@
             const section = document.getElementById(sectionId);
             if (section) {
                 section.classList.remove('visible');
-                if (currentSection === sectionId) {
-                    currentSection = null;
-                }
             }
-        }
-        
-        // === تحسينات: شريط التقدم ===
-        function showProgressSection() {
-            const progressSection = document.getElementById('progress-section');
-            if (progressSection) {
-                progressSection.classList.add('visible');
-            }
-        }
-        
-        function loadProgress() {
-            const savedProgress = localStorage.getItem(storageKeys.progress);
-            if (savedProgress) {
-                userProgress = JSON.parse(savedProgress);
-            }
-            
-            const savedTimer = localStorage.getItem(storageKeys.timerSettings);
-            if (savedTimer) {
-                const timerData = JSON.parse(savedTimer);
-                if (timerData.lastSetTime) {
-                    const timePassed = Math.floor((Date.now() - timerData.lastSetTime) / 1000);
-                    if (timerData.isRunning && timerData.seconds > timePassed) {
-                        timerSeconds = timerData.seconds - timePassed;
-                        timerRunning = true;
-                        startTimer();
-                    }
-                }
-            }
-        }
-        
-        function saveProgress() {
-            localStorage.setItem(storageKeys.progress, JSON.stringify(userProgress));
-        }
-        
-        function updateProgressBar() {
-            const progressPercentage = Math.round((userProgress.memorizedVerses / userProgress.totalVerses) * 100);
-            const progressFill = document.getElementById('progress-fill');
-            const progressPercentageText = document.getElementById('progress-percentage');
-            
-            if (progressFill) {
-                progressFill.style.width = `${progressPercentage}%`;
-            }
-            
-            if (progressPercentageText) {
-                progressPercentageText.textContent = `${progressPercentage}%`;
-            }
-        }
-        
-        function updateMemorizedVerses(count) {
-            userProgress.memorizedVerses = Math.min(count, userProgress.totalVerses);
-            userProgress.lastStudyDate = new Date().toISOString();
-            userProgress.studyDays++;
-            saveProgress();
-            updateProgressBar();
-        }
-        
-        // === تحسينات: المؤقت ===
-        function setTimer(minutes, label) {
-            timerSeconds = minutes * 60;
-            currentTimerLabel = label;
-            resetTimer();
-            
-            // إظهار رسالة المؤقت
-            const timerMessage = document.getElementById('timer-message');
-            if (timerMessage) {
-                timerMessage.textContent = label;
-            }
-            
-            // حفظ إعدادات المؤقت
-            const timerData = {
-                seconds: timerSeconds,
-                label: label,
-                lastSetTime: Date.now(),
-                isRunning: false
-            };
-            localStorage.setItem(storageKeys.timerSettings, JSON.stringify(timerData));
-            
-            updateTimerDisplay();
-        }
-        
-        function startTimer() {
-            if (timerRunning) return;
-            
-            timerRunning = true;
-            const timerData = {
-                seconds: timerSeconds,
-                label: currentTimerLabel,
-                lastSetTime: Date.now(),
-                isRunning: true
-            };
-            localStorage.setItem(storageKeys.timerSettings, JSON.stringify(timerData));
-            
-            timerInterval = setInterval(() => {
-                if (timerSeconds > 0) {
-                    timerSeconds--;
-                    updateTimerDisplay();
-                    
-                    // تحديث التخزين كل 10 ثواني
-                    if (timerSeconds % 10 === 0) {
-                        timerData.seconds = timerSeconds;
-                        timerData.lastSetTime = Date.now();
-                        localStorage.setItem(storageKeys.timerSettings, JSON.stringify(timerData));
-                    }
-                } else {
-                    clearInterval(timerInterval);
-                    timerRunning = false;
-                    alert('⏰ انتهى الوقت! لقد أكملت جلسة الحفظ بنجاح.');
-                    
-                    // تحديث التقدم تلقائياً
-                    if (currentTimerLabel.includes('اليوم الأول')) {
-                        updateMemorizedVerses(3);
-                    } else if (currentTimerLabel.includes('اليوم الثاني')) {
-                        updateMemorizedVerses(4);
-                    } else if (currentTimerLabel.includes('اليوم الثالث')) {
-                        updateMemorizedVerses(6);
-                    } else if (currentTimerLabel.includes('اليوم الرابع')) {
-                        updateMemorizedVerses(7);
-                    } else if (currentTimerLabel.includes('اليوم الخامس')) {
-                        // السورة مكتملة
-                        updateMemorizedVerses(7);
-                        alert('🎉 مبروك! لقد أكملت حفظ سورة الفاتحة!');
-                    }
-                }
-            }, 1000);
-        }
-        
-        function pauseTimer() {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            
-            const timerData = {
-                seconds: timerSeconds,
-                label: currentTimerLabel,
-                lastSetTime: Date.now(),
-                isRunning: false
-            };
-            localStorage.setItem(storageKeys.timerSettings, JSON.stringify(timerData));
-        }
-        
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            
-            if (currentTimerLabel.includes('اليوم الأول')) {
-                timerSeconds = 15 * 60; // 15 دقيقة
-            } else if (currentTimerLabel.includes('اليوم الثاني')) {
-                timerSeconds = 10 * 60; // 10 دقائق
-            } else if (currentTimerLabel.includes('اليوم الثالث')) {
-                timerSeconds = 20 * 60; // 20 دقيقة
-            } else if (currentTimerLabel.includes('اليوم الرابع')) {
-                timerSeconds = 15 * 60; // 15 دقيقة
-            } else if (currentTimerLabel.includes('اليوم الخامس')) {
-                timerSeconds = 30 * 60; // 30 دقيقة
-            }
-            
-            updateTimerDisplay();
-            
-            const timerData = {
-                seconds: timerSeconds,
-                label: currentTimerLabel,
-                lastSetTime: Date.now(),
-                isRunning: false
-            };
-            localStorage.setItem(storageKeys.timerSettings, JSON.stringify(timerData));
-        }
-        
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timerSeconds / 60);
-            const seconds = timerSeconds % 60;
-            const timerDisplay = document.getElementById('timer-display');
-            if (timerDisplay) {
-                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-        }
-        
-        // === تحسينات: تفسير السورة ===
-        function loadTafsir() {
-            const loader = document.getElementById('tafsir-loader');
-            const accordion = document.getElementById('tafsir-accordion');
-            
-            if (!accordion.innerHTML.trim()) {
-                loader.classList.add('visible');
-                
-                // محاكاة تحميل البيانات (في الواقع ستأتي من API)
-                setTimeout(() => {
-                    loader.classList.remove('visible');
-                    
-                    const tafsirData = [
-                        {
-                            verse: "الآية ١: بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-                            content: "نبدأ باسم الله مستعينين به، متبركين به. الرحمن: صفة لله تعالى تدل على سعة رحمته لجميع الخلق. الرحيم: صفة تدل على استمرار رحمته وشمولها للمؤمنين خاصة."
-                        },
-                        {
-                            verse: "الآية ٢: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-                            content: "الثناء الكامل لله تعالى بجميع المحامد، وهو الرب الذي خلق الخلق ورباهم بالنعم. 'العالمين': جميع المخلوقات من إنس وجن وملائكة وحيوانات."
-                        },
-                        {
-                            verse: "الآية ٣: الرَّحْمَٰنِ الرَّحِيمِ",
-                            content: "تكرار صفة الرحمة للتأكيد على عظمتها، ولتطمين قلب العبد أن ربه رحيم به، فيقبل عليه برجاء وأمل."
-                        },
-                        {
-                            verse: "الآية ٤: مَالِكِ يَوْمِ الدِّينِ",
-                            content: "الله هو المالك المتصرف في يوم القيامة، وهو اليوم الذي يجازي فيه الناس بأعمالهم. 'الدين': الجزاء والحساب."
-                        },
-                        {
-                            verse: "الآية ٥: إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
-                            content: "إخلاص العبادة لله وحده دون شريك، والاستعانة به في جميع الأمور. هذه الآية تمثل جوهر التوحيد والتوكل."
-                        },
-                        {
-                            verse: "الآية ٦: اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
-                            content: "طلب الهداية الدائمة إلى الطريق المستقيم، وهو الإسلام والالتزام بشرع الله. 'الصراط المستقيم': طريق الأنبياء والصالحين."
-                        },
-                        {
-                            verse: "الآية ٧: صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
-                            content: "تحديد الصراط المستقيم بأنه طريق الذين أنعم الله عليهم من النبيين والصديقين والشهداء والصالحين، بخلاف المغضوب عليهم (اليهود) والضالين (النصارى)."
-                        }
-                    ];
-                    
-                    let tafsirHTML = '';
-                    tafsirData.forEach((item, index) => {
-                        tafsirHTML += `
-                            <div class="tafsir-item">
-                                <div class="tafsir-header" onclick="toggleTafsir(${index})">
-                                    <span>${item.verse}</span>
-                                    <span>▼</span>
-                                </div>
-                                <div class="tafsir-content" id="tafsir-content-${index}">
-                                    <p>${item.content}</p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    accordion.innerHTML = tafsirHTML;
-                }, 800); // محاكاة وقت التحميل
-            }
-        }
-        
-        function toggleTafsir(index) {
-            const content = document.getElementById(`tafsir-content-${index}`);
-            content.classList.toggle('open');
-            
-            // تغيير السهم
-            const header = content.previousElementSibling;
-            const arrow = header.querySelector('span:last-child');
-            if (content.classList.contains('open')) {
-                arrow.textContent = '▲';
-            } else {
-                arrow.textContent = '▼';
-            }
-        }
-        
-        function copyTafsir() {
-            const tafsirText = document.querySelector('.tafsir-section').innerText;
-            navigator.clipboard.writeText(tafsirText).then(() => {
-                alert('✅ تم نسخ التفسير إلى الحافظة');
-            });
-        }
-        
-        // === تحسينات: المشاركة ===
-        function shareResult(platform) {
-            const progressPercentage = Math.round((userProgress.memorizedVerses / userProgress.totalVerses) * 100);
-            const message = `📖 تقدمي في حفظ سورة الفاتحة: ${progressPercentage}%\n\nحفظت ${userProgress.memorizedVerses} من ${userProgress.totalVerses} آية\n\nجرب تطبيق القرآن التفاعلي:`;
-            
-            if (platform === 'whatsapp') {
-                window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-            }
-        }
-        
-        function copyProgress() {
-            const progressPercentage = Math.round((userProgress.memorizedVerses / userProgress.totalVerses) * 100);
-            const text = `تقدمي في حفظ سورة الفاتحة: ${progressPercentage}%\nحفظت ${userProgress.memorizedVerses} من ${userProgress.totalVerses} آية`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ تم نسخ التقدم إلى الحافظة');
-            });
-        }
-        
-        function shareQuizResult(platform) {
-            const quizResult = document.getElementById('quiz-result').innerText;
-            const message = `🎯 نتيجتي في اختبار سورة الفاتحة:\n\n${quizResult}\n\nجرب التطبيق:`;
-            
-            if (platform === 'whatsapp') {
-                window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-            }
-        }
-        
-        function copyQuizResult() {
-            const quizResult = document.getElementById('quiz-result').innerText;
-            navigator.clipboard.writeText(quizResult).then(() => {
-                alert('✅ تم نسخ نتيجة الاختبار إلى الحافظة');
-            });
+            // الرجوع لقسم السورة
+            showSection('quran-text');
         }
         
         // === اختبار الحفظ ===
@@ -1474,15 +897,10 @@
             
             displayQuizQuestion();
             
-            // إخفاء نتيجة سابقة وأزرار المشاركة
+            // إخفاء نتيجة سابقة
             const resultBox = document.getElementById('quiz-result');
             if (resultBox) {
                 resultBox.classList.remove('visible');
-            }
-            
-            const shareButtons = document.getElementById('quiz-share-buttons');
-            if (shareButtons) {
-                shareButtons.style.display = 'none';
             }
         }
         
@@ -1620,17 +1038,6 @@
                 resultBox.classList.add('visible');
             }
             
-            // عرض أزرار المشاركة
-            const shareButtons = document.getElementById('quiz-share-buttons');
-            if (shareButtons) {
-                shareButtons.style.display = 'flex';
-            }
-            
-            // حفظ النتيجة
-            userProgress.quizScore = Math.max(userProgress.quizScore, percentage);
-            saveProgress();
-            updateProgressBar();
-            
             // عرض التفسير الصحيح للأسئلة
             displayQuizQuestion();
         }
@@ -1765,9 +1172,6 @@
         
         // === تهيئة الصفحة ===
         document.addEventListener('DOMContentLoaded', function() {
-            // تحميل التقدم من التخزين المحلي
-            loadProgress();
-            
             // إضافة حدث النقر على الأزرار
             document.querySelectorAll('.control-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1777,10 +1181,7 @@
                 });
             });
             
-            // تهيئة المؤقت
-            updateTimerDisplay();
-            
-            console.log('تهيئة الصفحة مكتملة - مع التحسينات');
+            console.log('صفحة سورة الناس جاهزة');
         });
     </script>
 </body>
