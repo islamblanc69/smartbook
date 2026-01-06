@@ -55,134 +55,194 @@
             backdrop-filter: blur(10px);
         }
         
-        /* أقسام الأطفال والكبار */
-        .sections {
+        /* إطار العرض */
+        .frame-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 3px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .frame-title {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.3);
+        }
+        
+        .sections-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
-            margin: 30px 0;
+            margin-top: 20px;
         }
         
         @media (max-width: 768px) {
-            .sections {
+            .sections-grid {
                 grid-template-columns: 1fr;
             }
         }
         
         .section-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border: 2px solid;
+            transition: all 0.3s ease;
         }
         
-        .kids-section {
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .kids-card {
             border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
         }
         
-        .adults-section {
+        .adults-card {
             border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
         }
         
-        .section-title {
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 25px;
             color: #1e40af;
+        }
+        
+        .section-icon {
+            font-size: 2.5rem;
+        }
+        
+        .section-header h2 {
             font-size: 1.8rem;
+            color: inherit;
         }
         
-        /* أشرطة القارئ */
-        .reciter-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .kids-header {
+            color: #059669;
         }
         
-        .reciter-btn {
-            padding: 10px 20px;
-            background: #e0f2fe;
-            border: 2px solid transparent;
-            border-radius: 10px;
+        .adults-header {
+            color: #1e40af;
+        }
+        
+        /* أزرار القسم */
+        .section-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .section-btn {
+            padding: 18px;
+            background: white;
+            border: 2px solid;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #1e40af;
-            font-weight: 600;
-        }
-        
-        .reciter-btn:hover {
-            background: #3b82f6;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .reciter-btn.active {
-            background: #1e40af;
-            color: white;
-            border-color: #3b82f6;
-        }
-        
-        /* مشغلات الفيديو والصوت */
-        .video-container {
-            width: 100%;
-            height: 300px;
-            margin: 20px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
-            padding: 20px;
             text-align: center;
+            font-weight: 600;
+            gap: 10px;
         }
         
-        .video-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            color: #3b82f6;
+        .section-btn:hover {
+            transform: translateY(-3px);
         }
         
-        .watch-btn {
-            padding: 12px 30px;
+        .kids-btn {
+            border-color: #10b981;
+            color: #059669;
+        }
+        
+        .kids-btn:hover {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .adults-btn {
+            border-color: #3b82f6;
+            color: #1e40af;
+        }
+        
+        .adults-btn:hover {
             background: #3b82f6;
             color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
         
-        .watch-btn:hover {
-            background: #2563eb;
-            transform: scale(1.05);
+        .btn-icon {
+            font-size: 2rem;
+        }
+        
+        /* منطقة المحتوى */
+        .content-area {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 2px dashed;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .content-area.visible {
+            display: block;
+        }
+        
+        .kids-content {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .adults-content {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        /* مشغل الفيديو والصوت */
+        .media-container {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        #video-frame {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .audio-player {
             width: 100%;
-            background: #f8fafc;
+            background: white;
             padding: 20px;
             border-radius: 15px;
             margin: 20px 0;
             border: 2px solid #e2e8f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .audio-controls {
@@ -193,20 +253,8 @@
             flex-wrap: wrap;
         }
         
-        .custom-audio-player {
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        .custom-audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
         .audio-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             background: #3b82f6;
             color: white;
             border: none;
@@ -216,6 +264,7 @@
             align-items: center;
             gap: 8px;
             transition: background 0.3s;
+            font-weight: 600;
         }
         
         .audio-btn:hover {
@@ -238,161 +287,40 @@
             transition: width 0.1s linear;
         }
         
-        /* زر السورة المكتوبة */
-        .show-surah-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 20px 0;
-        }
-        
-        .show-surah-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-        }
-        
-        .surah-text {
-            background: #f0fdf4;
+        /* تفسير الأطفال */
+        .explanation-box {
+            background: white;
             padding: 25px;
             border-radius: 15px;
-            margin: 20px 0;
-            border-right: 5px solid #10b981;
-            display: none;
-            line-height: 2.5;
-            font-size: 1.3rem;
-            text-align: center;
+            border-right: 5px solid;
+            line-height: 1.8;
         }
         
-        .surah-text.visible {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .kids-explanation {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #e6f7f0 100%);
         }
         
-        /* اختبار الحفظ */
-        .test-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
-        
-        .question {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-right: 4px solid #3b82f6;
-        }
-        
-        .options {
-            display: grid;
-            gap: 12px;
-            margin: 20px 0;
-        }
-        
-        .option-btn {
-            padding: 15px;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: right;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        .option-btn:hover {
-            background: #f1f5f9;
-            transform: translateX(-5px);
+        .adults-explanation {
             border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #e6edff 100%);
         }
         
-        .option-btn.selected {
-            background: #dbeafe;
-            border-color: #3b82f6;
-            color: #1e40af;
-        }
-        
-        .submit-btn {
-            padding: 15px 40px;
-            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+        /* أزرار التحكم */
+        .close-btn {
+            padding: 10px 20px;
+            background: #ef4444;
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-top: 20px;
+            font-weight: 600;
+            transition: background 0.3s;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        /* نتيجة التقييم */
-        .result-container {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 30px;
-            border-radius: 20px;
-            margin-top: 30px;
-            text-align: center;
-            display: none;
-        }
-        
-        .result-container.visible {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(#10b981 var(--percentage), #e2e8f0 0);
-            margin: 20px auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .score-inner {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #1e40af;
-        }
-        
-        .motivation-text {
-            font-size: 1.2rem;
-            margin-top: 15px;
-            color: #475569;
-        }
-        
-        /* تفسير الأطفال */
-        .kids-explanation {
-            background: #f0fdf4;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 2px dashed #10b981;
+        .close-btn:hover {
+            background: #dc2626;
         }
         
         @keyframes fadeIn {
@@ -416,17 +344,25 @@
             font-weight: bold;
         }
         
-        /* مشغل الصوت المحسن */
-        .audio-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
         }
         
-        .time-display {
-            font-family: monospace;
-            color: #64748b;
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -461,166 +397,66 @@
             <p>سورة الفاتحة هي أول سورة نزلت كاملة، وتسمى بأم الكتاب وأم القرآن. نزلت لتكون أساس الصلاة التي هي عماد الدين، وهي السورة التي افتتح بها المصحف الشريف.</p>
         </div>
 
-        <!-- قسمي الأطفال والكبار -->
-        <div class="sections">
-            <!-- قسم الأطفال -->
-            <section class="section-card kids-section">
-                <h2 class="section-title">
-                    <span style="color: #10b981;">👶 قسم الأطفال</span>
-                </h2>
-                
-                <!-- فيديو معلم الأطفال -->
-                <h3>🎬 فيديو تعليمي للأطفال:</h3>
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        <div style="font-size: 4rem;">▶️</div>
-                        <h4>تعليم سورة الفاتحة للأطفال</h4>
-                        <p>اضغط على الزر لمشاهدة الفيديو التعليمي</p>
-                        <a href="https://www.youtube.com/watch?v=0Z0eRCePZ_s" 
-                           target="_blank" 
-                           class="watch-btn">
-                            📺 مشاهدة على يوتيوب
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- تفسير مبسط للأطفال -->
-                <div class="kids-explanation">
-                    <h3>🌈 تفسير مبسط للأطفال:</h3>
-                    <p>سورة الفاتحة هي أول سورة في القرآن الكريم. فيها نبدأ بذكر الله الرحمن الرحيم، ونحمده على كل النعم، وندعوه أن يهدينا إلى الطريق المستقيم.</p>
-                    <p>🔹 <strong>"الرحمن الرحيم"</strong>: الله رحيم بنا دائماً</p>
-                    <p>🔹 <strong>"اهدنا الصراط المستقيم"</strong>: ندعو الله أن يرشدنا إلى الطريق الصحيح</p>
-                </div>
-                
-                <!-- زر عرض السورة للأطفال -->
-                <button class="show-surah-btn" onclick="toggleSurahText('kids')">
-                    📖 عرض سورة الفاتحة للأطفال
-                </button>
-                <div id="kids-surah-text" class="surah-text">
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ <br>
-                    الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ <br>
-                    الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ <br>
-                    مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ <br>
-                    إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ <br>
-                    اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ <br>
-                    صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
-                </div>
-            </section>
-
-            <!-- قسم الكبار -->
-            <section class="section-card adults-section">
-                <h2 class="section-title">
-                    <span style="color: #3b82f6;">👨‍👩‍👧‍👦 قسم الكبار</span>
-                </h2>
-                
-                <!-- أشرطة القراء -->
-                <h3>🎵 اختر القارئ:</h3>
-                <div class="reciter-tabs">
-                    <button class="reciter-btn active" onclick="playReciter('hussary')">
-                        محمود الحصري
-                    </button>
-                    <button class="reciter-btn" onclick="playReciter('aljazaery')">
-                        ياسين الجزائري
-                    </button>
-                    <button class="reciter-btn" onclick="playReciter('fares')">
-                        فارس عباد
-                    </button>
-                </div>
-                
-                <!-- مشغل الصوت المحسن -->
-                <div class="audio-player">
-                    <div class="audio-info">
-                        <h4>🔊 الآن تشغيل: <span id="current-reciter">محمود الحصري</span></h4>
-                        <div class="time-display" id="time-display">0:00 / 0:00</div>
+        <!-- إطار العرض الرئيسي -->
+        <div class="frame-container">
+            <div class="frame-title">📚 الأنشطة التفاعلية</div>
+            
+            <div class="sections-grid">
+                <!-- قسم الأطفال -->
+                <div class="section-card kids-card">
+                    <div class="section-header kids-header">
+                        <div class="section-icon">👶</div>
+                        <h2>قسم الأطفال</h2>
                     </div>
                     
-                    <div class="custom-audio-player">
-                        <div class="progress-container" onclick="seekAudio(event)">
-                            <div class="progress-bar" id="audio-progress"></div>
-                        </div>
+                    <p style="color: #047857; margin-bottom: 20px;">محتوى مخصص للأطفال لتعليم سورة الفاتحة بطريقة مبسطة</p>
+                    
+                    <div class="section-buttons">
+                        <button class="section-btn kids-btn" onclick="showKidsVideo()">
+                            <div class="btn-icon">🎬</div>
+                            <div>فيديو تعليمي</div>
+                        </button>
                         
-                        <div class="custom-audio-controls">
-                            <button class="audio-btn" onclick="togglePlay()" id="play-btn">
-                                <span>▶️</span> تشغيل
-                            </button>
-                            <button class="audio-btn" onclick="stopAudio()">
-                                <span>⏹️</span> إيقاف
-                            </button>
-                            <div style="flex-grow: 1;"></div>
-                            <div style="color: #64748b; font-size: 0.9rem;">
-                                الحجم: <input type="range" min="0" max="100" value="50" 
-                                       oninput="changeVolume(this.value)" 
-                                       style="vertical-align: middle;">
-                            </div>
-                        </div>
+                        <button class="section-btn kids-btn" onclick="showKidsExplanation()">
+                            <div class="btn-icon">📖</div>
+                            <div>تفسير للأطفال</div>
+                        </button>
+                    </div>
+                    
+                    <!-- منطقة محتوى الأطفال -->
+                    <div id="kids-content" class="content-area kids-content">
+                        <!-- محتوى الفيديو سيظهر هنا -->
                     </div>
                 </div>
-                
-                <!-- زر عرض السورة للكبار -->
-                <button class="show-surah-btn" onclick="toggleSurahText('adults')">
-                    📖 عرض سورة الفاتحة بالخط العثماني
-                </button>
-                <div id="adults-surah-text" class="surah-text">
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ﴿١﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ ﴿٢﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ﴿٣﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        مَٰلِكِ يَوۡمِ ٱلدِّينِ ﴿٤﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ ﴿٥﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af; margin-bottom: 15px;">
-                        ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ ﴿٦﴾
-                    </div>
-                    <div style="font-size: 1.5rem; color: #1e40af;">
-                        صِرَٰطَ ٱلَّذِينَ أَنۡعَمتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ ﴿٧﴾
-                    </div>
-                </div>
-            </section>
-        </div>
 
-        <!-- اختبار الحفظ -->
-        <section class="test-section">
-            <h2 style="color: #1e40af; margin-bottom: 25px; text-align: center;">
-                🧠 اختبار حفظ سورة الفاتحة
-            </h2>
-            
-            <div id="quiz-container">
-                <!-- الأسئلة ستضاف هنا بواسطة JavaScript -->
-            </div>
-            
-            <div style="text-align: center;">
-                <button class="submit-btn" onclick="submitQuiz()">
-                    ✅ تصحيح الاختبار ومعرفة النتيجة
-                </button>
-            </div>
-            
-            <!-- نتيجة التقييم -->
-            <div id="result-container" class="result-container">
-                <h3>🎯 نتيجة اختبارك:</h3>
-                <div class="score-circle" id="score-circle">
-                    <div class="score-inner">
-                        <span id="score-percentage">0%</span>
+                <!-- قسم الكبار -->
+                <div class="section-card adults-card">
+                    <div class="section-header adults-header">
+                        <div class="section-icon">👨‍👩‍👧‍👦</div>
+                        <h2>قسم الكبار</h2>
+                    </div>
+                    
+                    <p style="color: #1d4ed8; margin-bottom: 20px;">محتوى متقدم للكبار يشمل تلاوات وتفاسير متعمقة</p>
+                    
+                    <div class="section-buttons">
+                        <button class="section-btn adults-btn" onclick="showReciters()">
+                            <div class="btn-icon">🎵</div>
+                            <div>تلاوات القراء</div>
+                        </button>
+                        
+                        <button class="section-btn adults-btn" onclick="showAdultsExplanation()">
+                            <div class="btn-icon">📚</div>
+                            <div>تفسير مفصل</div>
+                        </button>
+                    </div>
+                    
+                    <!-- منطقة محتوى الكبار -->
+                    <div id="adults-content" class="content-area adults-content">
+                        <!-- محتوى القراء سيظهر هنا -->
                     </div>
                 </div>
-                <h4 id="result-title">عنوان النتيجة</h4>
-                <p id="result-message" class="motivation-text">رسالة التشجيع</p>
-                <p id="result-details" style="color: #64748b; margin-top: 15px;"></p>
-                
-                <div style="margin-top: 20px;">
-                    <button class="submit-btn" onclick="retryQuiz()" style="background: linear-gradient(90deg, #059669 0%, #10b981 100%);">
-                        🔄 حاول مرة أخرى
-                    </button>
-                </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <script>
@@ -630,65 +466,72 @@
             pageNumber: 1,
             type: "مكية",
             verses: 7,
-            revelationOrder: 5,
-            reasons: "سورة الفاتحة هي أول سورة نزلت كاملة، وتسمى بأم الكتاب وأم القرآن. نزلت لتكون أساس الصلاة التي هي عماد الدين، وهي السورة التي افتتح بها المصحف الشريف."
+            revelationOrder: 5
         };
 
-        // بيانات القراء مع روابط مباشرة للصوت
-        const reciters = {
-            hussary: {
-                name: "محمود الحصري",
-                audio: "https://cdn.islamic.network/quran/audio/64/ar.husary/1.mp3"
-            },
-            aljazaery: {
-                name: "ياسين الجزائري",
-                audio: "https://cdn.islamic.network/quran/audio/64/ar.aljazaery/1.mp3"
-            },
-            fares: {
-                name: "فارس عباد",
-                audio: "https://everyayah.com/data/Fares_Abbad_128kbps/001001.mp3"
-            }
+        // بيانات الأطفال
+        const kidsData = {
+            videoUrl: "https://www.youtube.com/watch?v=0Z0eRCePZ_s", // رابط يوتيوب
+            explanation: `
+                <h3 style="color: #059669; margin-bottom: 15px;">🌈 تفسير سورة الفاتحة للأطفال:</h3>
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <p><strong>بسم الله الرحمن الرحيم:</strong> نبدأ باسم الله الذي هو رحيم بنا دائماً.</p>
+                    <p><strong>الحمد لله رب العالمين:</strong> نشكر الله على كل النعم.</p>
+                    <p><strong>الرحمن الرحيم:</strong> الله رحيم جداً بكل مخلوقاته.</p>
+                    <p><strong>مالك يوم الدين:</strong> الله هو مالك يوم القيامة.</p>
+                    <p><strong>إياك نعبد وإياك نستعين:</strong> نعبد الله وحده ونطلب منه المساعدة.</p>
+                    <p><strong>اهدنا الصراط المستقيم:</strong> ندعو الله أن يرينا الطريق الصحيح.</p>
+                    <p><strong>صراط الذين أنعمت عليهم:</strong> طريق الأنبياء والصالحين.</p>
+                </div>
+                <div style="background: #dcfce7; padding: 15px; border-radius: 10px; border-right: 4px solid #10b981;">
+                    <h4 style="color: #047857;">🎯 نشاط عملي للأطفال:</h4>
+                    <p>✏️ ارسم صورة تمثل معنى الآية الأولى</p>
+                    <p>🎤 سجل نفسك وأنت تقرأ السورة</p>
+                    <p>🧩 العب لعبة تركيب آيات السورة</p>
+                </div>
+            `
         };
 
-        // بيانات أسئلة الاختبار
-        const quizQuestions = [
-            {
-                question: "ما هو نوع سورة الفاتحة؟",
-                options: ["مكية", "مدنية", "مكية ومدنية", "غير ذلك"],
-                correctAnswer: 0,
-                explanation: "سورة الفاتحة هي سورة مكية نزلت قبل الهجرة"
-            },
-            {
-                question: "كم عدد آيات سورة الفاتحة؟",
-                options: ["5 آيات", "6 آيات", "7 آيات", "8 آيات"],
-                correctAnswer: 2,
-                explanation: "سورة الفاتحة تتكون من 7 آيات"
-            },
-            {
-                question: "أكمل الآية: 'إياك نعبد و......'",
-                options: ["نخشى", "نستعين", "نرجو", "نخاف"],
-                correctAnswer: 1,
-                explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
-            },
-            {
-                question: "ما رقم الصفحة التي تبدأ بها سورة الفاتحة في المصحف؟",
-                options: ["الصفحة 1", "الصفحة 2", "الصفحة 3", "الصفحة 4"],
-                correctAnswer: 0,
-                explanation: "تبدأ سورة الفاتحة في الصفحة الأولى من المصحف"
-            },
-            {
-                question: "ما معنى 'الصراط المستقيم' في السورة؟",
-                options: ["طريق المال", "طريق الهداية", "طريق التجارة", "طريق السفر"],
-                correctAnswer: 1,
-                explanation: "الصراط المستقيم هو طريق الهداية والإسلام"
-            }
-        ];
-
-        // متغيرات مشغل الصوت
-        let audioPlayer = null;
-        let currentReciter = 'hussary';
-        let isPlaying = false;
-        let updateInterval = null;
+        // بيانات الكبار
+        const adultsData = {
+            reciters: [
+                {
+                    name: "محمود الحصري",
+                    audioUrl: "https://server8.mp3quran.net/husr/001.mp3",
+                    description: "تلاوة مجودة بصوت الشيخ محمود الحصري"
+                },
+                {
+                    name: "ياسين الجزائري",
+                    audioUrl: "https://server8.mp3quran.net/jaza/001.mp3",
+                    description: "تلاوة مرتلة بصوت الشيخ ياسين الجزائري"
+                },
+                {
+                    name: "فارس عباد",
+                    audioUrl: "https://everyayah.com/data/Fares_Abbad_128kbps/001001.mp3",
+                    description: "تلاوة بتجويد رائع بصوت الشيخ فارس عباد"
+                }
+            ],
+            explanation: `
+                <h3 style="color: #1e40af; margin-bottom: 15px;">📚 تفسير مفصل لسورة الفاتحة:</h3>
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                    <h4 style="color: #3b82f6;">المعاني العظيمة في السورة:</h4>
+                    <p><strong>الفاتحة وأسرارها:</strong> سورة الفاتحة تشمل جميع معاني القرآن، فهي تبدأ بالحمد والثناء على الله، وتثبت الألوهية والربوبية، وتدعو إلى العبادة والاستعانة، وتطلب الهداية إلى الصراط المستقيم.</p>
+                    
+                    <h4 style="color: #3b82f6; margin-top: 15px;">الفوائد والعبر:</h4>
+                    <p>1. <strong>التوحيد:</strong> تثبت وحدانية الله في الربوبية والألوهية.</p>
+                    <p>2. <strong>الاستعانة:</strong> تعلمنا أن نستعين بالله في جميع أمورنا.</p>
+                    <p>3. <strong>الهداية:</strong> نسأل الله الهداية في كل صلاة.</p>
+                    <p>4. <strong>الوسطية:</strong> الصراط المستقيم هو طريق الوسط والاعتدال.</p>
+                </div>
+                <div style="background: #dbeafe; padding: 15px; border-radius: 10px; border-right: 4px solid #3b82f6;">
+                    <h4 style="color: #1d4ed8;">💎 فوائد حفظ السورة:</h4>
+                    <p>✅ تقرأ في كل ركعة من الصلاة</p>
+                    <p>✅ لها فضل عظيم في استجابة الدعاء</p>
+                    <p>✅ تسمى بالشافية والكافية</p>
+                    <p>✅ أعظم سورة في القرآن كما ورد في الحديث</p>
+                </div>
+            `
+        };
 
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
@@ -697,311 +540,218 @@
             document.getElementById('surah-type').textContent = surahData.type;
             document.getElementById('verse-count').textContent = surahData.verses;
             document.getElementById('revelation-order').textContent = surahData.revelationOrder;
-            
-            // إنشاء أسئلة الاختبار
-            createQuizQuestions();
-            
-            // تهيئة مشغل الصوت
-            initAudioPlayer();
-            
-            // تشغيل القارئ الأول
-            playReciter('hussary');
         });
 
-        // تهيئة مشغل الصوت
-        function initAudioPlayer() {
-            audioPlayer = new Audio();
-            audioPlayer.preload = 'auto';
-            audioPlayer.volume = 0.5;
+        // دالة تحويل رابط يوتيوب إلى رابط embed
+        function convertToEmbed(url) {
+            // استخراج ID الفيديو من الرابط
+            let videoId = '';
             
-            // أحداث مشغل الصوت
-            audioPlayer.addEventListener('loadedmetadata', updateDuration);
-            audioPlayer.addEventListener('timeupdate', updateProgress);
-            audioPlayer.addEventListener('ended', onAudioEnded);
-            audioPlayer.addEventListener('error', onAudioError);
-        }
-
-        // تبديل عرض السورة
-        function toggleSurahText(type) {
-            const elementId = type === 'kids' ? 'kids-surah-text' : 'adults-surah-text';
-            const element = document.getElementById(elementId);
-            element.classList.toggle('visible');
-            
-            const button = event.target;
-            if (element.classList.contains('visible')) {
-                button.textContent = '📖 إخفاء السورة';
-            } else {
-                button.textContent = type === 'kids' 
-                    ? '📖 عرض سورة الفاتحة للأطفال' 
-                    : '📖 عرض سورة الفاتحة بالخط العثماني';
-            }
-        }
-
-        // تشغيل القارئ المحدد
-        function playReciter(reciterId) {
-            // إيقاف الصوت الحالي
-            stopAudio();
-            
-            const reciter = reciters[reciterId];
-            currentReciter = reciterId;
-            
-            // تحديث زر القارئ النشط
-            document.querySelectorAll('.reciter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // تغيير المصدر وعرض اسم القارئ
-            audioPlayer.src = reciter.audio;
-            document.getElementById('current-reciter').textContent = reciter.name;
-            
-            // إعادة تعيين المشغل
-            document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
-            isPlaying = false;
-            document.getElementById('audio-progress').style.width = '0%';
-            document.getElementById('time-display').textContent = '0:00 / 0:00';
-            
-            // تحميل الصوت
-            audioPlayer.load();
-        }
-
-        // تبديل التشغيل/الإيقاف المؤقت
-        function togglePlay() {
-            const playBtn = document.getElementById('play-btn');
-            
-            if (!audioPlayer.src) {
-                playReciter('hussary');
-                return;
-            }
-            
-            if (isPlaying) {
-                audioPlayer.pause();
-                playBtn.innerHTML = '<span>▶️</span> تشغيل';
-                clearInterval(updateInterval);
-            } else {
-                audioPlayer.play()
-                    .then(() => {
-                        playBtn.innerHTML = '<span>⏸️</span> إيقاف مؤقت';
-                        isPlaying = true;
-                        startProgressUpdate();
-                    })
-                    .catch(error => {
-                        console.error('خطأ في تشغيل الصوت:', error);
-                        alert('⚠️ تعذر تشغيل الصوت. يرجى التأكد من اتصال الإنترنت أو اختيار قارئ آخر.');
-                    });
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // إيقاف الصوت
-        function stopAudio() {
-            if (audioPlayer) {
-                audioPlayer.pause();
-                audioPlayer.currentTime = 0;
-                isPlaying = false;
-                document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
-                clearInterval(updateInterval);
-                document.getElementById('audio-progress').style.width = '0%';
-            }
-        }
-
-        // تغيير مستوى الصوت
-        function changeVolume(value) {
-            if (audioPlayer) {
-                audioPlayer.volume = value / 100;
-            }
-        }
-
-        // تحديث شريط التقدم
-        function updateProgress() {
-            if (audioPlayer.duration) {
-                const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                document.getElementById('audio-progress').style.width = progress + '%';
-                
-                // تحديث الوقت المعروض
-                const currentTime = formatTime(audioPlayer.currentTime);
-                const duration = formatTime(audioPlayer.duration);
-                document.getElementById('time-display').textContent = `${currentTime} / ${duration}`;
-            }
-        }
-
-        // تحديث المدة
-        function updateDuration() {
-            const duration = formatTime(audioPlayer.duration);
-            const currentTime = formatTime(audioPlayer.currentTime);
-            document.getElementById('time-display').textContent = `${currentTime} / ${duration}`;
-        }
-
-        // تقدم إلى وقت معين عند النقر على شريط التقدم
-        function seekAudio(event) {
-            if (audioPlayer.duration) {
-                const progressBar = event.currentTarget;
-                const clickPosition = event.offsetX;
-                const progressBarWidth = progressBar.offsetWidth;
-                const seekTime = (clickPosition / progressBarWidth) * audioPlayer.duration;
-                
-                audioPlayer.currentTime = seekTime;
-                updateProgress();
-            }
-        }
-
-        // عند انتهاء الصوت
-        function onAudioEnded() {
-            document.getElementById('play-btn').innerHTML = '<span>▶️</span> تشغيل';
-            isPlaying = false;
-            clearInterval(updateInterval);
-        }
-
-        // عند حدوث خطأ في الصوت
-        function onAudioError() {
-            console.error('خطأ في تحميل الصوت:', audioPlayer.error);
-            alert('⚠️ تعذر تحميل الصوت. يرجى التأكد من اتصال الإنترنت أو اختيار قارئ آخر.');
-            stopAudio();
-        }
-
-        // بدء تحديث التقدم
-        function startProgressUpdate() {
-            clearInterval(updateInterval);
-            updateInterval = setInterval(updateProgress, 100);
-        }
-
-        // تنسيق الوقت
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        // إنشاء أسئلة الاختبار
-        function createQuizQuestions() {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = '';
-            
-            quizQuestions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `
-                    <h4>السؤال ${index + 1}: ${question.question}</h4>
-                    <div class="options">
-                        ${question.options.map((option, optIndex) => `
-                            <button class="option-btn" 
-                                    onclick="selectAnswer(this, ${index}, ${optIndex})"
-                                    data-question="${index}"
-                                    data-option="${optIndex}">
-                                ${option}
-                            </button>
-                        `).join('')}
-                    </div>
-                    <p class="explanation" id="explanation-${index}" 
-                       style="display: none; color: #64748b; margin-top: 10px; font-size: 0.9rem;">
-                    </p>
-                `;
-                container.appendChild(questionDiv);
-            });
-        }
-
-        // تحديد الإجابة
-        let userAnswers = new Array(quizQuestions.length).fill(null);
-        
-        function selectAnswer(button, questionIndex, optionIndex) {
-            // إزالة التحديد من جميع خيارات هذا السؤال
-            const questionDiv = button.closest('.question');
-            questionDiv.querySelectorAll('.option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            // تحديد الخيار المختار
-            button.classList.add('selected');
-            userAnswers[questionIndex] = optionIndex;
-            
-            // إظهار التفسير
-            const explanationDiv = document.getElementById(`explanation-${questionIndex}`);
-            explanationDiv.textContent = `💡 ${quizQuestions[questionIndex].explanation}`;
-            explanationDiv.style.display = 'block';
-        }
-
-        // تصحيح الاختبار
-        function submitQuiz() {
-            let correctCount = 0;
-            const totalQuestions = quizQuestions.length;
-            
-            // حساب الإجابات الصحيحة
-            userAnswers.forEach((answer, index) => {
-                if (answer === quizQuestions[index].correctAnswer) {
-                    correctCount++;
+            // تحويل روابط مختلفة
+            if (url.includes('youtube.com/watch?v=')) {
+                videoId = url.split('v=')[1];
+                const ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition !== -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
                 }
-            });
-            
-            // حساب النسبة المئوية
-            const percentage = Math.round((correctCount / totalQuestions) * 100);
-            
-            // عرض النتيجة
-            showResult(percentage, correctCount, totalQuestions);
-        }
-
-        // عرض نتيجة التقييم
-        function showResult(percentage, correctCount, totalQuestions) {
-            const resultContainer = document.getElementById('result-container');
-            const scoreCircle = document.getElementById('score-circle');
-            const scorePercentage = document.getElementById('score-percentage');
-            const resultTitle = document.getElementById('result-title');
-            const resultMessage = document.getElementById('result-message');
-            const resultDetails = document.getElementById('result-details');
-            
-            // تحديث النسبة المئوية
-            scorePercentage.textContent = `${percentage}%`;
-            scoreCircle.style.setProperty('--percentage', `${percentage}%`);
-            
-            // تحديد العنوان والرسالة حسب النتيجة
-let title, message;
-            if (percentage >= 90) {
-                title = "ممتاز! 🎉";
-                message = "إنجاز رائع! أنت على دراية ممتازة بسورة الفاتحة.";
-            } else if (percentage >= 70) {
-                title = "جيد جداً! 👍";
-                message = "مستوى جيد، استمر في المراجعة والتكرار.";
-            } else if (percentage >= 50) {
-                title = "ليس سيئاً! 💪";
-                message = "احرص على تكرار السورة وفهم معانيها.";
-            } else {
-                title = "يحتاج مزيداً من الجهد 📚";
-                message = "راجع السورة مرة أخرى وكررها مع التفسير.";
+            } else if (url.includes('youtu.be/')) {
+                videoId = url.split('youtu.be/')[1];
+                const questionMarkPosition = videoId.indexOf('?');
+                if (questionMarkPosition !== -1) {
+                    videoId = videoId.substring(0, questionMarkPosition);
+                }
             }
             
-            resultTitle.textContent = title;
-            resultMessage.textContent = message;
-            resultDetails.textContent = `أجبت بشكل صحيح على ${correctCount} من أصل ${totalQuestions} سؤالاً`;
-            
-            // إظهار نتيجة التقييم
-            resultContainer.classList.add('visible');
-            
-            // التمرير إلى نتيجة التقييم
-            resultContainer.scrollIntoView({ behavior: 'smooth' });
+            // إرجاع رابط embed
+            return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0&controls=1`;
         }
 
-        // إعادة الاختبار
-        function retryQuiz() {
-            // إخفاء نتيجة التقييم
-            document.getElementById('result-container').classList.remove('visible');
-            
-            // إعادة تعيين الإجابات
-            userAnswers = new Array(quizQuestions.length).fill(null);
-            
-            // إزالة التحديد من جميع الخيارات
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            // إخفاء جميع التفسيرات
-            document.querySelectorAll('.explanation').forEach(exp => {
-                exp.style.display = 'none';
-            });
-            
-            // التمرير إلى أعلى الاختبار
-            document.getElementById('quiz-container').scrollIntoView({ behavior: 'smooth' });
+        // دالة تحويل رابط صوتي إلى مشغل
+        function createAudioPlayer(audioUrl, reciterName, description) {
+            return `
+                <div class="audio-player">
+                    <h4 style="color: #1e40af;">🎵 ${reciterName}</h4>
+                    <p style="color: #64748b; margin-bottom: 15px;">${description}</p>
+                    
+                    <audio id="audio-player-${reciterName.replace(/\s+/g, '-')}" 
+                           controls 
+                           style="width: 100%; margin: 15px 0;">
+                        <source src="${audioUrl}" type="audio/mpeg">
+                        متصفحك لا يدعم مشغل الصوت.
+                    </audio>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 10px;">
+                        <strong>💡 نصيحة:</strong> استمع وكرر خلف القارئ لتحسين التلاوة
+                    </div>
+                </div>
+            `;
         }
+
+        // عرض فيديو الأطفال
+        function showKidsVideo() {
+            const contentArea = document.getElementById('kids-content');
+            
+            // تحويل الرابط إلى embed
+            const embedUrl = convertToEmbed(kidsData.videoUrl);
+            
+            // عرض محتوى الفيديو
+            contentArea.innerHTML = `
+                <h3 style="color: #059669; margin-bottom: 15px;">🎬 فيديو تعليمي للأطفال</h3>
+                <p style="color: #047857; margin-bottom: 20px;">فيديو ممتع لتعليم سورة الفاتحة بطريقة سهلة للأطفال</p>
+                
+                <div class="media-container">
+                    <iframe id="video-frame"
+                        src="${embedUrl}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div style="background: #dcfce7; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: #047857;">📝 نشاط بعد المشاهدة:</h4>
+                    <p>1. حاول ترديد السورة مع المعلم</p>
+                    <p>2. سجل نفسك وأنت تقرأ السورة</p>
+                    <p>3. ارسم رسومات تعبر عن معاني الآيات</p>
+                </div>
+                
+                <button class="close-btn" onclick="hideContent('kids')">
+                    ✖ إغلاق الفيديو
+                </button>
+            `;
+            
+            // إظهار المحتوى
+            contentArea.classList.add('visible');
+            
+            // إخفاء محتوى الكبار إذا كان ظاهراً
+            document.getElementById('adults-content').classList.remove('visible');
+        }
+
+        // عرض تفسير الأطفال
+        function showKidsExplanation() {
+            const contentArea = document.getElementById('kids-content');
+            
+            // عرض تفسير الأطفال
+            contentArea.innerHTML = `
+                <div class="explanation-box kids-explanation">
+                    ${kidsData.explanation}
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="section-btn kids-btn" onclick="showKidsVideo()" 
+                            style="width: auto; padding: 12px 25px; margin: 0 auto;">
+                        🎬 مشاهدة الفيديو التعليمي
+                    </button>
+                </div>
+                
+                <button class="close-btn" onclick="hideContent('kids')" style="margin-top: 20px;">
+                    ✖ إغلاق التفسير
+                </button>
+            `;
+            
+            // إظهار المحتوى
+            contentArea.classList.add('visible');
+            
+            // إخفاء محتوى الكبار إذا كان ظاهراً
+            document.getElementById('adults-content').classList.remove('visible');
+        }
+
+        // عرض القراء للكبار
+        function showReciters() {
+            const contentArea = document.getElementById('adults-content');
+            
+            // إنشاء HTML للقراء
+            let recitersHTML = `
+                <h3 style="color: #1e40af; margin-bottom: 15px;">🎵 تلاوات سورة الفاتحة</h3>
+                <p style="color: #1d4ed8; margin-bottom: 20px;">اختر قارئاً واستمع لتلاوة السورة بصوته</p>
+                
+                <div style="display: grid; gap: 20px;">
+            `;
+            
+            // إضافة كل قارئ
+            adultsData.reciters.forEach((reciter, index) => {
+                recitersHTML += createAudioPlayer(
+                    reciter.audioUrl, 
+                    reciter.name, 
+                    reciter.description
+                );
+            });
+            
+            recitersHTML += `
+                </div>
+                
+                <div style="margin-top: 25px; background: #dbeafe; padding: 20px; border-radius: 10px;">
+                    <h4 style="color: #1d4ed8;">🎯 نصائح للاستماع:</h4>
+                    <p>1. استمع بتركيز للقارئ المفضل لديك</p>
+                    <p>2. كرر خلف القارئ لتحسين النطق</p>
+                    <p>3. جرب الاستماع لأكثر من قارئ للاستفادة من الأساليب المختلفة</p>
+                </div>
+                
+                <button class="close-btn" onclick="hideContent('adults')">
+                    ✖ إغلاق التلاوات
+                </button>
+            `;
+            
+            contentArea.innerHTML = recitersHTML;
+            
+            // إظهار المحتوى
+            contentArea.classList.add('visible');
+            
+            // إخفاء محتوى الأطفال إذا كان ظاهراً
+            document.getElementById('kids-content').classList.remove('visible');
+        }
+
+        // عرض تفسير الكبار
+        function showAdultsExplanation() {
+            const contentArea = document.getElementById('adults-content');
+            
+            // عرض تفسير الكبار
+            contentArea.innerHTML = `
+                <div class="explanation-box adults-explanation">
+                    ${adultsData.explanation}
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="section-btn adults-btn" onclick="showReciters()" 
+                            style="width: auto; padding: 12px 25px; margin: 0 auto;">
+                        🎵 الاستماع للتلاوات
+                    </button>
+                </div>
+                
+                <button class="close-btn" onclick="hideContent('adults')" style="margin-top: 20px;">
+                    ✖ إغلاق التفسير
+                </button>
+            `;
+            
+            // إظهار المحتوى
+            contentArea.classList.add('visible');
+            
+            // إخفاء محتوى الأطفال إذا كان ظاهراً
+            document.getElementById('kids-content').classList.remove('visible');
+        }
+
+        // إخفاء المحتوى
+        function hideContent(section) {
+            const contentArea = document.getElementById(section === 'kids' ? 'kids-content' : 'adults-content');
+            contentArea.classList.remove('visible');
+            
+            // إيقاف أي فيديو أو صوت يعمل
+            const iframe = contentArea.querySelector('iframe');
+            if (iframe) {
+                iframe.src = iframe.src; // إعادة تعيين الرابط لإيقاف الفيديو
+            }
+            
+            const audioElements = contentArea.querySelectorAll('audio');
+            audioElements.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+
+        // عند تحميل الصفحة، يمكن إضافة محتوى افتراضي
+        window.onload = function() {
+            // يمكنك جعل زر معين يظهر افتراضياً
+            // showKidsVideo(); // مثلاً عرض فيديو الأطفال تلقائياً
+        };
     </script>
 </body>
 </html>
