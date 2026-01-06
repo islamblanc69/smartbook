@@ -36,7 +36,7 @@
 <body onload="checkProgress()">
 
 <div class="header">
-    <img src="logo.png" alt="لوغو" class="logo-img">
+    <img src="image.png" alt="لوغو" class="logo-img">
     <div class="site-subtitle">تتبع القرآن الكريم - سورة المسد</div>
     <h1>سورة المَسَد</h1>
 </div>
@@ -82,7 +82,7 @@
             </div>
 
             <span class="label">التفسير والبيان</span>
-            <div class="button interpret-btn" onclick="playVid('E290Oq1-7Sg')">📖 تفسير السعدي الميسر</div>
+            <div class="button interpret-btn" onclick="playVid('I77v6mNf5oM')">📖 التفسير الميسر (فهد الكندري)</div>
         </div>
     </div>
 </div>
@@ -92,16 +92,24 @@
 </div>
 
 <script>
-    const surahId = 'masad_final_v3';
+    const surahId = 'masad_fixed';
 
     function toggleTab(id, el) {
         const content = document.getElementById(id);
         const arrow = el.querySelector('.arrow');
         document.querySelectorAll('.tab-content').forEach(tab => {
-            if(tab.id !== id) { tab.style.maxHeight = null; tab.previousElementSibling.querySelector('.arrow').classList.remove('rotate'); }
+            if(tab.id !== id) {
+                tab.style.maxHeight = null;
+                tab.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
+            }
         });
-        if (content.style.maxHeight) { content.style.maxHeight = null; arrow.classList.remove('rotate'); }
-        else { content.style.maxHeight = content.scrollHeight + "px"; arrow.classList.add('rotate'); }
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            arrow.classList.remove('rotate');
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            arrow.classList.add('rotate');
+        }
     }
 
     function playVid(id) {
