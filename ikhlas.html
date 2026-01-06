@@ -3,32 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>سورة الفاتحة</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>سورة الأعلى</title>
+    <link rel="stylesheet" href="../styles.css"> <!-- ربط مع styles.css اللي عدلناه سابقاً -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade:wght@400;700&display=swap" rel="stylesheet"> <!-- خط قرآني واضح -->
+    <style>
+        /* تعديلات إضافية للتصميم الإسلامي العصري */
+        body { font-family: 'Scheherazade', serif; background: linear-gradient(to bottom, #e8f5e9, #ffffff); } /* gradient إسلامي هادئ */
+        header { background: linear-gradient(to right, #198754, #0d6efd); } /* أخضر إلى أزرق */
+        .btn-animation { transition: all 0.3s ease; } /* أنيميشن للأزرار */
+        .btn-animation:hover { transform: scale(1.05); background-color: #157347; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        iframe { border: 2px solid #198754; border-radius: 15px; width: 100%; height: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); } /* إطار خاص للـ iframe */
+        .dashboard { background: #fff; padding: 1rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        .section { margin-bottom: 2rem; padding: 1.5rem; background: #fff; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        audio { width: 100%; border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
     <header>
-        <h1>سورة الفاتحة</h1>
+        <h1>سورة الأعلى</h1>
     </header>
 
-    <div class="container">
-        <div id="ayahs"></div>
-        <audio id="audioPlayer" controls></audio>
-        <button id="playAudio" class="btn btn-success mt-3">استمع إلى التلاوة</button>
+    <!-- داشبورد في الأعلى -->
+    <div class="container dashboard text-center">
+        <p>عدد الزيارات: <span id="visitCount">0</span></p>
+        <p>عدد الاستماعات: <span id="listenCount">0</span></p>
+        <button id="saveBtn" class="btn btn-primary btn-animation">حفظ السورة</button>
+    </div>
+
+    <!-- قسم الكبار -->
+    <div class="container section">
+        <h2>قسم الكبار</h2>
+        <h3>تلاوات صوتية</h3>
+        <button class="btn btn-success btn-animation mb-2" onclick="playAudio('https://server8.mp3quran.net/frs_a/087.mp3', 'listenCount')">تلاوة فارس عباد</button>
+        <audio id="audioPlayer1" controls></audio>
+        
+        <button class="btn btn-success btn-animation mb-2" onclick="playAudio('https://server10.mp3quran.net/husr/087.mp3', 'listenCount')">تلاوة محمود الحصري</button>
+        <audio id="audioPlayer2" controls></audio>
+        
+        <button class="btn btn-success btn-animation mb-2" onclick="playAudio('https://server5.mp3quran.net/yas/087.mp3', 'listenCount')">تلاوة ياسين الجزائري</button>
+        <audio id="audioPlayer3" controls></audio>
+        
+        <h3>تفسير ميسر</h3>
+        <iframe src="https://e-quran.com/taf87.html" frameborder="0"></iframe> <!-- iframe للتفسير -->
+    </div>
+
+    <!-- قسم الأطفال -->
+    <div class="container section">
+        <h2>قسم الأطفال</h2>
+        <h3>تلاوة معلمة مع ترديد</h3>
+        <button class="btn btn-success btn-animation mb-2" onclick="playAudio('https://server6.mp3quran.net/husr_mjwd/087.mp3', 'listenCount')">تلاوة محمود الحصري للأطفال</button>
+        <audio id="audioPlayer4" controls></audio>
+        
+        <h3>تفسير مبسط للأطفال</h3>
+        <iframe src="https://www.twinkl.com/teaching-wiki/tfsyr-swrt-alaly-llatfal" frameborder="0"></iframe> <!-- iframe للتفسير المبسط -->
     </div>
 
     <nav class="navbar fixed-bottom">
         <div class="container-fluid justify-content-around">
             <a href="../index.html" class="nav-link">الرئيسية</a>
-            <button class="nav-link btn btn-link" onclick="document.getElementById('playAudio').click()">استماع</button>
+            <button class="nav-link btn btn-link" onclick="playRandomAudio()">استماع عشوائي</button>
             <a href="#" class="nav-link">مشاركة</a>
         </div>
     </nav>
 
     <script>
-        // الكود السابق لجلب الآيات والصوت
+        // تتبع الزيارات والاستماعات بـ localStorage
+        let visits = localStorage.getItem('visits_ala') || 0;
+        visits++;
+        localStorage.setItem('visits_ala', visits);
+        document.getElementById('visitCount').textContent = visits;
+
+        let listens = localStorage.getItem('listens_ala') || 0;
+        document.getElementById('listenCount').textContent = listens;
+
+        // زر الحفظ/إلغاء
+        const saveBtn = document.getElementById('saveBtn');
+        let saved = localStorage.getItem('saved_ala') === 'true';
+        if (saved) saveBtn.textContent = 'إلغاء الحفظ';
+        saveBtn.addEventListener('click', () => {
+            saved = !saved;
+            localStorage.setItem('saved_ala', saved);
+            saveBtn.textContent = saved ? 'إلغاء الحفظ' : 'حفظ السورة';
+        });
+
+        // دالة لتشغيل الصوت وتحديث العدد
+        function playAudio(src, countId) {
+            const audio = document.createElement('audio');
+            audio.src = src;
+            audio.play();
+            listens++;
+            localStorage.setItem('listens_ala', listens);
+            document.getElementById(countId).textContent = listens;
+        }
+
+        // استماع عشوائي (اختياري)
+        function playRandomAudio() {
+            const audios = ['https://server8.mp3quran.net/frs_a/087.mp3', 'https://server10.mp3quran.net/husr/087.mp3', 'https://server5.mp3quran.net/yas/087.mp3', 'https://server6.mp3quran.net/husr_mjwd/087.mp3'];
+            const randomSrc = audios[Math.floor(Math.random() * audios.length)];
+            playAudio(randomSrc, 'listenCount');
+        }
+
+        // جلب الآيات من API (كما في الكود السابق، إذا أردت)
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('https://api.alquran.cloud/v1/surah/87')
+                .then(response => response.json())
+                .then(data => {
+                    const ayahsDiv = document.createElement('div');
+                    ayahsDiv.id = 'ayahs';
+                    data.data.ayahs.forEach(ayah => {
+                        const p = document.createElement('p');
+                        p.innerHTML = `<strong>آية ${ayah.numberInSurah}:</strong> ${ayah.text}`;
+                        ayahsDiv.appendChild(p);
+                    });
+                    document.querySelector('.section:first-of-type').appendChild(ayahsDiv); // أضف الآيات في قسم الكبار
+                });
+        });
     </script>
 </body>
 </html>
