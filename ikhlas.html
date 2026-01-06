@@ -2,96 +2,24 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الفاتحة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>سورة الإخلاص</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <header>
-        <a href="../index.html" class="back-btn">رجوع</a>
-        <div class="logo">قرآن</div>
-        <a href="../index.html" class="home-btn">الرئيسية</a>
+
+    <!-- الهيدر العلوي العصري -->
+    <header class="app-header">
+        <!-- فقط اللوجو في الوسط، بدون أي أزرار -->
+        <div class="logo-circle">
+            <img src="../assets/image.png" alt="لوجو التطبيق">
+        </div>
     </header>
 
-    <h1 class="surah-title">سورة الفاتحة</h1>
+    <!-- العنوان الرئيسي -->
+    <h1 class="surah-main-title">القسم الذكي<br>لسورة الإخلاص</h1>
 
-    <div class="ayahs" id="ayahs"></div>
+    <!-- الباقي راح يجي هنا (الآيات، التلاوات، التبويبات...) -->
 
-    <button class="replay-btn" onclick="replayCurrent()">إعادة تشغيل التلاوة</button>
-
-    <div class="tabs">
-        <div class="tab active" onclick="switchTab('adults')">قسم الكبار</div>
-        <div class="tab" onclick="switchTab('kids')">قسم الأطفال</div>
-    </div>
-
-    <div id="adults" class="section active">
-        <button class="recitation-btn" onclick="playAudio('https://server8.mp3quran.net/frs_a/001.mp3')">تلاوة فارس عباد</button>
-        <audio controls></audio>
-
-        <button class="recitation-btn" onclick="playAudio('https://server10.mp3quran.net/husr/001.mp3')">تلاوة محمود خليل الحصري</button>
-        <audio controls></audio>
-
-        <button class="recitation-btn" onclick="playAudio('https://server5.mp3quran.net/yas/001.mp3')">تلاوة ياسين الجزائري</button>
-        <audio controls></audio>
-
-        <div class="tafsir">
-            <h3>تفسير ميسر</h3>
-            <p>الحمد لله الذي له الحمد الكامل على نعمه الدينية والدنيوية، رب العالمين ومالكهما ومدبرهما، الرحمن في الدنيا بعباده جميعاً، الرحيم في الآخرة بالمؤمنين، مالك يوم الدين وهو يوم القيامة، إياك نعبد ولا نعبد غيرك، وإياك نستعين ولا نستعين بغيرك، اهدنا الصراط المستقيم صراط الذين أنعمت عليهم من النبيين والصديقين والشهداء والصالحين غير المغضوب عليهم الذين عرفوا الحق وتركوه كاليهود ولا الضالين الذين تركوا الحق جهلاً كالنصارى.</p>
-        </div>
-    </div>
-
-    <div id="kids" class="section">
-        <button class="recitation-btn" onclick="playAudio('https://server11.mp3quran.net/husr_mu/001.mp3')">تلاوة محمود الحصري المعلم (مع ترديد الأطفال)</button>
-        <audio controls></audio>
-
-        <div class="tafsir">
-            <h3>تفسير مبسط للأطفال</h3>
-            <p>يا أطفال، نحمد الله اللي خلق كل شيء ورباه، هو الرحمن اللي يرحم الجميع، والرحيم اللي يرحم المؤمنين يوم القيامة. نعبد الله وحده ونطلب المساعدة منه وحده. اللهم اهدنا الطريق المستقيم زي الأنبياء والصالحين، ولا تجعلنا زي اللي غضبت عليهم أو اللي ضلوا الطريق.</p>
-        </div>
-    </div>
-
-    <nav class="navbar">
-        <a href="../index.html">رجوع</a>
-        <a href="../index.html">الرئيسية</a>
-        <a href="#">تفسير الأحلام</a>
-    </nav>
-
-    <script>
-        let currentAudio = null;
-
-        fetch('https://api.alquran.cloud/v1/surah/1')
-            .then(res => res.json())
-            .then(data => {
-                const ayahsDiv = document.getElementById('ayahs');
-                data.data.ayahs.forEach(ayah => {
-                    const p = document.createElement('p');
-                    p.textContent = ayah.text;
-                    ayahsDiv.appendChild(p);
-                });
-            });
-
-        function playAudio(src) {
-            if (currentAudio) currentAudio.pause();
-            const audio = document.querySelector('.section.active audio');
-            audio.src = src;
-            audio.play();
-            currentAudio = audio;
-        }
-
-        function replayCurrent() {
-            if (currentAudio) {
-                currentAudio.currentTime = 0;
-                currentAudio.play();
-            }
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
-
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-    </script>
 </body>
 </html>
