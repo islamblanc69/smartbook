@@ -3,139 +3,700 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الإخلاص</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri&display=swap" rel="stylesheet">
+    <title>سورة الفاتحة - تتبع القرآن بخط اليد</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
         body {
-            background: #121212;
-            color: #e0e0e0;
-            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            padding: 20px;
             min-height: 100vh;
-            padding: 1rem;
         }
-        .container { max-width: 480px; margin: 0 auto; }
-
-        /* الإحصائيات العلوية */
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            background: #1e1e1e;
-            padding: 1rem;
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
             border-radius: 20px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .stat-item h3 { font-size: 1rem; color: #aaa; margin-bottom: 0.5rem; }
-        .stat-item p { font-size: 1.8rem; font-weight: bold; }
-        .stat-item:nth-child(1) p { color: #bb86fc; }
-        .stat-item:nth-child(2) p { color: #03dac6; }
-        .stat-item:nth-child(3) p { color: #cf6679; }
-        .stat-item:nth-child(4) p { color: #ffd60a; }
-
-        /* صورة الغلاف */
-        .cover-image {
-            width: 100%;
-            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border: 1px solid #e1e8ed;
         }
-        .cover-image img { width: 100%; display: block; }
-
-        /* عنوان الركن */
-        .section-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #1e1e1e;
-            padding: 1rem 1.5rem;
-            border-radius: 20px 20px 0 0;
-            margin-bottom: 0.5rem;
-        }
-        .section-title h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-        .section-title .icon { font-size: 1.6rem; }
-
-        /* الكروت الداخلية */
-        .cards {
-            background: #1e1e1e;
-            border-radius: 0 0 20px 20px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-        }
-        .card-item {
-            background: #2d2d2d;
-            padding: 1.2rem;
-            border-radius: 16px;
-            margin-bottom: 1rem;
+        
+        .header {
+            background: linear-gradient(90deg, #1a5f7a 0%, #2a9d8f 100%);
+            color: white;
+            padding: 25px;
             text-align: center;
-            font-size: 1.1rem;
+            position: relative;
         }
-        .card-item:last-child { margin-bottom: 0; }
-
-        /* ألوان خاصة للعناوين */
-        .title-anshita { color: #ff7598; }
-        .title-kibar { color: #64d8cb; }
-
-        /* أيقونات */
-        .icon { opacity: 0.9; }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .surah-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .info-box {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .handwriting-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px dashed #2a9d8f;
+            text-align: center;
+        }
+        
+        .handwriting-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .activities {
+            margin-top: 40px;
+        }
+        
+        .activity-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: #e9f5f3;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: #1a5f7a;
+            font-weight: 600;
+        }
+        
+        .tab-btn:hover {
+            background: #2a9d8f;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: #1a5f7a;
+            color: white;
+        }
+        
+        .activity-content {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            min-height: 300px;
+            display: none;
+        }
+        
+        .activity-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-right: 5px solid #2a9d8f;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .option-btn {
+            padding: 15px;
+            background: #e9f5f3;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .option-btn:hover {
+            background: #d1e7e4;
+            transform: translateX(-5px);
+        }
+        
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .result {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            display: none;
+            font-weight: bold;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .drawing-canvas {
+            width: 100%;
+            height: 300px;
+            border: 2px solid #2a9d8f;
+            border-radius: 10px;
+            background: white;
+            cursor: crosshair;
+            margin: 20px 0;
+            touch-action: none;
+        }
+        
+        .canvas-controls {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 10px 20px;
+            background: #1a5f7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: #2a9d8f;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .progress-container {
+            margin-top: 15px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #2a9d8f;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(90deg, #1a5f7a 0%, #2a9d8f 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(42, 157, 143, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-
-        <!-- الإحصائيات -->
-        <div class="stats">
-            <div class="stat-item">
-                <h3>الجزء</h3>
-                <p>30</p>
-            </div>
-            <div class="stat-item">
-                <h3>الصفحة</h3>
-                <p>604</p>
-            </div>
-            <div class="stat-item">
-                <h3>الآيات</h3>
-                <p>4</p>
-            </div>
-            <div class="stat-item">
-                <h3>الرقم</h3>
-                <p>112</p>
+        <!-- رأس الصفحة -->
+        <div class="header">
+            <h1 id="surah-name">سورة الفاتحة</h1>
+            <div class="surah-info">
+                <div class="info-box">عدد الآيات: <span id="verse-count">7</span></div>
+                <div class="info-box">ترتيب النزول: <span id="revelation-order">5</span></div>
+                <div class="info-box">النوع: <span id="surah-type">مكية</span></div>
             </div>
         </div>
-
-        <!-- صورة غلاف السورة -->
-        <div class="cover-image">
-            <img src="https://i.imgur.com/0qOQJ0Z.jpeg" alt="سورة الإخلاص">
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="content">
+            <!-- قسم الخط اليدوي -->
+            <section class="handwriting-section">
+                <h2>✍️ تتبع الآيات بخط اليد</h2>
+                <p>إليك صورة الآيات بخط اليد. حاول تتبع الخطوط للتعود على شكل الحروف:</p>
+                <img src="https://via.placeholder.com/800x400/2a9d8f/ffffff?text=صورة+خط+اليد+للسورة" 
+                     alt="خط يد سورة الفاتحة" class="handwriting-image" id="handwriting-img">
+                
+                <!-- لوحة الرسم التفاعلية -->
+                <div class="canvas-controls">
+                    <button class="control-btn" onclick="clearCanvas()">🧹 مسح الرسم</button>
+                    <button class="control-btn" onclick="changeColor('#1a5f7a')">🔵 لون أزرق</button>
+                    <button class="control-btn" onclick="changeColor('#e74c3c')">🔴 لون أحمر</button>
+                    <button class="control-btn" onclick="changeBrushSize(2)">✏️ رفيع</button>
+                    <button class="control-btn" onclick="changeBrushSize(10)">🖌️ عريض</button>
+                </div>
+                <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
+                
+                <!-- رابط تحميل صورة الخط -->
+                <a href="#" class="download-btn" onclick="downloadHandwriting()">
+                    ⬇️ تحميل صورة الخط اليدوي
+                </a>
+            </section>
+            
+            <!-- قسم الأنشطة التفاعلية -->
+            <section class="activities">
+                <h2>🎯 أنشطة تفاعلية للحفظ</h2>
+                <p>اختر نشاطًا لمساعدتك في حفظ السورة وفهم معانيها:</p>
+                
+                <!-- أزرار التبويب -->
+                <div class="activity-tabs">
+                    <button class="tab-btn active" onclick="showActivity(1)">🧩 اختبار التكملة</button>
+                    <button class="tab-btn" onclick="showActivity(2)">🔤 ترتيب الآيات</button>
+                    <button class="tab-btn" onclick="showActivity(3)">🎧 الاستماع والتكرار</button>
+                    <button class="tab-btn" onclick="showActivity(4)">📖 تفسير الآيات</button>
+                </div>
+                
+                <!-- محتوى الأنشطة -->
+                <!-- النشاط 1: اختبار التكملة -->
+                <div id="activity1" class="activity-content active">
+                    <div class="question">
+                        <h3>أكمل الآية: "الحمد لله رب ________"</h3>
+                        <div class="options">
+                            <button class="option-btn" onclick="checkAnswer(this, 'correct')">العالمين</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">الناس</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">الخلق</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">الكون</button>
+                        </div>
+                        <div id="result1" class="result"></div>
+                    </div>
+                    
+                    <div class="question">
+                        <h3>أكمل الآية: "إياك نعبد وإياك ________"</h3>
+                        <div class="options">
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">نخشى</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'correct')">نستعين</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">نرجو</button>
+                            <button class="option-btn" onclick="checkAnswer(this, 'wrong')">نخاف</button>
+                        </div>
+                        <div id="result2" class="result"></div>
+                    </div>
+                </div>
+                
+                <!-- النشاط 2: ترتيب الآيات -->
+                <div id="activity2" class="activity-content">
+                    <h3>رتب الآيات بالترتيب الصحيح:</h3>
+                    <p>اسحب وأسقط الآيات في الترتيب الصحيح:</p>
+                    <div id="sortable-list" style="margin-top: 20px;">
+                        <div class="verse-item" draggable="true" data-order="3">صراط الذين أنعمت عليهم</div>
+                        <div class="verse-item" draggable="true" data-order="1">بسم الله الرحمن الرحيم</div>
+                        <div class="verse-item" draggable="true" data-order="4">غير المغضوب عليهم ولا الضالين</div>
+                        <div class="verse-item" draggable="true" data-order="2">الحمد لله رب العالمين</div>
+                    </div>
+                    <button class="control-btn" onclick="checkOrder()" style="margin-top: 20px;">✅ تحقق من الترتيب</button>
+                    <div id="order-result" class="result"></div>
+                </div>
+                
+                <!-- النشاط 3: الاستماع والتكرار -->
+                <div id="activity3" class="activity-content">
+                    <h3>🎵 استمع وكرر</h3>
+                    <p>استمع إلى الآية وحاول ترديدها:</p>
+                    
+                    <div class="audio-player">
+                        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <button class="control-btn" onclick="playPause()">▶️ تشغيل</button>
+                            <button class="control-btn" onclick="stopAudio()">⏹️ إيقاف</button>
+                            <select id="verse-select" onchange="loadVerse()" style="padding: 10px; border-radius: 5px;">
+                                <option value="1">الآية 1</option>
+                                <option value="2">الآية 2</option>
+                                <option value="3">الآية 3</option>
+                            </select>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress" id="audio-progress"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; background: #e9f5f3; padding: 15px; border-radius: 10px;">
+                            <h4>الآية الحالية:</h4>
+                            <p id="current-verse">بسم الله الرحمن الرحيم</p>
+                            <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">كرر الآية 3 مرات بعد السماع</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- النشاط 4: التفسير -->
+                <div id="activity4" class="activity-content">
+                    <h3>📖 تفسير مختصر للآيات</h3>
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                        <h4>بسم الله الرحمن الرحيم:</h4>
+                        <p>أبدأ بسم الله مستعينا به، وهو الرحمن الرحيم الذي وسعت رحمته كل شيء.</p>
+                        
+                        <h4 style="margin-top: 15px;">الحمد لله رب العالمين:</h4>
+                        <p>الثناء على الله بجميع المحامد، وهو المربي لجميع الخلق.</p>
+                        
+                        <h4 style="margin-top: 15px;">الرحمن الرحيم:</h4>
+                        <p>الذي وسعت رحمته كل شيء، وهو دائم الرحمة بعباده.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-
-        <!-- ركن الأنشطة -->
-        <div class="section-title title-anshita">
-            <h2>ركن الأنشطة</h2>
-            <span class="icon">👦</span>
-        </div>
-        <div class="cards">
-            <div class="card-item">معلم الأطفال 🎤</div>
-            <div class="card-item">تفسير للأطفال 📖</div>
-        </div>
-
-        <!-- ركن الكبار -->
-        <div class="section-title title-kibar">
-            <h2>ركن الكبار</h2>
-            <span class="icon">👨</span>
-        </div>
-        <div class="cards">
-            <div class="card-item">ياسين الجزائري 🎧</div>
-            <div class="card-item">فارس عباد 🎧</div>
-            <div class="card-item">محمود خليل الحصري 🎧</div>
-            <div class="card-item">تكرار للحفظ 🔁</div>
-            <div class="card-item">محمود الحصري المعلم 🎤</div>
-            <div class="card-item">تفسير السورة 📖</div>
-        </div>
-
     </div>
+
+    <script>
+        // بيانات السورة (يمكن تغييرها لكل سورة)
+        const surahData = {
+            name: "الفاتحة",
+            verses: 7,
+            order: 5,
+            type: "مكية",
+            handwritingImage: "path/to/your/image.jpg" // رابط صورة خط اليد
+        };
+
+        // تهيئة البيانات
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('surah-name').textContent = `سورة ${surahData.name}`;
+            document.getElementById('verse-count').textContent = surahData.verses;
+            document.getElementById('revelation-order').textContent = surahData.order;
+            document.getElementById('surah-type').textContent = surahData.type;
+            document.getElementById('handwriting-img').src = surahData.handwritingImage;
+            
+            // تهيئة لوحة الرسم
+            initDrawingCanvas();
+            
+            // جعل العناصر قابلة للسحب
+            initDragAndDrop();
+        });
+
+        // نظام التبويب للأنشطة
+        function showActivity(activityNumber) {
+            // إخفاء كل الأنشطة
+            document.querySelectorAll('.activity-content').forEach(activity => {
+                activity.classList.remove('active');
+            });
+            
+            // إزالة النشط من جميع الأزرار
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // إظهار النشاط المحدد
+            document.getElementById(`activity${activityNumber}`).classList.add('active');
+            
+            // جعل الزر نشط
+            event.target.classList.add('active');
+        }
+
+        // التحقق من الإجابات
+        function checkAnswer(button, status) {
+            // إزالة الألوان السابقة
+            button.parentElement.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('correct', 'wrong');
+            });
+            
+            // تطبيق اللون المناسب
+            button.classList.add(status);
+            
+            // إظهار النتيجة
+            const resultDiv = button.parentElement.nextElementSibling;
+            if (status === 'correct') {
+                resultDiv.textContent = "🎉 إجابة صحيحة! أحسنت!";
+                resultDiv.className = "result success";
+            } else {
+                resultDiv.textContent = "⚠️ حاول مرة أخرى!";
+                resultDiv.className = "result error";
+            }
+        }
+
+        // لوحة الرسم التفاعلية
+        let canvas, ctx, painting = false, brushColor = '#1a5f7a', brushSize = 5;
+
+        function initDrawingCanvas() {
+            canvas = document.getElementById('drawingCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // ضبط حجم الكانفاس
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // أحداث الماوس
+            canvas.addEventListener('mousedown', startPosition);
+            canvas.addEventListener('mouseup', endPosition);
+            canvas.addEventListener('mousemove', draw);
+            
+            // أحداث اللمس
+            canvas.addEventListener('touchstart', startPosition);
+            canvas.addEventListener('touchend', endPosition);
+            canvas.addEventListener('touchmove', draw);
+        }
+
+        function startPosition(e) {
+            painting = true;
+            draw(e);
+        }
+
+        function endPosition() {
+            painting = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!painting) return;
+            
+            e.preventDefault();
+            
+            let x, y;
+            if (e.type.includes('touch')) {
+                x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+                y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+            } else {
+                x = e.offsetX;
+                y = e.offsetY;
+            }
+            
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = brushColor;
+            
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function changeColor(color) {
+            brushColor = color;
+        }
+
+        function changeBrushSize(size) {
+            brushSize = size;
+        }
+
+        // نظام السحب والإفلات لترتيب الآيات
+        let draggedItem = null;
+
+        function initDragAndDrop() {
+            const items = document.querySelectorAll('.verse-item');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    setTimeout(() => this.style.display = 'none', 0);
+                });
+                
+                item.addEventListener('dragend', function() {
+                    setTimeout(() => {
+                        this.style.display = 'block';
+                        draggedItem = null;
+                    }, 0);
+                });
+                
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+                
+                item.addEventListener('dragenter', function(e) {
+                    e.preventDefault();
+                    this.style.backgroundColor = '#e9f5f3';
+                });
+                
+                item.addEventListener('dragleave', function() {
+                    this.style.backgroundColor = '';
+                });
+                
+                item.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (draggedItem !== this) {
+                        const allItems = [...document.querySelectorAll('.verse-item')];
+                        const draggedIndex = allItems.indexOf(draggedItem);
+                        const dropIndex = allItems.indexOf(this);
+                        
+                        if (draggedIndex < dropIndex) {
+                            this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                        } else {
+                            this.parentNode.insertBefore(draggedItem, this);
+                        }
+                    }
+                    this.style.backgroundColor = '';
+                });
+            });
+        }
+
+        // التحقق من الترتيب الصحيح
+        function checkOrder() {
+            const items = document.querySelectorAll('.verse-item');
+            let isCorrect = true;
+            
+            items.forEach((item, index) => {
+                const correctOrder = parseInt(item.getAttribute('data-order'));
+                if (correctOrder !== index + 1) {
+                    isCorrect = false;
+                    item.style.backgroundColor = '#f8d7da';
+                } else {
+                    item.style.backgroundColor = '#d4edda';
+                }
+            });
+            
+            const resultDiv = document.getElementById('order-result');
+            if (isCorrect) {
+                resultDiv.textContent = "🎉 ترتيب صحيح! أحسنت!";
+                resultDiv.className = "result success";
+            } else {
+                resultDiv.textContent = "⚠️ الترتيب غير صحيح، حاول مرة أخرى!";
+                resultDiv.className = "result error";
+            }
+        }
+
+        // محاكاة مشغل الصوت
+        function playPause() {
+            const button = event.target.closest('button');
+            if (button.textContent.includes('تشغيل')) {
+                button.textContent = '⏸️ إيقاف مؤقت';
+                simulateAudioProgress();
+            } else {
+                button.textContent = '▶️ تشغيل';
+                stopProgress();
+            }
+        }
+
+        function stopAudio() {
+            document.querySelector('[onclick="playPause()"]').textContent = '▶️ تشغيل';
+            stopProgress();
+        }
+
+        function loadVerse() {
+            const verseSelect = document.getElementById('verse-select');
+            const verses = [
+                "بسم الله الرحمن الرحيم",
+                "الحمد لله رب العالمين",
+                "الرحمن الرحيم"
+            ];
+            document.getElementById('current-verse').textContent = verses[verseSelect.value - 1];
+        }
+
+        // محاكاة شريط التقدم
+        let progressInterval;
+        function simulateAudioProgress() {
+            let progress = 0;
+            const progressBar = document.getElementById('audio-progress');
+            
+            stopProgress();
+            
+            progressInterval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    stopProgress();
+                    document.querySelector('[onclick="playPause()"]').textContent = '▶️ تشغيل';
+                }
+            }, 100);
+        }
+
+        function stopProgress() {
+            clearInterval(progressInterval);
+        }
+
+        // تحميل صورة الخط اليدوي
+        function downloadHandwriting() {
+            alert("ستبدأ عملية تحميل صورة الخط اليدوي...");
+            // في الواقع، ستكون هنا دالة لتحميل الصورة
+            // window.location.href = surahData.handwritingImage;
+        }
+    </script>
 </body>
 </html>
