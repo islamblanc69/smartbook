@@ -13,7 +13,7 @@
         .logo-img { width: 90px; height: 90px; margin-bottom: 15px; border-radius: 20px; border: 3px solid var(--gold); background: white; padding: 5px; object-fit: cover; }
         .header h1 { font-family: 'Amiri', serif; font-size: 2.2rem; margin: 5px 0; color: var(--gold); }
         .main-card { width: 92%; max-width: 550px; margin: 20px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid #eee; }
-        .tab-trigger { padding: 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
+        .tab-trigger { padding: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1rem; }
         .kids-head { border-right: 8px solid var(--kids); color: var(--kids); }
         .adults-head { border-right: 8px solid var(--adults); color: var(--adults); }
         .label { display: block; font-size: 0.9rem; color: #7f8c8d; margin: 15px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; text-align: right; }
@@ -31,7 +31,6 @@
 <div class="header">
     <img src="image.png" alt="لوغو" class="logo-img">
     <h1>سورة المَسَد</h1>
-    <p>اضغط على الخيار للتشغيل في اليوتيوب</p>
 </div>
 
 <div class="main-card">
@@ -61,14 +60,14 @@
         </div>
 
         <span class="label">التفسير</span>
-        <a href="https://www.youtube.com/watch?v=E290Oq1-7Sg" class="button interpret-btn" target="_blank">📖 التفسير الميسر</a>
+        <a href="https://www.youtube.com/watch?v=I77v6mNf5oM" class="button interpret-btn" target="_blank">📖 التفسير الميسر</a>
     </div>
 </div>
 
 <button id="finishBtn" class="finish-btn" onclick="markAsFinished()">لقد أنهيت السورة! 🎊</button>
 
 <script>
-    const surahId = 'masad_final_safe';
+    const surahId = 'masad_v114';
 
     function markAsFinished() {
         const isCurrentlyFinished = localStorage.getItem('finish_' + surahId) === 'true';
