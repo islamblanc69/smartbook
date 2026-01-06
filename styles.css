@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Amiri', serif; /* خط عربي جميل، حمل من Google Fonts */
+    direction: rtl;
+    text-align: right;
+}
+
+h1 {
+    color: #198754; /* لون إسلامي أخضر */
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
