@@ -31,25 +31,27 @@
             position: relative; 
         }
         
-        /* الرأس مع اللوغو والعنوان */
+        /* الرأس مع اللوغو والعنوان - محاذاة محسنة */
         .header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            justify-content: flex-start; /* تغيير من center إلى flex-start */
+            gap: 20px; /* زيادة المسافة */
+            margin-bottom: 25px;
+            flex-wrap: nowrap; /* منع التفاف العناصر */
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         
         .logo-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
+            flex-shrink: 0; /* منع تصغير اللوغو */
         }
         
         .logo-circle {
-            width: 100%;
-            height: 100%;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--gold), #f59e0b);
             display: flex;
@@ -60,24 +62,22 @@
             overflow: hidden;
         }
         
-        .logo-circle::before {
-            content: '📖';
-            font-size: 40px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-        
-        /* إذا كان لديك صورة image.png */
         .logo-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* مخفي حتى تضيف صورتك */
+            display: none; /* سيتم عرضها إذا وجدت */
+        }
+        
+        /* الأيقونة النصية الاحتياطية */
+        .logo-fallback {
+            font-size: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
         
         .title-container {
             text-align: right;
             flex: 1;
-            min-width: 250px;
         }
         
         .main-title {
@@ -270,7 +270,7 @@
             transition: all 0.3s ease;
         }
         
-        /* أزرار التحكم */
+        /* أزرار التحكم - إزالة زر الرئيسية */
         .controls {
             display: flex;
             gap: 10px;
@@ -293,7 +293,7 @@
             gap: 8px;
             transition: all 0.3s ease;
             flex: 1;
-            min-width: 160px;
+            min-width: 200px; /* زيادة العرض */
             justify-content: center;
         }
         
@@ -310,16 +310,6 @@
         
         .control-btn.reset:hover {
             background: rgba(239, 68, 68, 0.25);
-        }
-        
-        .control-btn.home {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: rgba(59, 130, 246, 0.3);
-            color: #bfdbfe;
-        }
-        
-        .control-btn.home:hover {
-            background: rgba(59, 130, 246, 0.25);
         }
         
         footer { 
@@ -359,12 +349,14 @@
         /* للتجاوب */
         @media (max-width: 768px) {
             .header {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row; /* إبقاءها في صف واحد */
+                text-align: right;
+                gap: 15px;
+                padding: 12px;
             }
             
             .title-container {
-                text-align: center;
+                text-align: right;
             }
             
             .surah-name { font-size: 2.2rem; }
@@ -375,13 +367,13 @@
                 font-size: 1.5rem;
             }
             
-            .logo-container {
-                width: 70px;
-                height: 70px;
+            .logo-circle {
+                width: 60px;
+                height: 60px;
             }
             
-            .controls {
-                flex-direction: column;
+            .logo-fallback {
+                font-size: 30px;
             }
             
             .control-btn {
@@ -393,18 +385,26 @@
             body { padding: 15px; }
             .surah-name { font-size: 1.8rem; }
             .main-title { font-size: 1.3rem; }
+            
+            .header {
+                flex-direction: column; /* على شاشات صغيرة جداً */
+                text-align: center;
+            }
+            
+            .title-container {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- الرأس الجديد مع اللوغو والعنوان -->
+    <!-- الرأس مع اللوغو والعنوان - محاذاة محسنة -->
     <div class="header">
         <div class="logo-container">
             <div class="logo-circle">
-                <!-- إذا كان لديك صورة image.png، استخدم هذا السطر -->
-                <!-- <img src="image.png" alt="الكتاب الذكي"> -->
+                <div class="logo-fallback">📖</div>
             </div>
         </div>
         <div class="title-container">
@@ -431,11 +431,18 @@
         </div>
         <div class="card-content">
             <div class="inner-grid">
+                <!-- روابط أطفال محدثة -->
                 <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=uzV2UvD-Afs')">
                     <i class="fas fa-microphone"></i> معلم الأطفال
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=5rY6U6A0uVw')">
-                    <i class="fas fa-video"></i> تفسير أطفالنا
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=sjGM93E9Bpk')">
+                    <i class="fas fa-video"></i> تعليم سورة الإخلاص
+                </button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=GRMl0D9fifg')">
+                    <i class="fas fa-user-graduate"></i> حفظ للأطفال
+                </button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=gnlLCwNfRjo')">
+                    <i class="fas fa-star"></i> أناشيد إسلامية
                 </button>
             </div>
         </div>
@@ -447,21 +454,24 @@
         </div>
         <div class="card-content">
             <div class="inner-grid">
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=n8f_A6vT3vM')">
-                    <i class="fas fa-user-tie"></i> فارس عباد
+                <!-- روابط كبار محدثة ومتنوعة -->
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=JHH5FmMBwjE')">
+                    <i class="fas fa-user-tie"></i> عبد الباسط عبد الصمد
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=v7zC6yN7L0k')">
-                    <i class="fas fa-user-tie"></i> ياسين الجزائري
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Rla_5O7CpC4')">
+                    <i class="fas fa-user-tie"></i> مشاري العفاسي
                 </button>
-                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=4zCqI0-tK5U')">
-                    <i class="fas fa-user-tie"></i> الشيخ محمود خليل الحصري
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=4zCqI0-tK5U')">
+                    <i class="fas fa-user-tie"></i> محمود خليل الحصري
                 </button>
-                
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=9I-m-3vC-U4')">
-                    <i class="fas fa-redo"></i> تكرار (فارس عباد)
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Yvt2UUkG0WI')">
+                    <i class="fas fa-user-tie"></i> سعد الغامدي
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=v7zC6yN7L0k&loop=1')">
-                    <i class="fas fa-redo"></i> تكرار (ياسين الجزائري)
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=3tC_LFu_Z6E')">
+                    <i class="fas fa-redo"></i> تكرار مع ترتيل
+                </button>
+                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=xd5tVK8wLq8')">
+                    <i class="fas fa-play-circle"></i> تفسير مبسط للإخلاص
                 </button>
             </div>
         </div>
@@ -476,16 +486,11 @@
         </button>
     </div>
 
-    <!-- أزرار التحكم الجديدة -->
+    <!-- زر التحكم الوحيد (إعادة الصفر فقط) -->
     <div class="controls">
         <button class="control-btn reset" onclick="resetAllData()">
             <i class="fas fa-redo"></i>
             <span>إعادة الصفحة من الصفر</span>
-        </button>
-        
-        <button class="control-btn home" onclick="goToHomePage()">
-            <i class="fas fa-home"></i>
-            <span>العودة للصفحة الرئيسية</span>
         </button>
     </div>
 
@@ -507,7 +512,7 @@
         return 'ikhlas';
     }
 
-    // دالة الفيديو الأصلية
+    // دالة الفيديو
     function getEmbedUrl(url) {
         let videoId = "";
         try {
@@ -515,7 +520,7 @@
             else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
             else videoId = url.split('/').pop();
         } catch(e) { videoId = url; }
-        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&modestbranding=1";
     }
 
     function smartPlay(url) {
@@ -632,7 +637,7 @@
 
     // دالة إعادة الصفحة من الصفر
     function resetAllData() {
-        if (confirm('هل أنت متأكد من إعادة ضبط جميع البيانات؟ هذا سيمسح:\n✓ حالة حفظ السورة\n✓ عدد المراجعات\n✓ تاريخ الحفظ')) {
+        if (confirm('هل أنت متأكد من إعادة ضبط جميع البيانات؟\n\nهذا سيمسح:\n✓ حالة حفظ السورة\n✓ عدد المراجعات\n✓ تاريخ الحفظ')) {
             const surahId = getCurrentSurahId();
             
             // مسح جميع بيانات هذه السورة
@@ -663,11 +668,6 @@
             // إظهار رسالة نجاح
             showResetNotification();
         }
-    }
-
-    // دالة الذهاب للصفحة الرئيسية
-    function goToHomePage() {
-        window.location.href = 'index.html'; // تأكد من تغيير هذا لمسار صفحتك الرئيسية
     }
 
     // إشعار إعادة الضبط
@@ -716,7 +716,8 @@
                 verses: 4, 
                 page: 604, 
                 revelation: 'مكية',
-                meaning: 'التوحيد'
+                meaning: 'التوحيد',
+                juz: 30
             },
             'nas': { 
                 name: 'الناس',
@@ -724,7 +725,8 @@
                 verses: 6, 
                 page: 604, 
                 revelation: 'مكية',
-                meaning: 'الناس'
+                meaning: 'الناس',
+                juz: 30
             },
             'falaq': { 
                 name: 'الفلق',
@@ -732,7 +734,8 @@
                 verses: 5, 
                 page: 604, 
                 revelation: 'مكية',
-                meaning: 'الصبح'
+                meaning: 'الصبح',
+                juz: 30
             },
             'fatiha': { 
                 name: 'الفاتحة',
@@ -740,7 +743,8 @@
                 verses: 7, 
                 page: 1, 
                 revelation: 'مكية',
-                meaning: 'الفاتحة'
+                meaning: 'الفاتحة',
+                juz: 1
             }
         };
         
@@ -784,10 +788,10 @@
                 </div>
                 <div class="info-item">
                     <div style="font-size: 0.9rem; color: #94a3b8;">
-                        <i class="fas fa-map-marker-alt"></i> النزول
+                        <i class="fas fa-bookmark"></i> الجزء
                     </div>
                     <div style="font-weight: bold; font-size: 1.5rem;">
-                        ${info.revelation}
+                        ${info.juz}
                     </div>
                 </div>
                 <div class="info-item" style="grid-column: span 4; margin-top: 10px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -871,6 +875,34 @@
         }, 300);
     }
 
+    // تحميل صورة اللوغو
+    function loadLogoImage() {
+        const logoCircle = document.querySelector('.logo-circle');
+        const logoFallback = document.querySelector('.logo-fallback');
+        
+        // تحميل الصورة
+        const logoImg = new Image();
+        logoImg.src = 'image.png';
+        
+        logoImg.onload = function() {
+            // إذا تم تحميل الصورة بنجاح
+            logoFallback.style.display = 'none';
+            logoImg.style.cssText = `
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            `;
+            logoCircle.appendChild(logoImg);
+        };
+        
+        logoImg.onerror = function() {
+            // إذا فشل تحميل الصورة، ابق على الأيقونة النصية
+            console.log('لم يتم العثور على صورة اللوغو image.png - استخدام الأيقونة النصية');
+            logoFallback.style.display = 'flex';
+        };
+    }
+
     // عند تحميل الصفحة
     document.addEventListener('DOMContentLoaded', function() {
         const surahId = getCurrentSurahId();
@@ -886,35 +918,14 @@
         // إضافة المكونات
         addSurahInfo();
         addReviewCounter();
+        loadLogoImage();
         
         // فتح أول قسم للأطفال تلقائياً
         setTimeout(() => {
             const firstCard = document.querySelector('.card .card-header');
             if (firstCard) firstCard.click();
         }, 500);
-        
-        // تحميل صورة اللوغو إذا كانت موجودة
-        loadLogoImage();
     });
-
-    // دالة لتحميل صورة اللوغو
-    function loadLogoImage() {
-        const logoCircle = document.querySelector('.logo-circle');
-        const logoImg = document.createElement('img');
-        logoImg.src = 'image.png';
-        logoImg.alt = 'الكتاب الذكي';
-        logoImg.onload = function() {
-            // إذا تم تحميل الصورة بنجاح، استبدل المحتوى النصي بالصورة
-            logoCircle.innerHTML = '';
-            logoCircle.appendChild(logoImg);
-            logoImg.style.display = 'block';
-        };
-        logoImg.onerror = function() {
-            // إذا فشل تحميل الصورة، ابق على الأيقونة النصية
-            console.log('لم يتم العثور على صورة اللوغو image.png');
-            // يمكنك إضافة صورة افتراضية هنا إذا أردت
-        };
-    }
 </script>
 
 </body>
