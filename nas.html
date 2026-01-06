@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الكتاب الذكي - سورة الناس</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -14,7 +14,6 @@
             --accent-gold: #fbbf24;
             --accent-kids: #f472b6;
             --accent-adults: #34d399;
-            --telegram-blue: #0088cc;
         }
 
         body {
@@ -31,17 +30,12 @@
             text-align: center;
             font-size: 1.6rem;
             font-weight: 900;
-            color: #fff;
             margin-top: 15px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .header { text-align: center; padding: 15px 0 25px; }
-        .logo { 
-            width: 80px; height: 80px; border-radius: 20px; 
-            margin-bottom: 10px; border: 2px solid var(--accent-gold);
-            background: #fff; object-fit: cover;
-        }
+        .logo { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--accent-gold); background: #fff; }
         .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; color: var(--accent-gold); }
 
         .video-wrapper {
@@ -57,69 +51,45 @@
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 18px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            transition: 0.3s;
+            border-radius: 18px; margin-bottom: 15px; overflow: hidden;
         }
 
         .collapsible-header {
-            padding: 18px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 900;
-            font-size: 1.1rem;
-            user-select: none;
+            padding: 18px 20px; display: flex; justify-content: space-between;
+            align-items: center; cursor: pointer; font-weight: 900;
         }
 
-        .collapsible-header:hover { background: rgba(255,255,255,0.03); }
-
-        .arrow-icon { transition: transform 0.3s; font-size: 0.8rem; opacity: 0.6; }
-
         .collapsible-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(0,0,0,0.1);
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(0,0,0,0.2);
         }
 
         .inner-grid { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         .btn {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.1);
             padding: 14px; border-radius: 14px; color: #fff;
             cursor: pointer; font-weight: 600; font-size: 0.9rem;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
-        .btn:hover { background: rgba(255,255,255,0.15); border-color: var(--accent-gold); }
+        
+        .btn:hover { background: rgba(255,255,255,0.2); border-color: var(--accent-gold); }
         .btn-full { grid-column: span 2; }
+        .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; text-align: right; }
 
-        .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; margin-top: 5px; text-align: right; }
-
-        .active-header .arrow-icon { transform: rotate(180deg); }
-        .active-content { max-height: 600px; } 
+        .active-content { max-height: 500px; }
 
         .done-section { text-align: center; margin: 30px 0; }
         .done-btn {
             background: var(--accent-adults); color: #064e3b;
             border: none; padding: 16px 50px; border-radius: 100px;
             font-size: 1.1rem; font-weight: 900; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(52, 211, 153, 0.2);
         }
         .done-btn.active { background: var(--accent-gold); color: #78350f; }
 
         .footer { text-align: center; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer p { font-size: 0.85rem; color: #94a3b8; }
-        .tg-link {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(0, 136, 204, 0.15); color: #38bdf8;
-            padding: 10px 22px; border-radius: 50px; text-decoration: none;
-            font-weight: bold; font-size: 0.9rem; margin-top: 12px;
-            border: 1px solid rgba(0, 136, 204, 0.3);
-        }
+        .tg-link { color: #38bdf8; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -133,13 +103,13 @@
     </div>
 
     <div class="video-wrapper">
-        <iframe id="tv" src="https://youtu.be/ggbZHTqxpHg?si=fLa_wkW70smzUBoy" allowfullscreen></iframe>
+        <iframe id="tv" src="https://www.youtube.com/embed/15" allowfullscreen></iframe>
     </div>
 
     <div class="collapsible-card">
-        <div class="collapsible-header" onclick="toggleSection('kidsSection', this)" style="color: var(--accent-kids);">
+        <div class="collapsible-header" onclick="toggleSection('kidsSection')" style="color: var(--accent-kids);">
             <span>🧒 ركن الأشبال</span>
-            <span class="arrow-icon">▼</span>
+            <span>▼</span>
         </div>
         <div id="kidsSection" class="collapsible-content">
             <div class="inner-grid">
@@ -150,9 +120,9 @@
     </div>
 
     <div class="collapsible-card">
-        <div class="collapsible-header" onclick="toggleSection('adultsSection', this)" style="color: var(--accent-adults);">
+        <div class="collapsible-header" onclick="toggleSection('adultsSection')" style="color: var(--accent-adults);">
             <span>🧔 ركن الكبار</span>
-            <span class="arrow-icon">▼</span>
+            <span>▼</span>
         </div>
         <div id="adultsSection" class="collapsible-content">
             <div class="inner-grid">
@@ -179,50 +149,23 @@
 </div>
 
 <script>
-    const sid = "smart_book_nas_final";
-
-    function toggleSection(id, header) {
+    function toggleSection(id) {
         const content = document.getElementById(id);
-        const isOpen = content.classList.contains('active-content');
-        document.querySelectorAll('.collapsible-content').forEach(el => {
-            el.classList.remove('active-content');
-            el.style.maxHeight = null;
-            el.parentElement.querySelector('.collapsible-header').classList.remove('active-header');
-        });
-        if (!isOpen) {
-            content.classList.add('active-content');
-            content.style.maxHeight = content.scrollHeight + "px";
-            header.classList.add('active-header');
-        }
+        content.classList.toggle('active-content');
     }
     
     function load(id) {
-        document.getElementById('tv').src = "http://googleusercontent.com/youtube.com/" + id;
-        window.scrollTo({top: 150, behavior: 'smooth'});
+        // هذا الرابط هو الصحيح والمضمون لليوتيوب
+        document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
     }
 
     function finish() {
         const btn = document.getElementById('finish');
-        const isDone = localStorage.getItem(sid) === 'y';
-        if (!isDone) {
-            localStorage.setItem(sid, 'y');
-            btn.classList.add('active');
-            btn.innerText = "أحسنت! مبارك الحفظ ✅";
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
-        } else {
-            localStorage.removeItem(sid);
-            btn.classList.remove('active');
-            btn.innerText = "تم الحفظ بنجاح 🎊";
-        }
-    }
-
-    window.onload = () => {
-        if(localStorage.getItem(sid) === 'y') {
-            const btn = document.getElementById('finish');
-            btn.classList.add('active');
-            btn.innerText = "أحسنت! مبارك الحفظ ✅";
-        }
+        btn.classList.add('active');
+        btn.innerText = "أحسنت! مبارك الحفظ ✅";
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
     }
 </script>
+
 </body>
 </html>
