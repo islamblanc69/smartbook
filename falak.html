@@ -1,70 +1,101 @@
-m<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الفلق - الكتاب الذكي</title>
+    <title>الكتاب الذكي - سورة الفلق</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --bg: #0f172a; --gold: #fbbf24; --card: rgba(255,255,255,0.05); }
-        body { background: var(--bg); color: #f8fafc; font-family: 'Tajawal', sans-serif; margin: 0; padding: 20px; text-align: center; }
-        .smart-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; opacity: 0.9; }
-        .surah-name { font-family: 'Amiri', serif; font-size: 2.5rem; color: var(--gold); margin: 10px 0; }
-        .video-box { width: 100%; max-width: 600px; aspect-ratio: 16/9; margin: 0 auto 20px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #000; }
+        :root { --bg: #0f172a; --gold: #fbbf24; }
+        body { background: var(--bg); color: #f8fafc; font-family: 'Tajawal', sans-serif; margin: 0; padding: 20px; direction: rtl; }
+        .container { max-width: 600px; margin: 0 auto; text-align: center; }
+        .smart-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 5px; }
+        .surah-name { font-family: 'Amiri', serif; font-size: 2.8rem; color: var(--gold); margin: 0 0 20px 0; }
+        
+        /* مشغل الفيديو */
+        .video-box { 
+            width: 100%; aspect-ratio: 16/9; background: #000; 
+            border-radius: 20px; overflow: hidden; margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+        }
         .video-box iframe { width: 100%; height: 100%; border: none; }
-        .card { background: var(--card); border-radius: 20px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .card-header { padding: 15px; cursor: pointer; font-weight: 900; background: rgba(255,255,255,0.02); display: flex; justify-content: space-between; padding: 15px 25px; }
-        .content { max-height: 0; overflow: hidden; transition: 0.3s; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
-        .content.open { max-height: 500px; padding: 15px; }
-        .btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; color: #fff; cursor: pointer; font-family: inherit; }
-        .btn:hover { border-color: var(--gold); background: rgba(251, 191, 36, 0.1); }
+
+        /* القوائم المخفية */
+        .card { background: rgba(255,255,255,0.05); border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .card-btn { width: 100%; padding: 15px 20px; background: none; border: none; color: #fff; font-weight: 900; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; font-family: inherit; }
+        .content { max-height: 0; overflow: hidden; transition: 0.3s ease-out; background: rgba(0,0,0,0.2); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        
+        .btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; color: #fff; cursor: pointer; font-family: inherit; }
+        .btn:hover { border-color: var(--gold); }
         .full { grid-column: span 2; }
-        .done-btn { background: #34d399; color: #064e3b; border: none; padding: 15px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; margin-top: 20px; }
-        footer { margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; color: #94a3b8; }
+
+        .done-btn { background: #34d399; color: #064e3b; border: none; padding: 15px 50px; border-radius: 50px; font-weight: 900; cursor: pointer; margin-top: 20px; width: 100%; }
     </style>
 </head>
 <body>
 
+<div class="container">
     <div class="smart-title">الكتاب الذكي لحفظ القرآن الكريم</div>
     <div class="surah-name">سورة الفلق</div>
 
     <div class="video-box">
-        <iframe id="tv" src="https://www.youtube.com/embed/S0uA_Y9P2m8" allowfullscreen></iframe>
+        <iframe id="mainPlayer" src="https://www.youtube.com/embed/S0uA_Y9P2m8" allowfullscreen></iframe>
     </div>
 
     <div class="card">
-        <div class="card-header" onclick="this.nextElementSibling.classList.toggle('open')">🧒 ركن الأشبال <span>▼</span></div>
+        <button class="card-btn" onclick="toggle(this)">🧒 ركن الأشبال <span>▼</span></button>
         <div class="content">
-            <button class="btn" onclick="play('S0uA_Y9P2m8')">🎤 معلم الأطفال</button>
-            <button class="btn" onclick="play('uN_p0L-25jM')">🎬 تفسير أطفالنا</button>
+            <div class="grid">
+                <button class="btn" onclick="smartPlay('https://youtu.be/S0uA_Y9P2m8')">🎤 معلم الأطفال</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=uN_p0L-25jM')">🎬 تفسير أطفالنا</button>
+            </div>
         </div>
     </div>
 
     <div class="card">
-        <div class="card-header" onclick="this.nextElementSibling.classList.toggle('open')">🧔 ركن الكبار <span>▼</span></div>
+        <button class="card-btn" onclick="toggle(this)">🧔 ركن الكبار <span>▼</span></button>
         <div class="content">
-            <button class="btn" onclick="play('680D96u66hM')">فارس عباد</button>
-            <button class="btn" onclick="play('SA0GPRxNDus')">ياسين الجزائري</button>
-            <button class="btn full" onclick="play('-cF2DWuNB1E')">محمود خليل الحصري</button>
-            <button class="btn" onclick="play('5v9E2j3G2qQ')">🔁 تكرار حفص</button>
-            <button class="btn" onclick="play('j6N-3RzWn2M')">🔁 تكرار ورش</button>
+            <div class="grid">
+                <button class="btn" onclick="smartPlay('680D96u66hM')">فارس عباد</button>
+                <button class="btn" onclick="smartPlay('SA0GPRxNDus')">ياسين الجزائري</button>
+                <button class="btn full" onclick="smartPlay('-cF2DWuNB1E')">محمود خليل الحصري</button>
+                <button class="btn" onclick="smartPlay('5v9E2j3G2qQ')">🔁 تكرار حفص</button>
+                <button class="btn" onclick="smartPlay('j6N-3RzWn2M')">🔁 تكرار ورش</button>
+            </div>
         </div>
     </div>
 
     <button class="done-btn" onclick="confetti()">تم الحفظ بنجاح 🎊</button>
+</div>
 
-    <footer>
-        جميع الحقوق محفوظة لدى مكتبة اسلام 2026<br><br>
-        <a href="https://t.me/smartbookislam" style="color: #38bdf8; text-decoration: none;">انضم لمجموعة التليجرام</a>
-    </footer>
-
-    <script>
-        function play(id) {
-            // التحويل البرمجي الصحيح الذي يمنع الشاشة السوداء
-            document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
-            window.scrollTo({top: 100, behavior: 'smooth'});
+<script>
+    // العفسة الذكية: تحويل أي رابط يوتيوب لـ Embed تلقائياً
+    function getEmbedUrl(input) {
+        let videoId = "";
+        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+        const match = input.match(regex);
+        
+        if (match && match[1]) {
+            videoId = match[1];
+        } else if (input.length === 11) {
+            videoId = input; // إذا كان المدخل هو الكود فقط
         }
-    </script>
+        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+    }
+
+    function smartPlay(url) {
+        const embedUrl = getEmbedUrl(url);
+        document.getElementById('mainPlayer').src = embedUrl;
+        window.scrollTo({top: 50, behavior: 'smooth'});
+    }
+
+    function toggle(btn) {
+        const content = btn.nextElementSibling;
+        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+    }
+</script>
+
 </body>
 </html>
