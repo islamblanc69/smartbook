@@ -35,7 +35,7 @@
         }
 
         .header { text-align: center; padding: 15px 0 25px; }
-        .logo { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--accent-gold); background: #fff; }
+        .logo { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--accent-gold); background: #fff; margin: 0 auto 10px; display: block; }
         .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; color: var(--accent-gold); }
 
         .video-wrapper {
@@ -72,13 +72,14 @@
             border: 1px solid rgba(255,255,255,0.1);
             padding: 14px; border-radius: 14px; color: #fff;
             cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            font-family: 'Tajawal', sans-serif;
         }
         
         .btn:hover { background: rgba(255,255,255,0.2); border-color: var(--accent-gold); }
         .btn-full { grid-column: span 2; }
-        .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; text-align: right; }
+        .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; text-align: right; margin-top: 10px; }
 
-        .active-content { max-height: 500px; }
+        .active-content { max-height: 600px; }
 
         .done-section { text-align: center; margin: 30px 0; }
         .done-btn {
@@ -89,7 +90,8 @@
         .done-btn.active { background: var(--accent-gold); color: #78350f; }
 
         .footer { text-align: center; padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .tg-link { color: #38bdf8; text-decoration: none; font-weight: bold; }
+        .footer p { font-size: 0.85rem; color: #94a3b8; }
+        .tg-link { color: #38bdf8; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -103,7 +105,7 @@
     </div>
 
     <div class="video-wrapper">
-        <iframe id="tv" src="https://www.youtube.com/embed/15" allowfullscreen></iframe>
+        <iframe id="tv" src="https://www.youtube.com/embed/fS50mN_y_yA?rel=0" allowfullscreen></iframe>
     </div>
 
     <div class="collapsible-card">
@@ -113,8 +115,8 @@
         </div>
         <div id="kidsSection" class="collapsible-content">
             <div class="inner-grid">
-                <button class="btn" onclick="load('15')">🎤 معلم الأطفال</button>
-                <button class="btn" onclick="load('16')">🎬 تفسير أطفالنا</button>
+                <button class="btn" onclick="load('fS50mN_y_yA')">🎤 معلم الأطفال</button>
+                <button class="btn" onclick="load('P1h2l-S1Iis')">🎬 تفسير أطفالنا</button>
             </div>
         </div>
     </div>
@@ -127,13 +129,13 @@
         <div id="adultsSection" class="collapsible-content">
             <div class="inner-grid">
                 <div class="label-sm">الاستماع للقراءات</div>
-                <button class="btn" onclick="load('17')">القارئ فارس عباد</button>
-                <button class="btn" onclick="load('18')">القارئ ياسين الجزائري</button>
-                <button class="btn btn-full" onclick="load('19')">الشيخ محمود خليل الحصري</button>
+                <button class="btn" onclick="load('B7X6uF17mSc')">القارئ فارس عباد</button>
+                <button class="btn" onclick="load('oE83XhW2u0U')">القارئ ياسين الجزائري</button>
+                <button class="btn btn-full" onclick="load('BvK0F99eT9o')">الشيخ محمود خليل الحصري</button>
                 
                 <div class="label-sm">تكرار الحفظ</div>
-                <button class="btn" onclick="load('20')">🔁 تكرار (حفص)</button>
-                <button class="btn" onclick="load('21')">🔁 تكرار (ورش)</button>
+                <button class="btn" onclick="load('vG7Wc6CHeR0')">🔁 تكرار (حفص)</button>
+                <button class="btn" onclick="load('pX_9o9G-N48')">🔁 تكرار (ورش)</button>
             </div>
         </div>
     </div>
@@ -149,21 +151,35 @@
 </div>
 
 <script>
+    const sid = "smart_book_nas_vFINAL";
+
     function toggleSection(id) {
         const content = document.getElementById(id);
         content.classList.toggle('active-content');
     }
     
     function load(id) {
-        // هذا الرابط هو الصحيح والمضمون لليوتيوب
-        document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
+        // الرابط المصلح للتشغيل المباشر
+        document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+        window.scrollTo({top: 150, behavior: 'smooth'});
     }
 
     function finish() {
         const btn = document.getElementById('finish');
-        btn.classList.add('active');
-        btn.innerText = "أحسنت! مبارك الحفظ ✅";
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        if (!localStorage.getItem(sid)) {
+            localStorage.setItem(sid, 'y');
+            btn.classList.add('active');
+            btn.innerText = "أحسنت! مبارك الحفظ ✅";
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        }
+    }
+
+    window.onload = () => {
+        if(localStorage.getItem(sid)) {
+            const btn = document.getElementById('finish');
+            btn.classList.add('active');
+            btn.innerText = "أحسنت! مبارك الحفظ ✅";
+        }
     }
 </script>
 
