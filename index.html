@@ -3,24 +3,642 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق تفاعلي لكتاب تتبع آيات القرآن</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <title>القرآن الكريم - المصحف التفاعلي</title>
+    <style>
+        :root {
+            --quran-green: #2a9d8f;
+            --quran-gold: #e9c46a;
+            --quran-dark: #1a5f7a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Traditional Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f3ff 100%);
+            color: #1a365d;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* الهيدر */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--quran-dark) 0%, var(--quran-green) 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(26, 95, 122, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* قسم القراء */
+        .reciters-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            color: var(--quran-dark);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .reciters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .reciter-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid var(--quran-green);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .reciter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(42, 157, 143, 0.2);
+            background: white;
+        }
+        
+        .reciter-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--quran-green);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .play-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--quran-green);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .play-btn:hover {
+            background: var(--quran-dark);
+            transform: scale(1.05);
+        }
+        
+        /* فهرس السور */
+        .surah-index {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .index-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 10px 25px;
+            background: #e9f5f3;
+            border: 2px solid var(--quran-green);
+            border-radius: 50px;
+            cursor: pointer;
+            color: var(--quran-dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: var(--quran-green);
+            color: white;
+        }
+        
+        .control-btn.active {
+            background: var(--quran-dark);
+            color: white;
+            border-color: var(--quran-dark);
+        }
+        
+        .surah-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 15px;
+            direction: rtl;
+        }
+        
+        .surah-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .surah-card:hover {
+            background: white;
+            border-color: var(--quran-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .surah-number {
+            background: var(--quran-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .surah-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--quran-dark);
+        }
+        
+        .surah-details {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* الفلتر */
+        .filter-search {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        #search-input {
+            width: 80%;
+            max-width: 500px;
+            padding: 15px 25px;
+            border: 2px solid var(--quran-green);
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .reciters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .surah-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* زر الرجوع للصفحة الرئيسية */
+        .back-to-surah {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(90deg, #e76f51 0%, #f4a261 100%);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(231, 111, 81, 0.3);
+        }
+        
+        /* شريط التقدم */
+        .progress-container {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--quran-green);
+            width: 0%;
+            transition: width 1s ease;
+        }
+    </style>
 </head>
 <body>
-    <header class="container text-center my-4">
-        <h1>كتاب تتبع آيات القرآن بخط اليد - الجزء التفاعلي</h1>
-        <p>سكان QR Code في الكتاب للوصول إلى السورة، ومارس الكتابة والحفظ.</p>
-    </header>
-
     <div class="container">
-        <input type="text" id="searchInput" class="form-control mb-3" placeholder="ابحث عن سورة...">
-        <div id="surahList" class="row">
-            <!-- السور ستضاف هنا ديناميكياً عبر JS -->
+        <!-- الهيدر -->
+        <header class="header">
+            <h1>🌙 القرآن الكريم</h1>
+            <p>مصحف تفاعلي مع تلاوات مشاهير القراء وتفسير السور</p>
+        </header>
+        
+        <!-- قسم القراء -->
+        <section class="reciters-section">
+            <h2 class="section-title">
+                <span>🎵</span>
+                تلاوات مشاهير القراء
+            </h2>
+            
+            <div class="reciters-grid">
+                <!-- القارئ 1 -->
+                <div class="reciter-card" onclick="playReciter('hussary')">
+                    <div class="reciter-avatar">🎤</div>
+                    <h3>محمود الحصري</h3>
+                    <p style="color: #666; margin: 10px 0;">أحد أشهر قراء القرآن في العالم الإسلامي</p>
+                    <a href="https://www.youtube.com/results?search_query=محمود+الحصري+الفاتحة" 
+                       target="_blank" class="play-btn">
+                        ▶️ استمع على يوتيوب
+                    </a>
+                </div>
+                
+                <!-- القارئ 2 -->
+                <div class="reciter-card" onclick="playReciter('aljazaery')">
+                    <div class="reciter-avatar" style="background: #1a5f7a;">🎵</div>
+                    <h3>ياسين الجزائري</h3>
+                    <p style="color: #666; margin: 10px 0;">صوت شجي مع تجويد متقن</p>
+                    <a href="https://www.youtube.com/results?search_query=ياسين+الجزائري+الفاتحة" 
+                       target="_blank" class="play-btn">
+                        ▶️ استمع على يوتيوب
+                    </a>
+                </div>
+                
+                <!-- القارئ 3 -->
+                <div class="reciter-card" onclick="playReciter('fares')">
+                    <div class="reciter-avatar" style="background: #e76f51;">📖</div>
+                    <h3>فارس عباد</h3>
+                    <p style="color: #666; margin: 10px 0;">تلاوة مرتلة بتجويد مميز</p>
+                    <a href="https://www.youtube.com/results?search_query=فارس+عباد+الفاتحة" 
+                       target="_blank" class="play-btn">
+                        ▶️ استمع على يوتيوب
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- فهرس السور -->
+        <section class="surah-index">
+            <h2 class="section-title">
+                <span>📚</span>
+                فهرس سور القرآن الكريم
+            </h2>
+            
+            <!-- فلتر البحث -->
+            <div class="filter-search">
+                <input type="text" id="search-input" placeholder="🔍 ابحث عن سورة..." onkeyup="filterSurahs()">
+            </div>
+            
+            <!-- أزرار التحكم -->
+            <div class="index-controls">
+                <button class="control-btn active" onclick="showAll()">الكل</button>
+                <button class="control-btn" onclick="filterByType('مكية')">المكية</button>
+                <button class="control-btn" onclick="filterByType('مدنية')">المدنية</button>
+                <button class="control-btn" onclick="sortByLength()">الأقصر أولاً</button>
+                <button class="control-btn" onclick="sortByRevelation()">ترتيب النزول</button>
+            </div>
+            
+            <!-- شبكة السور -->
+            <div class="surah-grid" id="surah-grid">
+                <!-- السور ستضاف هنا بواسطة JavaScript -->
+            </div>
+        </section>
+        
+        <!-- معلومات التقدم -->
+        <div style="text-align: center; margin: 40px 0;">
+            <div style="display: inline-block; padding: 20px 40px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: var(--quran-dark); margin-bottom: 10px;">📊 تقدمك في الحفظ</h3>
+                <div class="progress-container" style="width: 300px;">
+                    <div class="progress-bar" id="total-progress"></div>
+                </div>
+                <p style="margin-top: 10px; color: #666;" id="progress-text">0% مكتمل</p>
+            </div>
+        </div>
+        
+        <!-- زر الرجوع للصفحة التفاعلية -->
+        <div class="back-to-surah">
+            <a href="al-fatihah.html" class="back-btn">
+                📖 العودة لسورة الفاتحة التفاعلية
+            </a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // بيانات السور
+        const surahs = [
+            { number: 1, name: "الفاتحة", verses: 7, type: "مكية", page: 1, revelation: 5 },
+            { number: 2, name: "البقرة", verses: 286, type: "مدنية", page: 2, revelation: 87 },
+            { number: 3, name: "آل عمران", verses: 200, type: "مدنية", page: 50, revelation: 89 },
+            { number: 4, name: "النساء", verses: 176, type: "مدنية", page: 77, revelation: 92 },
+            { number: 5, name: "المائدة", verses: 120, type: "مدنية", page: 106, revelation: 112 },
+            { number: 6, name: "الأنعام", verses: 165, type: "مكية", page: 128, revelation: 55 },
+            { number: 7, name: "الأعراف", verses: 206, type: "مكية", page: 151, revelation: 39 },
+            { number: 8, name: "الأنفال", verses: 75, type: "مدنية", page: 177, revelation: 88 },
+            { number: 9, name: "التوبة", verses: 129, type: "مدنية", page: 187, revelation: 113 },
+            { number: 10, name: "يونس", verses: 109, type: "مكية", page: 208, revelation: 51 },
+            { number: 11, name: "هود", verses: 123, type: "مكية", page: 221, revelation: 52 },
+            { number: 12, name: "يوسف", verses: 111, type: "مكية", page: 235, revelation: 53 },
+            { number: 13, name: "الرعد", verses: 43, type: "مدنية", page: 249, revelation: 96 },
+            { number: 14, name: "ابراهيم", verses: 52, type: "مكية", page: 255, revelation: 72 },
+            { number: 15, name: "الحجر", verses: 99, type: "مكية", page: 262, revelation: 54 },
+            { number: 16, name: "النحل", verses: 128, type: "مكية", page: 267, revelation: 70 },
+            { number: 17, name: "الإسراء", verses: 111, type: "مكية", page: 282, revelation: 50 },
+            { number: 18, name: "الكهف", verses: 110, type: "مكية", page: 293, revelation: 69 },
+            { number: 19, name: "مريم", verses: 98, type: "مكية", page: 305, revelation: 44 },
+            { number: 20, name: "طه", verses: 135, type: "مكية", page: 312, revelation: 45 },
+            { number: 21, name: "الأنبياء", verses: 112, type: "مكية", page: 322, revelation: 73 },
+            { number: 22, name: "الحج", verses: 78, type: "مدنية", page: 332, revelation: 103 },
+            { number: 23, name: "المؤمنون", verses: 118, type: "مكية", page: 342, revelation: 74 },
+            { number: 24, name: "النور", verses: 64, type: "مدنية", page: 350, revelation: 102 },
+            { number: 25, name: "الفرقان", verses: 77, type: "مكية", page: 359, revelation: 42 },
+            { number: 26, name: "الشعراء", verses: 227, type: "مكية", page: 367, revelation: 47 },
+            { number: 27, name: "النمل", verses: 93, type: "مكية", page: 377, revelation: 48 },
+            { number: 28, name: "القصص", verses: 88, type: "مكية", page: 385, revelation: 49 },
+            { number: 29, name: "العنكبوت", verses: 69, type: "مكية", page: 396, revelation: 85 },
+            { number: 30, name: "الروم", verses: 60, type: "مكية", page: 404, revelation: 84 },
+            { number: 31, name: "لقمان", verses: 34, type: "مكية", page: 411, revelation: 57 },
+            { number: 32, name: "السجدة", verses: 30, type: "مكية", page: 415, revelation: 75 },
+            { number: 33, name: "الأحزاب", verses: 73, type: "مدنية", page: 418, revelation: 90 },
+            { number: 34, name: "سبأ", verses: 54, type: "مكية", page: 428, revelation: 58 },
+            { number: 35, name: "فاطر", verses: 45, type: "مكية", page: 434, revelation: 43 },
+            { number: 36, name: "يس", verses: 83, type: "مكية", page: 440, revelation: 41 },
+            { number: 37, name: "الصافات", verses: 182, type: "مكية", page: 446, revelation: 56 },
+            { number: 38, name: "ص", verses: 88, type: "مكية", page: 453, revelation: 38 },
+            { number: 39, name: "الزمر", verses: 75, type: "مكية", page: 458, revelation: 59 },
+            { number: 40, name: "غافر", verses: 85, type: "مكية", page: 467, revelation: 60 },
+            { number: 41, name: "فصلت", verses: 54, type: "مكية", page: 477, revelation: 61 },
+            { number: 42, name: "الشورى", verses: 53, type: "مكية", page: 483, revelation: 62 },
+            { number: 43, name: "الزخرف", verses: 89, type: "مكية", page: 489, revelation: 63 },
+            { number: 44, name: "الدخان", verses: 59, type: "مكية", page: 496, revelation: 64 },
+            { number: 45, name: "الجاثية", verses: 37, type: "مكية", page: 499, revelation: 65 },
+            { number: 46, name: "الأحقاف", verses: 35, type: "مكية", page: 502, revelation: 66 },
+            { number: 47, name: "محمد", verses: 38, type: "مدنية", page: 507, revelation: 95 },
+            { number: 48, name: "الفتح", verses: 29, type: "مدنية", page: 511, revelation: 111 },
+            { number: 49, name: "الحجرات", verses: 18, type: "مدنية", page: 515, revelation: 106 },
+            { number: 50, name: "ق", verses: 45, type: "مكية", page: 518, revelation: 34 },
+            { number: 51, name: "الذاريات", verses: 60, type: "مكية", page: 520, revelation: 67 },
+            { number: 52, name: "الطور", verses: 49, type: "مكية", page: 523, revelation: 76 },
+            { number: 53, name: "النجم", verses: 62, type: "مكية", page: 526, revelation: 23 },
+            { number: 54, name: "القمر", verses: 55, type: "مكية", page: 528, revelation: 37 },
+            { number: 55, name: "الرحمن", verses: 78, type: "مدنية", page: 531, revelation: 97 },
+            { number: 56, name: "الواقعة", verses: 96, type: "مكية", page: 534, revelation: 46 },
+            { number: 57, name: "الحديد", verses: 29, type: "مدنية", page: 537, revelation: 94 },
+            { number: 58, name: "المجادلة", verses: 22, type: "مدنية", page: 542, revelation: 105 },
+            { number: 59, name: "الحشر", verses: 24, type: "مدنية", page: 545, revelation: 101 },
+            { number: 60, name: "الممتحنة", verses: 13, type: "مدنية", page: 549, revelation: 91 },
+            { number: 61, name: "الصف", verses: 14, type: "مدنية", page: 551, revelation: 109 },
+            { number: 62, name: "الجمعة", verses: 11, type: "مدنية", page: 553, revelation: 110 },
+            { number: 63, name: "المنافقون", verses: 11, type: "مدنية", page: 554, revelation: 104 },
+            { number: 64, name: "التغابن", verses: 18, type: "مدنية", page: 556, revelation: 108 },
+            { number: 65, name: "الطلاق", verses: 12, type: "مدنية", page: 558, revelation: 99 },
+            { number: 66, name: "التحريم", verses: 12, type: "مدنية", page: 560, revelation: 107 },
+            { number: 67, name: "الملك", verses: 30, type: "مكية", page: 562, revelation: 77 },
+            { number: 68, name: "القلم", verses: 52, type: "مكية", page: 564, revelation: 2 },
+            { number: 69, name: "الحاقة", verses: 52, type: "مكية", page: 566, revelation: 78 },
+            { number: 70, name: "المعارج", verses: 44, type: "مكية", page: 568, revelation: 79 },
+            { number: 71, name: "نوح", verses: 28, type: "مكية", page: 570, revelation: 71 },
+            { number: 72, name: "الجن", verses: 28, type: "مكية", page: 572, revelation: 40 },
+            { number: 73, name: "المزمل", verses: 20, type: "مكية", page: 574, revelation: 3 },
+            { number: 74, name: "المدثر", verses: 56, type: "مكية", page: 575, revelation: 4 },
+            { number: 75, name: "القيامة", verses: 40, type: "مكية", page: 577, revelation: 31 },
+            { number: 76, name: "الانسان", verses: 31, type: "مدنية", page: 578, revelation: 98 },
+            { number: 77, name: "المرسلات", verses: 50, type: "مكية", page: 580, revelation: 33 },
+            { number: 78, name: "النبأ", verses: 40, type: "مكية", page: 582, revelation: 80 },
+            { number: 79, name: "النازعات", verses: 46, type: "مكية", page: 583, revelation: 81 },
+            { number: 80, name: "عبس", verses: 42, type: "مكية", page: 585, revelation: 24 },
+            { number: 81, name: "التكوير", verses: 29, type: "مكية", page: 586, revelation: 7 },
+            { number: 82, name: "الإنفطار", verses: 19, type: "مكية", page: 587, revelation: 82 },
+            { number: 83, name: "المطففين", verses: 36, type: "مكية", page: 587, revelation: 86 },
+            { number: 84, name: "الإنشقاق", verses: 25, type: "مكية", page: 589, revelation: 83 },
+            { number: 85, name: "البروج", verses: 22, type: "مكية", page: 590, revelation: 27 },
+            { number: 86, name: "الطارق", verses: 17, type: "مكية", page: 591, revelation: 36 },
+            { number: 87, name: "الأعلى", verses: 19, type: "مكية", page: 591, revelation: 8 },
+            { number: 88, name: "الغاشية", verses: 26, type: "مكية", page: 592, revelation: 68 },
+            { number: 89, name: "الفجر", verses: 30, type: "مكية", page: 593, revelation: 10 },
+            { number: 90, name: "البلد", verses: 20, type: "مكية", page: 594, revelation: 35 },
+            { number: 91, name: "الشمس", verses: 15, type: "مكية", page: 595, revelation: 26 },
+            { number: 92, name: "الليل", verses: 21, type: "مكية", page: 595, revelation: 9 },
+            { number: 93, name: "الضحى", verses: 11, type: "مكية", page: 596, revelation: 11 },
+            { number: 94, name: "الشرح", verses: 8, type: "مكية", page: 596, revelation: 12 },
+            { number: 95, name: "التين", verses: 8, type: "مكية", page: 597, revelation: 28 },
+            { number: 96, name: "العلق", verses: 19, type: "مكية", page: 597, revelation: 1 },
+            { number: 97, name: "القدر", verses: 5, type: "مكية", page: 598, revelation: 25 },
+            { number: 98, name: "البينة", verses: 8, type: "مدنية", page: 598, revelation: 100 },
+            { number: 99, name: "الزلزلة", verses: 8, type: "مدنية", page: 599, revelation: 93 },
+            { number: 100, name: "العاديات", verses: 11, type: "مكية", page: 599, revelation: 14 },
+            { number: 101, name: "القارعة", verses: 11, type: "مكية", page: 600, revelation: 30 },
+            { number: 102, name: "التكاثر", verses: 8, type: "مكية", page: 600, revelation: 16 },
+            { number: 103, name: "العصر", verses: 3, type: "مكية", page: 601, revelation: 13 },
+            { number: 104, name: "الهمزة", verses: 9, type: "مكية", page: 601, revelation: 32 },
+            { number: 105, name: "الفيل", verses: 5, type: "مكية", page: 601, revelation: 19 },
+            { number: 106, name: "قريش", verses: 4, type: "مكية", page: 602, revelation: 29 },
+            { number: 107, name: "الماعون", verses: 7, type: "مكية", page: 602, revelation: 17 },
+            { number: 108, name: "الكوثر", verses: 3, type: "مكية", page: 602, revelation: 15 },
+            { number: 109, name: "الكافرون", verses: 6, type: "مكية", page: 603, revelation: 18 },
+            { number: 110, name: "النصر", verses: 3, type: "مدنية", page: 603, revelation: 114 },
+            { number: 111, name: "المسد", verses: 5, type: "مكية", page: 603, revelation: 6 },
+            { number: 112, name: "الإخلاص", verses: 4, type: "مكية", page: 604, revelation: 22 },
+            { number: 113, name: "الفلق", verses: 5, type: "مكية", page: 604, revelation: 20 },
+            { number: 114, name: "الناس", verses: 6, type: "مكية", page: 604, revelation: 21 }
+        ];
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // عرض جميع السور
+            displaySurahs(surahs);
+            
+            // تحديث شريط التقدم
+            updateProgress();
+            
+            // تفعيل أزرار التحكم
+            setupControlButtons();
+        });
+
+        // عرض السور
+        function displaySurahs(surahArray) {
+            const grid = document.getElementById('surah-grid');
+            grid.innerHTML = '';
+            
+            surahArray.forEach(surah => {
+                const card = document.createElement('a');
+                card.className = 'surah-card';
+                card.href = `surah-${surah.number}.html`; // رابط صفحة السورة
+                
+                card.innerHTML = `
+                    <div class="surah-number">${surah.number}</div>
+                    <div class="surah-name">${surah.name}</div>
+                    <div class="surah-details">
+                        ${surah.verses} آية<br>
+                        ${surah.type === 'مكية' ? '🕋' : '🕌'} ${surah.type}
+                    </div>
+                `;
+                
+                // عند النقر على السورة (يمكن إضافة سلوك خاص)
+                card.onclick = function(e) {
+                    e.preventDefault();
+                    showSurahDetails(surah);
+                };
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // فلتر البحث
+        function filterSurahs() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const filtered = surahs.filter(surah => 
+                surah.name.includes(searchTerm) || 
+                surah.number.toString().includes(searchTerm)
+            );
+            
+            displaySurahs(filtered);
+        }
+
+        // عرض جميع السور
+        function showAll() {
+            displaySurahs(surahs);
+            updateActiveButton(event.target);
+        }
+
+        // فلتر حسب النوع
+        function filterByType(type) {
+            const filtered = surahs.filter(surah => surah.type === type);
+            displaySurahs(filtered);
+            updateActiveButton(event.target);
+        }
+
+        // ترتيب حسب عدد الآيات
+        function sortByLength() {
+            const sorted = [...surahs].sort((a, b) => a.verses - b.verses);
+            displaySurahs(sorted);
+            updateActiveButton(event.target);
+        }
+
+        // ترتيب حسب النزول
+        function sortByRevelation() {
+            const sorted = [...surahs].sort((a, b) => a.revelation - b.revelation);
+            displaySurahs(sorted);
+            updateActiveButton(event.target);
+        }
+
+        // تحديث الزر النشط
+        function updateActiveButton(button) {
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+
+        // إعداد أزرار التحكم
+        function setupControlButtons() {
+            document.querySelectorAll('.control-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    updateActiveButton(this);
+                });
+            });
+        }
+
+        // عرض تفاصيل السورة
+        function showSurahDetails(surah) {
+            // هنا يمكنك إضافة نافذة منبثقة أو تحويل لصفحة السورة
+            alert(`سورة ${surah.name}\nعدد الآيات: ${surah.verses}\nالنوع: ${surah.type}\nصفحة البدء: ${surah.page}`);
+            
+            // أو تحويل لصفحة السورة
+            // window.location.href = `surah-${surah.number}.html`;
+        }
+
+        // تشغيل القارئ
+        function playReciter(reciter) {
+            const reciters = {
+                hussary: 'https://www.youtube.com/results?search_query=محمود+الحصري+القرآن',
+                aljazaery: 'https://www.youtube.com/results?search_query=ياسين+الجزائري+القرآن',
+                fares: 'https://www.youtube.com/results?search_query=فارس+عباد+القرآن'
+            };
+            
+            window.open(reciters[reciter], '_blank');
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            // محاكاة تقدم الحفظ (في الواقع سيتم حفظه في localStorage)
+            const totalSurahs = surahs.length;
+            const completedSurahs = 1; // مثال: سورة الفاتحة مكتملة
+            
+            const progress = Math.round((completedSurahs / totalSurahs) * 100);
+            const progressBar = document.getElementById('total-progress');
+            const progressText = document.getElementById('progress-text');
+            
+            progressBar.style.width = progress + '%';
+            progressText.textContent = `${progress}% مكتمل (${completedSurahs} من ${totalSurahs} سورة)`;
+        }
+    </script>
 </body>
 </html>
