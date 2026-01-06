@@ -42,7 +42,7 @@
 </div>
 
 <div class="video-container">
-    <iframe id="mainPlayer" src="https://www.youtube.com/embed/CHuzxjvc_xI" allowfullscreen></iframe>
+    <iframe id="mainPlayer" src="https://www.youtube.com/embed/egZOjxkXuec" allowfullscreen></iframe>
 </div>
 
 <div class="main-card">
@@ -54,7 +54,7 @@
         <div class="inner-padding">
             <span class="label">تحفيظ للأطفال</span>
             <div class="btn-grid">
-                <div class="button" onclick="playVid('CHuzxjvc_xI')">🎤 المنشاوي معلم</div>
+                <div class="button" onclick="playVid('egZOjxkXuec')">🎤 المنشاوي معلم</div>
                 <div class="button interpret-btn" onclick="playVid('_z8FzYCU1FM')">🎬 تفسير السورة (أطفالنا)</div>
             </div>
         </div>
@@ -81,8 +81,8 @@
                 <div class="button" onclick="playVid('88GnucV9_wU')">🔁 تكرار ورش</div>
             </div>
 
-            <span class="label">التفسير</span>
-            <div class="button interpret-btn" onclick="playVid('O5XidL49k8Y')">📖 التفسير الميسر</div>
+            <span class="label">التفسير والبيان</span>
+            <div class="button interpret-btn" onclick="playVid('E290Oq1-7Sg')">📖 تفسير السعدي الميسر</div>
         </div>
     </div>
 </div>
@@ -92,24 +92,16 @@
 </div>
 
 <script>
-    const surahId = 'masad_v2'; // معرف السورة
+    const surahId = 'masad_final_v3';
 
     function toggleTab(id, el) {
         const content = document.getElementById(id);
         const arrow = el.querySelector('.arrow');
         document.querySelectorAll('.tab-content').forEach(tab => {
-            if(tab.id !== id) {
-                tab.style.maxHeight = null;
-                tab.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
-            }
+            if(tab.id !== id) { tab.style.maxHeight = null; tab.previousElementSibling.querySelector('.arrow').classList.remove('rotate'); }
         });
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-            arrow.classList.remove('rotate');
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-            arrow.classList.add('rotate');
-        }
+        if (content.style.maxHeight) { content.style.maxHeight = null; arrow.classList.remove('rotate'); }
+        else { content.style.maxHeight = content.scrollHeight + "px"; arrow.classList.add('rotate'); }
     }
 
     function playVid(id) {
