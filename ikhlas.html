@@ -31,14 +31,14 @@
             position: relative; 
         }
         
-        /* الرأس مع اللوغو والعنوان - محاذاة محسنة */
+        /* الرأس مع اللوغو والعنوان */
         .header {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* تغيير من center إلى flex-start */
-            gap: 20px; /* زيادة المسافة */
+            justify-content: flex-start;
+            gap: 20px;
             margin-bottom: 25px;
-            flex-wrap: nowrap; /* منع التفاف العناصر */
+            flex-wrap: nowrap;
             padding: 15px;
             background: rgba(255,255,255,0.03);
             border-radius: 20px;
@@ -46,7 +46,7 @@
         }
         
         .logo-container {
-            flex-shrink: 0; /* منع تصغير اللوغو */
+            flex-shrink: 0;
         }
         
         .logo-circle {
@@ -66,10 +66,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* سيتم عرضها إذا وجدت */
+            display: none;
         }
         
-        /* الأيقونة النصية الاحتياطية */
         .logo-fallback {
             font-size: 40px;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
@@ -270,7 +269,7 @@
             transition: all 0.3s ease;
         }
         
-        /* أزرار التحكم - إزالة زر الرئيسية */
+        /* أزرار التحكم */
         .controls {
             display: flex;
             gap: 10px;
@@ -293,7 +292,7 @@
             gap: 8px;
             transition: all 0.3s ease;
             flex: 1;
-            min-width: 200px; /* زيادة العرض */
+            min-width: 200px;
             justify-content: center;
         }
         
@@ -349,7 +348,7 @@
         /* للتجاوب */
         @media (max-width: 768px) {
             .header {
-                flex-direction: row; /* إبقاءها في صف واحد */
+                flex-direction: row;
                 text-align: right;
                 gap: 15px;
                 padding: 12px;
@@ -387,7 +386,7 @@
             .main-title { font-size: 1.3rem; }
             
             .header {
-                flex-direction: column; /* على شاشات صغيرة جداً */
+                flex-direction: column;
                 text-align: center;
             }
             
@@ -400,7 +399,7 @@
 <body>
 
 <div class="container">
-    <!-- الرأس مع اللوغو والعنوان - محاذاة محسنة -->
+    <!-- الرأس مع اللوغو والعنوان -->
     <div class="header">
         <div class="logo-container">
             <div class="logo-circle">
@@ -431,18 +430,12 @@
         </div>
         <div class="card-content">
             <div class="inner-grid">
-                <!-- روابط أطفال محدثة -->
+                <!-- روابط الأطفال - كما طلبت -->
                 <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=uzV2UvD-Afs')">
                     <i class="fas fa-microphone"></i> معلم الأطفال
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=sjGM93E9Bpk')">
-                    <i class="fas fa-video"></i> تعليم سورة الإخلاص
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=GRMl0D9fifg')">
-                    <i class="fas fa-user-graduate"></i> حفظ للأطفال
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=gnlLCwNfRjo')">
-                    <i class="fas fa-star"></i> أناشيد إسلامية
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=5rY6U6A0uVw')">
+                    <i class="fas fa-video"></i> تفسير أطفالنا
                 </button>
             </div>
         </div>
@@ -454,24 +447,21 @@
         </div>
         <div class="card-content">
             <div class="inner-grid">
-                <!-- روابط كبار محدثة ومتنوعة -->
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=JHH5FmMBwjE')">
-                    <i class="fas fa-user-tie"></i> عبد الباسط عبد الصمد
+                <!-- روابط الكبار - كما طلبت -->
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=n8f_A6vT3vM')">
+                    <i class="fas fa-user-tie"></i> فارس عباد
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Rla_5O7CpC4')">
-                    <i class="fas fa-user-tie"></i> مشاري العفاسي
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=v7zC6yN7L0k')">
+                    <i class="fas fa-user-tie"></i> ياسين الجزائري
                 </button>
                 <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=4zCqI0-tK5U')">
-                    <i class="fas fa-user-tie"></i> محمود خليل الحصري
+                    <i class="fas fa-user-tie"></i> محمود الحصري
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Yvt2UUkG0WI')">
-                    <i class="fas fa-user-tie"></i> سعد الغامدي
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=9I-m-3vC-U4')">
+                    <i class="fas fa-redo"></i> تكرار
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=3tC_LFu_Z6E')">
-                    <i class="fas fa-redo"></i> تكرار مع ترتيل
-                </button>
-                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=xd5tVK8wLq8')">
-                    <i class="fas fa-play-circle"></i> تفسير مبسط للإخلاص
+                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=QJqg8-HdHMM')">
+                    <i class="fas fa-play-circle"></i> تفسير
                 </button>
             </div>
         </div>
@@ -486,7 +476,7 @@
         </button>
     </div>
 
-    <!-- زر التحكم الوحيد (إعادة الصفر فقط) -->
+    <!-- زر التحكم الوحيد -->
     <div class="controls">
         <button class="control-btn reset" onclick="resetAllData()">
             <i class="fas fa-redo"></i>
@@ -512,22 +502,61 @@
         return 'ikhlas';
     }
 
-    // دالة الفيديو
-    function getEmbedUrl(url) {
+    // دالة لتحويل أي رابط يوتيوب تلقائياً
+    function convertToEmbedUrl(anyUrl) {
         let videoId = "";
+        
+        // إزالة أي بارامترات إضافية غير ضرورية
+        let cleanUrl = anyUrl.split('&')[0];
+        
         try {
-            if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
-            else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
-            else videoId = url.split('/').pop();
-        } catch(e) { videoId = url; }
-        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&modestbranding=1";
+            // الحالة 1: رابط عادي مع v=
+            if (cleanUrl.includes("youtube.com/watch?v=")) {
+                videoId = cleanUrl.split("v=")[1];
+            }
+            // الحالة 2: رابط قصير youtu.be
+            else if (cleanUrl.includes("youtu.be/")) {
+                videoId = cleanUrl.split("youtu.be/")[1];
+            }
+            // الحالة 3: رابط embed
+            else if (cleanUrl.includes("youtube.com/embed/")) {
+                videoId = cleanUrl.split("embed/")[1];
+            }
+            // الحالة 4: رابط مع معلمات أخرى
+            else if (cleanUrl.includes("youtube.com/v/")) {
+                videoId = cleanUrl.split("v/")[1];
+            }
+            // الحالة 5: إذا كان الرابط يحتوي فقط على المعرف
+            else {
+                videoId = cleanUrl;
+            }
+            
+            // تنظيف المعرف من أي معلمات إضافية
+            videoId = videoId.split('?')[0];
+            videoId = videoId.split('&')[0];
+            videoId = videoId.split('/')[0];
+            
+        } catch(e) { 
+            console.log("خطأ في تحويل الرابط:", e);
+            videoId = anyUrl; 
+        }
+        
+        // إرجاع رابط embed جاهز
+        return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
     }
 
-    function smartPlay(url) {
+    // دالة تشغيل الفيديو - تعمل مع أي رابط يوتيوب
+    function smartPlay(originalUrl) {
         const player = document.getElementById('mainPlayer');
         const placeholder = document.getElementById('placeholder');
         
-        player.src = getEmbedUrl(url);
+        // تحويل الرابط تلقائياً
+        const embedUrl = convertToEmbedUrl(originalUrl);
+        
+        console.log("الرابط الأصلي:", originalUrl);
+        console.log("الرابط المحول:", embedUrl);
+        
+        player.src = embedUrl;
         player.style.display = 'block';
         placeholder.style.display = 'none';
         window.scrollTo({top: 50, behavior: 'smooth'});
@@ -880,12 +909,10 @@
         const logoCircle = document.querySelector('.logo-circle');
         const logoFallback = document.querySelector('.logo-fallback');
         
-        // تحميل الصورة
         const logoImg = new Image();
         logoImg.src = 'image.png';
         
         logoImg.onload = function() {
-            // إذا تم تحميل الصورة بنجاح
             logoFallback.style.display = 'none';
             logoImg.style.cssText = `
                 width: 100%;
@@ -897,7 +924,6 @@
         };
         
         logoImg.onerror = function() {
-            // إذا فشل تحميل الصورة، ابق على الأيقونة النصية
             console.log('لم يتم العثور على صورة اللوغو image.png - استخدام الأيقونة النصية');
             logoFallback.style.display = 'flex';
         };
