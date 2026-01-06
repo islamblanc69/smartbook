@@ -3,99 +3,1025 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الكتاب الذكي - سورة الفلق</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <title>سورة الفلق - القرآن التفاعلي</title>
+    <link rel="icon" href="../image.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg: #0f172a; --gold: #fbbf24; }
-        body { background: var(--bg); color: #f8fafc; font-family: 'Tajawal', sans-serif; margin: 0; padding: 20px; direction: rtl; }
-        .container { max-width: 600px; margin: 0 auto; text-align: center; }
-        .smart-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 5px; }
-        .surah-name { font-family: 'Amiri', serif; font-size: 2.8rem; color: var(--gold); margin: 0 0 20px 0; }
-        
-        /* مشغل الفيديو */
-        .video-box { 
-            width: 100%; aspect-ratio: 16/9; background: #000; 
-            border-radius: 20px; overflow: hidden; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+        :root {
+            --quran-green: #2a9d8f;
+            --quran-gold: #e9c46a;
+            --quran-blue: #1a5f7a;
+            --quran-cream: #fef9e7;
         }
-        .video-box iframe { width: 100%; height: 100%; border: none; }
-
-        /* القوائم المخفية */
-        .card { background: rgba(255,255,255,0.05); border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
-        .card-btn { width: 100%; padding: 15px 20px; background: none; border: none; color: #fff; font-weight: 900; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; font-family: inherit; }
-        .content { max-height: 0; overflow: hidden; transition: 0.3s ease-out; background: rgba(0,0,0,0.2); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
         
-        .btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; color: #fff; cursor: pointer; font-family: inherit; }
-        .btn:hover { border-color: var(--gold); }
-        .full { grid-column: span 2; }
-
-        .done-btn { background: #34d399; color: #064e3b; border: none; padding: 15px 50px; border-radius: 50px; font-weight: 900; cursor: pointer; margin-top: 20px; width: 100%; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--quran-cream);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        /* الهيدر */
+        .header {
+            background: linear-gradient(135deg, var(--quran-blue) 0%, var(--quran-green) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--quran-blue);
+            border: 3px solid var(--quran-gold);
+            font-size: 1.2rem;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* زر العودة */
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        /* قسم التحكم */
+        .control-section {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            padding: 15px 25px;
+            background: white;
+            border: 2px solid var(--quran-green);
+            border-radius: 8px;
+            color: var(--quran-blue);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .control-btn:hover {
+            background: var(--quran-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* المحتوى */
+        .content-section {
+            padding: 25px;
+        }
+        
+        /* السورة كما في المصحف */
+        .quran-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2.2rem;
+            line-height: 3;
+            text-align: center;
+            color: #1a365d;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .verse {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .verse-number {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: var(--quran-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        /* خطة الحفظ */
+        .simple-mind-map {
+            background: #f0f9f7;
+            padding: 25px;
+            border-radius: 10px;
+            border-right: 5px solid var(--quran-green);
+            margin-bottom: 25px;
+        }
+        
+        .mind-map-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .map-step {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--quran-gold);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--quran-blue);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        /* تفسير السورة */
+        .tafsir-section {
+            background: #f5f7fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #d1e0e0;
+            margin: 25px 0;
+        }
+        
+        .tafsir-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .tafsir-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-gold);
+        }
+        
+        .tafsir-verse {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tafsir-verse:last-child {
+            border-bottom: none;
+        }
+        
+        /* معلومات السورة */
+        .surah-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-box {
+            background: #f0f9f7;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .info-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--quran-blue);
+        }
+        
+        /* اختبار الحفظ */
+        .simple-quiz {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-green);
+        }
+        
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .answer-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .answer-btn:hover {
+            background: #e9f5f3;
+            border-color: var(--quran-green);
+        }
+        
+        .answer-btn.selected {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724
+.answer-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        /* نتيجة الاختبار */
+        .result-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result-box.visible {
+            display: block;
+        }
+        
+        /* أسئلة الفهم */
+        .understanding-questions {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px dashed #ffd43b;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1rem;
+            min-height: 100px;
+        }
+        
+        /* زر الإغلاق */
+        .close-section-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .close-section-btn:hover {
+            background: #5a6268;
+        }
+        
+        /* قصة السورة */
+        .story-section {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ffd43b;
+        }
+        
+        /* إخفاء المحتوى */
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .hidden-content.visible {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* الفوتر */
+        .footer {
+            background: var(--quran-blue);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 3px solid var(--quran-gold);
+        }
+        
+        .telegram-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-btn:hover {
+            background: #006699;
+            transform: scale(1.05);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .control-btn {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .quran-text {
+                font-size: 1.8rem;
+                line-height: 2.5;
+            }
+            
+            .surah-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-btn {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                display: inline-block;
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="smart-title">الكتاب الذكي لحفظ القرآن الكريم</div>
-    <div class="surah-name">سورة الفلق</div>
-
-    <div class="video-box">
-        <iframe id="mainPlayer" src="https://www.youtube.com/embed/S0uA_Y9P2m8" allowfullscreen></iframe>
-    </div>
-
-    <div class="card">
-        <button class="card-btn" onclick="toggle(this)">🧒 ركن الأشبال <span>▼</span></button>
-        <div class="content">
-            <div class="grid">
-                <button class="btn" onclick="smartPlay('https://youtu.be/PgVM2bftqTM?si=ae4hhUznMmEXr-6z')">🎤 معلم الأطفال</button>
-                <button class="btn" onclick="smartPlay('https://youtu.be/dvpLwScI8Jk?si=SvMqGCrM9VgZ1gms')">🎬 تفسير أطفالنا</button>
+    <div class="container">
+        <!-- الهيدر -->
+        <div class="header">
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i> العودة
+            </a>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="../image.png" alt="لوغو مكتبة إسلام عنابة" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
+                </div>
+                <div>
+                    <h1>سورة الفلق</h1>
+                    <p>المعوذة الأولى - سورة التحصين والحماية</p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="card">
-        <button class="card-btn" onclick="toggle(this)">🧔 ركن الكبار <span>▼</span></button>
-        <div class="content">
-            <div class="grid">
-                <button class="btn" onclick="smartPlay('https://youtu.be/khCOtazHOw0?si=z-o9hUfLLqrXlFHs')">فارس عباد</button>
-                <button class="btn" onclick="smartPlay('https://youtu.be/ERIghg8F3a0?si=aAc5wiNlumk6P6-q')">ياسين الجزائري</button>
-                <button class="btn full" onclick="smartPlay('-https://youtu.be/24xqAf4ZDj8?si=J0NcInAkvz2tGewN')">محمود خليل الحصري</button>
-                <button class="btn" onclick="smartPlay('https://youtu.be/AIOvwqTOR5I?si=72czAO1JYgfzOBuE')">🔁 تكرار حفص</button>
-                <button class="btn" onclick="smartPlay('https://youtu.be/SDs_cXDhTO4?si=hoqH4K8Itsb7UME5')">🔁 تكرار ورش</button>
-            </div>
-        </div>
-    </div>
-
-    <button class="done-btn" onclick="confetti()">تم الحفظ بنجاح 🎊</button>
-</div>
-
-<script>
-    // العفسة الذكية: تحويل أي رابط يوتيوب لـ Embed تلقائياً
-    function getEmbedUrl(input) {
-        let videoId = "";
-        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-        const match = input.match(regex);
         
-        if (match && match[1]) {
-            videoId = match[1];
-        } else if (input.length === 11) {
-            videoId = input; // إذا كان المدخل هو الكود فقط
+        <!-- أزرار التحكم -->
+        <div class="control-section">
+            <div class="control-buttons">
+                <button class="control-btn" onclick="showSection('mind-map')">
+                    <span>🗺️</span> خطة الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('quran-text')">
+                    <span>📖</span> السورة كاملة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-info')">
+                    <span>ℹ️</span> معلومات السورة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-story')">
+                    <span>📖</span> قصة السورة
+                </button>
+                <button class="control-btn" onclick="showSection('tafsir-section')">
+                    <span>📚</span> تفسير السورة
+                </button>
+                <button class="control-btn" onclick="showSection('quiz')">
+                    <span>🧠</span> اختبار الحفظ
+                </button>
+            </div>
+        </div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="content-section">
+            
+            <!-- السورة كاملة -->
+            <div id="quran-text" class="hidden-content visible">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--quran-blue);">📖 سورة الفلق كاملة</h2>
+                    <p style="color: #666; margin-top: 10px;">سورة مكية - عدد آياتها: 5 آيات</p>
+                </div>
+                
+                <div class="quran-text">
+                    <div class="verse">
+                        <div class="verse-number">١</div>
+                        قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٢</div>
+                        مِن شَرِّ مَا خَلَقَ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٣</div>
+                        وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٤</div>
+                        وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٥</div>
+                        وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ
+                    </div>
+                </div>
+            </div>
+            
+            <!-- خطة الحفظ -->
+            <div id="mind-map" class="hidden-content">
+                <div class="simple-mind-map">
+                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة الفلق</h2>
+                    
+                    <div class="map-step">
+                        <span class="step-number">١</span>
+                        <h3>اليوم الأول: الآيات ١-٢</h3>
+                        <p>حفظ: قل أعوذ برب الفلق + من شر ما خلق</p>
+                        <p>⏰ الوقت المقترح: 10 دقائق</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٢</span>
+                        <h3>اليوم الثاني: الآيات ٣-٤</h3>
+                        <p>حفظ: ومن شر غاسق إذا وقب + ومن شر النفاثات في العقد</p>
+                        <p>مع التكرار اليومي للآيات السابقة</p>
+                        <p>⏰ الوقت المقترح: 10 دقائق</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٣</span>
+                        <h3>اليوم الثالث: الآية ٥</h3>
+                        <p>حفظ: ومن شر حاسد إذا حسد</p>
+                        <p>⏰ الوقت المقترح: 5 دقائق</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٤</span>
+                        <h3>اليوم الرابع: المراجعة</h3>
+                        <p>تسميع السورة كاملة ٥ مرات</p>
+                        <p>التدرب على التلاوة الصحيحة</p>
+                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('mind-map')">
+                    إغلاق خطة الحفظ
+                </button>
+            </div>
+            
+            <!-- معلومات السورة -->
+            <div id="surah-info" class="hidden-content">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h2 style="color: var(--quran-blue);">ℹ️ معلومات عن سورة الفلق</h2>
+                </div>
+                
+                <div class="surah-info-grid">
+                    <div class="info-box">
+                        <div class="info-label">رقم السورة في المصحف</div>
+                        <div class="info-value">113</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">نوع السورة</div>
+                        <div class="info-value">مكية</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">عدد الآيات</div>
+                        <div class="info-value">5 آيات</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">عدد الكلمات</div>
+                        <div class="info-value">23 كلمة</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">عدد الحروف</div>
+                        <div class="info-value">71 حرفاً</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">ترتيب النزول</div>
+                        <div class="info-value">20</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">الجزء</div>
+                        <div class="info-value">30</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">مدة التلاوة</div>
+                        <div class="info-value">20 ثانية</div>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('surah-info')">
+                    إغلاق المعلومات
+                </button>
+            </div>
+            
+            <!-- قصة السورة -->
+            <div id="surah-story" class="hidden-content">
+                <div class="story-section">
+                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
+                        📖 قصة وفضائل سورة الفلق
+                    </h2>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">✨ سبب النزول:</h3>
+                    <p>نزلت سورة الفلق مع سورة الناس عندما سحر النبي ﷺ، فأمره جبريل بالاستعاذة بهاتين السورتين.</p>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">🎯 فضائلها العظيمة:</h3>
+                    <p>1. من المعوذات التي تحمي من الشرور والعين والسحر</p>
+                    <p>2. تقال في الرقية والتحصين من كل شر</p>
+                    <p>3. قراءتها قبل النوم تحمي بإذن الله</p>
+                    <p>4. كانت النبي ﷺ يتعوذ بهما عند النوم</p>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">💡 لماذا سميت بالفلق؟</h3>
+                    <p>"الفلق" يعني الصبح، والاستعاذة برب الفلق هي الاستعاذة برب الصباح الذي يفلق الظلام.</p>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('surah-story')">
+                    إغلاق القصة
+                </button>
+            </div>
+            
+            <!-- تفسير السورة -->
+            <div id="tafsir-section" class="hidden-content">
+                <div class="tafsir-section">
+                    <h2 class="tafsir-title">📚 تفسير سورة الفلق - الآية بالآية</h2>
+                    
+                    <div class="tafsir-content">
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الأولى: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ"</h3>
+                            <p><strong>التفسير:</strong> قل -يا محمد- أعتصم وألجأ برب الفلق، وهو رب الصباح الذي يشق ظلمة الليل.</p>
+                            <p><strong>المعنى:</strong> الاستعاذة بالله من كل شر، والبدء باسم الرب الذي يبدد الظلمات.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الثانية: "مِن شَرِّ مَا خَلَقَ"</h3>
+                            <p><strong>التفسير:</strong> من شر جميع المخلوقات التي خلقها الله، سواء كانت من الإنس أو الجن أو الحيوانات.</p>
+                            <p><strong>المعنى:</strong> شمول الاستعاذة من شر كل ما خلق الله.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الثالثة: "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ"</h3>
+                            <p><strong>التفسير:</strong> ومن شر الليل عندما يدخل ويظلم، أو من الشر الذي يكون في الليل.</p>
+                            <p><strong>المعنى:</strong> الحماية من أخطار الليل ومفاجآته.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الرابعة: "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ"</h3>
+                            <p><strong>التفسير:</strong> ومن شر الساحرات اللاتي ينفخن في العقد عند السحر.</p>
+                            <p><strong>المعنى:</strong> الحماية من السحر والسحرة.</p>
+                        </div>
+                        
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--quran-blue);">الآية الخامسة: "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ"</h3>
+                            <p><strong>التفسير:</strong> ومن شر الحاسد عندما يحسد، أي عندما يتمنى زوال النعمة عن المحسود.</p>
+                            <p><strong>المعنى:</strong> الحماية من عين الحاسد وضرره.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <h4 style="color: var(--quran-blue);">🎯 ملخص التفسير:</h4>
+                        <p>سورة الفلق تحصين كامل للمسلم من جميع أنواع الشرور: شر المخلوقات، شر الليل، شر السحر، وشر الحسد. وهي مع سورة الناس تحفظ المسلم بإذن الله.</p>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('tafsir-section')">
+                    إغلاق التفسير
+                </button>
+            </div>
+            
+            <!-- اختبار الحفظ -->
+            <div id="quiz" class="hidden-content">
+                <div class="simple-quiz">
+                    <h2 style="color: var(--quran-blue); margin-bottom: 20px; text-align: center;">
+                        🧠 اختبار حفظ سورة الفلق
+                    </h2>
+                    
+                    <div id="quiz-container">
+                        <!-- الأسئلة ستظهر هنا -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitQuiz()" style="background: var(--quran-green); color: white;">
+                            ✅ تصحيح الإجابات
+                        </button>
+                        <button class="control-btn" onclick="resetQuiz()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 إعادة الاختبار
+                        </button>
+                    </div>
+                    
+                    <div id="quiz-result" class="result-box">
+                        <!-- نتيجة الاختبار ستظهر هنا -->
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('quiz')">
+                    إغلاق الاختبار
+                </button>
+            </div>
+        </div>
+        
+        <!-- الفوتر -->
+        <div class="footer">
+            <div class="telegram-section">
+                <h3 style="margin-bottom: 15px;">📱 انضم إلى مجتمعنا</h3>
+                <p>انضم لمجموعة تلغرام الخاصة بمستخدمي الكتاب للاستفادة من:</p>
+                <p>• آخر التحديثات • نصائح الحفظ • مسابقات ودورات • دعم مباشر</p>
+                <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
+                    📲 انضم لمجموعة تلغرام
+                </a>
+            </div>
+            
+            <div class="copyright">
+                جميع الحقوق محفوظة © 2026 مكتبة إسلام عنابة<br>
+                <small>القرآن التفاعلي - كتاب تتبع القرآن الكريم بخط اليد</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === بيانات سورة الفلق ===
+        const memoryQuestions = [
+            {
+                question: "ما هي الآية الأولى في سورة الفلق؟",
+                options: ["قل أعوذ برب الفلق", "من شر ما خلق", "ومن شر غاسق إذا وقب", "ومن شر النفاثات في العقد"],
+                correct: 0,
+                explanation: "الآية الأولى هي: 'قل أعوذ برب الفلق'"
+            },
+            {
+                question: "كم عدد آيات سورة الفلق؟",
+                options: ["4 آيات", "5 آيات", "6 آيات", "7 آيات"],
+                correct: 1,
+                explanation: "سورة الفلق تتكون من 5 آيات"
+            },
+            {
+                question: "أكمل الآية: 'ومن شر ________ إذا وقب'",
+                options: ["غاسق", "حاسد", "النفاثات", "ما خلق"],
+                correct: 0,
+                explanation: "الآية الكاملة: 'ومن شر غاسق إذا وقب'"
+            },
+            {
+                question: "ما هي الآية التي تلي 'من شر ما خلق'؟",
+                options: ["قل أعوذ برب الفلق", "ومن شر غاسق إذا وقب", "ومن شر النفاثات في العقد", "ومن شر حاسد إذا حسد"],
+                correct: 1,
+                explanation: "بعد 'من شر ما خلق' تأتي 'ومن شر غاسق إذا وقب'"
+            },
+            {
+                question: "أكمل الآية: 'ومن شر ________ في العقد'",
+                options: ["الحاسدات", "النفاثات", "الساحرات", "الغاسقات"],
+                correct: 1,
+                explanation: "الآية الكاملة: 'ومن شر النفاثات في العقد'"
+            }
+        ];
+        
+        // === التحكم في الأقسام ===
+        let currentSection = 'quran-text'; // تظهر السورة مباشرة
+        
+        function showSection(sectionId) {
+            // إخفاء جميع الأقسام
+            document.querySelectorAll('.hidden-content').forEach(section => {
+                section.classList.remove('visible');
+            });
+            
+            // إظهار القسم المطلوب
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('visible');
+                currentSection = sectionId;
+                
+                // التمرير للقسم
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // تهيئة المحتوى إذا لزم
+                if (sectionId === 'quiz') {
+                    initQuiz();
+                }
+            }
         }
-        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-    }
-
-    function smartPlay(url) {
-        const embedUrl = getEmbedUrl(url);
-        document.getElementById('mainPlayer').src = embedUrl;
-        window.scrollTo({top: 50, behavior: 'smooth'});
-    }
-
-    function toggle(btn) {
-        const content = btn.nextElementSibling;
-        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
-    }
-</script>
-
+        
+        function hideSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('visible');
+            }
+            // الرجوع لقسم السورة
+            showSection('quran-text');
+        }
+        
+        // === اختبار الحفظ ===
+        let currentQuizQuestions = [];
+        let userQuizAnswers = [];
+        let currentQuizIndex = 0;
+        let quizSubmitted = false;
+        
+        function initQuiz() {
+            // اختيار 3 أسئلة عشوائية
+            currentQuizQuestions = [...memoryQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
+            
+            currentQuizIndex = 0;
+            quizSubmitted = false;
+            userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
+            
+            displayQuizQuestion();
+            
+            // إخفاء نتيجة سابقة
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.classList.remove('visible');
+            }
+        }
+        
+        function displayQuizQuestion() {
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+            
+            if (currentQuizIndex >= currentQuizQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 3rem;">✅</div>
+                        <h3 style="color: var(--quran-green);">اكتمل الاختبار</h3>
+                        <p>اضغط على زر "تصحيح الإجابات" لمعرفة نتيجتك</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = currentQuizQuestions[currentQuizIndex];
+            let optionsHTML = '';
+            const letters = ['أ', 'ب', 'ج', 'د'];
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userQuizAnswers[currentQuizIndex] === index;
+                const isCorrect = quizSubmitted && index === question.correct;
+                const isWrong = quizSubmitted && userQuizAnswers[currentQuizIndex] === index && index !== question.correct;
+                
+                let className = 'answer-btn';
+                if (isSelected) className += ' selected';
+                if (isCorrect) className += ' selected';
+                if (isWrong) className += ' wrong';
+                
+                optionsHTML += `
+                    <div class="${className}" 
+                         onclick="selectQuizAnswer(${index})">
+                         ${letters[index]}. ${option}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>السؤال ${currentQuizIndex + 1}: ${question.question}</h3>
+                    <div class="answer-buttons">
+                        ${optionsHTML}
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevQuizQuestion()" 
+                            ${currentQuizIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextQuizQuestion()">
+                        ${currentQuizIndex === currentQuizQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function selectQuizAnswer(answerIndex) {
+            if (!quizSubmitted) {
+                userQuizAnswers[currentQuizIndex] = answerIndex;
+                displayQuizQuestion();
+            }
+        }
+        
+        function nextQuizQuestion() {
+            if (currentQuizIndex < currentQuizQuestions.length - 1) {
+                currentQuizIndex++;
+                displayQuizQuestion();
+            } else {
+                currentQuizIndex = currentQuizQuestions.length;
+                displayQuizQuestion();
+            }
+        }
+        
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                displayQuizQuestion();
+            }
+        }
+        
+        function submitQuiz() {
+            quizSubmitted = true;
+            let score = 0;
+            let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
+            
+            currentQuizQuestions.forEach((question, index) => {
+                const userAnswer = userQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
+                        <strong>إجابتك:</strong> ${userAnswer !== null ? question.options[userAnswer] : 'لم تجب'}<br>
+                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correct]}<br>
+                        <em>${question.explanation}</em>
+                    </div>
+                `;
+            });
+            
+            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
+            let message = '';
+            let emoji = '';
+            
+            if (percentage >= 90) {
+                message = 'ممتاز! إتقان تام للسورة';
+                emoji = '🎉';
+            } else if (percentage >= 70) {
+                message = 'جيد جداً، مستوى ممتاز';
+                emoji = '👍';
+            } else if (percentage >= 50) {
+                message = 'مقبول، يحتاج مراجعة بسيطة';
+                emoji = '💪';
+            } else {
+                message = 'راجع السورة مرة أخرى';
+                emoji = '📚';
+            }
+            
+            resultsHTML += `
+                <div style="background: var(--quran-green); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>${emoji} ${message}</h4>
+                    <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
+                    <p>النسبة: ${percentage}%</p>
+                </div>
+            `;
+            
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.innerHTML = resultsHTML;
+                resultBox.classList.add('visible');
+            }
+            
+            // عرض التفسير الصحيح للأسئلة
+            displayQuizQuestion();
+        }
+        
+        function resetQuiz() {
+            initQuiz();
+        }
+        
+        // === تهيئة الصفحة ===
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('صفحة سورة الفلق جاهزة');
+        });
+    </script>
 </body>
 </html>
