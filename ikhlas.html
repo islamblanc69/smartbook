@@ -2,119 +2,95 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>سورة الأعلى</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سورة الفاتحة</title>
     <link rel="stylesheet" href="../styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Scheherazade New', serif; font-size: 1.3rem; line-height: 2.5; background: #f8f9fa; }
-        header { background: #198754; color: white; padding: 2rem; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
-        .ayahs-container { background: white; padding: 2rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-        .ayahs-container p { margin: 1.5rem 0; font-size: 1.6rem; color: #198754; }
-        .dashboard { background: white; padding: 1.5rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
-        .section { background: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .section h2 { color: #198754; border-bottom: 2px solid #e9ecef; padding-bottom: 0.5rem; }
-        .btn-recitation { background: #198754; color: white; border-radius: 30px; padding: 1rem 1.5rem; margin: 0.5rem 0; width: 100%; transition: all 0.3s ease; }
-        .btn-recitation:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(25,135,84,0.3); }
-        audio { width: 100%; margin-top: 1rem; border-radius: 15px; }
-        .tafsir-text { font-size: 1.2rem; line-height: 2; color: #333; padding: 1rem; background: #f8f9fa; border-radius: 15px; }
-        .navbar .nav-link { color: #198754; font-weight: bold; }
-    </style>
 </head>
 <body>
     <header>
-        <h1>سورة الأعلى</h1>
-        <p>سبِّحِ اسمَ ربِّكَ الأعلى</p>
+        <a href="../index.html" class="back-btn">رجوع</a>
+        <div class="logo">قرآن</div>
+        <a href="../index.html" class="home-btn">الرئيسية</a>
     </header>
 
-    <div class="container">
-        <!-- نص السورة -->
-        <div class="ayahs-container" id="ayahs"></div>
+    <h1 class="surah-title">سورة الفاتحة</h1>
 
-        <!-- داشبورد -->
-        <div class="dashboard">
-            <p>عدد الزيارات: <strong id="visitCount">0</strong></p>
-            <p>عدد الاستماعات: <strong id="listenCount">0</strong></p>
-            <button id="saveBtn" class="btn btn-primary btn-animation">تم حفظ السورة</button>
-        </div>
+    <div class="ayahs" id="ayahs"></div>
 
-        <!-- قسم التلاوات (كبار) -->
-        <div class="section">
-            <h2>تلاوات صوتية</h2>
-            <button class="btn-recitation" onclick="playAudio('https://server8.mp3quran.net/frs_a/087.mp3')">تلاوة فارس عباد</button>
-            <audio controls></audio>
+    <button class="replay-btn" onclick="replayCurrent()">إعادة تشغيل التلاوة</button>
 
-            <button class="btn-recitation" onclick="playAudio('https://server10.mp3quran.net/husr/087.mp3')">تلاوة محمود خليل الحصري</button>
-            <audio controls></audio>
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('adults')">قسم الكبار</div>
+        <div class="tab" onclick="switchTab('kids')">قسم الأطفال</div>
+    </div>
 
-            <button class="btn-recitation" onclick="playAudio('https://server5.mp3quran.net/yas/087.mp3')">تلاوة ياسين الجزائري</button>
-            <audio controls></audio>
+    <div id="adults" class="section active">
+        <button class="recitation-btn" onclick="playAudio('https://server8.mp3quran.net/frs_a/001.mp3')">تلاوة فارس عباد</button>
+        <audio controls></audio>
 
-            <h3>تفسير ميسر للسورة</h3>
-            <div class="tafsir-text">
-                نزه اسم ربك الأعلى عن الشريك والنقائص تنزيها يليق بعظمته، الذي خلق المخلوقات فأتقن خلقها وأحسنه، والذي قدَّر أرزاق الخلائق وغيرها، فهداهم لمصالحهم. والذي أخرج المرعى أخضر، ثم جعله بعد ذلك جافًّا يابسًا أسود. سنقرئك -أيها الرسول- القرآن، فلا تنساه إلا ما شاء الله، إنه يعلم ما تُظهره من القراءة، وما تخفيه في نفسك. وسنيسر لك اليسرى من الأمور والأخلاق والشرائع. فذكِّر الناس بالقرآن إن نفعت التذكير، سيذكر ويتعظ من يخشى الله، ويتجنب القرآن الأشقى الذي يدخل النار ذات اللهب العظيم، ثم لا يموت فيها فيستريح، ولا يحيا حياة طيبة. قد فاز من زكَّى نفسه بتوحيد الله وطاعته وذكره، وأدى الصلاة في أوقاتها، بل يؤثر كثير من الناس الحياة الدنيا على الآخرة، والآخرة خير وأبقى. إن هذا القرآن المشتمل على التوحيد والوعد والوعيد موجود في الكتب المتقدمة، كتب إبراهيم وموسى. (مأخوذ من تفسير السعدي وإسلام ويب)
-            </div>
-        </div>
+        <button class="recitation-btn" onclick="playAudio('https://server10.mp3quran.net/husr/001.mp3')">تلاوة محمود خليل الحصري</button>
+        <audio controls></audio>
 
-        <!-- قسم الأطفال -->
-        <div class="section">
-            <h2>قسم الأطفال</h2>
-            <button class="btn-recitation" onclick="playAudio('https://server11.mp3quran.net/husr_mu/087.mp3')">تلاوة محمود الحصري المعلم (مع ترديد)</button>
-            <audio controls></audio>
+        <button class="recitation-btn" onclick="playAudio('https://server5.mp3quran.net/yas/001.mp3')">تلاوة ياسين الجزائري</button>
+        <audio controls></audio>
 
-            <h3>تفسير مبسط للأطفال</h3>
-            <div class="tafsir-text">
-                يا أطفال، الله يأمرنا أن نقول: سبحان ربي الأعلى، يعني الله عالي جداً وكامل بدون عيوب. هو اللي خلق كل شيء وحسنه، وقدر كل حاجة وهدى الكائنات لطريقها. الله يخرج العشب الأخضر ثم يجعله يابساً. الله راح يقرأك القرآن يا رسول الله وما تنساه، وراح ييسر لك كل حاجة سهلة. ذكر الناس بالقرآن، اللي يخاف الله راح يتذكر، واللي ما يخافش راح يعذب في النار. اللي يزكي نفسه ويصلي راح يفوز، والآخرة أحسن من الدنيا. هذا الكلام موجود في كتب إبراهيم وموسى عليهما السلام. (مبسط من مواضيع إسلامية للأطفال)
-            </div>
+        <div class="tafsir">
+            <h3>تفسير ميسر</h3>
+            <p>الحمد لله الذي له الحمد الكامل على نعمه الدينية والدنيوية، رب العالمين ومالكهما ومدبرهما، الرحمن في الدنيا بعباده جميعاً، الرحيم في الآخرة بالمؤمنين، مالك يوم الدين وهو يوم القيامة، إياك نعبد ولا نعبد غيرك، وإياك نستعين ولا نستعين بغيرك، اهدنا الصراط المستقيم صراط الذين أنعمت عليهم من النبيين والصديقين والشهداء والصالحين غير المغضوب عليهم الذين عرفوا الحق وتركوه كاليهود ولا الضالين الذين تركوا الحق جهلاً كالنصارى.</p>
         </div>
     </div>
 
-    <nav class="navbar fixed-bottom">
-        <div class="container-fluid justify-content-around">
-            <a href="../index.html" class="nav-link">الرئيسية</a>
-            <a href="#" class="nav-link">استماع عشوائي</a>
-            <a href="#" class="nav-link">مشاركة</a>
+    <div id="kids" class="section">
+        <button class="recitation-btn" onclick="playAudio('https://server11.mp3quran.net/husr_mu/001.mp3')">تلاوة محمود الحصري المعلم (مع ترديد الأطفال)</button>
+        <audio controls></audio>
+
+        <div class="tafsir">
+            <h3>تفسير مبسط للأطفال</h3>
+            <p>يا أطفال، نحمد الله اللي خلق كل شيء ورباه، هو الرحمن اللي يرحم الجميع، والرحيم اللي يرحم المؤمنين يوم القيامة. نعبد الله وحده ونطلب المساعدة منه وحده. اللهم اهدنا الطريق المستقيم زي الأنبياء والصالحين، ولا تجعلنا زي اللي غضبت عليهم أو اللي ضلوا الطريق.</p>
         </div>
+    </div>
+
+    <nav class="navbar">
+        <a href="../index.html">رجوع</a>
+        <a href="../index.html">الرئيسية</a>
+        <a href="#">تفسير الأحلام</a>
     </nav>
 
     <script>
-        // جلب الآيات من API
-        fetch('https://api.alquran.cloud/v1/surah/87/ar.asad')
+        let currentAudio = null;
+
+        fetch('https://api.alquran.cloud/v1/surah/1')
             .then(res => res.json())
             .then(data => {
                 const ayahsDiv = document.getElementById('ayahs');
-                data.data.ayahs.forEach((ayah, i) => {
+                data.data.ayahs.forEach(ayah => {
                     const p = document.createElement('p');
-                    p.innerHTML = `${ayah.text} <span style="color:#198754;">(${i+1})</span>`;
+                    p.textContent = ayah.text;
                     ayahsDiv.appendChild(p);
                 });
             });
 
-        // داشبورد وتتبع
-        let visits = parseInt(localStorage.getItem('visits_ala') || '0') + 1;
-        localStorage.setItem('visits_ala', visits);
-        document.getElementById('visitCount').textContent = visits;
-
-        let listens = parseInt(localStorage.getItem('listens_ala') || '0');
-        document.getElementById('listenCount').textContent = listens;
-
-        const saveBtn = document.getElementById('saveBtn');
-        if (localStorage.getItem('saved_ala') === 'true') saveBtn.textContent = 'إلغاء الحفظ';
-        saveBtn.addEventListener('click', () => {
-            const saved = localStorage.getItem('saved_ala') === 'true';
-            localStorage.setItem('saved_ala', !saved);
-            saveBtn.textContent = !saved ? 'إلغاء الحفظ' : 'تم حفظ السورة';
-        });
-
-        // تشغيل الصوت وزيادة العد
         function playAudio(src) {
-            const audio = document.querySelector('audio[controls]');
+            if (currentAudio) currentAudio.pause();
+            const audio = document.querySelector('.section.active audio');
             audio.src = src;
             audio.play();
-            listens++;
-            localStorage.setItem('listens_ala', listens);
-            document.getElementById('listenCount').textContent = listens;
+            currentAudio = audio;
+        }
+
+        function replayCurrent() {
+            if (currentAudio) {
+                currentAudio.currentTime = 0;
+                currentAudio.play();
+            }
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
         }
     </script>
 </body>
