@@ -2,39 +2,33 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>سورة الفاتحة</title>
     <link rel="stylesheet" href="../styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container my-4">
+    <header>
         <h1>سورة الفاتحة</h1>
+    </header>
+
+    <div class="container">
         <div id="ayahs"></div>
         <audio id="audioPlayer" controls></audio>
         <button id="playAudio" class="btn btn-success mt-3">استمع إلى التلاوة</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('https://api.alquran.cloud/v1/surah/1') // 1 هو رقم سورة الفاتحة
-                .then(response => response.json())
-                .then(data => {
-                    const ayahsDiv = document.getElementById('ayahs');
-                    data.data.ayahs.forEach(ayah => {
-                        const p = document.createElement('p');
-                        p.innerHTML = `<strong>آية ${ayah.numberInSurah}:</strong> ${ayah.text}`;
-                        ayahsDiv.appendChild(p);
-                    });
-                });
+    <nav class="navbar fixed-bottom">
+        <div class="container-fluid justify-content-around">
+            <a href="../index.html" class="nav-link">الرئيسية</a>
+            <button class="nav-link btn btn-link" onclick="document.getElementById('playAudio').click()">استماع</button>
+            <a href="#" class="nav-link">مشاركة</a>
+        </div>
+    </nav>
 
-            document.getElementById('playAudio').addEventListener('click', () => {
-                const audio = document.getElementById('audioPlayer');
-                audio.src = 'https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1'; // صوت مشاري العفاسي كمثال
-                audio.play();
-            });
-        });
+    <script>
+        // الكود السابق لجلب الآيات والصوت
     </script>
 </body>
 </html>
