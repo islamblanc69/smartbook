@@ -1,1184 +1,44 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الفاتحة - القرآن التفاعلي</title>
-    <link rel="icon" href="image.png" type="image/png">
-    <style>
-        :root {
-            --quran-green: #2a9d8f;
-            --quran-gold: #e9c46a;
-            --quran-blue: #1a5f7a;
-            --quran-cream: #fef9e7;
-        }
+<!-- في المحتوى الرئيسي بعد قسم قصة السورة -->
+<div id="surah-tafsir" class="hidden-content">
+    <div style="background: #e8f4fc; padding: 25px; border-radius: 10px; border-right: 5px solid #1a5f7a;">
+        <h2 style="color: #1a5f7a; margin-bottom: 25px; text-align: center;">
+            📚 تفسير سورة الفاتحة - الآية بالآية
+        </h2>
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', 'Segoe UI', sans-serif;
-        }
-        
-        body {
-            background-color: var(--quran-cream);
-            color: #2c3e50;
-            line-height: 1.6;
-            padding: 15px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        /* الهيدر مع اللوغو */
-        .header {
-            background: linear-gradient(135deg, var(--quran-blue) 0%, var(--quran-green) 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--quran-blue);
-            border: 3px solid var(--quran-gold);
-            font-size: 1.2rem;
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* زر قسم التلاوة في الهيدر */
-        .tilaawa-header-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 30px;
-            background: white;
-            color: var(--quran-blue);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .tilaawa-header-btn:hover {
-            background: var(--quran-gold);
-            transform: scale(1.05);
-        }
-        
-        /* قسم التحكم */
-        .control-section {
-            padding: 20px;
-            background: #f8f9fa;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .control-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .control-btn {
-            padding: 15px 25px;
-            background: white;
-            border: 2px solid var(--quran-green);
-            border-radius: 8px;
-            color: var(--quran-blue);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            min-width: 180px;
-            justify-content: center;
-        }
-        
-        .control-btn:hover {
-            background: var(--quran-green);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* المحتوى */
-        .content-section {
-            padding: 25px;
-        }
-        
-        /* خطة الحفظ البسيطة */
-        .simple-mind-map {
-            background: #f0f9f7;
-            padding: 25px;
-            border-radius: 10px;
-            border-right: 5px solid var(--quran-green);
-            margin-bottom: 25px;
-        }
-        
-        .mind-map-title {
-            color: var(--quran-blue);
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.4rem;
-        }
-        
-        .map-step {
-            background: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--quran-gold);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        
-        .step-number {
-            display: inline-block;
-            background: var(--quran-blue);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 35px;
-            margin-left: 10px;
-            font-weight: bold;
-        }
-        
-        /* السورة كما في المصحف */
-        .quran-text {
-            font-family: 'Traditional Arabic', serif;
-            font-size: 2rem;
-            line-height: 3;
-            text-align: center;
-            color: #1a365d;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-        }
-        
-        .verse {
-            margin: 30px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .verse-number {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: var(--quran-green);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        /* زر قسم التلاوة في المحتوى */
-        .tilaawa-section {
-            background: #e8f4f8;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            text-align: center;
-        }
-        
-        .section-title {
-            color: var(--quran-blue);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-        
-        .tilaawa-btn {
-            display: inline-block;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, var(--quran-green) 0%, var(--quran-blue) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
-        }
-        
-        .tilaawa-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.4);
-        }
-        
-        /* اختبار الحفظ البسيط */
-        .simple-quiz {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px solid #eee;
-            margin: 25px 0;
-        }
-        
-        .quiz-question {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-right: 4px solid var(--quran-green);
-        }
-        
-        .answer-buttons {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 15px;
-        }
-        
-        .answer-btn {
-            padding: 15px;
-            background: white;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            text-align: right;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        .answer-btn:hover {
-            background: #e9f5f3;
-            border-color: var(--quran-green);
-        }
-        
-        .answer-btn.selected {
-            background: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-        }
-        
-        .answer-btn.wrong {
-            background: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
-        }
-        
-        /* معلومات السورة */
-        .surah-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .info-box {
-            background: #f0f9f7;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        
-        .info-label {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        
-        .info-value {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--quran-blue);
-        }
-        
-        /* أسئلة الفهم */
-        .understanding-questions {
-            background: #fff9db;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            border: 1px dashed #ffd43b;
-        }
-        
-        .answer-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 1rem;
-            min-height: 100px;
-        }
-        
-        /* نتيجة الاختبار */
-        .result-box {
-            background: #d4edda;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            display: none;
-        }
-        
-        .result-box.visible {
-            display: block;
-        }
-        
-        /* زر الإغلاق */
-        .close-section-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .close-section-btn:hover {
-            background: #5a6268;
-        }
-        
-        /* التجاوب */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .control-btn {
-                width: 100%;
-                min-width: auto;
-            }
-            
-            .quran-text {
-                font-size: 1.5rem;
-                line-height: 2.5;
-            }
-            
-            .surah-info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* إخفاء المحتوى */
-        .hidden-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .hidden-content.visible {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* قصة السورة */
-        .story-section {
-            background: #fff9db;
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px solid #ffd43b;
-        }
-        
-        /* الفوتر */
-        .footer {
-            background: var(--quran-blue);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            margin-top: 30px;
-            border-top: 3px solid var(--quran-gold);
-        }
-        
-        .telegram-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .telegram-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .telegram-btn:hover {
-            background: #006699;
-            transform: scale(1.05);
-        }
-        
-        .copyright {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- الهيدر مع اللوغو -->
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <!-- استبدل هذا بالنص إذا لم توجد صورة -->
-                    📖
-                    <!-- أو استخدم: <img src="image.png" alt="لوغو مكتبة إسلام عنابة"> -->
-                </div>
-                <div>
-                    <h1>سورة الفاتحة</h1>
-                    <p>أم القرآن - السبع المثاني</p>
-                </div>
-            </div>
-            <!-- زر قسم التلاوة في الهيدر -->
-            <a href="index.html" class="tilaawa-header-btn">
-                🔊 قسم التلاوة
-            </a>
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية الأولى: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"</h3>
+            <p><strong>التفسير:</strong> نبدأ باسم الله متبركين به، والله هو المعبود بحق. الرحمن: ذو الرحمة الواسعة لجميع الخلق. الرحيم: ذو الرحمة الخاصة بالمؤمنين.</p>
+            <p><strong>الحكمة:</strong> التبرك باسم الله في بداية كل عمل.</p>
         </div>
         
-        <!-- أزرار التحكم -->
-        <div class="control-section">
-            <div class="control-buttons">
-                <button class="control-btn" onclick="showSection('mind-map')">
-                    <span>🗺️</span> خطة الحفظ
-                </button>
-                <button class="control-btn" onclick="showSection('quran-text')">
-                    <span>📖</span> السورة كاملة
-                </button>
-                <button class="control-btn" onclick="showSection('surah-info')">
-                    <span>ℹ️</span> معلومات السورة
-                </button>
-                <button class="control-btn" onclick="showSection('surah-story')">
-                    <span>📖</span> قصة السورة
-                </button>
-                <button class="control-btn" onclick="showSection('quiz')">
-                    <span>🧠</span> اختبار الحفظ
-                </button>
-                <button class="control-btn" onclick="showSection('understanding')">
-                    <span>💭</span> أسئلة الفهم
-                </button>
-            </div>
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية الثانية: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"</h3>
+            <p><strong>التفسير:</strong> الثناء على الله بصفات الكمال، والاعتراف بأنه الرب الذي يربّي جميع الخلق بالنعم.</p>
+            <p><strong>الحكمة:</strong> تنمية روح الشكر والاعتراف بالنعم.</p>
         </div>
         
-        <!-- المحتوى الرئيسي -->
-        <div class="content-section">
-            
-            <!-- خطة الحفظ البسيطة -->
-            <div id="mind-map" class="hidden-content">
-                <div class="simple-mind-map">
-                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة الفاتحة</h2>
-                    
-                    <div class="map-step">
-                        <span class="step-number">١</span>
-                        <h3>اليوم الأول: الآيات ١-٣</h3>
-                        <p>حفظ: البسملة + الحمد لله رب العالمين + الرحمن الرحيم</p>
-                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
-                    </div>
-                    
-                    <div class="map-step">
-                        <span class="step-number">٢</span>
-                        <h3>اليوم الثاني: الآية ٤</h3>
-                        <p>حفظ: مالك يوم الدين</p>
-                        <p>مع التكرار اليومي للآيات السابقة</p>
-                        <p>⏰ الوقت المقترح: 10 دقائق</p>
-                    </div>
-                    
-                    <div class="map-step">
-                        <span class="step-number">٣</span>
-                        <h3>اليوم الثالث: الآيات ٥-٦</h3>
-                        <p>حفظ: إياك نعبد وإياك نستعين + اهدنا الصراط المستقيم</p>
-                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
-                    </div>
-                    
-                    <div class="map-step">
-                        <span class="step-number">٤</span>
-                        <h3>اليوم الرابع: الآية ٧</h3>
-                        <p>حفظ: صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين</p>
-                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
-                    </div>
-                    
-                    <div class="map-step">
-                        <span class="step-number">٥</span>
-                        <h3>اليوم الخامس: المراجعة</h3>
-                        <p>تسميع السورة كاملة ٣ مرات</p>
-                        <p>التدرب على التلاوة الصحيحة</p>
-                        <p>⏰ الوقت المقترح: 30 دقيقة</p>
-                    </div>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('mind-map')">
-                    إغلاق خطة الحفظ
-                </button>
-            </div>
-            
-            <!-- السورة كما في المصحف -->
-            <div id="quran-text" class="hidden-content">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h2 style="color: var(--quran-blue);">📖 سورة الفاتحة كما في المصحف</h2>
-                    <p style="color: #666; margin-top: 10px;">يمكنك القراءة والنقل منها</p>
-                </div>
-                
-                <div class="quran-text">
-                    <div class="verse">
-                        <div class="verse-number">١</div>
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٢</div>
-                        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٣</div>
-                        الرَّحْمَٰنِ الرَّحِيمِ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٤</div>
-                        مَالِكِ يَوْمِ الدِّينِ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٥</div>
-                        إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٦</div>
-                        اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-                    </div>
-                    
-                    <div class="verse">
-                        <div class="verse-number">٧</div>
-                        صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-                    </div>
-                </div>
-                
-                <!-- زر قسم التلاوة في المحتوى -->
-                <div class="tilaawa-section">
-                    <h3 class="section-title">🎵 للاستماع إلى التلاوة</h3>
-                    <p>اضغط على الزر للذهاب إلى قسم التلاوات بصوت مشاهير القراء</p>
-                    <a href="index.html" class="tilaawa-btn">
-                        🔊 قسم التلاوة
-                    </a>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('quran-text')">
-                    إغلاق السورة
-                </button>
-            </div>
-            
-            <!-- معلومات السورة -->
-            <div id="surah-info" class="hidden-content">
-                <div style="text-align: center; margin-bottom: 25px;">
-                    <h2 style="color: var(--quran-blue);">ℹ️ معلومات عن سورة الفاتحة</h2>
-                </div>
-                
-                <div class="surah-info-grid">
-                    <div class="info-box">
-                        <div class="info-label">رقم الصفحة في المصحف</div>
-                        <div class="info-value">1</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">نوع السورة</div>
-                        <div class="info-value">مكية</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">عدد الآيات</div>
-                        <div class="info-value">7 آيات</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">عدد الكلمات</div>
-                        <div class="info-value">25 كلمة</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">عدد الحروف</div>
-                        <div class="info-value">113 حرفاً</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">ترتيب النزول</div>
-                        <div class="info-value">5</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">ترتيب السورة</div>
-                        <div class="info-value">1</div>
-                    </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">مدة التلاوة</div>
-                        <div class="info-value">دقيقة واحدة</div>
-                    </div>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('surah-info')">
-                    إغلاق المعلومات
-                </button>
-            </div>
-            
-            <!-- قصة السورة -->
-            <div id="surah-story" class="hidden-content">
-                <div class="story-section">
-                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
-                        📖 قصة وفضائل سورة الفاتحة
-                    </h2>
-                    
-                    <h3 style="color: var(--quran-blue); margin-top: 15px;">✨ لماذا سميت بأم القرآن؟</h3>
-                    <p>لأنها تجمع معاني القرآن الكريم كله، وقد سماها النبي صلى الله عليه وسلم "أم القرآن" و"السبع المثاني".</p>
-                    
-                    <h3 style="color: var(--quran-blue); margin-top: 15px;">🎯 فضائلها العظيمة:</h3>
-                    <p>1. أعظم سورة في القرآن كما ورد في الحديث الصحيح</p>
-                    <p>2. لا تصح الصلاة بدون قراءتها</p>
-                    <p>3. تسمى بالشافية والكافية</p>
-                    <p>4. قراءتها عبادة وسبب لقبول الدعاء</p>
-                    
-                    <h3 style="color: var(--quran-blue); margin-top: 15px;">💡 سبب النزول:</h3>
-                    <p>نزلت سورة الفاتحة في مكة لتكون أساس الصلاة، وهي أول سورة نزلت كاملة.</p>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('surah-story')">
-                    إغلاق القصة
-                </button>
-            </div>
-            
-            <!-- اختبار الحفظ -->
-            <div id="quiz" class="hidden-content">
-                <div class="simple-quiz">
-                    <h2 style="color: var(--quran-blue); margin-bottom: 20px; text-align: center;">
-                        🧠 اختبار حفظ سورة الفاتحة
-                    </h2>
-                    
-                    <div id="quiz-container">
-                        <!-- الأسئلة ستظهر هنا -->
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="control-btn" onclick="submitQuiz()" style="background: var(--quran-green); color: white;">
-                            ✅ تصحيح الإجابات
-                        </button>
-                        <button class="control-btn" onclick="resetQuiz()" style="background: #6c757d; color: white; margin-right: 10px;">
-                            🔄 إعادة الاختبار
-                        </button>
-                    </div>
-                    
-                    <div id="quiz-result" class="result-box">
-                        <!-- نتيجة الاختبار ستظهر هنا -->
-                    </div>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('quiz')">
-                    إغلاق الاختبار
-                </button>
-            </div>
-            
-            <!-- أسئلة الفهم -->
-            <div id="understanding" class="hidden-content">
-                <div class="understanding-questions">
-                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
-                        💭 أسئلة فهم سورة الفاتحة
-                    </h2>
-                    
-                    <div id="understanding-container">
-                        <!-- الأسئلة ستظهر هنا -->
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a; color: #000;">
-                            📤 إرسال الإجابات
-                        </button>
-                        <button class="control-btn" onclick="resetUnderstanding()" style="background: #6c757d; color: white; margin-right: 10px;">
-                            🔄 أسئلة جديدة
-                        </button>
-                    </div>
-                    
-                    <div id="understanding-result" class="result-box">
-                        <!-- النتيجة ستظهر هنا -->
-                    </div>
-                </div>
-                
-                <button class="close-section-btn" onclick="hideSection('understanding')">
-                    إغلاق أسئلة الفهم
-                </button>
-            </div>
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية الثالثة: "الرَّحْمَٰنِ الرَّحِيمِ"</h3>
+            <p><strong>التفسير:</strong> توكيد صفة الرحمة بعد صفة الربوبية، ليعلَم العبد أن سيده رحيم به.</p>
+            <p><strong>الحكمة:</strong> الأمل في رحمة الله والتشجيع على التقرب إليه.</p>
         </div>
         
-        <!-- الفوتر -->
-        <div class="footer">
-            <div class="telegram-section">
-                <h3 style="margin-bottom: 15px;">📱 انضم إلى مجتمعنا</h3>
-                <p>انضم لمجموعة تلغرام الخاصة بمستخدمي الكتاب للاستفادة من:</p>
-                <p>• آخر التحديثات • نصائح الحفظ • مسابقات ودورات • دعم مباشر</p>
-                <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
-                    📲 انضم لمجموعة تلغرام
-                </a>
-            </div>
-            
-            <div class="copyright">
-                جميع الحقوق محفوظة © 2026 مكتبة إسلام عنابة
-                <br>
-                <small>القرآن التفاعلي - كتاب تتبع القرآن الكريم بخط اليد</small>
-            </div>
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية الرابعة: "مَالِكِ يَوْمِ الدِّينِ"</h3>
+            <p><strong>التفسير:</strong> الله هو المالك ليوم الجزاء، وهو اليوم الذي يُدين الله فيه العباد بأعمالهم.</p>
+            <p><strong>الحكمة:</strong> التذكير باليوم الآخر والاستعداد له.</p>
         </div>
-    </div>
-
-    <script>
-        // === البيانات ===
-        const memoryQuestions = [
-            {
-                question: "ما هي الآية الأولى في سورة الفاتحة؟",
-                options: ["بسم الله الرحمن الرحيم", "الحمد لله رب العالمين", "الرحمن الرحيم", "مالك يوم الدين"],
-                correct: 0,
-                explanation: "الآية الأولى هي: 'بسم الله الرحمن الرحيم'"
-            },
-            {
-                question: "كم عدد آيات سورة الفاتحة؟",
-                options: ["5 آيات", "6 آيات", "7 آيات", "8 آيات"],
-                correct: 2,
-                explanation: "سورة الفاتحة تتكون من 7 آيات"
-            },
-            {
-                question: "أكمل الآية: 'إياك نعبد و________'",
-                options: ["نخشى", "نستعين", "نرجو", "نخاف"],
-                correct: 1,
-                explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
-            },
-            {
-                question: "ما هي الآية التي تلي 'مالك يوم الدين'؟",
-                options: ["الحمد لله رب العالمين", "الرحمن الرحيم", "إياك نعبد وإياك نستعين", "اهدنا الصراط المستقيم"],
-                correct: 2,
-                explanation: "بعد 'مالك يوم الدين' تأتي 'إياك نعبد وإياك نستعين'"
-            },
-            {
-                question: "أكمل الآية: 'اهدنا الصراط ________'",
-                options: ["الواسع", "المستقيم", "الحق", "السهل"],
-                correct: 1,
-                explanation: "الآية الكاملة: 'اهدنا الصراط المستقيم'"
-            }
-        ];
         
-        const understandingQuestions = [
-            {
-                question: "لماذا سميت سورة الفاتحة بأم القرآن؟",
-                modelAnswer: "لأنها تجمع معاني القرآن الكريم كله، فهي تحتوي على الثناء على الله، وإثبات الربوبية والألوهية، والعبادة والاستعانة، وطلب الهداية إلى الصراط المستقيم."
-            },
-            {
-                question: "ما معنى 'الرحمن الرحيم' وما الفرق بينهما؟",
-                modelAnswer: "الرحمن: اسم يدل على سعة رحمة الله لجميع الخلق. الرحيم: اسم يدل على رحمة الله الخاصة بالمؤمنين."
-            },
-            {
-                question: "ما أهمية طلب الهداية في كل صلاة؟",
-                modelAnswer: "للتذكير بأن الهداية من الله، وللحاجة الدائمة إليها، وللتجديد الدائم للعزم على اتباع الحق."
-            }
-        ];
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية الخامسة: "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ"</h3>
+            <p><strong>التفسير:</strong> إخلاص العبادة لله وحده، والاستعانة به في جميع الأمور.</p>
+            <p><strong>الحكمة:</strong> تحقيق التوحيد والتوكل على الله.</p>
+        </div>
         
-        // === التحكم في الأقسام - تم التصحيح ===
-        let currentSection = null;
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding: 20px; background: white; border-radius: 8px;">
+            <h3 style="color: #2a9d8f;">الآية السادسة: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ"</h3>
+            <p><strong>التفسير:</strong> طلب الهداية إلى الطريق المستقيم، وهو الإسلام والالتزام بشرع الله.</p>
+            <p><strong>الحكمة:</strong> الحاجة الدائمة لهداية الله في كل لحظة.</p>
+        </div>
         
-        function showSection(sectionId) {
-            // إخفاء القسم الحالي إذا كان مفتوحاً
-            if (currentSection) {
-                hideSection(currentSection);
-            }
-            
-            // إظهار القسم الجديد
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('visible');
-                currentSection = sectionId;
-                
-                // التمرير للقسم
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // تهيئة المحتوى إذا لزم
-                if (sectionId === 'quiz') {
-                    initQuiz();
-                } else if (sectionId === 'understanding') {
-                    initUnderstanding();
-                }
-            }
-        }
-        
-        function hideSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.remove('visible');
-                if (currentSection === sectionId) {
-                    currentSection = null;
-                }
-            }
-        }
-        
-        // === اختبار الحفظ - تم التصحيح ===
-        let currentQuizQuestions = [];
-        let userQuizAnswers = [];
-        let currentQuizIndex = 0;
-        let quizSubmitted = false;
-        
-        function initQuiz() {
-            // اختيار 3 أسئلة عشوائية
-            currentQuizQuestions = [...memoryQuestions]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 3);
-            
-            currentQuizIndex = 0;
-            quizSubmitted = false;
-            userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
-            
-            displayQuizQuestion();
-            
-            // إخفاء نتيجة سابقة
-            const resultBox = document.getElementById('quiz-result');
-            if (resultBox) {
-                resultBox.classList.remove('visible');
-            }
-        }
-        
-        function displayQuizQuestion() {
-            const container = document.getElementById('quiz-container');
-            if (!container) return;
-            
-            if (currentQuizIndex >= currentQuizQuestions.length) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <div style="font-size: 3rem;">✅</div>
-                        <h3 style="color: var(--quran-green);">اكتمل الاختبار</h3>
-                        <p>اضغط على زر "تصحيح الإجابات" لمعرفة نتيجتك</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const question = currentQuizQuestions[currentQuizIndex];
-            let optionsHTML = '';
-            const letters = ['أ', 'ب', 'ج', 'د'];
-            
-            question.options.forEach((option, index) => {
-                const isSelected = userQuizAnswers[currentQuizIndex] === index;
-                const isCorrect = quizSubmitted && index === question.correct;
-                const isWrong = quizSubmitted && userQuizAnswers[currentQuizIndex] === index && index !== question.correct;
-                
-                let className = 'answer-btn';
-                if (isSelected) className += ' selected';
-                if (isCorrect) className += ' selected';
-                if (isWrong) className += ' wrong';
-                
-                optionsHTML += `
-                    <div class="${className}" 
-                         onclick="selectQuizAnswer(${index})">
-                         ${letters[index]}. ${option}
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = `
-                <div class="quiz-question">
-                    <h3>السؤال ${currentQuizIndex + 1}: ${question.question}</h3>
-                    <div class="answer-buttons">
-                        ${optionsHTML}
-                    </div>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                    <button class="control-btn" onclick="prevQuizQuestion()" 
-                            ${currentQuizIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
-                        ◀️ السابق
-                    </button>
-                    <button class="control-btn" onclick="nextQuizQuestion()">
-                        ${currentQuizIndex === currentQuizQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
-                    </button>
-                </div>
-            `;
-        }
-        
-        function selectQuizAnswer(answerIndex) {
-            if (!quizSubmitted) {
-                userQuizAnswers[currentQuizIndex] = answerIndex;
-                displayQuizQuestion();
-            }
-        }
-        
-        function nextQuizQuestion() {
-            if (currentQuizIndex < currentQuizQuestions.length - 1) {
-                currentQuizIndex++;
-                displayQuizQuestion();
-            } else {
-                currentQuizIndex = currentQuizQuestions.length;
-                displayQuizQuestion();
-            }
-        }
-        
-        function prevQuizQuestion() {
-            if (currentQuizIndex > 0) {
-                currentQuizIndex--;
-                displayQuizQuestion();
-            }
-        }
-        
-        function submitQuiz() {
-            quizSubmitted = true;
-            let score = 0;
-            let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
-            
-            currentQuizQuestions.forEach((question, index) => {
-                const userAnswer = userQuizAnswers[index];
-                const isCorrect = userAnswer === question.correct;
-                
-                if (isCorrect) score++;
-                
-                resultsHTML += `
-                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
-                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
-                        <strong>إجابتك:</strong> ${userAnswer !== null ? question.options[userAnswer] : 'لم تجب'}<br>
-                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correct]}<br>
-                        <em>${question.explanation}</em>
-                    </div>
-                `;
-            });
-            
-            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
-            let message = '';
-            let emoji = '';
-            
-            if (percentage >= 90) {
-                message = 'ممتاز! إتقان تام للسورة';
-                emoji = '🎉';
-            } else if (percentage >= 70) {
-                message = 'جيد جداً، مستوى ممتاز';
-                emoji = '👍';
-            } else if (percentage >= 50) {
-                message = 'مقبول، يحتاج مراجعة بسيطة';
-                emoji = '💪';
-            } else {
-                message = 'راجع السورة مرة أخرى';
-                emoji = '📚';
-            }
-            
-            resultsHTML += `
-                <div style="background: var(--quran-green); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                    <h4>${emoji} ${message}</h4>
-                    <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
-                    <p>النسبة: ${percentage}%</p>
-                </div>
-            `;
-            
-            const resultBox = document.getElementById('quiz-result');
-            if (resultBox) {
-                resultBox.innerHTML = resultsHTML;
-                resultBox.classList.add('visible');
-            }
-            
-            // عرض التفسير الصحيح للأسئلة
-            displayQuizQuestion();
-        }
-        
-        function resetQuiz() {
-            initQuiz();
-        }
-        
-        // === أسئلة الفهم - تم التصحيح ===
-        let currentUnderstandingQuestions = [];
-        let userUnderstandingAnswers = [];
-        let currentUnderstandingIndex = 0;
-        
-        function initUnderstanding() {
-            // اختيار 2 سؤال عشوائي
-            currentUnderstandingQuestions = [...understandingQuestions]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 2);
-            
-            currentUnderstandingIndex = 0;
-            userUnderstandingAnswers = new Array(currentUnderstandingQuestions.length).fill('');
-            
-            displayUnderstandingQuestion();
-            
-            // إخفاء نتيجة سابقة
-            const resultBox = document.getElementById('understanding-result');
-            if (resultBox) {
-                resultBox.classList.remove('visible');
-            }
-        }
-        
-        function displayUnderstandingQuestion() {
-            const container = document.getElementById('understanding-container');
-            if (!container) return;
-            
-            if (currentUnderstandingIndex >= currentUnderstandingQuestions.length) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 30px;">
-                        <div style="font-size: 3rem;">📝</div>
-                        <h3 style="color: #e67700;">اكتملت الأسئلة</h3>
-                        <p>اضغط على زر "إرسال الإجابات"</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const question = currentUnderstandingQuestions[currentUnderstandingIndex];
-            
-            container.innerHTML = `
-                <div class="quiz-question">
-                    <h3>السؤال ${currentUnderstandingIndex + 1}: ${question.question}</h3>
-                    <textarea class="answer-input" 
-                              placeholder="اكتب إجابتك هنا..."
-                              oninput="saveUnderstandingAnswer(this.value)"
-                              id="understanding-answer-${currentUnderstandingIndex}">${userUnderstandingAnswers[currentUnderstandingIndex]}</textarea>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                    <button class="control-btn" onclick="prevUnderstandingQuestion()" 
-                            ${currentUnderstandingIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
-                        ◀️ السابق
-                    </button>
-                    <button class="control-btn" onclick="nextUnderstandingQuestion()">
-                        ${currentUnderstandingIndex === currentUnderstandingQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
-                    </button>
-                </div>
-            `;
-        }
-        
-        function saveUnderstandingAnswer(value) {
-            userUnderstandingAnswers[currentUnderstandingIndex] = value;
-        }
-        
-        function nextUnderstandingQuestion() {
-            if (currentUnderstandingIndex < currentUnderstandingQuestions.length - 1) {
-                currentUnderstandingIndex++;
-                displayUnderstandingQuestion();
-            } else {
-                currentUnderstandingIndex = currentUnderstandingQuestions.length;
-                displayUnderstandingQuestion();
-            }
-        }
-        
-        function prevUnderstandingQuestion() {
-            if (currentUnderstandingIndex > 0) {
-                currentUnderstandingIndex--;
-                displayUnderstandingQuestion();
-            }
-        }
-        
-        function submitUnderstanding() {
-            let resultsHTML = '<h3>📝 تقييم إجاباتك</h3>';
-            
-            currentUnderstandingQuestions.forEach((question, index) => {
-                const userAnswer = userUnderstandingAnswers[index] || 'لم تجب على هذا السؤال';
-                
-                resultsHTML += `
-                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
-                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br><br>
-                        <strong>📝 إجابتك:</strong><br>
-                        <div style="background: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
-                            ${userAnswer}
-                        </div>
-                        <strong>✅ الإجابة النموذجية:</strong><br>
-                        <div style="background: #d4edda; padding: 10px; border-radius: 5px; margin: 10px 0;">
-                            ${question.modelAnswer}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            resultsHTML += `
-                <div style="background: #e9c46a; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                    <h4>🎯 نصائح للتحسين:</h4>
-                    <p>• قارن إجاباتك بالإجابات النموذجية</p>
-                    <p>• راجع تفسير السورة بشكل متعمق</p>
-                    <p>• استمع لشروحات العلماء عن معاني السورة</p>
-                    <p>• ناقش الأسئلة مع معلم أو صديق</p>
-                </div>
-            `;
-            
-            const resultBox = document.getElementById('understanding-result');
-            if (resultBox) {
-                resultBox.innerHTML = resultsHTML;
-                resultBox.classList.add('visible');
-            }
-        }
-        
-        function resetUnderstanding() {
-            initUnderstanding();
-        }
-        
-        // === تهيئة الصفحة ===
-        document.addEventListener('DOMContentLoaded', function() {
-            // إضافة حدث النقر على الأزرار
-            document.querySelectorAll('.control-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // التأكد من أن الزر له وظيفة
-                    if (this.getAttribute('onclick')) {
-                        // السماح للحدث بالتنفيذ
-                        return true;
-                    }
-                });
-            });
-            
-            // التأكد من أن جميع العناصر موجودة
-            console.log('تهيئة الصفحة مكتملة');
-        });
-    </script>
-</body>
-</html>
+        <div class="tafsir-verse" style="margin-bottom: 25px; padding
