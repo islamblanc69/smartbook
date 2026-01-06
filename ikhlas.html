@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الكتاب الذكي - سورة الإخلاص</title>
+    <title>سورة الإخلاص - الكتاب الذكي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -29,15 +29,15 @@
     <div class="surah-name">سورة الإخلاص</div>
 
     <div class="video-box">
-        <iframe id="mainPlayer" src="http://www.youtube.com/watch?v=skwZnEfde0c" allowfullscreen></iframe>
+        <iframe id="mainPlayer" src="https://www.youtube.com/watch?v=skwZnEfde0c" allowfullscreen></iframe>
     </div>
 
     <div class="card">
         <div class="card-header" onclick="toggle(this)" style="color: var(--accent-kids);">🧒 ركن الأشبال <span>▼</span></div>
         <div class="card-content">
             <div class="inner-grid">
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=skwZnEfde0c')">🎤 معلم الأطفال</button>
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=IVCvoAdLyWE')">🎬 تفسير أطفالنا</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=skwZnEfde0c')">🎤 معلم الأطفال</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=IVCvoAdLyWE')">🎬 تفسير أطفالنا</button>
             </div>
         </div>
     </div>
@@ -46,22 +46,21 @@
         <div class="card-header" onclick="toggle(this)" style="color: var(--accent-adults);">🧔 ركن الكبار <span>▼</span></div>
         <div class="card-content">
             <div class="inner-grid">
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=kBExcp2xIC8')">القارئ فارس عباد</button>
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=0g3rIVJNRt4')">ياسين الجزائري</button>
-                <button class="btn full" onclick="smartPlay('http://www.youtube.com/watch?v=by12E-0i7qI')">الشيخ محمود خليل الحصري</button>
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=OquUdWeXbVc')">🔁 تكرار (حفص)</button>
-                <button class="btn" onclick="smartPlay('http://www.youtube.com/watch?v=38TA9CGimns')">🔁 تكرار (ورش)</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=7RdYdlwzJvg')">القارئ فارس عباد</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=0g3rIVJNRt4')">ياسين الجزائري</button>
+                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=by12E-0i7qI')">الشيخ محمود خليل الحصري</button>
+                
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=kBExcp2xIC8')">🔁 تكرار (فارس عباد)</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=15TJI-2WvMs')">🔁 تكرار (ياسين الجزائري)</button>
             </div>
         </div>
     </div>
 
     <button class="done-btn" onclick="finish()">تم الحفظ بنجاح 🎊</button>
-
     <footer>جميع الحقوق محفوظة لدى مكتبة اسلام 2026</footer>
 </div>
 
 <script>
-    // العفسة الذكية لتحويل أي رابط يوتيوب ليعمل في embed
     function getEmbedUrl(url) {
         let videoId = "";
         try {
@@ -69,10 +68,9 @@
                 videoId = url.split("v=")[1].split("&")[0];
             } else if (url.includes("youtu.be/")) {
                 videoId = url.split("youtu.be/")[1].split("?")[0];
-            } else if (url.includes("youtube.com/embed/")) {
+            } else if (url.includes("embed/")) {
                 return url;
             } else {
-                // محاولة أخيرة لو كان الكود فقط
                 videoId = url.split('/').pop();
             }
         } catch(e) { videoId = url; }
@@ -93,7 +91,6 @@
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
     }
 
-    // تشغيل التحويل عند أول تحميل للصفحة لضمان عمل فيديو البداية
     window.onload = () => {
         const player = document.getElementById('mainPlayer');
         player.src = getEmbedUrl(player.src);
