@@ -14,6 +14,7 @@
             --accent-gold: #fbbf24;
             --accent-kids: #f472b6;
             --accent-adults: #34d399;
+            --telegram-blue: #0088cc;
         }
 
         body {
@@ -22,17 +23,15 @@
             font-family: 'Tajawal', sans-serif;
             margin: 0;
             min-height: 100vh;
-            padding-bottom: 50px;
+            padding-bottom: 20px;
         }
 
         .container { padding: 20px; max-width: 600px; margin: 0 auto; }
 
-        /* الهيدر */
         .header { text-align: center; padding: 30px 0; }
         .logo { width: 80px; height: 80px; border-radius: 22px; margin-bottom: 15px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); border: 2px solid var(--accent-gold); }
         .header h1 { font-family: 'Amiri', serif; font-size: 2.5rem; margin: 0; color: var(--accent-gold); }
 
-        /* مشغل الفيديو */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
@@ -45,7 +44,6 @@
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* البطاقات */
         .section-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -66,7 +64,6 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* الأزرار */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         
         .btn {
@@ -83,6 +80,7 @@
             justify-content: center;
             gap: 8px;
             font-size: 0.95rem;
+            text-decoration: none;
         }
 
         .btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); border-color: var(--accent-gold); }
@@ -93,8 +91,7 @@
 
         .label-sm { grid-column: span 2; font-size: 0.8rem; color: #94a3b8; margin-top: 10px; text-align: right; }
 
-        /* زر الإنجاز */
-        .done-section { text-align: center; margin-top: 30px; }
+        .done-section { text-align: center; margin-top: 30px; margin-bottom: 40px; }
         .done-btn {
             background: var(--accent-adults);
             color: #064e3b;
@@ -108,6 +105,31 @@
             box-shadow: 0 10px 20px rgba(52, 211, 153, 0.2);
         }
         .done-btn.active { background: var(--accent-gold); color: #78350f; }
+
+        /* تذييل الصفحة */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer p { font-size: 0.85rem; color: #94a3b8; margin: 5px 0; }
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 136, 204, 0.1);
+            color: var(--telegram-blue);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border: 1px solid rgba(0, 136, 204, 0.2);
+            transition: 0.3s;
+        }
+        .tg-link:hover { background: var(--telegram-blue); color: white; }
 
     </style>
 </head>
@@ -126,7 +148,7 @@
     <div class="section-card">
         <div class="section-title" style="color: var(--accent-kids);">🧒 ركن الأشبال</div>
         <div class="grid">
-            <button class="btn btn-kids" onclick="load('CHuzxjvc_xI')">🎤 المنشاوي معلم</button>
+            <button class="btn btn-kids" onclick="load('CHuzxjvc_xI')">🎤 معلم الأطفال</button>
             <button class="btn btn-kids" onclick="load('_z8FzYCU1FM')">🎬 تفسير أطفالنا</button>
         </div>
     </div>
@@ -135,23 +157,31 @@
         <div class="section-title" style="color: var(--accent-adults);">🧔 ركن الكبار</div>
         <div class="grid">
             <div class="label-sm">الاستماع للقراءات</div>
-            <button class="btn btn-adults" onclick="load('QRnSYpl9Axo')">حفص - عباد</button>
-            <button class="btn btn-adults" onclick="load('SA0GPRxNDus')">ورش - ياسين</button>
-            <button class="btn btn-adults btn-full" onclick="load('-cF2DWuNB1E')">ورش - الحصري</button>
+            <button class="btn btn-adults" onclick="load('QRnSYpl9Axo')">القارئ فارس عباد</button>
+            <button class="btn btn-adults" onclick="load('SA0GPRxNDus')">القارئ ياسين الجزائري</button>
+            <button class="btn btn-adults btn-full" onclick="load('-cF2DWuNB1E')">الشيخ محمود خليل الحصري</button>
             
             <div class="label-sm">تكرار الحفظ</div>
-            <button class="btn btn-adults" onclick="load('wCJJssWWPNc')">🔁 تكرار حفص</button>
-            <button class="btn btn-adults" onclick="load('88GnucV9_wU')">🔁 تكرار ورش</button>
+            <button class="btn btn-adults" onclick="load('wCJJssWWPNc')">🔁 تكرار (حفص)</button>
+            <button class="btn btn-adults" onclick="load('88GnucV9_wU')">🔁 تكرار (ورش)</button>
         </div>
     </div>
 
     <div class="done-section">
         <button id="finish" class="done-btn" onclick="finish()">تم الحفظ بنجاح 🎊</button>
     </div>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة لدى مكتبة اسلام 2026</p>
+        <a href="https://t.me/smartbookislam" target="_blank" class="tg-link">
+            <span>انضم لمجموعة التليجرام</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.39.52-.46-.01-1.33-.26-1.98-.48-.8-.27-1.43-.42-1.37-.89.03-.25.38-.51 1.03-.78 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.18z"/></svg>
+        </a>
+    </footer>
 </div>
 
 <script>
-    const sid = "masad_glass_v1";
+    const sid = "masad_glass_v2";
     
     function load(id) {
         document.getElementById('tv').src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
