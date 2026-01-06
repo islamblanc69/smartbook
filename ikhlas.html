@@ -1,188 +1,28 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة الإخلاص - الكتاب الذكي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <style>
-        /* ... (الستايل كامل كما هو سابقاً، بدون تغيير) ... */
-        :root { 
-            --bg: #0f172a; 
-            --gold: #fbbf24; 
-            --accent-kids: #f472b6; 
-            --accent-adults: #34d399; 
-        }
-        
-        body { 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
-            color: #f8fafc; 
-            font-family: 'Tajawal', sans-serif; 
-            margin: 0; 
-            padding: 20px; 
-            text-align: center; 
-            min-height: 100vh;
-        }
-        
-        /* باقي الستايل كما هو */
-        /* ... (انسخ كل الـ CSS السابق هنا بدون تغيير) ... */
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <!-- الرأس مع اللوغو والعنوان -->
-    <div class="header">
-        <div class="logo-container">
-            <div class="logo-circle">
-                <div class="logo-fallback">📖</div>
-            </div>
-        </div>
-        <div class="title-container">
-            <h1 class="main-title">الكتاب الذكي لحفظ القرآن الكريم</h1>
-            <p class="subtitle">منصة تفاعلية لتسهيل حفظ ومراجعة القرآن</p>
-        </div>
-    </div>
-
-    <div class="surah-name">سورة الإخلاص</div>
-
-    <div class="video-box" id="playerContainer">
-        <div class="video-placeholder" id="placeholder" onclick="alert('اختر القارئ من الأسفل للبدء')">
-            <div class="play-icon">▶</div>
-            <div>اختر القارئ وابدأ الحفظ</div>
-        </div>
-        <iframe id="mainPlayer" allowfullscreen></iframe>
-    </div>
-
-    <div class="card">
-        <div class="card-header" onclick="toggle(this)" style="color: var(--accent-kids);">
-            <i class="fas fa-child"></i> ركن الأشبال <span>▼</span>
-        </div>
-        <div class="card-content">
-            <div class="inner-grid">
-                <!-- روابط الأطفال بالعربية -->
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=OH74taV8wRE')">
-                    <i class="fas fa-microphone"></i> معلم الأطفال (قناة داوود)
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=_b298t5yXsE')">
-                    <i class="fas fa-video"></i> تفسير للأطفال
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header" onclick="toggle(this)" style="color: var(--accent-adults);">
-            <i class="fas fa-user"></i> ركن الكبار <span>▼</span>
-        </div>
-        <div class="card-content">
-            <div class="inner-grid">
-                <!-- روابط الكبار بالعربية -->
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=qItMu6PL36Y')">
-                    <i class="fas fa-user-tie"></i> فارس عباد
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=eVq9aDvfTqE')">
-                    <i class="fas fa-user-tie"></i> ياسر الدوسري
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Pi4Hf6Dskgw')">
-                    <i class="fas fa-user-tie"></i> محمود خليل الحصري (معلم)
-                </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=OquUdWeXbVc')">
-                    <i class="fas fa-redo"></i> تكرار للحفظ (30 دقيقة)
-                </button>
-                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=7uTOLRHkXlU')">
-                    <i class="fas fa-play-circle"></i> تفسير السورة
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- باقي الكود كما هو (الستاتوس، الكنترولز، الفوتر، والسكريبت) -->
-
-    <div class="status-container">
-        <button class="toggle-done" id="doneBtn" onclick="toggleProgress()">
-            <div class="checkbox-circle" id="checkIcon"></div>
-            <span id="btnText">تحديد كـ "تم الحفظ"</span>
-        </button>
-    </div>
-
-    <div class="controls">
-        <button class="control-btn reset" onclick="resetAllData()">
-            <i class="fas fa-redo"></i>
-            <span>إعادة الصفحة من الصفر</span>
-        </button>
-    </div>
-
-    <footer>
-        <i class="fas fa-book"></i> جميع الحقوق محفوظة لدى مكتبة اسلام 2026
-    </footer>
+<!-- داخل ركن الأشبال -->
+<div class="inner-grid">
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=rnUD9qGuCeM')">
+        <i class="fas fa-microphone"></i> معلم الأطفال (الحصري مع ترديد الأطفال)
+    </button>
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=_b298t5yXsE')">
+        <i class="fas fa-video"></i> تفسير للأطفال
+    </button>
 </div>
 
-<script>
-    /* ... (كل السكريبت السابق كما هو بدون تغيير) ... */
-    // الحصول على اسم السورة
-    function getCurrentSurahId() {
-        const path = window.location.pathname;
-        const filename = path.split('/').pop().toLowerCase();
-        
-        if (filename.includes('ikhlas')) return 'ikhlas';
-        if (filename.includes('nas')) return 'nas';
-        if (filename.includes('falaq')) return 'falaq';
-        if (filename.includes('fatiha')) return 'fatiha';
-        return 'ikhlas';
-    }
-
-    // دالة لتحويل أي رابط يوتيوب تلقائياً
-    function convertToEmbedUrl(anyUrl) {
-        let videoId = "";
-        
-        let cleanUrl = anyUrl.split('&')[0];
-        
-        try {
-            if (cleanUrl.includes("youtube.com/watch?v=")) {
-                videoId = cleanUrl.split("v=")[1];
-            }
-            else if (cleanUrl.includes("youtu.be/")) {
-                videoId = cleanUrl.split("youtu.be/")[1];
-            }
-            else if (cleanUrl.includes("youtube.com/embed/")) {
-                videoId = cleanUrl.split("embed/")[1];
-            }
-            else if (cleanUrl.includes("youtube.com/v/")) {
-                videoId = cleanUrl.split("v/")[1];
-            }
-            else {
-                videoId = cleanUrl;
-            }
-            
-            videoId = videoId.split('?')[0];
-            videoId = videoId.split('&')[0];
-            videoId = videoId.split('/')[0];
-            
-        } catch(e) { 
-            console.log("خطأ في تحويل الرابط:", e);
-            videoId = anyUrl; 
-        }
-        
-        return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-    }
-
-    function smartPlay(originalUrl) {
-        const player = document.getElementById('mainPlayer');
-        const placeholder = document.getElementById('placeholder');
-        
-        const embedUrl = convertToEmbedUrl(originalUrl);
-        
-        player.src = embedUrl;
-        player.style.display = 'block';
-        placeholder.style.display = 'none';
-        window.scrollTo({top: 50, behavior: 'smooth'});
-    }
-
-    /* ... (باقي السكريبت كاملاً كما في الكود الأصلي) ... */
-</script>
-
-</body>
-</html>
+<!-- داخل ركن الكبار -->
+<div class="inner-grid">
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=qItMu6PL36Y')">
+        <i class="fas fa-user-tie"></i> فارس عباد
+    </button>
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=rOWzxz2AUWs')">
+        <i class="fas fa-user-tie"></i> ياسين الجزائري
+    </button>
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Pi4Hf6Dskgw')">
+        <i class="fas fa-user-tie"></i> محمود الحصري (معلم)
+    </button>
+    <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=h4FpCYSSYiA')">
+        <i class="fas fa-redo"></i> تكرار للحفظ (ياسين الجزائري مكررة)
+    </button>
+    <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=7uTOLRHkXlU')">
+        <i class="fas fa-play-circle"></i> تفسير السورة
+    </button>
+</div>
