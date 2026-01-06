@@ -12,7 +12,6 @@
         .container { max-width: 600px; margin: 0 auto; }
         .surah-name { font-family: 'Amiri', serif; font-size: 2.8rem; color: var(--gold); margin: 10px 0; }
         
-        /* مشغل الفيديو مع واجهة الانتظار */
         .video-box { 
             width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; 
             box-shadow: 0 15px 40px rgba(0,0,0,0.5); background: #000; margin-bottom: 25px; 
@@ -32,7 +31,34 @@
         .btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 14px; color: #fff; cursor: pointer; font-weight: 600; font-family: inherit; }
         .full { grid-column: span 2; }
         
-        .done-btn { background: var(--accent-adults); color: #064e3b; border: none; padding: 18px 50px; border-radius: 100px; font-weight: 900; cursor: pointer; margin-top: 20px; width: 100%; }
+        /* ستايل زر المتابعة الجديد (التكشية) */
+        .status-container { margin-top: 20px; }
+        .toggle-done {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 18px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .toggle-done.completed {
+            background: var(--accent-adults);
+            color: #064e3b;
+            border-color: #34d399;
+        }
+        .checkbox-circle {
+            width: 25px; height: 25px; border: 2px solid currentColor; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 14px;
+        }
+
         footer { margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; color: #94a3b8; }
     </style>
 </head>
@@ -53,8 +79,8 @@
         <div class="card-header" onclick="toggle(this)" style="color: var(--accent-kids);">🧒 ركن الأشبال <span>▼</span></div>
         <div class="card-content">
             <div class="inner-grid">
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=skwZnEfde0c')">🎤 معلم الأطفال</button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=IVCvoAdLyWE')">🎬 تفسير أطفالنا</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=uzV2UvD-Afs')">🎤 معلم الأطفال</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=5rY6U6A0uVw')">🎬 تفسير أطفالنا</button>
             </div>
         </div>
     </div>
@@ -63,17 +89,23 @@
         <div class="card-header" onclick="toggle(this)" style="color: var(--accent-adults);">🧔 ركن الكبار <span>▼</span></div>
         <div class="card-content">
             <div class="inner-grid">
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=kBExcp2xIC8')">القارئ فارس عباد</button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=0g3rIVJNRt4')">ياسين الجزائري</button>
-                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=by12E-0i7qI')">الشيخ محمود خليل الحصري</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=n8f_A6vT3vM')">القارئ فارس عباد</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=v7zC6yN7L0k')">ياسين الجزائري</button>
+                <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=4zCqI0-tK5U')">الشيخ محمود خليل الحصري</button>
                 
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=kBExcp2xIC8')">🔁 تكرار (فارس عباد)</button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=15TJI-2WvMs')">🔁 تكرار (ياسين الجزائري)</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=9I-m-3vC-U4')">🔁 تكرار (فارس عباد)</button>
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=v7zC6yN7L0k&loop=1')">🔁 تكرار (ياسين الجزائري)</button>
             </div>
         </div>
     </div>
 
-    <button class="done-btn" onclick="celebrate()">تم الحفظ بنجاح 🎊</button>
+    <div class="status-container">
+        <button class="toggle-done" id="doneBtn" onclick="toggleProgress()">
+            <div class="checkbox-circle" id="checkIcon"></div>
+            <span id="btnText">تحديد كـ "تم الحفظ"</span>
+        </button>
+    </div>
+
     <footer>جميع الحقوق محفوظة لدى مكتبة اسلام 2026</footer>
 </div>
 
@@ -83,6 +115,8 @@
         try {
             if (url.includes("v=")) {
                 videoId = url.split("v=")[1].split("&")[0];
+            } else if (url.includes("youtu.be/")) {
+                videoId = url.split("youtu.be/")[1].split("?")[0];
             } else {
                 videoId = url.split('/').pop();
             }
@@ -106,9 +140,22 @@
         content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
     }
 
-    function celebrate() {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
-        alert("مبارك! تم تسجيل حفظ سورة الإخلاص ✅");
+    // دالة المتابعة الجديدة (Toggle)
+    function toggleProgress() {
+        const btn = document.getElementById('doneBtn');
+        const icon = document.getElementById('checkIcon');
+        const text = document.getElementById('btnText');
+        
+        btn.classList.toggle('completed');
+        
+        if (btn.classList.contains('completed')) {
+            icon.innerHTML = "✔";
+            text.innerHTML = "تم الحفظ بنجاح";
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        } else {
+            icon.innerHTML = "";
+            text.innerHTML = "تحديد كـ 'تم الحفظ'";
+        }
     }
 </script>
 
