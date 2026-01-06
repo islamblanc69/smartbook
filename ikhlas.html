@@ -94,7 +94,7 @@
             padding: 25px;
         }
         
-        /* الخريطة الذهنية البسيطة */
+        /* خطة الحفظ البسيطة */
         .simple-mind-map {
             background: #f0f9f7;
             padding: 25px;
@@ -170,8 +170,8 @@
             font-size: 1.1rem;
         }
         
-        /* قسم السمعي البصري */
-        .audio-visual-section {
+        /* زر قسم التلاوة */
+        .tilaawa-section {
             background: #e8f4f8;
             padding: 25px;
             border-radius: 10px;
@@ -185,7 +185,7 @@
             font-size: 1.3rem;
         }
         
-        .listen-btn {
+        .tilaawa-btn {
             display: inline-block;
             padding: 18px 40px;
             background: linear-gradient(135deg, var(--quran-green) 0%, var(--quran-blue) 100%);
@@ -199,7 +199,7 @@
             box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
         }
         
-        .listen-btn:hover {
+        .tilaawa-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(42, 157, 143, 0.4);
         }
@@ -248,6 +248,12 @@
             background: #d4edda;
             border-color: #28a745;
             color: #155724;
+        }
+        
+        .answer-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
         }
         
         /* معلومات السورة */
@@ -364,6 +370,14 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        
+        /* قصة السورة */
+        .story-section {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ffd43b;
+        }
     </style>
 </head>
 <body>
@@ -386,6 +400,9 @@
                 <button class="control-btn" onclick="showSection('surah-info')">
                     <span>ℹ️</span> معلومات السورة
                 </button>
+                <button class="control-btn" onclick="showSection('surah-story')">
+                    <span>📖</span> قصة السورة
+                </button>
                 <button class="control-btn" onclick="showSection('quiz')">
                     <span>🧠</span> اختبار الحفظ
                 </button>
@@ -407,6 +424,7 @@
                         <span class="step-number">١</span>
                         <h3>اليوم الأول: الآيات ١-٣</h3>
                         <p>حفظ: البسملة + الحمد لله رب العالمين + الرحمن الرحيم</p>
+                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
                     </div>
                     
                     <div class="map-step">
@@ -414,18 +432,21 @@
                         <h3>اليوم الثاني: الآية ٤</h3>
                         <p>حفظ: مالك يوم الدين</p>
                         <p>مع التكرار اليومي للآيات السابقة</p>
+                        <p>⏰ الوقت المقترح: 10 دقائق</p>
                     </div>
                     
                     <div class="map-step">
                         <span class="step-number">٣</span>
                         <h3>اليوم الثالث: الآيات ٥-٦</h3>
                         <p>حفظ: إياك نعبد وإياك نستعين + اهدنا الصراط المستقيم</p>
+                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
                     </div>
                     
                     <div class="map-step">
                         <span class="step-number">٤</span>
                         <h3>اليوم الرابع: الآية ٧</h3>
                         <p>حفظ: صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين</p>
+                        <p>⏰ الوقت المقترح: 15 دقيقة</p>
                     </div>
                     
                     <div class="map-step">
@@ -433,6 +454,7 @@
                         <h3>اليوم الخامس: المراجعة</h3>
                         <p>تسميع السورة كاملة ٣ مرات</p>
                         <p>التدرب على التلاوة الصحيحة</p>
+                        <p>⏰ الوقت المقترح: 30 دقيقة</p>
                     </div>
                 </div>
                 
@@ -485,11 +507,12 @@
                     </div>
                 </div>
                 
-                <div class="audio-visual-section">
-                    <h3 class="section-title">🎧 للاستماع إلى التلاوة</h3>
-                    <p>اضغط على الزر للذهاب إلى صفحة التلاوات بصوت مشاهير القراء</p>
-                    <a href="index.html" class="listen-btn">
-                        🔊 قسم السمعي البصري
+                <!-- زر قسم التلاوة -->
+                <div class="tilaawa-section">
+                    <h3 class="section-title">🎵 للاستماع إلى التلاوة</h3>
+                    <p>اضغط على الزر للذهاب إلى قسم التلاوات بصوت مشاهير القراء</p>
+                    <a href="index.html" class="tilaawa-btn">
+                        🔊 قسم التلاوة
                     </a>
                 </div>
                 
@@ -526,6 +549,11 @@
                     </div>
                     
                     <div class="info-box">
+                        <div class="info-label">عدد الحروف</div>
+                        <div class="info-value">113 حرفاً</div>
+                    </div>
+                    
+                    <div class="info-box">
                         <div class="info-label">ترتيب النزول</div>
                         <div class="info-value">5</div>
                     </div>
@@ -539,15 +567,35 @@
                         <div class="info-label">مدة التلاوة</div>
                         <div class="info-value">دقيقة واحدة</div>
                     </div>
-                    
-                    <div class="info-box">
-                        <div class="info-label">الأسماء الأخرى</div>
-                        <div class="info-value">أم القرآن<br>السبع المثاني</div>
-                    </div>
                 </div>
                 
                 <button class="close-section-btn" onclick="hideSection('surah-info')">
                     إغلاق المعلومات
+                </button>
+            </div>
+            
+            <!-- قصة السورة -->
+            <div id="surah-story" class="hidden-content">
+                <div class="story-section">
+                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
+                        📖 قصة وفضائل سورة الفاتحة
+                    </h2>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">✨ لماذا سميت بأم القرآن؟</h3>
+                    <p>لأنها تجمع معاني القرآن الكريم كله، وقد سماها النبي صلى الله عليه وسلم "أم القرآن" و"السبع المثاني".</p>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">🎯 فضائلها العظيمة:</h3>
+                    <p>1. أعظم سورة في القرآن كما ورد في الحديث الصحيح</p>
+                    <p>2. لا تصح الصلاة بدون قراءتها</p>
+                    <p>3. تسمى بالشافية والكافية</p>
+                    <p>4. قراءتها عبادة وسبب لقبول الدعاء</p>
+                    
+                    <h3 style="color: var(--quran-blue); margin-top: 15px;">💡 سبب النزول:</h3>
+                    <p>نزلت سورة الفاتحة في مكة لتكون أساس الصلاة، وهي أول سورة نزلت كاملة.</p>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('surah-story')">
+                    إغلاق القصة
                 </button>
             </div>
             
@@ -565,6 +613,9 @@
                     <div style="text-align: center; margin-top: 20px;">
                         <button class="control-btn" onclick="submitQuiz()" style="background: var(--quran-green); color: white;">
                             ✅ تصحيح الإجابات
+                        </button>
+                        <button class="control-btn" onclick="resetQuiz()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 إعادة الاختبار
                         </button>
                     </div>
                     
@@ -593,6 +644,9 @@
                         <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a; color: #000;">
                             📤 إرسال الإجابات
                         </button>
+                        <button class="control-btn" onclick="resetUnderstanding()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 أسئلة جديدة
+                        </button>
                     </div>
                     
                     <div id="understanding-result" class="result-box">
@@ -608,13 +662,13 @@
     </div>
 
     <script>
-        // === البيانات ===
+        // === بيانات الأسئلة المصححة ===
         const memoryQuestions = [
             {
                 question: "ما هي الآية الأولى في سورة الفاتحة؟",
-                options: ["الحمد لله رب العالمين", "بسم الله الرحمن الرحيم", "الرحمن الرحيم", "مالك يوم الدين"],
-                correct: 1,
-                explanation: "الآية الأولى هي: بسم الله الرحمن الرحيم"
+                options: ["بسم الله الرحمن الرحيم", "الحمد لله رب العالمين", "الرحمن الرحيم", "مالك يوم الدين"],
+                correct: 0,
+                explanation: "الآية الأولى هي: 'بسم الله الرحمن الرحيم'"
             },
             {
                 question: "كم عدد آيات سورة الفاتحة؟",
@@ -629,31 +683,73 @@
                 explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
             },
             {
+                question: "ما هي الآية التي تلي 'مالك يوم الدين'؟",
+                options: ["الحمد لله رب العالمين", "الرحمن الرحيم", "إياك نعبد وإياك نستعين", "اهدنا الصراط المستقيم"],
+                correct: 2,
+                explanation: "بعد 'مالك يوم الدين' تأتي 'إياك نعبد وإياك نستعين'"
+            },
+            {
+                question: "أكمل الآية: 'اهدنا الصراط ________'",
+                options: ["الواسع", "المستقيم", "الحق", "السهل"],
+                correct: 1,
+                explanation: "الآية الكاملة: 'اهدنا الصراط المستقيم'"
+            },
+            {
+                question: "ما هي آخر آية في سورة الفاتحة؟",
+                options: ["إياك نعبد وإياك نستعين", "اهدنا الصراط المستقيم", "صراط الذين أنعمت عليهم", "غير المغضوب عليهم ولا الضالين"],
+                correct: 3,
+                explanation: "آخر آية: 'غير المغضوب عليهم ولا الضالين'"
+            },
+            {
+                question: "كم مرة ترد كلمة 'الرحيم' في سورة الفاتحة؟",
+                options: ["مرة واحدة", "مرتين", "ثلاث مرات", "أربع مرات"],
+                correct: 1,
+                explanation: "تأتي كلمة 'الرحيم' مرتين: في البسملة وفي الآية الثالثة"
+            },
+            {
                 question: "ما معنى 'العالمين' في السورة؟",
                 options: ["البشر فقط", "الجن فقط", "جميع المخلوقات", "الملائكة فقط"],
                 correct: 2,
-                explanation: "'العالمين' تشمل جميع المخلوقات"
+                explanation: "'العالمين' تشمل جميع المخلوقات في السماوات والأرض"
             },
             {
                 question: "من هم 'المغضوب عليهم'؟",
-                options: ["النصارى", "اليهود", "المشركين", "المنافقين"],
+                options: ["النصارى", "اليهود", "المشركين", "الكفار"],
                 correct: 1,
-                explanation: "'المغضوب عليهم' هم اليهود"
+                explanation: "'المغضوب عليهم' هم اليهود الذين عرفوا الحق ولم يتبعوه"
+            },
+            {
+                question: "ما المقصود بـ 'الصراط المستقيم'؟",
+                options: ["طريق المال", "طريق الهداية", "طريق التجارة", "طريق السفر"],
+                correct: 1,
+                explanation: "'الصراط المستقيم' هو طريق الإسلام والهداية"
             }
         ];
         
         const understandingQuestions = [
             {
                 question: "لماذا سميت سورة الفاتحة بأم القرآن؟",
-                hint: "لأنها تجمع معاني القرآن الكريم"
+                modelAnswer: "لأنها تجمع معاني القرآن الكريم كله، فهي تحتوي على الثناء على الله، وإثبات الربوبية والألوهية، والعبادة والاستعانة، وطلب الهداية إلى الصراط المستقيم. وهي أول سورة في المصحف وأول ما يقرأ في الصلاة."
+            },
+            {
+                question: "ما معنى 'الرحمن الرحيم' وما الفرق بينهما؟",
+                modelAnswer: "الرحمن: اسم يدل على سعة رحمة الله لجميع الخلق في الدنيا والآخرة. الرحيم: اسم يدل على رحمة الله الخاصة بالمؤمنين في الآخرة. فالله رحمن برحمته العامة للجميع، ورحيم برحمته الخاصة للمؤمنين."
             },
             {
                 question: "ما أهمية طلب الهداية في كل صلاة؟",
-                hint: "للتذكير بأن الهداية من الله"
+                modelAnswer: "للتذكير بأن الهداية من الله، وللحاجة الدائمة إليها، وللتجديد الدائم للعزم على اتباع الحق، ولطلب الزيادة في الهداية والإيمان."
             },
             {
-                question: "ما الفرق بين 'الرحمن' و'الرحيم'؟",
-                hint: "الرحمن: رحمة عامة، الرحيم: رحمة خاصة بالمؤمنين"
+                question: "ما الفرق بين 'نعبد' و'نستعين'؟",
+                modelAnswer: "'نعبد': نخصك بالعبادة ونتذلل لك بالطاعة. 'نستعين': نطلب منك العون في جميع أمورنا الدينية والدنيوية. فالعبد يعبد الله ويستعين به."
+            },
+            {
+                question: "من هم 'الضالين' ولماذا ذكرهم الله بعد 'المغضوب عليهم'؟",
+                modelAnswer: "'الضالين' هم النصارى الذين عبدوا الله على جهل وضلال. ذكروا بعد اليهود لأن اليهود عرفوا الحق وتركوه (المغضوب عليهم)، والنصارى جهلوا الحق فضلوا."
+            },
+            {
+                question: "ما معنى 'مالك يوم الدين'؟",
+                modelAnswer: "أن الله هو المالك المتصرف وحده في يوم القيامة، وهو اليوم الذي يجازي فيه الناس على أعمالهم، وهو مالك الثواب والعقاب."
             }
         ];
         
@@ -694,17 +790,22 @@
         let currentQuizQuestions = [];
         let userQuizAnswers = [];
         let currentQuizIndex = 0;
+        let quizSubmitted = false;
         
         function initQuiz() {
-            // اختيار 3 أسئلة عشوائية
+            // اختيار 5 أسئلة عشوائية
             currentQuizQuestions = [...memoryQuestions]
                 .sort(() => Math.random() - 0.5)
-                .slice(0, 3);
+                .slice(0, 5);
             
             currentQuizIndex = 0;
+            quizSubmitted = false;
             userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
             
             displayQuizQuestion();
+            
+            // إخفاء نتيجة سابقة
+            document.getElementById('quiz-result').classList.remove('visible');
         }
         
         function displayQuizQuestion() {
@@ -727,9 +828,17 @@
             
             question.options.forEach((option, index) => {
                 const isSelected = userQuizAnswers[currentQuizIndex] === index;
+                const isCorrect = quizSubmitted && index === question.correct;
+                const isWrong = quizSubmitted && userQuizAnswers[currentQuizIndex] === index && index !== question.correct;
+                
+                let className = 'answer-btn';
+                if (isSelected) className += ' selected';
+                if (isCorrect) className += ' selected';
+                if (isWrong) className += ' wrong';
+                
                 optionsHTML += `
-                    <div class="answer-btn ${isSelected ? 'selected' : ''}" 
-                         onclick="selectQuizAnswer(${index})">
+                    <div class="${className}" 
+                         onclick="${!quizSubmitted ? `selectQuizAnswer(${index})` : ''}">
                          ${letters[index]}. ${option}
                     </div>
                 `;
@@ -756,8 +865,10 @@
         }
         
         function selectQuizAnswer(answerIndex) {
-            userQuizAnswers[currentQuizIndex] = answerIndex;
-            displayQuizQuestion();
+            if (!quizSubmitted) {
+                userQuizAnswers[currentQuizIndex] = answerIndex;
+                displayQuizQuestion();
+            }
         }
         
         function nextQuizQuestion() {
@@ -779,6 +890,7 @@
         }
         
         function submitQuiz() {
+            quizSubmitted = true;
             let score = 0;
             let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
             
@@ -800,137 +912,23 @@
             
             const percentage = Math.round((score / currentQuizQuestions.length) * 100);
             let message = '';
+            let emoji = '';
             
             if (percentage >= 90) {
-                message = '🎉 ممتاز! إتقان تام';
+                message = 'ممتاز! إتقان تام للسورة';
+                emoji = '🎉';
             } else if (percentage >= 70) {
-                message = '👍 جيد جداً';
+                message = 'جيد جداً، مستوى ممتاز';
+                emoji = '👍';
             } else if (percentage >= 50) {
-                message = '💪 مقبول، يحتاج مراجعة';
+                message = 'مقبول، يحتاج مراجعة بسيطة';
+                emoji = '💪';
             } else {
-                message = '📚 راجع السورة مرة أخرى';
+                message = 'راجع السورة مرة أخرى';
+                emoji = '📚';
             }
             
             resultsHTML += `
                 <div style="background: var(--quran-green); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                    <h4>${message}</h4>
+                    <h4>${emoji} ${message}</h4>
                     <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
-                    <p>النسبة: ${percentage}%</p>
-                </div>
-            `;
-            
-            document.getElementById('quiz-result').innerHTML = resultsHTML;
-            document.getElementById('quiz-result').classList.add('visible');
-        }
-        
-        // === أسئلة الفهم ===
-        let currentUnderstandingIndex = 0;
-        let userUnderstandingAnswers = [];
-        
-        function initUnderstanding() {
-            // اختيار 2 سؤال عشوائي
-            const selectedQuestions = [...understandingQuestions]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 2);
-            
-            currentUnderstandingIndex = 0;
-            userUnderstandingAnswers = new Array(selectedQuestions.length).fill('');
-            
-            displayUnderstandingQuestion(selectedQuestions);
-        }
-        
-        function displayUnderstandingQuestion(questions) {
-            const container = document.getElementById('understanding-container');
-            
-            if (currentUnderstandingIndex >= questions.length) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 30px;">
-                        <div style="font-size: 3rem;">📝</div>
-                        <h3 style="color: #e67700;">اكتملت الأسئلة</h3>
-                        <p>اضغط على زر "إرسال الإجابات"</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const question = questions[currentUnderstandingIndex];
-            
-            container.innerHTML = `
-                <div class="quiz-question">
-                    <h3>السؤال ${currentUnderstandingIndex + 1}: ${question.question}</h3>
-                    <p style="color: #666; margin-top: 10px;">💡 تلميح: ${question.hint}</p>
-                    <textarea class="answer-input" 
-                              placeholder="اكتب إجابتك هنا..."
-                              oninput="saveUnderstandingAnswer(this.value)"
-                              id="understanding-answer-${currentUnderstandingIndex}">${userUnderstandingAnswers[currentUnderstandingIndex]}</textarea>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-                    <button class="control-btn" onclick="prevUnderstandingQuestion(questions)" 
-                            ${currentUnderstandingIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
-                        ◀️ السابق
-                    </button>
-                    <button class="control-btn" onclick="nextUnderstandingQuestion(questions)">
-                        ${currentUnderstandingIndex === questions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
-                    </button>
-                </div>
-            `;
-        }
-        
-        function saveUnderstandingAnswer(value) {
-            userUnderstandingAnswers[currentUnderstandingIndex] = value;
-        }
-        
-        function nextUnderstandingQuestion(questions) {
-            if (currentUnderstandingIndex < questions.length - 1) {
-                currentUnderstandingIndex++;
-                displayUnderstandingQuestion(questions);
-            } else {
-                currentUnderstandingIndex = questions.length;
-                displayUnderstandingQuestion(questions);
-            }
-        }
-        
-        function prevUnderstandingQuestion(questions) {
-            if (currentUnderstandingIndex > 0) {
-                currentUnderstandingIndex--;
-                displayUnderstandingQuestion(questions);
-            }
-        }
-        
-        function submitUnderstanding() {
-            const questions = understandingQuestions.slice(0, 2); // أول سؤالين
-            let resultsHTML = '<h3>📝 تقييم إجاباتك</h3>';
-            
-            questions.forEach((question, index) => {
-                const userAnswer = userUnderstandingAnswers[index] || 'لم تجب على هذا السؤال';
-                
-                resultsHTML += `
-                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
-                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
-                        <strong>إجابتك:</strong> ${userAnswer}<br>
-                        <strong>الإرشاد:</strong> ${question.hint}
-                    </div>
-                `;
-            });
-            
-            resultsHTML += `
-                <div style="background: #e9c46a; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                    <h4>🔍 نصائح للتحسين:</h4>
-                    <p>• راجع تفسير السورة</p>
-                    <p>• استمع لشروحات العلماء</p>
-                    <p>• ناقش الأسئلة مع معلم أو صديق</p>
-                </div>
-            `;
-            
-            document.getElementById('understanding-result').innerHTML = resultsHTML;
-            document.getElementById('understanding-result').classList.add('visible');
-        }
-        
-        // === تهيئة الصفحة ===
-        document.addEventListener('DOMContentLoaded', function() {
-            // يمكن إضافة تهيئة إضافية هنا
-        });
-    </script>
-</body>
-</html>
