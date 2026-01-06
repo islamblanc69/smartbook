@@ -6,341 +6,159 @@
     <title>سورة الفاتحة - القرآن التفاعلي</title>
     <style>
         :root {
-            --primary: #1a5f7a;
-            --secondary: #2a9d8f;
-            --accent: #e76f51;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
+            --quran-green: #2a9d8f;
+            --quran-gold: #e9c46a;
+            --quran-blue: #1a5f7a;
+            --quran-cream: #fef9e7;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Arial', 'Segoe UI', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
-            color: var(--dark);
-            line-height: 1.8;
-            padding: 20px;
+            background-color: var(--quran-cream);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 15px;
             min-height: 100vh;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-        }
-        
-        /* شريط العنوان */
-        .title-bar {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(26, 95, 122, 0.3);
-            position: relative;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         
-        .title-bar::before {
-            content: "﷽";
-            position: absolute;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            opacity: 0.1;
+        /* الهيدر */
+        .header {
+            background: linear-gradient(135deg, var(--quran-blue) 0%, var(--quran-green) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
         }
         
-        .title-bar h1 {
-            font-size: 2.5rem;
+        .header h1 {
+            font-size: 2rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 1;
         }
         
-        /* أزرار المعلومات */
-        .info-buttons {
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* قسم التحكم */
+        .control-section {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .control-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             justify-content: center;
-            margin: 30px 0;
-            padding: 20px;
+        }
+        
+        .control-btn {
+            padding: 15px 25px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-        
-        .info-btn {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #f0f9f7 0%, #e6f7f0 100%);
-            border: 2px solid var(--secondary);
-            border-radius: 50px;
-            color: var(--primary);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-        
-        .info-btn:hover {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.3);
-        }
-        
-        .info-btn i {
-            font-size: 1.3rem;
-        }
-        
-        /* المحتوى المخفي */
-        .hidden-content {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            margin: 25px 0;
-            border: 3px solid var(--secondary);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            display: none;
-            animation: slideDown 0.5s ease;
-            position: relative;
-        }
-        
-        .hidden-content.visible {
-            display: block;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* الخريطة الذهنية المرسومة */
-        .mind-map-container {
-            width: 100%;
-            height: 600px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            margin: 20px 0;
-        }
-        
-        .mind-map-canvas {
-            width: 100%;
-            height: 100%;
-            cursor: move;
-        }
-        
-        .map-node {
-            position: absolute;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            min-width: 200px;
-            max-width: 300px;
-            transition: all 0.3s ease;
-            border: 3px solid;
-            cursor: pointer;
-        }
-        
-        .map-node:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-        
-        .node-main {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border-color: var(--accent);
-            width: 250px;
-            text-align: center;
-            font-size: 1.3rem;
+            border: 2px solid var(--quran-green);
+            border-radius: 8px;
+            color: var(--quran-blue);
             font-weight: bold;
-        }
-        
-        .node-1 {
-            top: 20%;
-            right: 20%;
-            border-color: #2a9d8f;
-            background: #f0f9f7;
-        }
-        
-        .node-2 {
-            top: 20%;
-            left: 20%;
-            border-color: #e9c46a;
-            background: #fef9e7;
-        }
-        
-        .node-3 {
-            bottom: 20%;
-            right: 20%;
-            border-color: #e76f51;
-            background: #fdf2ee;
-        }
-        
-        .node-4 {
-            bottom: 20%;
-            left: 20%;
-            border-color: #9d4edd;
-            background: #f5f0ff;
-        }
-        
-        .node-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1rem;
         }
         
-        .node-content {
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        /* الأنشطة المخفية */
-        .activity-container {
-            display: none;
-            margin: 25px 0;
-        }
-        
-        .activity-container.visible {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* أزرار الأنشطة */
-        .activity-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .activity-btn {
-            padding: 25px;
-            background: white;
-            border: 3px solid;
-            border-radius: 15px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .activity-btn:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .activity-btn-1 { border-color: #2a9d8f; color: #2a9d8f; }
-        .activity-btn-2 { border-color: #e9c46a; color: #e9c46a; }
-        .activity-btn-3 { border-color: #e76f51; color: #e76f51; }
-        .activity-btn-4 { border-color: #9d4edd; color: #9d4edd; }
-        
-        .activity-icon {
-            font-size: 2.5rem;
-        }
-        
-        /* أسئلة الاختبار */
-        .quiz-container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            border: 3px solid var(--secondary);
-            margin: 20px 0;
-        }
-        
-        .question-counter {
-            background: var(--primary);
+        .control-btn:hover {
+            background: var(--quran-green);
             color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-block;
+            transform: translateY(-2px);
+        }
+        
+        /* المحتوى */
+        .content-section {
+            padding: 25px;
+        }
+        
+        /* الخريطة الذهنية البسيطة */
+        .simple-mind-map {
+            background: #f0f9f7;
+            padding: 25px;
+            border-radius: 10px;
+            border-right: 5px solid var(--quran-green);
+            margin-bottom: 25px;
+        }
+        
+        .mind-map-title {
+            color: var(--quran-blue);
             margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .map-step {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--quran-gold);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--quran-blue);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
             font-weight: bold;
         }
         
-        .question {
+        /* السورة كما في المصحف */
+        .quran-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2rem;
+            line-height: 3;
+            text-align: center;
+            color: #1a365d;
+            padding: 20px;
             background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border-right: 5px solid var(--secondary);
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
         }
         
-        .question-text {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .option {
+        .verse {
+            margin: 30px 0;
             padding: 20px;
             background: white;
-            border: 2px solid #dee2e6;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            border-radius: 8px;
+            position: relative;
         }
         
-        .option:hover {
-            background: #e9f5f3;
-            border-color: var(--secondary);
-            transform: translateX(-5px);
-        }
-        
-        .option.selected {
-            background: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-        }
-        
-        .option-letter {
-            background: var(--primary);
+        .verse-number {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: var(--quran-green);
             color: white;
             width: 40px;
             height: 40px;
@@ -349,248 +167,103 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            flex-shrink: 0;
+            font-size: 1.1rem;
         }
         
-        .quiz-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #eee;
-        }
-        
-        .nav-btn {
-            padding: 15px 30px;
-            background: var(--primary);
-            color: white;
-            border: none;
+        /* قسم السمعي البصري */
+        .audio-visual-section {
+            background: #e8f4f8;
+            padding: 25px;
             border-radius: 10px;
-            cursor: pointer;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .listen-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--quran-green) 0%, var(--quran-blue) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.3s;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
         }
         
-        .nav-btn:hover {
-            background: var(--secondary);
+        .listen-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.4);
         }
         
-        /* لعبة الربط المحسنة */
-        .matching-game {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .matching-game {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .matching-column {
+        /* اختبار الحفظ البسيط */
+        .simple-quiz {
             background: white;
             padding: 25px;
-            border-radius: 15px;
-            border: 3px dashed var(--secondary);
-        }
-        
-        .matching-column h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--primary);
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .matching-item {
-            padding: 20px;
-            margin: 15px 0;
-            background: #f8f9fa;
-            border: 2px solid transparent;
             border-radius: 10px;
-            cursor: move;
-            text-align: center;
-            font-weight: 500;
+            border: 2px solid #eee;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-green);
+        }
+        
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .answer-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: right;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
-        .matching-item:hover {
+        .answer-btn:hover {
             background: #e9f5f3;
-            border-color: var(--secondary);
+            border-color: var(--quran-green);
         }
         
-        .matching-item.correct {
+        .answer-btn.selected {
             background: #d4edda;
             border-color: #28a745;
             color: #155724;
         }
         
-        .matching-item.incorrect {
-            background: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
-        }
-        
-        .matching-dropzone {
-            min-height: 100px;
-            padding: 20px;
-            background: #f8f9fa;
-            border: 3px dashed #ccc;
-            border-radius: 15px;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .matching-dropzone.active {
-            border-color: var(--secondary);
-            background: #e9f5f3;
-        }
-        
-        /* نتيجة الاختبار */
-        .result-container {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 30px 0;
-            display: none;
-        }
-        
-        .result-container.visible {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .score-circle {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-        
-        .score-svg {
-            width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-        
-        .score-circle-bg {
-            fill: none;
-            stroke: #e9ecef;
-            stroke-width: 10;
-        }
-        
-        .score-circle-progress {
-            fill: none;
-            stroke: var(--secondary);
-            stroke-width: 10;
-            stroke-linecap: round;
-            stroke-dasharray: 565;
-            stroke-dashoffset: 565;
-            transition: stroke-dashoffset 1.5s ease;
-        }
-        
-        .score-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        /* زر الإغلاق */
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.3s;
-        }
-        
-        .close-btn:hover {
-            background: #c82333;
-        }
-        
-        /* السورة مكتوبة */
-        .surah-text {
-            font-family: 'Traditional Arabic', serif;
-            font-size: 1.8rem;
-            line-height: 3;
-            text-align: center;
-            color: #1a365d;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        
-        .verse {
-            margin: 40px 0;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border-right: 6px solid var(--secondary);
-            position: relative;
-        }
-        
-        .verse-number {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: var(--primary);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(26, 95, 122, 0.3);
-        }
-        
         /* معلومات السورة */
-        .info-grid {
+        .surah-info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid var(--secondary);
+        .info-box {
+            background: #f0f9f7;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .info-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
+            border: 1px solid #ddd;
         }
         
         .info-label {
@@ -600,1301 +273,658 @@
         }
         
         .info-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        /* زر الصفحة الرئيسية */
-        .home-btn {
-            display: block;
-            width: 100%;
-            padding: 25px;
-            background: linear-gradient(90deg, var(--accent) 0%, #f4a261 100%);
-            color: white;
-            border: none;
-            border-radius: 20px;
             font-size: 1.3rem;
             font-weight: bold;
-            cursor: pointer;
-            margin: 40px 0;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(231, 111, 81, 0.2);
+            color: var(--quran-blue);
         }
         
-        .home-btn:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(231, 111, 81, 0.3);
+        /* أسئلة الفهم */
+        .understanding-questions {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px dashed #ffd43b;
         }
         
-        /* مؤشر التحميل */
-        .loading {
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1rem;
+            min-height: 100px;
+        }
+        
+        /* نتيجة الاختبار */
+        .result-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
             text-align: center;
-            padding: 40px;
             display: none;
         }
         
-        .loading.visible {
+        .result-box.visible {
             display: block;
         }
         
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--secondary);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        /* زر الإغلاق */
+        .close-section-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .close-section-btn:hover {
+            background: #5a6268;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .control-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .quran-text {
+                font-size: 1.5rem;
+                line-height: 2.5;
+            }
+            
+            .surah-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* إخفاء المحتوى */
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .hidden-content.visible {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- شريط العنوان -->
-        <div class="title-bar">
-            <h1>📖 سورة الفاتحة - أم القرآن</h1>
-            <p>مصحف تفاعلي مع أنشطة متقدمة للحفظ والفهم</p>
+        <!-- الهيدر -->
+        <div class="header">
+            <h1>📖 سورة الفاتحة</h1>
+            <p>أم القرآن - السبع المثاني</p>
         </div>
         
-        <!-- أزرار المعلومات -->
-        <div class="info-buttons">
-            <button class="info-btn" onclick="showContent('mind-map')">
-                <i>🧠</i> الخريطة الذهنية
-            </button>
-            <button class="info-btn" onclick="showContent('surah-text')">
-                <i>📜</i> السورة مكتوبة
-            </button>
-            <button class="info-btn" onclick="showContent('surah-story')">
-                <i>📖</i> قصة السورة
-            </button>
-            <button class="info-btn" onclick="showContent('surah-info')">
-                <i>ℹ️</i> معلومات السورة
-            </button>
-        </div>
-        
-        <!-- الخريطة الذهنية المرسومة -->
-        <div id="mind-map" class="hidden-content">
-            <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center;">
-                🧠 خريطة ذهنية تفاعلية لحفظ سورة الفاتحة
-            </h2>
-            
-            <div class="mind-map-container">
-                <div class="mind-map-canvas" id="mind-map-canvas">
-                    <!-- الخريطة الذهنية المرسومة -->
-                    <div class="map-node node-main" onclick="zoomNode(this)">
-                        <div class="node-title">🌙 سورة الفاتحة</div>
-                        <div class="node-content">أم القرآن - السبع المثاني</div>
-                    </div>
-                    
-                    <div class="map-node node-1" onclick="zoomNode(this)">
-                        <div class="node-title">🔹 التقسيم الذهني</div>
-                        <div class="node-content">
-                            <p>• الثناء (آيات 1-3)</p>
-                            <p>• العبادة (آية 4)</p>
-                            <p>• الدعاء (آيات 5-7)</p>
-                        </div>
-                    </div>
-                    
-                    <div class="map-node node-2" onclick="zoomNode(this)">
-                        <div class="node-title">🔹 نقاط الحفظ</div>
-                        <div class="node-content">
-                            <p>• كلمات مكررة</p>
-                            <p>• روابط معنوية</p>
-                            <p>• قواعد تجويد</p>
-                            <p>• فواصل الآيات</p>
-                        </div>
-                    </div>
-                    
-                    <div class="map-node node-3" onclick="zoomNode(this)">
-                        <div class="node-title">🔹 خطة المراجعة</div>
-                        <div class="node-content">
-                            <p>📅 يومياً: تلاوة كاملة</p>
-                            <p>🔄 أسبوعياً: اختبار ذاتي</p>
-                            <p>⭐ شهرياً: مراجعة شاملة</p>
-                        </div>
-                    </div>
-                    
-                    <div class="map-node node-4" onclick="zoomNode(this)">
-                        <div class="node-title">🔹 أدوات مساعدة</div>
-                        <div class="node-content">
-                            <p>🎧 تسجيلات صوتية</p>
-                            <p>📝 دفتر التتبع</p>
-                            <p>🎯 اختبارات تفاعلية</p>
-                            <p>📊 متابعة التقدم</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="nav-btn" onclick="resetMindMap()">
-                    🔄 إعادة ضبط الخريطة
+        <!-- أزرار التحكم -->
+        <div class="control-section">
+            <div class="control-buttons">
+                <button class="control-btn" onclick="showSection('mind-map')">
+                    <span>🗺️</span> خطة الحفظ
                 </button>
-                <button class="close-btn" onclick="hideContent('mind-map')">
-                    ✖ إغلاق الخريطة
+                <button class="control-btn" onclick="showSection('quran-text')">
+                    <span>📖</span> السورة كاملة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-info')">
+                    <span>ℹ️</span> معلومات السورة
+                </button>
+                <button class="control-btn" onclick="showSection('quiz')">
+                    <span>🧠</span> اختبار الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('understanding')">
+                    <span>💭</span> أسئلة الفهم
                 </button>
             </div>
         </div>
         
-        <!-- السورة مكتوبة -->
-        <div id="surah-text" class="hidden-content">
-            <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center;">
-                📜 سورة الفاتحة كاملة بالخط العثماني
-            </h2>
+        <!-- المحتوى الرئيسي -->
+        <div class="content-section">
             
-            <div class="surah-text">
-                <div class="verse">
-                    <div class="verse-number">١</div>
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٢</div>
-                    الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٣</div>
-                    الرَّحْمَٰنِ الرَّحِيمِ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٤</div>
-                    مَالِكِ يَوْمِ الدِّينِ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٥</div>
-                    إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٦</div>
-                    اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-                </div>
-                
-                <div class="verse">
-                    <div class="verse-number">٧</div>
-                    صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-                </div>
-            </div>
-            
-            <button class="close-btn" onclick="hideContent('surah-text')">
-                ✖ إغلاق السورة
-            </button>
-        </div>
-        
-        <!-- قصة السورة -->
-        <div id="surah-story" class="hidden-content">
-            <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center;">
-                📖 قصة وفضائل سورة الفاتحة
-            </h2>
-            
-            <div style="background: #fff9db; padding: 30px; border-radius: 15px; border: 3px dashed #ffd43b;">
-                <h3 style="color: #e67700; margin-bottom: 20px;">✨ لماذا سميت بأم القرآن؟</h3>
-                <p style="margin-bottom: 20px; line-height: 1.8;">لأنها تجمع معاني القرآن كله، وهي السورة التي افتتح بها المصحف، وقد سماها النبي صلى الله عليه وسلم "أم القرآن" و"السبع المثاني".</p>
-                
-                <h3 style="color: #e67700; margin: 25px 0 15px;">📜 مكانتها في الصلاة:</h3>
-                <p style="margin-bottom: 20px; line-height: 1.8;">لا تصح الصلاة بدونها، قال رسول الله صلى الله عليه وسلم: "لا صلاة لمن لم يقرأ بفاتحة الكتاب".</p>
-                
-                <h3 style="color: #e67700; margin: 25px 0 15px;">💎 فضائلها العظيمة:</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
-                    <div style="background: white; padding: 15px; border-radius: 10px; border-right: 4px solid #2a9d8f;">
-                        <strong>1. أعظم سورة:</strong> كما ورد في الحديث الصحيح
-                    </div>
-                    <div style="background: white; padding: 15px; border-radius: 10px; border-right: 4px solid #e9c46a;">
-                        <strong>2. شافية:</strong> للأسقام والأمراض
-                    </div>
-                    <div style="background: white; padding: 15px; border-radius: 10px; border-right: 4px solid #e76f51;">
-                        <strong>3. كافية:</strong> تحفظ قارئها
-                    </div>
-                    <div style="background: white; padding: 15px; border-radius: 10px; border-right: 4px solid #9d4edd;">
-                        <strong>4. رقية:</strong> تشرح الصدور
-                    </div>
-                </div>
-            </div>
-            
-            <button class="close-btn" onclick="hideContent('surah-story')">
-                ✖ إغلاق القصة
-            </button>
-        </div>
-        
-        <!-- معلومات السورة -->
-        <div id="surah-info" class="hidden-content">
-            <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center;">
-                ℹ️ معلومات تفصيلية عن سورة الفاتحة
-            </h2>
-            
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="info-icon">📄</div>
-                    <div class="info-label">رقم الصفحة</div>
-                    <div class="info-value">1</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">📍</div>
-                    <div class="info-label">نوع السورة</div>
-                    <div class="info-value" style="color: #d9480f;">مكية</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">🔢</div>
-                    <div class="info-label">عدد الآيات</div>
-                    <div class="info-value">7 آيات</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">📊</div>
-                    <div class="info-label">ترتيب النزول</div>
-                    <div class="info-value">5</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">#️⃣</div>
-                    <div class="info-label">رقم السورة</div>
-                    <div class="info-value">1</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">🏷️</div>
-                    <div class="info-label">عدد الكلمات</div>
-                    <div class="info-value">25 كلمة</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">🔤</div>
-                    <div class="info-label">عدد الحروف</div>
-                    <div class="info-value">113 حرفاً</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="info-icon">⭐</div>
-                    <div class="info-label">السجدات</div>
-                    <div class="info-value">لا يوجد</div>
-                </div>
-            </div>
-            
-            <button class="close-btn" onclick="hideContent('surah-info')">
-                ✖ إغلاق المعلومات
-            </button>
-        </div>
-        
-        <!-- أزرار الأنشطة -->
-        <div class="activity-buttons">
-            <button class="activity-btn activity-btn-1" onclick="startQuiz()">
-                <div class="activity-icon">🧠</div>
-                <div>اختبار الحفظ المتقدم</div>
-                <div style="font-size: 0.9rem; color: #666;">50 سؤال متغير</div>
-            </button>
-            
-            <button class="activity-btn activity-btn-2" onclick="startUnderstandingQuiz()">
-                <div class="activity-icon">💡</div>
-                <div>أسئلة الفهم</div>
-                <div style="font-size: 0.9rem; color: #666;">50 سؤال متغير</div>
-            </button>
-            
-            <button class="activity-btn activity-btn-3" onclick="startMatchingGame()">
-                <div class="activity-icon">🧩</div>
-                <div>لعبة الربط</div>
-                <div style="font-size: 0.9rem; color: #666;">ربط الكلمات بمعانيها</div>
-            </button>
-            
-            <button class="activity-btn activity-btn-4" onclick="showProgress()">
-                <div class="activity-icon">📊</div>
-                <div>تتبع التقدم</div>
-                <div style="font-size: 0.9rem; color: #666;">متابعة إنجازاتك</div>
-            </button>
-        </div>
-        
-        <!-- اختبار الحفظ -->
-        <div id="quiz-container" class="activity-container">
-            <div class="quiz-container">
-                <div class="question-counter" id="quiz-counter">السؤال 1 من 10</div>
-                
-                <div id="quiz-questions">
-                    <!-- الأسئلة ستضاف هنا ديناميكياً -->
-                </div>
-                
-                <div class="quiz-controls">
-                    <button class="nav-btn" onclick="prevQuestion()">
-                        ◀️ السابق
-                    </button>
+            <!-- خطة الحفظ البسيطة -->
+            <div id="mind-map" class="hidden-content">
+                <div class="simple-mind-map">
+                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة الفاتحة</h2>
                     
-                    <div style="display: flex; gap: 10px;">
-                        <button class="nav-btn" onclick="checkAnswer()" id="check-btn">
-                            ✅ تحقق من الإجابة
-                        </button>
-                        <button class="nav-btn" onclick="skipQuestion()">
-                            ⏭️ تخطي
+                    <div class="map-step">
+                        <span class="step-number">١</span>
+                        <h3>اليوم الأول: الآيات ١-٣</h3>
+                        <p>حفظ: البسملة + الحمد لله رب العالمين + الرحمن الرحيم</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٢</span>
+                        <h3>اليوم الثاني: الآية ٤</h3>
+                        <p>حفظ: مالك يوم الدين</p>
+                        <p>مع التكرار اليومي للآيات السابقة</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٣</span>
+                        <h3>اليوم الثالث: الآيات ٥-٦</h3>
+                        <p>حفظ: إياك نعبد وإياك نستعين + اهدنا الصراط المستقيم</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٤</span>
+                        <h3>اليوم الرابع: الآية ٧</h3>
+                        <p>حفظ: صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين</p>
+                    </div>
+                    
+                    <div class="map-step">
+                        <span class="step-number">٥</span>
+                        <h3>اليوم الخامس: المراجعة</h3>
+                        <p>تسميع السورة كاملة ٣ مرات</p>
+                        <p>التدرب على التلاوة الصحيحة</p>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('mind-map')">
+                    إغلاق خطة الحفظ
+                </button>
+            </div>
+            
+            <!-- السورة كما في المصحف -->
+            <div id="quran-text" class="hidden-content">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--quran-blue);">📖 سورة الفاتحة كما في المصحف</h2>
+                    <p style="color: #666; margin-top: 10px;">يمكنك القراءة والنقل منها</p>
+                </div>
+                
+                <div class="quran-text">
+                    <div class="verse">
+                        <div class="verse-number">١</div>
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٢</div>
+                        الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٣</div>
+                        الرَّحْمَٰنِ الرَّحِيمِ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٤</div>
+                        مَالِكِ يَوْمِ الدِّينِ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٥</div>
+                        إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٦</div>
+                        اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+                    </div>
+                    
+                    <div class="verse">
+                        <div class="verse-number">٧</div>
+                        صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+                    </div>
+                </div>
+                
+                <div class="audio-visual-section">
+                    <h3 class="section-title">🎧 للاستماع إلى التلاوة</h3>
+                    <p>اضغط على الزر للذهاب إلى صفحة التلاوات بصوت مشاهير القراء</p>
+                    <a href="index.html" class="listen-btn">
+                        🔊 قسم السمعي البصري
+                    </a>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('quran-text')">
+                    إغلاق السورة
+                </button>
+            </div>
+            
+            <!-- معلومات السورة -->
+            <div id="surah-info" class="hidden-content">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h2 style="color: var(--quran-blue);">ℹ️ معلومات عن سورة الفاتحة</h2>
+                </div>
+                
+                <div class="surah-info-grid">
+                    <div class="info-box">
+                        <div class="info-label">رقم الصفحة في المصحف</div>
+                        <div class="info-value">1</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">نوع السورة</div>
+                        <div class="info-value">مكية</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">عدد الآيات</div>
+                        <div class="info-value">7 آيات</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">عدد الكلمات</div>
+                        <div class="info-value">25 كلمة</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">ترتيب النزول</div>
+                        <div class="info-value">5</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">ترتيب السورة</div>
+                        <div class="info-value">1</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">مدة التلاوة</div>
+                        <div class="info-value">دقيقة واحدة</div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-label">الأسماء الأخرى</div>
+                        <div class="info-value">أم القرآن<br>السبع المثاني</div>
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('surah-info')">
+                    إغلاق المعلومات
+                </button>
+            </div>
+            
+            <!-- اختبار الحفظ -->
+            <div id="quiz" class="hidden-content">
+                <div class="simple-quiz">
+                    <h2 style="color: var(--quran-blue); margin-bottom: 20px; text-align: center;">
+                        🧠 اختبار حفظ سورة الفاتحة
+                    </h2>
+                    
+                    <div id="quiz-container">
+                        <!-- الأسئلة ستظهر هنا -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitQuiz()" style="background: var(--quran-green); color: white;">
+                            ✅ تصحيح الإجابات
                         </button>
                     </div>
                     
-                    <button class="nav-btn" onclick="nextQuestion()">
-                        التالي ▶️
-                    </button>
+                    <div id="quiz-result" class="result-box">
+                        <!-- نتيجة الاختبار ستظهر هنا -->
+                    </div>
                 </div>
+                
+                <button class="close-section-btn" onclick="hideSection('quiz')">
+                    إغلاق الاختبار
+                </button>
             </div>
             
-            <button class="close-btn" onclick="hideActivity('quiz-container')" style="margin-top: 20px;">
-                ✖ إغلاق الاختبار
-            </button>
-        </div>
-        
-        <!-- أسئلة الفهم -->
-        <div id="understanding-container" class="activity-container">
-            <div class="quiz-container">
-                <div class="question-counter" id="understanding-counter">السؤال 1 من 10</div>
-                
-                <div id="understanding-questions">
-                    <!-- أسئلة الفهم ستضاف هنا -->
-                </div>
-                
-                <div class="quiz-controls">
-                    <button class="nav-btn" onclick="prevUnderstandingQuestion()">
-                        ◀️ السابق
-                    </button>
+            <!-- أسئلة الفهم -->
+            <div id="understanding" class="hidden-content">
+                <div class="understanding-questions">
+                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
+                        💭 أسئلة فهم سورة الفاتحة
+                    </h2>
                     
-                    <div style="display: flex; gap: 10px;">
-                        <button class="nav-btn" onclick="submitUnderstandingAnswer()">
-                            📤 إرسال الإجابة
-                        </button>
-                        <button class="nav-btn" onclick="showUnderstandingHint()">
-                            💡 تلميح
+                    <div id="understanding-container">
+                        <!-- الأسئلة ستظهر هنا -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a; color: #000;">
+                            📤 إرسال الإجابات
                         </button>
                     </div>
                     
-                    <button class="nav-btn" onclick="nextUnderstandingQuestion()">
-                        التالي ▶️
-                    </button>
+                    <div id="understanding-result" class="result-box">
+                        <!-- النتيجة ستظهر هنا -->
+                    </div>
                 </div>
+                
+                <button class="close-section-btn" onclick="hideSection('understanding')">
+                    إغلاق أسئلة الفهم
+                </button>
             </div>
-            
-            <button class="close-btn" onclick="hideActivity('understanding-container')" style="margin-top: 20px;">
-                ✖ إغلاق أسئلة الفهم
-            </button>
         </div>
-        
-        <!-- لعبة الربط -->
-        <div id="matching-container" class="activity-container">
-            <div style="background: white; padding: 30px; border-radius: 20px; border: 3px solid var(--secondary);">
-                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
-                    🧩 لعبة الربط: وصل الكلمة بمعناها الصحيح
-                </h2>
-                
-                <div class="matching-game" id="matching-game">
-                    <!-- اللعبة ستضاف هنا ديناميكياً -->
-                </div>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="nav-btn" onclick="checkMatchingGame()">
-                        ✅ تحقق من الإجابات
-                    </button>
-                    <button class="nav-btn" onclick="shuffleMatchingGame()">
-                        🔀 إعادة ترتيب
-                    </button>
-                    <button class="nav-btn" onclick="showMatchingSolution()">
-                        👁️ عرض الحل
-                    </button>
-                </div>
-            </div>
-            
-            <button class="close-btn" onclick="hideActivity('matching-container')" style="margin-top: 20px;">
-                ✖ إغلاق لعبة الربط
-            </button>
-        </div>
-        
-        <!-- تتبع التقدم -->
-        <div id="progress-container" class="activity-container">
-            <div style="background: white; padding: 40px; border-radius: 20px; border: 3px solid var(--secondary);">
-                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
-                    📊 تتبع تقدمك في حفظ سورة الفاتحة
-                </h2>
-                
-                <div class="score-circle" id="progress-circle">
-                    <svg class="score-svg" viewBox="0 0 200 200">
-                        <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
-                        <circle class="score-circle-progress" id="progress-bar" 
-                                cx="100" cy="100" r="90"></circle>
-                    </svg>
-                    <div class="score-text" id="progress-percentage">0%</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px;">
-                    <div style="text-align: center; padding: 20px; background: #e7f5ff; border-radius: 15px;">
-                        <div style="font-size: 2rem;">✅</div>
-                        <div style="font-weight: bold; color: var(--primary);">الحفظ</div>
-                        <div id="memorized-count">0 من 7 آيات</div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 20px; background: #fff9db; border-radius: 15px;">
-                        <div style="font-size: 2rem;">📖</div>
-                        <div style="font-weight: bold; color: #e67700;">التكرار</div>
-                        <div id="repetition-count">0 مرة</div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 20px; background: #f0f9f7; border-radius: 15px;">
-                        <div style="font-size: 2rem;">🧠</div>
-                        <div style="font-weight: bold; color: #2a9d8f;">الاختبارات</div>
-                        <div id="tests-count">0 اجتازها</div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 20px; background: #fdf2ee; border-radius: 15px;">
-                        <div style="font-size: 2rem;">⭐</div>
-                        <div style="font-weight: bold; color: #e76f51;">التقييم</div>
-                        <div id="rating">مبتدئ</div>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="nav-btn" onclick="resetProgress()">
-                        🔄 إعادة تعيين التقدم
-                    </button>
-                    <button class="nav-btn" onclick="exportProgress()">
-                        📥 تصدير التقدم
-                    </button>
-                </div>
-            </div>
-            
-            <button class="close-btn" onclick="hideActivity('progress-container')" style="margin-top: 20px;">
-                ✖ إغلاق تتبع التقدم
-            </button>
-        </div>
-        
-        <!-- نتيجة الاختبار -->
-        <div id="result-container" class="result-container">
-            <!-- ستضاف النتائج هنا ديناميكياً -->
-        </div>
-        
-        <!-- زر الصفحة الرئيسية -->
-        <a href="index.html" class="home-btn">
-            🎵 استمع إلى القرآن بصوت مشاهير القراء
-        </a>
     </div>
 
     <script>
-        // === البيانات الأساسية ===
-        const surahData = {
-            name: "الفاتحة",
-            pageNumber: 1,
-            type: "مكية",
-            verses: 7,
-            revelationOrder: 5,
-            words: 25,
-            letters: 113
-        };
-
-        // === قاعدة أسئلة اختبار الحفظ (50 سؤال) ===
+        // === البيانات ===
         const memoryQuestions = [
-            // أسئلة أكمل الآية (15 سؤال)
             {
-                type: "completion",
-                question: "أكمل الآية: 'الحمد لله رب ________'",
-                options: ["العالمين", "الناسين", "الخلقين", "الكونين"],
-                correct: 0,
-                explanation: "الآية الكاملة: 'الحمد لله رب العالمين'"
-            },
-            {
-                type: "completion",
-                question: "أكمل الآية: 'إياك نعبد و________'",
-                options: ["نخشى", "نستعين", "نرجو", "نخاف"],
+                question: "ما هي الآية الأولى في سورة الفاتحة؟",
+                options: ["الحمد لله رب العالمين", "بسم الله الرحمن الرحيم", "الرحمن الرحيم", "مالك يوم الدين"],
                 correct: 1,
-                explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
+                explanation: "الآية الأولى هي: بسم الله الرحمن الرحيم"
             },
             {
-                type: "completion",
-                question: "أكمل الآية: 'اهدنا الصراط ________'",
-                options: ["الواسع", "المستقيم", "الحق", "السهل"],
-                correct: 1,
-                explanation: "الآية الكاملة: 'اهدنا الصراط المستقيم'"
-            },
-            {
-                type: "completion",
-                question: "أكمل الآية: 'بسم الله ________ الرحيم'",
-                options: ["العظيم", "الكبير", "الرحمن", "الغفور"],
-                correct: 2,
-                explanation: "الآية الكاملة: 'بسم الله الرحمن الرحيم'"
-            },
-            {
-                type: "completion",
-                question: "أكمل الآية: 'غير المغضوب عليهم ولا ________'",
-                options: ["الضالين", "الكافرين", "الفاسقين", "المشركين"],
-                correct: 0,
-                explanation: "الآية الكاملة: 'غير المغضوب عليهم ولا الضالين'"
-            },
-            
-            // أسئلة ترتيب الآيات (10 سؤال)
-            {
-                type: "order",
-                question: "ما هي الآية الثالثة في سورة الفاتحة؟",
-                options: ["الرحمن الرحيم", "مالك يوم الدين", "إياك نعبد وإياك نستعين", "الحمد لله رب العالمين"],
-                correct: 0,
-                explanation: "الآية الثالثة هي: 'الرحمن الرحيم'"
-            },
-            {
-                type: "order",
-                question: "ما هي الآية الأخيرة في سورة الفاتحة؟",
-                options: ["صراط الذين أنعمت عليهم", "غير المغضوب عليهم ولا الضالين", "اهدنا الصراط المستقيم", "إياك نعبد وإياك نستعين"],
-                correct: 1,
-                explanation: "الآية الأخيرة: 'غير المغضوب عليهم ولا الضالين'"
-            },
-            {
-                type: "order",
-                question: "ما هي الآية التي تلي 'مالك يوم الدين'؟",
-                options: ["الحمد لله رب العالمين", "الرحمن الرحيم", "إياك نعبد وإياك نستعين", "اهدنا الصراط المستقيم"],
-                correct: 2,
-                explanation: "بعد 'مالك يوم الدين' تأتي 'إياك نعبد وإياك نستعين'"
-            },
-            
-            // أسئلة عدد الآيات (5 أسئلة)
-            {
-                type: "count",
                 question: "كم عدد آيات سورة الفاتحة؟",
                 options: ["5 آيات", "6 آيات", "7 آيات", "8 آيات"],
                 correct: 2,
                 explanation: "سورة الفاتحة تتكون من 7 آيات"
             },
             {
-                type: "count",
-                question: "كم مرة ترد كلمة 'الرحيم' في سورة الفاتحة؟",
-                options: ["مرة واحدة", "مرتين", "ثلاث مرات", "أربع مرات"],
+                question: "أكمل الآية: 'إياك نعبد و________'",
+                options: ["نخشى", "نستعين", "نرجو", "نخاف"],
                 correct: 1,
-                explanation: "تأتي كلمة 'الرحيم' مرتين: في البسملة وفي الآية الثالثة"
+                explanation: "الآية الكاملة: 'إياك نعبد وإياك نستعين'"
             },
-            
-            // أسئلة الكلمات المفتاحية (10 أسئلة)
             {
-                type: "keywords",
                 question: "ما معنى 'العالمين' في السورة؟",
                 options: ["البشر فقط", "الجن فقط", "جميع المخلوقات", "الملائكة فقط"],
                 correct: 2,
-                explanation: "'العالمين' تشمل جميع المخلوقات في السماوات والأرض"
+                explanation: "'العالمين' تشمل جميع المخلوقات"
             },
             {
-                type: "keywords",
-                question: "ما المقصود بـ 'الصراط المستقيم'؟",
-                options: ["طريق المال", "طريق الهداية", "طريق التجارة", "طريق السفر"],
-                correct: 1,
-                explanation: "'الصراط المستقيم' هو طريق الإسلام والهداية"
-            },
-            {
-                type: "keywords",
                 question: "من هم 'المغضوب عليهم'؟",
-                options: ["النصارى", "اليهود", "المشركين", "الكفار"],
+                options: ["النصارى", "اليهود", "المشركين", "المنافقين"],
                 correct: 1,
-                explanation: "'المغضوب عليهم' هم اليهود الذين عرفوا الحق ولم يتبعوه"
-            },
-            {
-                type: "keywords",
-                question: "من هم 'الضالين'؟",
-                options: ["اليهود", "النصارى", "المشركين", "المنافقين"],
-                correct: 1,
-                explanation: "'الضالين' هم النصارى الذين عبدوا الله على جهل وضلال"
-            },
-            
-            // أسئلة التلاوة (10 أسئلة)
-            {
-                type: "recitation",
-                question: "أين تقف عند قراءة: 'إياك نعبد وإياك نستعين'؟",
-                options: ["لا يوجد وقف", "بعد نعبد", "بعد نستعين", "بعد إياك الأولى"],
-                correct: 0,
-                explanation: "يستحب وصل الآية كلها دون وقف"
-            },
-            {
-                type: "recitation",
-                question: "ما حكم البسملة في بداية سورة الفاتحة؟",
-                options: ["واجبة", "سنة", "مستحبة", "مكروهة"],
-                correct: 0,
-                explanation: "البسملة آية من سورة الفاتحة وتجب قراءتها في الصلاة"
+                explanation: "'المغضوب عليهم' هم اليهود"
             }
         ];
-
-        // === قاعدة أسئلة الفهم (50 سؤال) ===
+        
         const understandingQuestions = [
             {
-                type: "meaning",
-                question: "ما معنى 'الرحمن الرحيم'؟",
-                answer: "الرحمن: ذو الرحمة الواسعة الشاملة لجميع الخلق، الرحيم: ذو الرحمة الخاصة بالمؤمنين"
+                question: "لماذا سميت سورة الفاتحة بأم القرآن؟",
+                hint: "لأنها تجمع معاني القرآن الكريم"
             },
             {
-                type: "meaning",
-                question: "لماذا بدأ الله السورة بالحمد؟",
-                answer: "لتعليم العباد كيف يبدأون كلامهم بالثناء على الله، ولإظهار أن كل نعمة من الله"
-            },
-            {
-                type: "meaning",
-                question: "ما معنى 'مالك يوم الدين'؟",
-                answer: "أن الله هو المالك المتصرف وحده في يوم القيامة، وهو اليوم الذي يجازي فيه الناس على أعمالهم"
-            },
-            {
-                type: "meaning",
-                question: "ما الفرق بين 'نعبد' و'نستعين'؟",
-                answer: "'نعبد': نخصك بالعبادة، 'نستعين': نطلب منك العون في جميع أمورنا"
-            },
-            {
-                type: "meaning",
                 question: "ما أهمية طلب الهداية في كل صلاة؟",
-                answer: "للتذكير بأن الهداية من الله، وللحاجة الدائمة إليها، وللتجديد الدائم للعزم على اتباع الحق"
+                hint: "للتذكير بأن الهداية من الله"
             },
             {
-                type: "application",
-                question: "كيف تطبق معنى 'إياك نعبد' في حياتك اليومية؟",
-                answer: "بإخلاص العبادة لله وحده، والتقرب إليه بالطاعات، واجتناب المعاصي"
-            },
-            {
-                type: "application",
-                question: "ما الدروس المستفادة من تقسيم السورة إلى ثناء وعبادة ودعاء؟",
-                answer: "أسلوب الدعاء الناجح يبدأ بالثناء على الله، ثم الإقرار بالعبودية، ثم طلب الحاجة"
-            },
-            {
-                type: "application",
-                question: "كيف تساعدك السورة على تجنب طريق الضالين؟",
-                answer: "بتذكيري الدائم بطلب الهداية، وبمعرفة صفات أهل الضلال لأتجنبها"
+                question: "ما الفرق بين 'الرحمن' و'الرحيم'؟",
+                hint: "الرحمن: رحمة عامة، الرحيم: رحمة خاصة بالمؤمنين"
             }
         ];
-
-        // === لعبة الربط ===
-        const matchingPairs = [
-            { word: "الرحمن", meaning: "ذو الرحمة الواسعة" },
-            { word: "العالمين", meaning: "جميع الخلائق" },
-            { word: "الرحيم", meaning: "ذي الرحمة الخاصة" },
-            { word: "الدين", meaning: "يوم القيامة" },
-            { word: "الصراط", meaning: "الطريق" },
-            { word: "المستقيم", meaning: "المعدل" },
-            { word: "أنعمت", meaning: "أعطيت النعمة" },
-            { word: "المغضوب", meaning: "اليهود" },
-            { word: "الضالين", meaning: "النصارى" },
-            { word: "العبادة", meaning: "التذلل والخضوع" }
-        ];
-
-        // === المتغيرات العامة ===
-        let currentMemoryQuestions = [];
-        let currentUnderstandingQuestions = [];
-        let currentMatchingPairs = [];
         
-        let currentQuestionIndex = 0;
-        let currentUnderstandingIndex = 0;
-        let userAnswers = [];
-        let understandingAnswers = [];
+        // === التحكم في الأقسام ===
+        let currentSection = null;
         
-        let quizScore = 0;
-        let understandingScore = 0;
-        
-        // === نظام المحتوى المخفي ===
-        let currentlyOpen = null;
-        
-        function showContent(contentId) {
-            // إغلاق المحتوى المفتوح حالياً
-            if (currentlyOpen && currentlyOpen !== contentId) {
-                document.getElementById(currentlyOpen).classList.remove('visible');
+        function showSection(sectionId) {
+            // إخفاء القسم الحالي إذا كان مفتوحاً
+            if (currentSection) {
+                hideSection(currentSection);
             }
             
-            const content = document.getElementById(contentId);
+            // إظهار القسم الجديد
+            const section = document.getElementById(sectionId);
+            section.classList.add('visible');
+            currentSection = sectionId;
             
-            // فتح/إغلاق المحتوى المحدد
-            if (content.classList.contains('visible')) {
-                content.classList.remove('visible');
-                currentlyOpen = null;
-            } else {
-                content.classList.add('visible');
-                currentlyOpen = contentId;
-                
-                // التمرير للمحتوى
-                content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // تهيئة الخريطة الذهنية إذا تم فتحها
-                if (contentId === 'mind-map') {
-                    initMindMap();
-                }
+            // التمرير للقسم
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // تهيئة المحتوى إذا لزم
+            if (sectionId === 'quiz') {
+                initQuiz();
+            } else if (sectionId === 'understanding') {
+                initUnderstanding();
             }
         }
         
-        function hideContent(contentId) {
-            document.getElementById(contentId).classList.remove('visible');
-            if (currentlyOpen === contentId) {
-                currentlyOpen = null;
+        function hideSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.remove('visible');
+            if (currentSection === sectionId) {
+                currentSection = null;
             }
-        }
-        
-        // === نظام الأنشطة ===
-        function showActivity(activityId) {
-            // إخفاء جميع الأنشطة
-            document.querySelectorAll('.activity-container').forEach(activity => {
-                activity.classList.remove('visible');
-            });
-            
-            // إظهار النشاط المحدد
-            document.getElementById(activityId).classList.add('visible');
-            
-            // التمرير للنشاط
-            document.getElementById(activityId).scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function hideActivity(activityId) {
-            document.getElementById(activityId).classList.remove('visible');
-        }
-        
-        // === الخريطة الذهنية ===
-        function initMindMap() {
-            // إضافة أحداث السحب للخريطة
-            const canvas = document.getElementById('mind-map-canvas');
-            const nodes = document.querySelectorAll('.map-node');
-            
-            nodes.forEach(node => {
-                node.addEventListener('mousedown', startDrag);
-                node.addEventListener('touchstart', startDrag);
-            });
-            
-            // جعل الخريطة قابلة للسحب
-            let isDragging = false;
-            let startX, startY, initialX, initialY;
-            
-            function startDrag(e) {
-                isDragging = true;
-                const node = e.target;
-                
-                if (e.type.includes('touch')) {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                } else {
-                    startX = e.clientX;
-                    startY = e.clientY;
-                }
-                
-                initialX = node.offsetLeft;
-                initialY = node.offsetTop;
-                
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('touchmove', drag);
-                document.addEventListener('mouseup', stopDrag);
-                document.addEventListener('touchend', stopDrag);
-            }
-            
-            function drag(e) {
-                if (!isDragging) return;
-                
-                e.preventDefault();
-                let currentX, currentY;
-                
-                if (e.type.includes('touch')) {
-                    currentX = e.touches[0].clientX;
-                    currentY = e.touches[0].clientY;
-                } else {
-                    currentX = e.clientX;
-                    currentY = e.clientY;
-                }
-                
-                const dx = currentX - startX;
-                const dy = currentY - startY;
-                
-                const node = e.target.closest('.map-node');
-                if (node) {
-                    node.style.left = `${initialX + dx}px`;
-                    node.style.top = `${initialY + dy}px`;
-                }
-            }
-            
-            function stopDrag() {
-                isDragging = false;
-                document.removeEventListener('mousemove', drag);
-                document.removeEventListener('touchmove', drag);
-                document.removeEventListener('mouseup', stopDrag);
-                document.removeEventListener('touchend', stopDrag);
-            }
-        }
-        
-        function zoomNode(node) {
-            // تأثير التكبير عند النقر
-            node.style.transform = node.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
-            node.style.zIndex = node.style.zIndex === '100' ? '1' : '100';
-        }
-        
-        function resetMindMap() {
-            const nodes = document.querySelectorAll('.map-node');
-            
-            // إعادة العقد إلى أماكنها الأصلية
-            nodes.forEach(node => {
-                node.style.left = '';
-                node.style.top = '';
-                node.style.transform = 'scale(1)';
-                node.style.zIndex = '1';
-            });
         }
         
         // === اختبار الحفظ ===
-        function startQuiz() {
-            // توليد 10 أسئلة عشوائية من قاعدة الأسئلة
-            currentMemoryQuestions = [...memoryQuestions]
+        let currentQuizQuestions = [];
+        let userQuizAnswers = [];
+        let currentQuizIndex = 0;
+        
+        function initQuiz() {
+            // اختيار 3 أسئلة عشوائية
+            currentQuizQuestions = [...memoryQuestions]
                 .sort(() => Math.random() - 0.5)
-                .slice(0, 10);
+                .slice(0, 3);
             
-            currentQuestionIndex = 0;
-            quizScore = 0;
-            userAnswers = new Array(currentMemoryQuestions.length).fill(null);
+            currentQuizIndex = 0;
+            userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
             
-            // إظهار واجهة الاختبار
-            showActivity('quiz-container');
-            displayQuestion();
+            displayQuizQuestion();
         }
         
-        function displayQuestion() {
-            if (currentQuestionIndex >= currentMemoryQuestions.length) {
-                showQuizResults();
+        function displayQuizQuestion() {
+            const container = document.getElementById('quiz-container');
+            
+            if (currentQuizIndex >= currentQuizQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 3rem;">✅</div>
+                        <h3 style="color: var(--quran-green);">اكتمل الاختبار</h3>
+                        <p>اضغط على زر "تصحيح الإجابات" لمعرفة نتيجتك</p>
+                    </div>
+                `;
                 return;
             }
             
-            const question = currentMemoryQuestions[currentQuestionIndex];
-            const container = document.getElementById('quiz-questions');
-            
-            // تحديث العداد
-            document.getElementById('quiz-counter').textContent = 
-                `السؤال ${currentQuestionIndex + 1} من ${currentMemoryQuestions.length}`;
-            
-            // إنشاء HTML للسؤال
+            const question = currentQuizQuestions[currentQuizIndex];
             let optionsHTML = '';
             const letters = ['أ', 'ب', 'ج', 'د'];
             
             question.options.forEach((option, index) => {
-                const isSelected = userAnswers[currentQuestionIndex] === index;
+                const isSelected = userQuizAnswers[currentQuizIndex] === index;
                 optionsHTML += `
-                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${index})">
-                        <div class="option-letter">${letters[index]}</div>
-                        <div>${option}</div>
+                    <div class="answer-btn ${isSelected ? 'selected' : ''}" 
+                         onclick="selectQuizAnswer(${index})">
+                         ${letters[index]}. ${option}
                     </div>
                 `;
             });
             
             container.innerHTML = `
-                <div class="question">
-                    <div class="question-text">${question.question}</div>
-                    <div class="options-grid">
+                <div class="quiz-question">
+                    <h3>السؤال ${currentQuizIndex + 1}: ${question.question}</h3>
+                    <div class="answer-buttons">
                         ${optionsHTML}
                     </div>
                 </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevQuizQuestion()" 
+                            ${currentQuizIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextQuizQuestion()">
+                        ${currentQuizIndex === currentQuizQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
             `;
-            
-            // تحديث حالة أزرار التنقل
-            updateQuizNavigation();
         }
         
-        function selectAnswer(answerIndex) {
-            // إزالة التحديد من جميع الخيارات
-            const options = document.querySelectorAll('#quiz-questions .option');
-            options.forEach(option => option.classList.remove('selected'));
-            
-            // تحديد الخيار المختار
-            options[answerIndex].classList.add('selected');
-            userAnswers[currentQuestionIndex] = answerIndex;
-            
-            // تمكين زر التحقق
-            document.getElementById('check-btn').disabled = false;
+        function selectQuizAnswer(answerIndex) {
+            userQuizAnswers[currentQuizIndex] = answerIndex;
+            displayQuizQuestion();
         }
         
-        function checkAnswer() {
-            const question = currentMemoryQuestions[currentQuestionIndex];
-            const userAnswer = userAnswers[currentQuestionIndex];
-            const options = document.querySelectorAll('#quiz-questions .option');
-            
-            if (userAnswer === null) {
-                alert('الرجاء اختيار إجابة أولاً');
-                return;
+        function nextQuizQuestion() {
+            if (currentQuizIndex < currentQuizQuestions.length - 1) {
+                currentQuizIndex++;
+                displayQuizQuestion();
+            } else {
+                // إنهاء الاختبار
+                currentQuizIndex = currentQuizQuestions.length;
+                displayQuizQuestion();
             }
+        }
+        
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                displayQuizQuestion();
+            }
+        }
+        
+        function submitQuiz() {
+            let score = 0;
+            let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
             
-            // تلوين الإجابات
-            options.forEach((option, index) => {
-                if (index === question.correct) {
-                    option.style.background = '#d4edda';
-                    option.style.borderColor = '#28a745';
-                } else if (index === userAnswer && index !== question.correct) {
-                    option.style.background = '#f8d7da';
-                    option.style.borderColor = '#dc3545';
-                }
+            currentQuizQuestions.forEach((question, index) => {
+                const userAnswer = userQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
+                        <strong>إجابتك:</strong> ${userAnswer !== null ? question.options[userAnswer] : 'لم تجب'}<br>
+                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correct]}<br>
+                        <em>${question.explanation}</em>
+                    </div>
+                `;
             });
             
-            // حساب النتيجة
-            if (userAnswer === question.correct) {
-                quizScore++;
-            }
+            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
+            let message = '';
             
-            // تعطيل زر التحقق
-            document.getElementById('check-btn').disabled = true;
-        }
-        
-        function nextQuestion() {
-            if (currentQuestionIndex < currentMemoryQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-            } else {
-                showQuizResults();
-            }
-        }
-        
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion();
-            }
-        }
-        
-        function skipQuestion() {
-            userAnswers[currentQuestionIndex] = null;
-            nextQuestion();
-        }
-        
-        function updateQuizNavigation() {
-            // يمكن إضافة منطق لتحديث حالة الأزرار
-        }
-        
-        function showQuizResults() {
-            const percentage = Math.round((quizScore / currentMemoryQuestions.length) * 100);
-            const resultContainer = document.getElementById('result-container');
-            
-            let message, color;
             if (percentage >= 90) {
-                message = "ممتاز! 🎉 أنت متقن لسورة الفاتحة";
-                color = "#2a9d8f";
+                message = '🎉 ممتاز! إتقان تام';
             } else if (percentage >= 70) {
-                message = "جيد جداً! 👍 استمر في المراجعة";
-                color = "#e9c46a";
+                message = '👍 جيد جداً';
             } else if (percentage >= 50) {
-                message = "مستوى مقبول 💪 احرص على التكرار";
-                color = "#e76f51";
+                message = '💪 مقبول، يحتاج مراجعة';
             } else {
-                message = "يحتاج إلى مزيد من الجهد 📚 راجع السورة جيداً";
-                color = "#dc3545";
+                message = '📚 راجع السورة مرة أخرى';
             }
             
-            resultContainer.innerHTML = `
-                <h2 style="color: ${color};">🎯 نتيجة اختبار الحفظ</h2>
-                <div class="score-circle">
-                    <svg class="score-svg" viewBox="0 0 200 200">
-                        <circle class="score-circle-bg" cx="100" cy="100" r="90"></circle>
-                        <circle class="score-circle-progress" id="quiz-result-bar" 
-                                cx="100" cy="100" r="90"></circle>
-                    </svg>
-                    <div class="score-text">${percentage}%</div>
-                </div>
-                <h3>${message}</h3>
-                <p>أجبت بشكل صحيح على ${quizScore} من ${currentMemoryQuestions.length} سؤالاً</p>
-                
-                <div style="margin-top: 30px;">
-                    <button class="nav-btn" onclick="startQuiz()" style="background: ${color};">
-                        🔄 إعادة الاختبار
-                    </button>
-                    <button class="nav-btn" onclick="hideResult()">
-                        ✖ إغلاق النتيجة
-                    </button>
+            resultsHTML += `
+                <div style="background: var(--quran-green); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>${message}</h4>
+                    <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
+                    <p>النسبة: ${percentage}%</p>
                 </div>
             `;
             
-            // عرض النتيجة
-            resultContainer.classList.add('visible');
-            resultContainer.scrollIntoView({ behavior: 'smooth' });
-            
-            // تحريك شريط التقدم
-            setTimeout(() => {
-                const progressBar = document.getElementById('quiz-result-bar');
-                const dashoffset = 565 - (565 * percentage / 100);
-                progressBar.style.strokeDashoffset = dashoffset;
-            }, 100);
-        }
-        
-        function hideResult() {
-            document.getElementById('result-container').classList.remove('visible');
+            document.getElementById('quiz-result').innerHTML = resultsHTML;
+            document.getElementById('quiz-result').classList.add('visible');
         }
         
         // === أسئلة الفهم ===
-        function startUnderstandingQuiz() {
-            // توليد 5 أسئلة عشوائية
-            currentUnderstandingQuestions = [...understandingQuestions]
+        let currentUnderstandingIndex = 0;
+        let userUnderstandingAnswers = [];
+        
+        function initUnderstanding() {
+            // اختيار 2 سؤال عشوائي
+            const selectedQuestions = [...understandingQuestions]
                 .sort(() => Math.random() - 0.5)
-                .slice(0, 5);
+                .slice(0, 2);
             
             currentUnderstandingIndex = 0;
-            understandingScore = 0;
-            understandingAnswers = new Array(currentUnderstandingQuestions.length).fill('');
+            userUnderstandingAnswers = new Array(selectedQuestions.length).fill('');
             
-            showActivity('understanding-container');
-            displayUnderstandingQuestion();
+            displayUnderstandingQuestion(selectedQuestions);
         }
         
-        function displayUnderstandingQuestion() {
-            if (currentUnderstandingIndex >= currentUnderstandingQuestions.length) {
-                showUnderstandingResults();
+        function displayUnderstandingQuestion(questions) {
+            const container = document.getElementById('understanding-container');
+            
+            if (currentUnderstandingIndex >= questions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3rem;">📝</div>
+                        <h3 style="color: #e67700;">اكتملت الأسئلة</h3>
+                        <p>اضغط على زر "إرسال الإجابات"</p>
+                    </div>
+                `;
                 return;
             }
             
-            const question = currentUnderstandingQuestions[currentUnderstandingIndex];
-            const container = document.getElementById('understanding-questions');
-            
-            // تحديث العداد
-            document.getElementById('understanding-counter').textContent = 
-                `السؤال ${currentUnderstandingIndex + 1} من ${currentUnderstandingQuestions.length}`;
+            const question = questions[currentUnderstandingIndex];
             
             container.innerHTML = `
-                <div class="question">
-                    <div class="question-text">${question.question}</div>
-                    <textarea id="understanding-answer" 
-                              rows="6" 
-                              style="width: 100%; padding: 15px; border: 2px solid #dee2e6; border-radius: 10px; margin-top: 20px; font-size: 1rem;"
+                <div class="quiz-question">
+                    <h3>السؤال ${currentUnderstandingIndex + 1}: ${question.question}</h3>
+                    <p style="color: #666; margin-top: 10px;">💡 تلميح: ${question.hint}</p>
+                    <textarea class="answer-input" 
                               placeholder="اكتب إجابتك هنا..."
-                              oninput="saveUnderstandingAnswer()">${understandingAnswers[currentUnderstandingIndex]}</textarea>
-                    
-                    <div id="understanding-hint" style="display: none; margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 10px; color: #856404;">
-                        <strong>💡 تلميح:</strong> فكر في المعنى العام للكلمة وارتباطها ببقية الآية
-                    </div>
+                              oninput="saveUnderstandingAnswer(this.value)"
+                              id="understanding-answer-${currentUnderstandingIndex}">${userUnderstandingAnswers[currentUnderstandingIndex]}</textarea>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevUnderstandingQuestion(questions)" 
+                            ${currentUnderstandingIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextUnderstandingQuestion(questions)">
+                        ${currentUnderstandingIndex === questions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
                 </div>
             `;
         }
         
-        function saveUnderstandingAnswer() {
-            const answer = document.getElementById('understanding-answer').value;
-            understandingAnswers[currentUnderstandingIndex] = answer;
+        function saveUnderstandingAnswer(value) {
+            userUnderstandingAnswers[currentUnderstandingIndex] = value;
         }
         
-        function submitUnderstandingAnswer() {
-            const answer = document.getElementById('understanding-answer').value;
-            if (!answer.trim()) {
-                alert('الرجاء كتابة إجابة أولاً');
-                return;
-            }
-            
-            // هنا يمكن إضافة منطق تصحيح متقدم
-            // للتبسيط، سنعطي درجة إذا كانت الإجابة تحتوي على كلمات مفتاحية
-            const question = currentUnderstandingQuestions[currentUnderstandingIndex];
-            const keywords = getKeywordsForQuestion(question.type);
-            const hasKeywords = keywords.some(keyword => 
-                answer.toLowerCase().includes(keyword.toLowerCase())
-            );
-            
-            if (hasKeywords) {
-                understandingScore++;
-            }
-            
-            nextUnderstandingQuestion();
-        }
-        
-        function getKeywordsForQuestion(type) {
-            const keywords = {
-                meaning: ['رحمة', 'واسعة', 'خاصة', 'الخلق', 'المؤمنين'],
-                application: ['تطبيق', 'حياة', 'يومية', 'عبادة', 'دعاء', 'ثناء']
-            };
-            return keywords[type] || [];
-        }
-        
-        function showUnderstandingHint() {
-            document.getElementById('understanding-hint').style.display = 'block';
-        }
-        
-        function nextUnderstandingQuestion() {
-            if (currentUnderstandingIndex < currentUnderstandingQuestions.length - 1) {
+        function nextUnderstandingQuestion(questions) {
+            if (currentUnderstandingIndex < questions.length - 1) {
                 currentUnderstandingIndex++;
-                displayUnderstandingQuestion();
+                displayUnderstandingQuestion(questions);
             } else {
-                showUnderstandingResults();
+                currentUnderstandingIndex = questions.length;
+                displayUnderstandingQuestion(questions);
             }
         }
         
-        function prevUnderstandingQuestion() {
+        function prevUnderstandingQuestion(questions) {
             if (currentUnderstandingIndex > 0) {
                 currentUnderstandingIndex--;
-                displayUnderstandingQuestion();
+                displayUnderstandingQuestion(questions);
             }
         }
         
-        function showUnderstandingResults() {
-            const percentage = Math.round((understandingScore / currentUnderstandingQuestions.length) * 100);
+        function submitUnderstanding() {
+            const questions = understandingQuestions.slice(0, 2); // أول سؤالين
+            let resultsHTML = '<h3>📝 تقييم إجاباتك</h3>';
             
-            alert(`🎯 نتيجة أسئلة الفهم:\n\nنقاطك: ${understandingScore} من ${currentUnderstandingQuestions.length}\nالنسبة: ${percentage}%\n\n${percentage >= 60 ? 'أحسنت! لديك فهم جيد للسورة' : 'راجع معاني السورة مرة أخرى'}`);
-            
-            hideActivity('understanding-container');
-        }
-        
-        // === لعبة الربط ===
-        function startMatchingGame() {
-            // اختيار 5 أزواج عشوائية
-            currentMatchingPairs = [...matchingPairs]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, 5);
-            
-            // فصل الكلمات عن المعاني
-            const words = currentMatchingPairs.map(pair => pair.word);
-            const meanings = currentMatchingPairs.map(pair => pair.meaning);
-            
-            // خلط الكلمات والمعاني
-            const shuffledWords = [...words].sort(() => Math.random() - 0.5);
-            const shuffledMeanings = [...meanings].sort(() => Math.random() - 0.5);
-            
-            // بناء واجهة اللعبة
-            const gameContainer = document.getElementById('matching-game');
-            
-            let wordsHTML = '<h3>الكلمات</h3>';
-            shuffledWords.forEach(word => {
-                wordsHTML += `
-                    <div class="matching-item" draggable="true" ondragstart="drag(event)" data-word="${word}">
-                        ${word}
-                    </div>
-                `;
-            });
-            
-            let meaningsHTML = '<h3>المعاني</h3>';
-            shuffledMeanings.forEach(meaning => {
-                meaningsHTML += `
-                    <div class="matching-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" data-meaning="${meaning}">
-                        ${meaning}
-                    </div>
-                `;
-            });
-            
-            gameContainer.innerHTML = `
-                <div class="matching-column">
-                    ${wordsHTML}
-                </div>
-                <div class="matching-column">
-                    ${meaningsHTML}
-                </div>
-            `;
-            
-            showActivity('matching-container');
-        }
-        
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-        
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.getAttribute('data-word'));
-        }
-        
-        function drop(event) {
-            event.preventDefault();
-            const word = event.dataTransfer.getData("text");
-            const dropzone = event.target;
-            
-            // البحث عن المعنى الصحيح للكلمة
-            const correctPair = currentMatchingPairs.find(pair => pair.word === word);
-            
-            if (correctPair && dropzone.getAttribute('data-meaning') === correctPair.meaning) {
-                dropzone.style.background = '#d4edda';
-                dropzone.style.borderColor = '#28a745';
-                dropzone.innerHTML = `✅ ${word} - ${correctPair.meaning}`;
-                dropzone.classList.add('correct');
-            } else {
-                dropzone.style.background = '#f8d7da';
-                dropzone.style.borderColor = '#dc3545';
-                dropzone.classList.add('incorrect');
+            questions.forEach((question, index) => {
+                const userAnswer = userUnderstandingAnswers[index] || 'لم تجب على هذا السؤال';
                 
-                setTimeout(() => {
-                    dropzone.style.background = '';
-                    dropzone.style.borderColor = '';
-                    dropzone.classList.remove('incorrect');
-                }, 1000);
-            }
-        }
-        
-        function checkMatchingGame() {
-            const correctMatches = document.querySelectorAll('.matching-dropzone.correct').length;
-            const totalPairs = currentMatchingPairs.length;
-            
-            if (correctMatches === totalPairs) {
-                alert(`🎉 أحسنت! ربطت جميع الكلمات بمعانيها الصحيحة!\n\n${correctMatches} من ${totalPairs} صحيحة`);
-            } else {
-                alert(`📝 تحتاج إلى مزيد من المحاولة!\n\n${correctMatches} من ${totalPairs} صحيحة`);
-            }
-        }
-        
-        function shuffleMatchingGame() {
-            startMatchingGame();
-        }
-        
-        function showMatchingSolution() {
-            const gameContainer = document.getElementById('matching-game');
-            
-            let solutionHTML = '<h3>الحل الصحيح</h3>';
-            currentMatchingPairs.forEach(pair => {
-                solutionHTML += `
-                    <div style="padding: 15px; margin: 10px 0; background: #d4edda; border-radius: 10px; border-left: 4px solid #28a745;">
-                        <strong>${pair.word}</strong> = ${pair.meaning}
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
+                        <strong>إجابتك:</strong> ${userAnswer}<br>
+                        <strong>الإرشاد:</strong> ${question.hint}
                     </div>
                 `;
             });
             
-            gameContainer.innerHTML = `
-                <div class="matching-column">
-                    ${solutionHTML}
-                </div>
-                <div class="matching-column">
-                    <div style="text-align: center; padding: 40px;">
-                        <div style="font-size: 4rem;">✅</div>
-                        <h3>الحل الكامل</h3>
-                        <p>حاول تذكر هذه المطابقات</p>
-                    </div>
+            resultsHTML += `
+                <div style="background: #e9c46a; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>🔍 نصائح للتحسين:</h4>
+                    <p>• راجع تفسير السورة</p>
+                    <p>• استمع لشروحات العلماء</p>
+                    <p>• ناقش الأسئلة مع معلم أو صديق</p>
                 </div>
             `;
-        }
-        
-        // === تتبع التقدم ===
-        function showProgress() {
-            // جلب بيانات التقدم من localStorage
-            const progressData = JSON.parse(localStorage.getItem('surah-progress') || '{"memorized": 0, "repetitions": 0, "tests": 0}');
             
-            // حساب النسبة المئوية
-            const progressPercentage = Math.min(Math.round((progressData.memorized / 7) * 100), 100);
-            
-            // تحديث العرض
-            document.getElementById('memorized-count').textContent = 
-                `${progressData.memorized} من 7 آيات`;
-            document.getElementById('repetition-count').textContent = 
-                `${progressData.repetitions} مرة`;
-            document.getElementById('tests-count').textContent = 
-                `${progressData.tests} اجتازها`;
-            
-            // تحديث التقييم
-            let rating = "مبتدئ";
-            if (progressPercentage >= 80) rating = "ممتاز";
-            else if (progressPercentage >= 60) rating = "جيد";
-            else if (progressPercentage >= 40) rating = "متوسط";
-            document.getElementById('rating').textContent = rating;
-            
-            // تحديث شريط التقدم
-            const progressBar = document.getElementById('progress-bar');
-            const dashoffset = 565 - (565 * progressPercentage / 100);
-            progressBar.style.strokeDashoffset = dashoffset;
-            document.getElementById('progress-percentage').textContent = `${progressPercentage}%`;
-            
-            showActivity('progress-container');
-        }
-        
-        function resetProgress() {
-            if (confirm('هل تريد إعادة تعيين جميع بيانات التقدم؟')) {
-                localStorage.setItem('surah-progress', JSON.stringify({
-                    memorized: 0,
-                    repetitions: 0,
-                    tests: 0
-                }));
-                showProgress();
-            }
-        }
-        
-        function exportProgress() {
-            const progressData = JSON.parse(localStorage.getItem('surah-progress') || '{}');
-            const dataStr = JSON.stringify(progressData, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportFileDefaultName = 'تقدم-حفظ-الفاتحة.json';
-            
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
+            document.getElementById('understanding-result').innerHTML = resultsHTML;
+            document.getElementById('understanding-result').classList.add('visible');
         }
         
         // === تهيئة الصفحة ===
