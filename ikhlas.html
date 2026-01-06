@@ -32,13 +32,17 @@
             padding: 15px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);
         }
         
+        .logo-container { flex-shrink: 0; }
+        
         .logo-circle {
             width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), #f59e0b);
             display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.1); animation: float 3s ease-in-out infinite; overflow: hidden;
         }
         
-        .logo-fallback { font-size: 40px; }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        
+        .logo-fallback { font-size: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
         
         .main-title { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--gold); margin: 0; text-shadow: 0 2px 8px rgba(251, 191, 36, 0.4); }
         
@@ -72,20 +76,25 @@
         
         .checkbox-circle { width: 25px; height: 25px; border: 2px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         
-        .controls { display: flex; gap: 10px; margin-top: 15px; justify-content: center; }
+        .controls { display: flex; gap: 10px; margin-top: 15px; justify-content: center; flex-wrap: wrap; }
         
-        .control-btn.reset { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fecaca; padding: 12px 20px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .control-btn.reset { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fecaca; padding: 12px 20px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; flex: 1; min-width: 200px; justify-content: center; }
         
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         
-        @media (max-width: 768px) { .inner-grid { grid-template-columns: 1fr; } .surah-name { font-size: 2.2rem; } }
+        @media (max-width: 768px) { .inner-grid { grid-template-columns: 1fr; } .surah-name { font-size: 2.2rem; } .control-btn { min-width: 100%; } }
     </style>
 </head>
-<body>
+<body onload="loadLogoImage()">
 
 <div class="container">
     <div class="header">
-        <div class="logo-circle"><div class="logo-fallback">📖</div></div>
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img id="logoImg" alt="لوغو">
+                <div class="logo-fallback">📖</div>
+            </div>
+        </div>
         <div class="title-container">
             <h1 class="main-title">الكتاب الذكي لحفظ القرآن الكريم</h1>
             <p class="subtitle">منصة تفاعلية لتسهيل حفظ ومراجعة القرآن</p>
@@ -141,7 +150,7 @@
                 <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=Pi4Hf6Dskgw')">
                     <i class="fas fa-user-tie"></i> محمود الحصري
                 </button>
-                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=OquUdWeXbVc')">
+                <button class="btn" onclick="smartPlay('https://www.youtube.com/watch?v=LS7108eyK8E')">
                     <i class="fas fa-redo"></i> تكرار للحفظ
                 </button>
                 <button class="btn full" onclick="smartPlay('https://www.youtube.com/watch?v=7uTOLRHkXlU')">
@@ -199,7 +208,7 @@
         document.getElementById('placeholder').style.display = 'none';
     }
 
-    const surahId = 'ikhlas'; // للتجربة
+    const surahId = 'ikhlas';
 
     function toggleProgress() {
         const btn = document.getElementById('doneBtn');
@@ -212,7 +221,7 @@
             icon.innerHTML = "✔";
             text.innerHTML = "تم الحفظ بنجاح";
             localStorage.setItem(`surah_${surahId}_completed`, 'true');
-            confetti({ particleCount: 200, spread: 100, origin: { y: 0.8 } });
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.8 }, colors: ['#fbbf24', '#34d399', '#f472b6', '#ffffff'] });
         } else {
             icon.innerHTML = "";
             text.innerHTML = "تحديد كـ 'تم الحفظ'";
@@ -234,15 +243,29 @@
         }
     }
 
-    // تحميل الحالة عند الفتح
-    window.onload = function() {
+    function loadLogoImage() {
+        const logoImg = document.getElementById('logoImg');
+        const fallback = document.querySelector('.logo-fallback');
+        
+        logoImg.src = 'image.png';
+        logoImg.onload = () => {
+            logoImg.style.display = 'block';
+            fallback.style.display = 'none';
+        };
+        logoImg.onerror = () => {
+            fallback.style.display = 'flex';
+        };
+    }
+
+    // تحميل الحالة
+    window.addEventListener('load', () => {
         if (localStorage.getItem(`surah_${surahId}_completed`) === 'true') {
             document.getElementById('doneBtn').classList.add('completed');
             document.getElementById('checkIcon').innerHTML = "✔";
             document.getElementById('btnText').innerHTML = "تم الحفظ بنجاح";
         }
         document.getElementById('reviewCount').textContent = localStorage.getItem(`surah_${surahId}_reviews`) || '0';
-    }
+    });
 </script>
 
 </body>
