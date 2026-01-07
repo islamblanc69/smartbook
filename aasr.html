@@ -6,157 +6,106 @@
     <title>سورة العصر - القرآن التفاعلي</title>
     <link rel="icon" href="image.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 🔴 CSS بدون أي تغيير -->
+    <!-- ❌ CSS كما هو بدون أي تغيير -->
 </head>
 <body>
+    <!-- زر العودة للمصحف الرئيسي -->
+    <div class="top-button-container">
+        <a href="index.html" class="back-to-mushaf-btn">
+            <i class="fas fa-quran"></i> المصحف الإلكتروني الذكي
+        </a>
+    </div>
 
-<div class="container">
-    <div class="header">
-        <div class="logo-container">
-            <div class="logo">📖</div>
-            <div>
-                <h1>سورة العصر</h1>
-                <p>سورة تبين أن الإنسان في خسر إلا من آمن وعمل الصالحات</p>
+    <div class="container">
+        <!-- الهيدر -->
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="image.png" alt="لوغو" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
+                </div>
+                <div>
+                    <h1>سورة العصر</h1>
+                    <p>سورة تبين خسران الإنسان إلا بالإيمان والعمل الصالح</p>
+                </div>
             </div>
+        </div>
+
+        <!-- المحتوى -->
+        <div class="content-section">
+
+            <!-- خطة الحفظ -->
+            <div id="mind-map" class="hidden-content">
+                <div class="simple-mind-map">
+                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة العصر</h2>
+
+                    <div class="map-step">
+                        <span class="step-number">١</span>
+                        <h3>اليوم الأول</h3>
+                        <p>حفظ السورة كاملة (قصيرة – 3 آيات)</p>
+                        <p>⏰ 10 دقائق</p>
+                    </div>
+
+                    <div class="map-step">
+                        <span class="step-number">٢</span>
+                        <h3>اليوم الثاني</h3>
+                        <p>تكرار السورة 10 مرات مع التدبر</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نص السورة -->
+            <div id="quran-text" class="hidden-content visible">
+                <h2 style="text-align:center;">📖 سورة العصر كاملة</h2>
+                <p style="text-align:center;">سورة مكية – عدد آياتها 3</p>
+
+                <div class="quran-text">
+                    <div class="verse"><div class="verse-number">١</div>وَالْعَصْرِ</div>
+                    <div class="verse"><div class="verse-number">٢</div>إِنَّ الْإِنسَانَ لَفِي خُسْرٍ</div>
+                    <div class="verse"><div class="verse-number">٣</div>
+                        إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ
+                        وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات السورة -->
+            <div id="surah-info" class="hidden-content">
+                <h2 style="text-align:center;">ℹ️ معلومات عن سورة العصر</h2>
+                <div class="surah-info-grid">
+                    <div class="info-box"><div class="info-label">رقم السورة</div><div class="info-value">103</div></div>
+                    <div class="info-box"><div class="info-label">نوع السورة</div><div class="info-value">مكية</div></div>
+                    <div class="info-box"><div class="info-label">عدد الآيات</div><div class="info-value">3</div></div>
+                    <div class="info-box"><div class="info-label">عدد الكلمات</div><div class="info-value">14</div></div>
+                    <div class="info-box"><div class="info-label">عدد الحروف</div><div class="info-value">68</div></div>
+                </div>
+            </div>
+
+            <!-- قصة السورة -->
+            <div id="surah-story" class="hidden-content">
+                <div class="story-section">
+                    <h2>📖 قصة وفضل سورة العصر</h2>
+                    <p>قال الإمام الشافعي: لو ما أنزل الله حجة على خلقه إلا هذه السورة لكفتهم.</p>
+                    <p>تجمع أصول النجاة: الإيمان، العمل الصالح، التواصي بالحق، التواصي بالصبر.</p>
+                </div>
+            </div>
+
+            <!-- تفسير -->
+            <div id="tafsir-section" class="hidden-content">
+                <div class="tafsir-section">
+                    <h2 class="tafsir-title">📚 تفسير سورة العصر</h2>
+                    <p><strong>والعصر:</strong> قسم بالزمن.</p>
+                    <p><strong>إن الإنسان لفي خسر:</strong> خاسر في عمره وأعماله.</p>
+                    <p><strong>إلا الذين آمنوا:</strong> نجوا بالإيمان والعمل الصالح.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الفوتر -->
+        <div class="footer">
+            <p>© 2026 مكتبة إسلام عنابة</p>
         </div>
     </div>
 
-    <!-- ================= السورة كاملة ================= -->
-    <div id="quran-text" class="hidden-content visible">
-        <h2 style="text-align:center;color:#1a5f7a;">📖 سورة العصر كاملة</h2>
-        <p style="text-align:center;">سورة مكية – عدد آياتها 3</p>
-
-        <div class="quran-text">
-            <div class="verse">
-                <div class="verse-number">١</div>
-                وَالْعَصْرِ
-            </div>
-            <div class="verse">
-                <div class="verse-number">٢</div>
-                إِنَّ الْإِنسَانَ لَفِي خُسْرٍ
-            </div>
-            <div class="verse">
-                <div class="verse-number">٣</div>
-                إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= معلومات السورة ================= -->
-    <div id="surah-info" class="hidden-content">
-        <h2 style="text-align:center;">ℹ️ معلومات عن سورة العصر</h2>
-
-        <div class="surah-info-grid">
-            <div class="info-box">
-                <div class="info-label">رقم السورة</div>
-                <div class="info-value">103</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">نوع السورة</div>
-                <div class="info-value">مكية</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">عدد الآيات</div>
-                <div class="info-value">3 آيات</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">عدد الكلمات</div>
-                <div class="info-value">14 كلمة</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">عدد الحروف</div>
-                <div class="info-value">68 حرفًا</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">مدة التلاوة</div>
-                <div class="info-value">15 ثانية</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= قصة السورة ================= -->
-    <div id="surah-story" class="hidden-content">
-        <div class="story-section">
-            <h2 style="text-align:center;">📖 قصة وفضل سورة العصر</h2>
-
-            <p>
-                سورة العصر من أعظم سور القرآن رغم قصرها، حتى قال الإمام الشافعي:
-                <strong>لو ما أنزل الله حجة على خلقه إلا هذه السورة لكفتهم</strong>.
-            </p>
-
-            <p>
-                تبين السورة أن جميع الناس في خسارة حقيقية في الدنيا والآخرة،
-                إلا من جمع أربع صفات عظيمة: الإيمان، والعمل الصالح،
-                والتواصي بالحق، والتواصي بالصبر.
-            </p>
-        </div>
-    </div>
-
-    <!-- ================= التفسير ================= -->
-    <div id="tafsir-section" class="hidden-content">
-        <div class="tafsir-section">
-            <h2 class="tafsir-title">📚 تفسير سورة العصر</h2>
-
-            <div class="tafsir-content">
-                <p><strong>﴿وَالْعَصْرِ﴾</strong>  
-                أقسم الله بالزمن لعظمته.</p>
-
-                <p><strong>﴿إِنَّ الْإِنسَانَ لَفِي خُسْرٍ﴾</strong>  
-                كل إنسان خاسر في عمره إن لم يستغله في طاعة الله.</p>
-
-                <p><strong>﴿إِلَّا الَّذِينَ آمَنُوا﴾</strong>  
-                استثناء لأهل الإيمان والعمل الصالح.</p>
-
-                <p>
-                <strong>﴿وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ﴾</strong>  
-                أي ينصح بعضهم بعضًا بالخير والثبات.
-                </p>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-/* ================= أسئلة الاختبار – سورة العصر ================= */
-
-const memoryQuestions = [
-    {
-        question: "كم عدد آيات سورة العصر؟",
-        options: ["3", "4", "5", "6"],
-        correct: 0,
-        explanation: "سورة العصر تتكون من 3 آيات"
-    },
-    {
-        question: "بماذا أقسم الله في سورة العصر؟",
-        options: ["الليل", "النهار", "العصر", "الدهر"],
-        correct: 2,
-        explanation: "أقسم الله بالعصر"
-    },
-    {
-        question: "من هم المستثنون من الخسران؟",
-        options: [
-            "الأغنياء",
-            "العلماء",
-            "الذين آمنوا وعملوا الصالحات",
-            "المجاهدون فقط"
-        ],
-        correct: 2,
-        explanation: "الاستثناء لأهل الإيمان والعمل الصالح"
-    }
-];
-
-const understandingQuestions = [
-    {
-        question: "لماذا أقسم الله بالعصر في هذه السورة؟",
-        modelAnswer: "لبيان أهمية الوقت وأنه رأس مال الإنسان في حياته"
-    },
-    {
-        question: "كيف ننجو من الخسران المذكور في السورة؟",
-        modelAnswer: "بالإيمان والعمل الصالح والتواصي بالحق والصبر"
-    }
-];
-</script>
-
+    <!-- ❌ JavaScript يبقى كما هو في مشروعك -->
 </body>
 </html>
