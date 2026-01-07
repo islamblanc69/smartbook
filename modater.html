@@ -3,106 +3,1277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة المدثر</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
-
+    <title>سورة المدثر - القرآن التفاعلي</title>
+    <link rel="icon" href="image.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            text-align: center; 
-            padding: 20px; 
-            
-            background-image: url('background.jpg');
-            background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat; 
-            background-attachment: fixed; 
+        :root {
+            --quran-green: #2a9d8f;
+            --quran-gold: #e9c46a;
+            --quran-blue: #1a5f7a;
+            --quran-cream: #fef9e7;
+            --surah-color: #dc143c; /* لون قرمزي لسورة المدثر */
         }
-
-        /* --- تعديل الشفافية إلى 60% --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', 'Segoe UI', sans-serif;
+        }
+        body {
+            background-color: var(--quran-cream);
+            color: #2c3e50;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .top-button-container {
+            background: linear-gradient(135deg, #1a365d 0%, var(--surah-color) 100%);
+            padding: 12px 20px;
+            text-align: center;
+            border-bottom: 2px solid #e9c46a;
+        }
+        .back-to-mushaf-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        .back-to-mushaf-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-color: #e9c46a;
+        }
+        .back-to-mushaf-btn i {
+            margin-left: 8px;
+            font-size: 1.2rem;
+        }
         .container {
-            /* --- 60% شفافية --- */
-            background-color: rgba(255, 255, 255, 0.6); 
-            padding: 20px 10px;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); 
-            max-width: 500px; 
-            margin: auto; 
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-        
-        h1 { 
-            color: #333; 
-            font-family: 'Amiri', serif; 
-            font-size: 2.5em; 
+        .header {
+            background: linear-gradient(135deg, var(--surah-color) 0%, #b22222 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--surah-color);
+            border: 3px solid var(--quran-gold);
+            font-size: 1.2rem;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .control-section {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #eee;
+        }
+        .control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .control-btn {
+            padding: 15px 25px;
+            background: white;
+            border: 2px solid var(--surah-color);
+            border-radius: 8px;
+            color: var(--surah-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            min-width: 180px;
+            justify-content: center;
+        }
+        .control-btn:hover {
+            background: var(--surah-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .content-section {
+            padding: 25px;
+        }
+        .simple-mind-map {
+            background: #fce8e8;
+            padding: 25px;
+            border-radius: 10px;
+            border-right: 5px solid var(--surah-color);
+            margin-bottom: 25px;
+        }
+        .mind-map-title {
+            color: var(--surah-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        .map-step {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .step-number {
+            display: inline-block;
+            background: var(--surah-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .quran-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2.2rem;
+            line-height: 3;
+            text-align: center;
+            color: #1a365d;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        .verse {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+        }
+        .verse-number {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: var(--surah-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .simple-quiz {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin: 25px 0;
+        }
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--surah-color);
+        }
+        .answer-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .answer-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .answer-btn:hover {
+            background: #ffeaea;
+            border-color: var(--surah-color);
+        }
+        .answer-btn.selected {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .answer-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .surah-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .info-box {
+            background: #fce8e8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .info-label {
+            color: #666;
+            font-size: 0.9rem;
             margin-bottom: 5px;
         }
-        
-        /* --- تغيير الجملة هنا --- */
-        p { 
-            color: #333; /* جعلته أغمق ليتناسب مع الخلفية الشفافة */
-            font-weight: 500;
-            font-size: 1.2em; /* تكبير الخط قليلاً */
-            margin-top: 0;
-            margin-bottom: 20px; /* إضافة مسافة قبل الأزرار */
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--surah-color);
         }
-
-        .button-link {
-            display: block;
+        .tafsir-section {
+            background: #fff0f0;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ffcccc;
+            margin: 25px 0;
+        }
+        .tafsir-title {
+            color: var(--surah-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .tafsir-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            border-right: 4px solid #ff6b6b;
+        }
+        .tafsir-verse {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .tafsir-verse:last-child {
+            border-bottom: none;
+        }
+        .understanding-questions {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px dashed #ffd43b;
+        }
+        .answer-input {
+            width: 100%;
             padding: 15px;
-            margin: 10px auto;
-            width: 80%;
-            max-width: 400px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1rem;
+            min-height: 100px;
+        }
+        .result-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        .result-box.visible {
+            display: block;
+        }
+        .close-section-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .close-section-btn:hover {
+            background: #5a6268;
+        }
+        .story-section {
+            background: #ffebee;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ff8a80;
+        }
+        .footer {
+            background: var(--surah-color);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 3px solid var(--quran-gold);
+        }
+        .telegram-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .telegram-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0088cc;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            transition: opacity 0.3s;
-            font-weight: 500; 
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
         }
-        .button-link:hover { opacity: 0.8; }
-        
-        .button-tilawa { background-color: #28a745; } /* أخضر */
-        .button-moallem { background-color: #a0522d; } /* بني دافئ */
-        .button-tafseer { background-color: #6c757d; } /* رمادي */
-        
-        .page-logo {
-            position: fixed; 
-            bottom: 15px;    
-            right: 15px;     
-            width: 60px;     
-            height: auto;    
-            opacity: 0.9;    
-            z-index: 1000;   
+        .telegram-btn:hover {
+            background: #006699;
+            transform: scale(1.05);
         }
-        
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .control-btn {
+                width: 100%;
+                min-width: auto;
+            }
+            .quran-text {
+                font-size: 1.8rem;
+                line-height: 2.5;
+            }
+            .surah-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .back-to-mushaf-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .hidden-content.visible {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-
+    <div class="top-button-container">
+        <a href="index.html" class="back-to-mushaf-btn">
+            <i class="fas fa-quran"></i> المصحف الإلكتروني الذكي
+        </a>
+    </div>
     <div class="container">
-        
-        <h1>سورة المدثر</h1>
-        
-        <p>استمع، تعلم، وتدبّر</p>
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="image.png" alt="لوغو مكتبة إسلام عنابة" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
+                </div>
+                <div>
+                    <h1>سورة المدثر</h1>
+                    <p>سورة نزلت بأول الأمر تأمر النبي بالدعوة والإنذار</p>
+                </div>
+            </div>
+        </div>
+        <div class="control-section">
+            <div class="control-buttons">
+                <button class="control-btn" onclick="showSection('mind-map')">
+                    <span>🗺️</span> خطة الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('quran-text')">
+                    <span>📖</span> السورة كاملة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-info')">
+                    <span>ℹ️</span> معلومات السورة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-story')">
+                    <span>📖</span> قصة السورة
+                </button>
+                <button class="control-btn" onclick="showSection('tafsir-section')">
+                    <span>📚</span> تفسير السورة
+                </button>
+                <button class="control-btn" onclick="showSection('quiz')">
+                    <span>🧠</span> اختبار الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('understanding')">
+                    <span>💭</span> أسئلة الفهم
+                </button>
+            </div>
+        </div>
+        <div class="content-section">
+            <div id="mind-map" class="hidden-content">
+                <div class="simple-mind-map">
+                    <h2 class="mind-map-title">🗺️ خطة سهلة لحفظ سورة المدثر</h2>
+                    <div class="map-step">
+                        <span class="step-number">١</span>
+                        <h3>اليوم الأول: الآيات ١-١٧</h3>
+                        <p>حفظ: يا أيها المدثر + قم فأنذر + وربك فكبر + وثيابك فطهر + والرجز فاهجر + ولا تمنن تستكثر + ولربك فاصبر + فإذا نقر في النقر + فذلك يومئذ يوم عسير + على الكافرين غير يسير + ذرني ومن خلقت وحيدا + وجعلت له مالا ممدودا + وبنين شهودا + ومهدت له تمهيدا + ثم يطمع أن أزيد + كلا إنه كان لآياتنا عنيدا + سأرهقه صعودا</p>
+                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
+                    </div>
+                    <div class="map-step">
+                        <span class="step-number">٢</span>
+                        <h3>اليوم الثاني: الآيات ١٨-٣٤</h3>
+                        <p>حفظ: إنه فكر وقدر + فقتل كيف قدر + ثم قتل كيف قدر + ثم نظر + ثم عبس وبسر + ثم أدبر واستكبر + فقال إن هذا إلا سحر يؤثر + إن هذا إلا قول البشر + سأصليه سقر + وما أدراك ما سقر + لا تبقي ولا تذر + لواحة للبشر + عليها تسعة عشر + وما جعلنا أصحاب النار إلا ملائكة + وما جعلنا عدتهم إلا فتنة للذين كفروا + ليثبت الذين آمنوا + ويزداد الذين آمنوا إيمانا + ولا يرتاب الذين أوتوا الكتاب والمؤمنون + وليقول الذين في قلوبهم مرض والكافرون ماذا أراد الله بهذا مثلا + كذلك يضل الله من يشاء ويهدي من يشاء + وما يعلم جنود ربك إلا هو + وما هي إلا ذكرى للبشر</p>
+                        <p>مع التكرار اليومي للآيات السابقة</p>
+                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
+                    </div>
+                    <div class="map-step">
+                        <span class="step-number">٣</span>
+                        <h3>اليوم الثالث: الآيات ٣٥-٥٦</h3>
+                        <p>حفظ: كلا والقمر + والليل إذا أدبر + والصبح إذا أسفر + إنها لإحدى الكبر + نذيرا للبشر + لمن شاء منكم أن يتقدم أو يتأخر + كل نفس بما كسبت رهينة + إلا أصحاب اليمين + في جنات يتساءلون + عن المجرمين + ما سلككم في سقر + قالوا لم نك من المصلين + ولم نك نطعم المسكين + وكنا نخوض مع الخائضين + وكنا نكذب بيوم الدين + حتى أتانا اليقين + فما تنفعهم شفاعة الشافعين + فما لهم عن التذكرة معرضين + كأنهم حمر مستنفرة + فرت من قسورة + بل يريد كل امرئ منهم أن يؤتى صحفا منشرة + كلا بل لا يخافون الآخرة + كلا إنه تذكرة + فمن شاء ذكره + وما يذكرون إلا أن يشاء الله + هو أهل التقوى وأهل المغفرة</p>
+                        <p>التسميع الكامل والمراجعة</p>
+                        <p>⏰ الوقت المقترح: 20 دقيقة</p>
+                    </div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('mind-map')">
+                    إغلاق خطة الحفظ
+                </button>
+            </div>
+            <div id="quran-text" class="hidden-content">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: var(--surah-color);">📖 سورة المدثر كاملة</h2>
+                    <p style="color: #666; margin-top: 10px;">سورة مكية - عدد آياتها: 56 آية</p>
+                </div>
+                <div class="quran-text">
+                    <div class="verse">
+                        <div class="verse-number">١</div>
+                        يَا أَيُّهَا الْمُدَّثِّرُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢</div>
+                        قُمْ فَأَنْذِرْ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣</div>
+                        وَرَبَّكَ فَكَبِّرْ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤</div>
+                        وَثِيَابَكَ فَطَهِّرْ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥</div>
+                        وَالرُّجْزَ فَاهْجُرْ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٦</div>
+                        وَلَا تَمْنُنْ تَسْتَكْثِرُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٧</div>
+                        وَلِرَبِّكَ فَاصْبِرْ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٨</div>
+                        فَإِذَا نُقِرَ فِي النَّاقُورِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٩</div>
+                        فَذَٰلِكَ يَوْمَئِذٍ يَوْمٌ عَسِيرٌ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٠</div>
+                        عَلَى الْكَافِرِينَ غَيْرُ يَسِيرٍ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١١</div>
+                        ذَرْنِي وَمَنْ خَلَقْتُ وَحِيدًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٢</div>
+                        وَجَعَلْتُ لَهُ مَالًا مَمْدُودًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٣</div>
+                        وَبَنِينَ شُهُودًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٤</div>
+                        وَمَهَّدْتُ لَهُ تَمْهِيدًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٥</div>
+                        ثُمَّ يَطْمَعُ أَنْ أَزِيدَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٦</div>
+                        كَلَّا ۖ إِنَّهُ كَانَ لِآيَاتِنَا عَنِيدًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٧</div>
+                        سَأُرْهِقُهُ صَعُودًا
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٨</div>
+                        إِنَّهُ فَكَّرَ وَقَدَّرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">١٩</div>
+                        فَقُتِلَ كَيْفَ قَدَّرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٠</div>
+                        ثُمَّ قُتِلَ كَيْفَ قَدَّرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢١</div>
+                        ثُمَّ نَظَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٢</div>
+                        ثُمَّ عَبَسَ وَبَسَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٣</div>
+                        ثُمَّ أَدْبَرَ وَاسْتَكْبَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٤</div>
+                        فَقَالَ إِنْ هَٰذَا إِلَّا سِحْرٌ يُؤْثَرُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٥</div>
+                        إِنْ هَٰذَا إِلَّا قَوْلُ الْبَشَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٦</div>
+                        سَأُصْلِيهِ سَقَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٧</div>
+                        وَمَا أَدْرَاكَ مَا سَقَرُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٨</div>
+                        لَا تُبْقِي وَلَا تَذَرُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٢٩</div>
+                        لَوَّاحَةٌ لِلْبَشَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٠</div>
+                        عَلَيْهَا تِسْعَةَ عَشَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣١</div>
+                        وَمَا جَعَلْنَا أَصْحَابَ النَّارِ إِلَّا مَلَائِكَةً ۙ وَمَا جَعَلْنَا عِدَّتَهُمْ إِلَّا فِتْنَةً لِلَّذِينَ كَفَرُوا لِيَسْتَيْقِنَ الَّذِينَ أُوتُوا الْكِتَابَ وَيَزْدَادَ الَّذِينَ آمَنُوا إِيمَانًا ۙ وَلَا يَرْتَابَ الَّذِينَ أُوتُوا الْكِتَابَ وَالْمُؤْمِنُونَ ۙ وَلِيَقُولَ الَّذِينَ فِي قُلُوبِهِمْ مَرَضٌ وَالْكَافِرُونَ مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا ۚ كَذَٰلِكَ يُضِلُّ اللَّهُ مَنْ يَشَاءُ وَيَهْدِي مَنْ يَشَاءُ ۚ وَمَا يَعْلَمُ جُنُودَ رَبِّكَ إِلَّا هُوَ ۚ وَمَا هِيَ إِلَّا ذِكْرَىٰ لِلْبَشَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٢</div>
+                        كَلَّا وَالْقَمَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٣</div>
+                        وَاللَّيْلِ إِذَا أَدْبَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٤</div>
+                        وَالصُّبْحِ إِذَا أَسْفَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٥</div>
+                        إِنَّهَا لَإِحْدَى الْكُبَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٦</div>
+                        نَذِيرًا لِلْبَشَرِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٧</div>
+                        لِمَنْ شَاءَ مِنْكُمْ أَنْ يَتَقَدَّمَ أَوْ يَتَأَخَّرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٨</div>
+                        كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٣٩</div>
+                        إِلَّا أَصْحَابَ الْيَمِينِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٠</div>
+                        فِي جَنَّاتٍ يَتَسَاءَلُونَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤١</div>
+                        عَنِ الْمُجْرِمِينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٢</div>
+                        مَا سَلَكَكُمْ فِي سَقَرَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٣</div>
+                        قَالُوا لَمْ نَكُ مِنَ الْمُصَلِّينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٤</div>
+                        وَلَمْ نَكُ نُطْعِمُ الْمِسْكِينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٥</div>
+                        وَكُنَّا نَخُوضُ مَعَ الْخَائِضِينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٦</div>
+                        وَكُنَّا نُكَذِّبُ بِيَوْمِ الدِّينِ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٧</div>
+                        حَتَّىٰ أَتَانَا الْيَقِينُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٨</div>
+                        فَمَا تَنْفَعُهُمْ شَفَاعَةُ الشَّافِعِينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٤٩</div>
+                        فَمَا لَهُمْ عَنِ التَّذْكِرَةِ مُعْرِضِينَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٠</div>
+                        كَأَنَّهُمْ حُمُرٌ مُسْتَنْفِرَةٌ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥١</div>
+                        فَرَّتْ مِنْ قَسْوَرَةٍ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٢</div>
+                        بَلْ يُرِيدُ كُلُّ امْرِئٍ مِنْهُمْ أَنْ يُؤْتَىٰ صُحُفًا مُنَشَّرَةً
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٣</div>
+                        كَلَّا ۖ بَلْ لَا يَخَافُونَ الْآخِرَةَ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٤</div>
+                        كَلَّا ۖ إِنَّهُ تَذْكِرَةٌ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٥</div>
+                        فَمَنْ شَاءَ ذَكَرَهُ
+                    </div>
+                    <div class="verse">
+                        <div class="verse-number">٥٦</div>
+                        وَمَا يَذْكُرُونَ إِلَّا أَنْ يَشَاءَ اللَّهُ ۚ هُوَ أَهْلُ التَّقْوَىٰ وَأَهْلُ الْمَغْفِرَةِ
+                    </div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('quran-text')">
+                    إغلاق السورة
+                </button>
+            </div>
+            <div id="surah-info" class="hidden-content">
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <h2 style="color: var(--surah-color);">ℹ️ معلومات عن سورة المدثر</h2>
+                </div>
+                <div class="surah-info-grid">
+                    <div class="info-box">
+                        <div class="info-label">رقم السورة في المصحف</div>
+                        <div class="info-value">74</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">نوع السورة</div>
+                        <div class="info-value">مكية</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">عدد الآيات</div>
+                        <div class="info-value">56 آية</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">عدد الكلمات</div>
+                        <div class="info-value">287 كلمة</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">عدد الحروف</div>
+                        <div class="info-value">1026 حرفاً</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">ترتيب النزول</div>
+                        <div class="info-value">4</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">مدة التلاوة</div>
+                        <div class="info-value">دقيقتان و30 ثانية</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">الاسم الآخر</div>
+                        <div class="info-value">يا أيها المدثر</div>
+                    </div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('surah-info')">
+                    إغلاق المعلومات
+                </button>
+            </div>
+            <div id="surah-story" class="hidden-content">
+                <div class="story-section">
+                    <h2 style="color: #dc143c; margin-bottom: 20px; text-align: center;">
+                        📖 قصة وفضائل سورة المدثر
+                    </h2>
+                    <h3 style="color: var(--surah-color); margin-top: 15px;">✨ سبب التسمية:</h3>
+                    <p>سميت سورة المدثر لأنها تبدأ بالنداء للنبي صلى الله عليه وسلم بـ "يا أيها المدثر"، والمدثر يعني المتغطي بثيابه.</p>
+                    <h3 style="color: var(--surah-color); margin-top: 15px;">✨ سبب النزول:</h3>
+                    <p>نزلت سورة المدثر بعد سورة المزمل، وهي من أوائل ما نزل من القرآن الكريم. نزلت بعد انقطاع الوحي لفترة، عندما كان النبي صلى الله عليه وسلم متغطياً بثيابه خوفاً مما رأى في غار حراء.</p>
+                    <h3 style="color: var(--surah-color); margin-top: 15px;">✨ قصة نزولها:</h3>
+                    <p>بعد نزول أول آيات القرآن (اقرأ باسم ربك) في غار حراء، انقطع الوحي فترة، فحزن النبي صلى الله عليه وسلم وخاف، فكان يتغطى بثيابه. ثم نزل جبريل بهذه السورة لتأمره بالدعوة والإنذار.</p>
+                    <h3 style="color: var(--surah-color); margin-top: 15px;">🎯 فضائلها العظيمة:</h3>
+                    <p>1. أول سورة تأمر بالدعوة والتبليغ</p>
+                    <p>2. تأمر بتكبير الله وتطهير الثياب</p>
+                    <p>3. تحذر من النار وسقر</p>
+                    <p>4. تذكر بعدد خزنة جهنم (19)</p>
+                    <p>5. تبين أسباب دخول النار</p>
+                    <p>6. تؤكد حرية الاختيار للإنسان</p>
+                    <h3 style="color: var(--surah-color); margin-top: 15px;">💡 أهم مواضيعها:</h3>
+                    <p>1. الأمر بالدعوة والإنذار</p>
+                    <p>2. التوجيهات الأساسية للداعية</p>
+                    <p>3. التحذير من عذاب النار</p>
+                    <p>4. ذكر عدد خزنة جهنم</p>
+                    <p>5. بيان أسباب عذاب الكافرين</p>
+                    <p>6. حرية الاختيار والهداية</p>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('surah-story')">
+                    إغلاق القصة
+                </button>
+            </div>
+            <div id="tafsir-section" class="hidden-content">
+                <div class="tafsir-section">
+                    <h2 class="tafsir-title">📚 تفسير سورة المدثر - الآية بالآية</h2>
+                    <div class="tafsir-content">
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ١-٧: "يَا أَيُّهَا الْمُدَّثِّرُ + قُمْ فَأَنْذِرْ..."</h3>
+                            <p><strong>التفسير:</strong> نداء للنبي صلى الله عليه وسلم وهو متغط بثيابه، يأمره بالقيام للدعوة وإنذار الناس.</p>
+                            <p><strong>المعنى:</strong> بداية التكليف الرسمي بالدعوة إلى الله.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ٨-١٠: "فَإِذَا نُقِرَ فِي النَّاقُورِ..."</h3>
+                            <p><strong>التفسير:</strong> وصف ليوم القيامة عندما ينفخ في الصور.</p>
+                            <p><strong>المعنى:</strong> يوم عسير صعب على الكافرين.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ١١-١٧: "ذَرْنِي وَمَنْ خَلَقْتُ وَحِيدًا..."</h3>
+                            <p><strong>التفسير:</strong> حديث عن الوليد بن المغيرة الذي أعطاه الله مالاً وبنين ثم كفر.</p>
+                            <p><strong>المعنى:</strong> تحذير من الغرور بالنعم وعدم الشكر.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ١٨-٢٥: "إِنَّهُ فَكَّرَ وَقَدَّرَ..."</h3>
+                            <p><strong>التفسير:</strong> وصف لتفكير الكافر وتكذيبه بالقرآن.</p>
+                            <p><strong>المعنى:</strong> بيان مراحل تكذيب الكافرين.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ٢٦-٣٠: "سَأُصْلِيهِ سَقَرَ..."</h3>
+                            <p><strong>التفسير:</strong> تهديد للكافرين بنار سقر.</p>
+                            <p><strong>المعنى:</strong> وصف لعذاب النار الشديد.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآية ٣١: "عَلَيْهَا تِسْعَةَ عَشَرَ"</h3>
+                            <p><strong>التفسير:</strong> عدد خزنة جهنم تسعة عشر ملكاً.</p>
+                            <p><strong>المعنى:</strong> بيان قوة عذاب النار بعدد خزنتها.</p>
+                        </div>
+                        <div class="tafsir-verse">
+                            <h3 style="color: var(--surah-color);">الآيات ٣٨-٤٧: "كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ..."</h3>
+                            <p><strong>التفسير:</strong> كل إنسان مرتهن بعمله، ثم حوار بين أهل الجنة وأهل النار.</p>
+                            <p><strong>المعنى:</strong> بيان أسباب دخول النار: ترك الصلاة، عدم إطعام المسكين، الخوض مع الخائضين، التكذيب بيوم الدين.</p>
+                        </div>
+                    </div>
+                    <div style="background: #ffeaea; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <h4 style="color: var(--surah-color);">🎯 ملخص التفسير:</h4>
+                        <p>سورة المدثر تبدأ بنداء النبي صلى الله عليه وسلم وهو متغط بثيابه: "يا أيها المدثر، قم فأنذر" تأمره بالقيام للدعوة وإنذار الناس، وتوجهه بتكبير الله وتطهير الثياب وهجر الأوثان وعدم المنَّة بالعطاء والصبر لربه، ثم تذكر يوم القيامة عندما ينفخ في الناقور فذلك يوم عسير على الكافرين، ثم تتحدث عن الوليد بن المغيرة الذي أعطاه الله مالاً ممدوداً وبنين شهوداً ومهد له تمهيداً ثم طمع في المزيد وكان لآيات الله عنيداً فسيعذبه الله عذاباً صعباً، ثم تذكر تفكيره وتقديره ثم تكذيبه بالقرآن وادعاءه أنه سحر أو قول البشر، وتتوعد له بسقر التي لا تبقي ولا تذر وتلوح للبشر، وعليها تسعة عشر ملكاً، وهذا العدد جعله الله فتنة للكافرين وثباتاً للمؤمنين، ثم تقسم بالقمر والليل إذا أدبر والصبح إذا أسفر على أن القرآن نذير للبشر لمن شاء أن يتقدم أو يتأخر، وكل نفس بما كسبت رهينة إلا أصحاب اليمين في جنات يتساءلون عن المجرمين: "ما سلككم في سقر؟" فيجيبون: لم نك من المصلين، ولم نك نطعم المسكين، وكنا نخوض مع الخائضين، وكنا نكذب بيوم الدين حتى أتانا اليقين، فلا تنفعهم شفاعة الشافعين، وهم عن التذكرة معرضون كأنهم حمر مستنفرة فرت من قسورة، بل يريد كل منهم أن يؤتى صحفاً منشرة، ولكنهم لا يخافون الآخرة، والقرآن تذكرة فمن شاء ذكره، وما يذكرون إلا أن يشاء الله، وهو أهل التقوى وأهل المغفرة.</p>
+                    </div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('tafsir-section')">
+                    إغلاق التفسير
+                </button>
+            </div>
+            <div id="quiz" class="hidden-content">
+                <div class="simple-quiz">
+                    <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">
+                        🧠 اختبار حفظ سورة المدثر
+                    </h2>
+                    <div id="quiz-container"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitQuiz()" style="background: var(--surah-color); color: white;">
+                            ✅ تصحيح الإجابات
+                        </button>
+                        <button class="control-btn" onclick="resetQuiz()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 إعادة الاختبار
+                        </button>
+                    </div>
+                    <div id="quiz-result" class="result-box"></div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('quiz')">
+                    إغلاق الاختبار
+                </button>
+            </div>
+            <div id="understanding" class="hidden-content">
+                <div class="understanding-questions">
+                    <h2 style="color: #dc143c; margin-bottom: 20px; text-align: center;">
+                        💭 أسئلة فهم سورة المدثر
+                    </h2>
+                    <div id="understanding-container"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a; color: #000;">
+                            📤 إرسال الإجابات
+                        </button>
+                        <button class="control-btn" onclick="resetUnderstanding()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 أسئلة جديدة
+                        </button>
+                    </div>
+                    <div id="understanding-result" class="result-box"></div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('understanding')">
+                    إغلاق أسئلة الفهم
+                </button>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="telegram-section">
+                <h3 style="margin-bottom: 15px;">📱 انضم إلى مجتمعنا</h3>
+                <p>انضم لمجموعة تلغرام الخاصة بمستخدمي الكتاب للاستفادة من:</p>
+                <p>• آخر التحديثات • نصائح الحفظ • مسابقات ودورات • دعم مباشر</p>
+                <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
+                    📲 انضم لمجموعة تلغرام
+                </a>
+            </div>
+            <div class="copyright">
+                جميع الحقوق محفوظة © 2024 مكتبة إسلام عنابة
+                <br>
+                <small>القرآن التفاعلي - كتاب تتبع القرآن الكريم بخط اليد</small>
+            </div>
+        </div>
+    </div>
 
-
-        <a href=https://drive.google.com/file/d/1QD2YDBEAx7g_S64OiNSqa90X4y9K7fVB/preview" class="button-link button-tilawa" target="_blank">
-            📖 التلاوة (صوت وصورة)
-        </a>
+    <script>
+        const memoryQuestions = [
+            {
+                question: "بماذا تبدأ سورة المدثر؟",
+                options: ["يا أيها المدثر", "يا أيها المزمل", "هل أتى على الإنسان", "لا أقسم بيوم القيامة"],
+                correct: 0,
+                explanation: "الآية الأولى: 'يا أيها المدثر'"
+            },
+            {
+                question: "ما أول أمر في السورة للنبي صلى الله عليه وسلم؟",
+                options: ["قم فأنذر", "وربك فكبر", "وثيابك فطهر", "والرجز فاهجر"],
+                correct: 0,
+                explanation: "الآية الثانية: 'قم فأنذر'"
+            },
+            {
+                question: "كم عدد خزنة جهنم المذكورين في السورة؟",
+                options: ["تسعة عشر", "سبعة", "سبعون", "مائة"],
+                correct: 0,
+                explanation: "الآية: 'عليها تسعة عشر'"
+            },
+            {
+                question: "ما اسم النار المذكورة في السورة؟",
+                options: ["سقر", "جهنم", "الحطمة", "السعير"],
+                correct: 0,
+                explanation: "الآية: 'سأصليه سقر'"
+            },
+            {
+                question: "ما أسباب دخول النار المذكورة في السورة؟",
+                options: ["ترك الصلاة وعدم إطعام المسكين", "السرقة والزنا", "الكذب والغش", "الربا والظلم"],
+                correct: 0,
+                explanation: "الآيات: 'لم نك من المصلين، ولم نك نطعم المسكين'"
+            },
+            {
+                question: "بماذا يقسم الله في نهاية السورة؟",
+                options: ["والقمر، والليل إذا أدبر، والصبح إذا أسفر", "والشمس وضحاها", "والفجر", "والضحى"],
+                correct: 0,
+                explanation: "الآيات: 'كلا والقمر، والليل إذا أدبر، والصبح إذا أسفر'"
+            }
+        ];
         
-        <a href=https://drive.google.com/file/d/17gbDPT4Q91lCTw4KEa2pwEQ8HZjBIVtG/preview" class="button-link button-moallem" target="_blank">
-            🧒 معلم الأطفال (تكرار)
-        </a>
+        const understandingQuestions = [
+            {
+                question: "ما دلالة بداية السورة بـ 'يا أيها المدثر'؟ وكيف تعكس هذه البداية المرحلة الانتقالية في حياة النبي صلى الله عليه وسلم؟",
+                modelAnswer: "الدلالات: 1. الانتقال من مرحلة التلقي إلى مرحلة التبليغ. 2. نهاية فترة الوحي المؤقتة. 3. بداية التكليف الرسمي بالدعوة. 4. تسمية النبي بصفته وقت نزول الوحي. 5. تهيئته للمهمة الجسيمة. المرحلة الانتقالية: 1. من الخوف والترقب إلى الجرأة والدعوة. 2. من العبادة الفردية إلى الدعوة الجماعية. 3. من المتلقي إلى المبلغ. 4. من المدثر المتغطي إلى القائم المنذر. 5. تحول في المسؤولية والواجب. 6. بداية المرحلة العلنية للدعوة. 7. انتقال من مرحلة الإعداد إلى مرحلة التنفيذ."
+            },
+            {
+                question: "ما الحكمة من ذكر عدد خزنة جهنم (تسعة عشر)؟ وكيف تعاملت السورة مع استهزاء المشركين بهذا العدد؟",
+                modelAnswer: "الحكمة من الذكر: 1. بيان عظمة العذاب بعدد الخزنة. 2. تحذير شديد للكافرين. 3. إثبات التفصيل في أمور الغيب. 4. إظهار دقة القرآن. تعامل السورة مع الاستهزاء: 1. بينت أن هذا العدد فتنة للكافرين. 2. أكدت أنه يزيد المؤمنين إيماناً. 3. ذكرت أنه يثبت أهل الكتاب. 4. بينت أن جهل الكافرين لا ينفي الحق. 5. أكدت أن العدد مهما قل فهو كاف للعذاب. 6. بينت أن الاستهزاء دليل على مرض القلب. 7. ذكرت أن هذا من حكمة الله في الابتلاء. 8. أكدت أن العبرة بالقوة لا بالعدد."
+            },
+            {
+                question: "ما الدروس المستفادة من حوار أهل الجنة مع أهل النار في السورة؟ وكيف يمكن استثمار هذا الحوار في التربية الإيمانية؟",
+                modelAnswer: "الدروس المستفادة: 1. كل إنسان مسؤول عن اختياراته. 2. الأعمال هي التي تحدد المصير. 3. التكذيب بالآخرة سبب للهلاك. 4. ترك الفرائض يؤدي إلى العذاب. 5. الخوض مع الخائضين من أسباب الهلاك. استثمار الحوار في التربية: 1. تحفيز المرء على محاسبة نفسه. 2. تذكير دائم بعواقب الإهمال. 3. بيان أن الصغائر قد تقود إلى الكبائر. 4. تعزيز أهمية الصلاة وإطعام المسكين. 5. التحذير من مصاحبة الأشرار. 6. ترسيخ الإيمان باليوم الآخر. 7. تنمية الخوف من الله ورجاء رحمته. 8. بناء تصور واضح عن الجزاء."
+            }
+        ];
         
-        <a href=https://drive.google.com/file/d/1zcoqk1HirT-n9aYuO3_tPJ-hmldSrRKS/preview" class="button-link button-tafseer" target="_blank">
-            🎧 التفسير الصوتي
-        </a>
-
-    </div> <img src="image.png" alt="Logo" class="page-logo">
-
+        let currentSection = 'quran-text';
+        
+        function showSection(sectionId) {
+            document.querySelectorAll('.hidden-content').forEach(section => {
+                section.classList.remove('visible');
+            });
+            
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('visible');
+                currentSection = sectionId;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                if (sectionId === 'quiz') {
+                    initQuiz();
+                } else if (sectionId === 'understanding') {
+                    initUnderstanding();
+                }
+            }
+        }
+        
+        function hideSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('visible');
+            }
+            showSection('quran-text');
+        }
+        
+        let currentQuizQuestions = [];
+        let userQuizAnswers = [];
+        let currentQuizIndex = 0;
+        let quizSubmitted = false;
+        
+        function initQuiz() {
+            currentQuizQuestions = [...memoryQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 4);
+            
+            currentQuizIndex = 0;
+            quizSubmitted = false;
+            userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
+            
+            displayQuizQuestion();
+            
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.classList.remove('visible');
+            }
+        }
+        
+        function displayQuizQuestion() {
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+            
+            if (currentQuizIndex >= currentQuizQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 3rem;">✅</div>
+                        <h3 style="color: var(--surah-color);">اكتمل الاختبار</h3>
+                        <p>اضغط على زر "تصحيح الإجابات" لمعرفة نتيجتك</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = currentQuizQuestions[currentQuizIndex];
+            let optionsHTML = '';
+            const letters = ['أ', 'ب', 'ج', 'د'];
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userQuizAnswers[currentQuizIndex] === index;
+                const isCorrect = quizSubmitted && index === question.correct;
+                const isWrong = quizSubmitted && userQuizAnswers[currentQuizIndex] === index && index !== question.correct;
+                
+                let className = 'answer-btn';
+                if (isSelected) className += ' selected';
+                if (isCorrect) className += ' selected';
+                if (isWrong) className += ' wrong';
+                
+                optionsHTML += `
+                    <div class="${className}" onclick="selectQuizAnswer(${index})">
+                         ${letters[index]}. ${option}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>السؤال ${currentQuizIndex + 1}: ${question.question}</h3>
+                    <div class="answer-buttons">${optionsHTML}</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevQuizQuestion()" ${currentQuizIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextQuizQuestion()">
+                        ${currentQuizIndex === currentQuizQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function selectQuizAnswer(answerIndex) {
+            if (!quizSubmitted) {
+                userQuizAnswers[currentQuizIndex] = answerIndex;
+                displayQuizQuestion();
+            }
+        }
+        
+        function nextQuizQuestion() {
+            if (currentQuizIndex < currentQuizQuestions.length - 1) {
+                currentQuizIndex++;
+                displayQuizQuestion();
+            } else {
+                currentQuizIndex = currentQuizQuestions.length;
+                displayQuizQuestion();
+            }
+        }
+        
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                displayQuizQuestion();
+            }
+        }
+        
+        function submitQuiz() {
+            quizSubmitted = true;
+            let score = 0;
+            let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
+            
+            currentQuizQuestions.forEach((question, index) => {
+                const userAnswer = userQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
+                        <strong>إجابتك:</strong> ${userAnswer !== null ? question.options[userAnswer] : 'لم تجب'}<br>
+                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correct]}<br>
+                        <em>${question.explanation}</em>
+                    </div>
+                `;
+            });
+            
+            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
+            let message = '';
+            let emoji = '';
+            
+            if (percentage >= 90) {
+                message = 'ممتاز! إتقان تام للسورة';
+                emoji = '🎉';
+            } else if (percentage >= 70) {
+                message = 'جيد جداً، مستوى ممتاز';
+                emoji = '👍';
+            } else if (percentage >= 50) {
+                message = 'مقبول، يحتاج مراجعة بسيطة';
+                emoji = '💪';
+            } else {
+                message = 'راجع السورة مرة أخرى';
+                emoji = '📚';
+            }
+            
+            resultsHTML += `
+                <div style="background: var(--surah-color); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>${emoji} ${message}</h4>
+                    <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
+                    <p>النسبة: ${percentage}%</p>
+                </div>
+            `;
+            
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.innerHTML = resultsHTML;
+                resultBox.classList.add('visible');
+            }
+            
+            displayQuizQuestion();
+        }
+        
+        function resetQuiz() {
+            initQuiz();
+        }
+        
+        let currentUnderstandingQuestions = [];
+        let userUnderstandingAnswers = [];
+        let currentUnderstandingIndex = 0;
+        
+        function initUnderstanding() {
+            currentUnderstandingQuestions = [...understandingQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 2);
+            
+            currentUnderstandingIndex = 0;
+            userUnderstandingAnswers = new Array(currentUnderstandingQuestions.length).fill('');
+            
+            displayUnderstandingQuestion();
+            
+            const resultBox = document.getElementById('understanding-result');
+            if (resultBox) {
+                resultBox.classList.remove('visible');
+            }
+        }
+        
+        function displayUnderstandingQuestion() {
+            const container = document.getElementById('understanding-container');
+            if (!container) return;
+            
+            if (currentUnderstandingIndex >= currentUnderstandingQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3rem;">📝</div>
+                        <h3 style="color: #dc143c;">اكتملت الأسئلة</h3>
+                        <p>اضغط على زر "إرسال الإجابات"</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = currentUnderstandingQuestions[currentUnderstandingIndex];
+            
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>السؤال ${currentUnderstandingIndex + 1}: ${question.question}</h3>
+                    <textarea class="answer-input" placeholder="اكتب إجابتك هنا..." oninput="saveUnderstandingAnswer(this.value)" id="understanding-answer-${currentUnderstandingIndex}">${userUnderstandingAnswers[currentUnderstandingIndex]}</textarea>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevUnderstandingQuestion()" ${currentUnderstandingIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextUnderstandingQuestion()">
+                        ${currentUnderstandingIndex === currentUnderstandingQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function saveUnderstandingAnswer(value) {
+            userUnderstandingAnswers[currentUnderstandingIndex] = value;
+        }
+        
+        function nextUnderstandingQuestion() {
+            if (currentUnderstandingIndex < currentUnderstandingQuestions.length - 1) {
+                currentUnderstandingIndex++;
+                displayUnderstandingQuestion();
+            } else {
+                currentUnderstandingIndex = currentUnderstandingQuestions.length;
+                displayUnderstandingQuestion();
+            }
+        }
+        
+        function prevUnderstandingQuestion() {
+            if (currentUnderstandingIndex > 0) {
+                currentUnderstandingIndex--;
+                displayUnderstandingQuestion();
+            }
+        }
+        
+        function submitUnderstanding() {
+            let resultsHTML = '<h3>📝 تقييم إجاباتك</h3>';
+            
+            currentUnderstandingQuestions.forEach((question, index) => {
+                const userAnswer = userUnderstandingAnswers[index] || 'لم تجب على هذا السؤال';
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br><br>
+                        <strong>📝 إجابتك:</strong><br>
+                        <div style="background: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                            ${userAnswer}
+                        </div>
+                        <strong>✅ الإجابة النموذجية:</strong><br>
+                        <div style="background: #d4edda; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                            ${question.modelAnswer}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsHTML += `
+                <div style="background: #e9c46a; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>🎯 نصائح للتحسين:</h4>
+                    <p>• قارن إجاباتك بالإجابات النموذجية</p>
+                    <p>• راجع تفسير السورة بشكل متعمق</p>
+                    <p>• استمع لشروحات العلماء عن معاني السورة</p>
+                    <p>• ناقش الأسئلة مع معلم أو صديق</p>
+                </div>
+            `;
+            
+            const resultBox = document.getElementById('understanding-result');
+            if (resultBox) {
+                resultBox.innerHTML = resultsHTML;
+                resultBox.classList.add('visible');
+            }
+        }
+        
+        function resetUnderstanding() {
+            initUnderstanding();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.getAttribute('onclick')) {
+                        return true;
+                    }
+                });
+            });
+            
+            console.log('صفحة سورة المدثر جاهزة');
+        });
+    </script>
 </body>
 </html>
-
