@@ -723,4 +723,428 @@
                     </div>
                 </div>
                 
-                <button class="close-section-btn" onclick="hideSection('quiz')
+                <button class="close-section-btn" onclick="hideSection('quiz')">
+                    إغلاق الاختبار
+                </button>
+            </div>
+            
+            <div id="understanding" class="hidden-content">
+                <div class="understanding-questions">
+                    <h2 style="color: #e67700; margin-bottom: 20px; text-align: center;">
+                        💭 أسئلة فهم سورة الكوثر
+                    </h2>
+                    
+                    <div id="understanding-container">
+                        <!-- الأسئلة ستظهر هنا -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a; color: #000;">
+                            📤 إرسال الإجابات
+                        </button>
+                        <button class="control-btn" onclick="resetUnderstanding()" style="background: #6c757d; color: white; margin-right: 10px;">
+                            🔄 أسئلة جديدة
+                        </button>
+                    </div>
+                    
+                    <div id="understanding-result" class="result-box">
+                        <!-- النتيجة ستظهر هنا -->
+                    </div>
+                </div>
+                
+                <button class="close-section-btn" onclick="hideSection('understanding')">
+                    إغلاق أسئلة الفهم
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="telegram-section">
+                <h3 style="margin-bottom: 15px;">📱 انضم إلى مجتمعنا</h3>
+                <p>انضم لمجموعة تلغرام الخاصة بمستخدمي الكتاب للاستفادة من:</p>
+                <p>• آخر التحديثات • نصائح الحفظ • مسابقات ودورات • دعم مباشر</p>
+                <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
+                    📲 انضم لمجموعة تلغرام
+                </a>
+            </div>
+            
+            <div class="copyright">
+                جميع الحقوق محفوظة © 2026 مكتبة إسلام عنابة
+                <br>
+                <small>القرآن التفاعلي - كتاب تتبع القرآن الكريم بخط اليد</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const memoryQuestions = [
+            {
+                question: "ما هي الآية الأولى في سورة الكوثر؟",
+                options: ["إنا أعطيناك الكوثر", "فصل لربك وانحر", "إن شانئك هو الأبتر", "قل هو الله أحد"],
+                correct: 0,
+                explanation: "الآية الأولى هي: 'إنا أعطيناك الكوثر'"
+            },
+            {
+                question: "كم عدد آيات سورة الكوثر؟",
+                options: ["2 آيات", "3 آيات", "4 آيات", "5 آيات"],
+                correct: 1,
+                explanation: "سورة الكوثر تتكون من 3 آيات"
+            },
+            {
+                question: "أكمل الآية: 'فصل لربك ________'",
+                options: ["واصبر", "وانحر", "واقنت", "وأطع"],
+                correct: 1,
+                explanation: "الآية الكاملة: 'فصل لربك وانحر'"
+            },
+            {
+                question: "ما هي الآية التي تلي 'فصل لربك وانحر'؟",
+                options: ["إنا أعطيناك الكوثر", "إن شانئك هو الأبتر", "قل يا أيها الكافرون", "تبت يدا أبي لهب"],
+                correct: 1,
+                explanation: "بعد 'فصل لربك وانحر' تأتي 'إن شانئك هو الأبتر'"
+            },
+            {
+                question: "ما معنى 'الأبتر' في السورة؟",
+                options: ["الغني", "المقطوع من الخير", "الكثير الذرية", "الطويل العمر"],
+                correct: 1,
+                explanation: "الأبتر: المقطوع من كل خير، المنقطع ذكره وذريته"
+            }
+        ];
+        
+        const understandingQuestions = [
+            {
+                question: "ما الحكمة من نزول سورة الكوثر؟ وما الذي تعلمنا إياه؟",
+                modelAnswer: "الحكمة: 1. تسلية النبي ﷺ وتثبيت قلبه. 2. رد على أعدائه الذين سبهوه. 3. بشرى بالخير الكثير. التعلم: 1. الشكر لله على النعم. 2. الصبر على أذى الأعداء. 3. الثقة بوعد الله. 4. رد الإساءة بالإحسان والثبات."
+            },
+            {
+                question: "ما هي مظاهر الكوثر التي أعطاها الله لنبيه ﷺ؟ وكيف نستفيد من السورة؟",
+                modelAnswer: "مظاهر الكوثر: 1. النبوة والرسالة. 2. القرآن الكريم. 3. الشفاعة العظمى. 4. الحوض المورود. 5. الأمة الكثيرة. 6. الذكر الخالد. الاستفادة: 1. الشكر الدائم لله. 2. الاقتداء بالنبي ﷺ. 3. الصبر على الأذى. 4. الفخر بالانتماء لأمة محمد ﷺ. 5. الثقة بنصر الله."
+            }
+        ];
+        
+        let currentSection = 'quran-text';
+        
+        function showSection(sectionId) {
+            document.querySelectorAll('.hidden-content').forEach(section => {
+                section.classList.remove('visible');
+            });
+            
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('visible');
+                currentSection = sectionId;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                if (sectionId === 'quiz') {
+                    initQuiz();
+                } else if (sectionId === 'understanding') {
+                    initUnderstanding();
+                }
+            }
+        }
+        
+        function hideSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('visible');
+            }
+            showSection('quran-text');
+        }
+        
+        let currentQuizQuestions = [];
+        let userQuizAnswers = [];
+        let currentQuizIndex = 0;
+        let quizSubmitted = false;
+        
+        function initQuiz() {
+            currentQuizQuestions = [...memoryQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
+            
+            currentQuizIndex = 0;
+            quizSubmitted = false;
+            userQuizAnswers = new Array(currentQuizQuestions.length).fill(null);
+            
+            displayQuizQuestion();
+            
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.classList.remove('visible');
+            }
+        }
+        
+        function displayQuizQuestion() {
+            const container = document.getElementById('quiz-container');
+            if (!container) return;
+            
+            if (currentQuizIndex >= currentQuizQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 3rem;">✅</div>
+                        <h3 style="color: var(--quran-green);">اكتمل الاختبار</h3>
+                        <p>اضغط على زر "تصحيح الإجابات" لمعرفة نتيجتك</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = currentQuizQuestions[currentQuizIndex];
+            let optionsHTML = '';
+            const letters = ['أ', 'ب', 'ج', 'د'];
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userQuizAnswers[currentQuizIndex] === index;
+                const isCorrect = quizSubmitted && index === question.correct;
+                const isWrong = quizSubmitted && userQuizAnswers[currentQuizIndex] === index && index !== question.correct;
+                
+                let className = 'answer-btn';
+                if (isSelected) className += ' selected';
+                if (isCorrect) className += ' selected';
+                if (isWrong) className += ' wrong';
+                
+                optionsHTML += `
+                    <div class="${className}" 
+                         onclick="selectQuizAnswer(${index})">
+                         ${letters[index]}. ${option}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>السؤال ${currentQuizIndex + 1}: ${question.question}</h3>
+                    <div class="answer-buttons">
+                        ${optionsHTML}
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevQuizQuestion()" 
+                            ${currentQuizIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextQuizQuestion()">
+                        ${currentQuizIndex === currentQuizQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function selectQuizAnswer(answerIndex) {
+            if (!quizSubmitted) {
+                userQuizAnswers[currentQuizIndex] = answerIndex;
+                displayQuizQuestion();
+            }
+        }
+        
+        function nextQuizQuestion() {
+            if (currentQuizIndex < currentQuizQuestions.length - 1) {
+                currentQuizIndex++;
+                displayQuizQuestion();
+            } else {
+                currentQuizIndex = currentQuizQuestions.length;
+                displayQuizQuestion();
+            }
+        }
+        
+        function prevQuizQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                displayQuizQuestion();
+            }
+        }
+        
+        function submitQuiz() {
+            quizSubmitted = true;
+            let score = 0;
+            let resultsHTML = '<h3>📊 نتيجة الاختبار</h3>';
+            
+            currentQuizQuestions.forEach((question, index) => {
+                const userAnswer = userQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) score++;
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br>
+                        <strong>إجابتك:</strong> ${userAnswer !== null ? question.options[userAnswer] : 'لم تجب'}<br>
+                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correct]}<br>
+                        <em>${question.explanation}</em>
+                    </div>
+                `;
+            });
+            
+            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
+            let message = '';
+            let emoji = '';
+            
+            if (percentage >= 90) {
+                message = 'ممتاز! إتقان تام للسورة';
+                emoji = '🎉';
+            } else if (percentage >= 70) {
+                message = 'جيد جداً، مستوى ممتاز';
+                emoji = '👍';
+            } else if (percentage >= 50) {
+                message = 'مقبول، يحتاج مراجعة بسيطة';
+                emoji = '💪';
+            } else {
+                message = 'راجع السورة مرة أخرى';
+                emoji = '📚';
+            }
+            
+            resultsHTML += `
+                <div style="background: var(--quran-green); color: white; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>${emoji} ${message}</h4>
+                    <p>الدرجة: ${score} من ${currentQuizQuestions.length}</p>
+                    <p>النسبة: ${percentage}%</p>
+                </div>
+            `;
+            
+            const resultBox = document.getElementById('quiz-result');
+            if (resultBox) {
+                resultBox.innerHTML = resultsHTML;
+                resultBox.classList.add('visible');
+            }
+            
+            displayQuizQuestion();
+        }
+        
+        function resetQuiz() {
+            initQuiz();
+        }
+        
+        let currentUnderstandingQuestions = [];
+        let userUnderstandingAnswers = [];
+        let currentUnderstandingIndex = 0;
+        
+        function initUnderstanding() {
+            currentUnderstandingQuestions = [...understandingQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 2);
+            
+            currentUnderstandingIndex = 0;
+            userUnderstandingAnswers = new Array(currentUnderstandingQuestions.length).fill('');
+            
+            displayUnderstandingQuestion();
+            
+            const resultBox = document.getElementById('understanding-result');
+            if (resultBox) {
+                resultBox.classList.remove('visible');
+            }
+        }
+        
+        function displayUnderstandingQuestion() {
+            const container = document.getElementById('understanding-container');
+            if (!container) return;
+            
+            if (currentUnderstandingIndex >= currentUnderstandingQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px;">
+                        <div style="font-size: 3rem;">📝</div>
+                        <h3 style="color: #e67700;">اكتملت الأسئلة</h3>
+                        <p>اضغط على زر "إرسال الإجابات"</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const question = currentUnderstandingQuestions[currentUnderstandingIndex];
+            
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h3>السؤال ${currentUnderstandingIndex + 1}: ${question.question}</h3>
+                    <textarea class="answer-input" 
+                              placeholder="اكتب إجابتك هنا..."
+                              oninput="saveUnderstandingAnswer(this.value)"
+                              id="understanding-answer-${currentUnderstandingIndex}">${userUnderstandingAnswers[currentUnderstandingIndex]}</textarea>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button class="control-btn" onclick="prevUnderstandingQuestion()" 
+                            ${currentUnderstandingIndex === 0 ? 'disabled style="opacity:0.5"' : ''}>
+                        ◀️ السابق
+                    </button>
+                    <button class="control-btn" onclick="nextUnderstandingQuestion()">
+                        ${currentUnderstandingIndex === currentUnderstandingQuestions.length - 1 ? 'إنهاء' : 'التالي ▶️'}
+                    </button>
+                </div>
+            `;
+        }
+        
+        function saveUnderstandingAnswer(value) {
+            userUnderstandingAnswers[currentUnderstandingIndex] = value;
+        }
+        
+        function nextUnderstandingQuestion() {
+            if (currentUnderstandingIndex < currentUnderstandingQuestions.length - 1) {
+                currentUnderstandingIndex++;
+                displayUnderstandingQuestion();
+            } else {
+                currentUnderstandingIndex = currentUnderstandingQuestions.length;
+                displayUnderstandingQuestion();
+            }
+        }
+        
+        function prevUnderstandingQuestion() {
+            if (currentUnderstandingIndex > 0) {
+                currentUnderstandingIndex--;
+                displayUnderstandingQuestion();
+            }
+        }
+        
+        function submitUnderstanding() {
+            let resultsHTML = '<h3>📝 تقييم إجاباتك</h3>';
+            
+            currentUnderstandingQuestions.forEach((question, index) => {
+                const userAnswer = userUnderstandingAnswers[index] || 'لم تجب على هذا السؤال';
+                
+                resultsHTML += `
+                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
+                        <strong>السؤال ${index + 1}:</strong> ${question.question}<br><br>
+                        <strong>📝 إجابتك:</strong><br>
+                        <div style="background: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                            ${userAnswer}
+                        </div>
+                        <strong>✅ الإجابة النموذجية:</strong><br>
+                        <div style="background: #d4edda; padding: 10px; border-radius: 5px; margin: 10px 0;">
+                            ${question.modelAnswer}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsHTML += `
+                <div style="background: #e9c46a; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <h4>🎯 نصائح للتحسين:</h4>
+                    <p>• قارن إجاباتك بالإجابات النموذجية</p>
+                    <p>• راجع تفسير السورة بشكل متعمق</p>
+                    <p>• استمع لشروحات العلماء عن معاني السورة</p>
+                    <p>• ناقش الأسئلة مع معلم أو صديق</p>
+                </div>
+            `;
+            
+            const resultBox = document.getElementById('understanding-result');
+            if (resultBox) {
+                resultBox.innerHTML = resultsHTML;
+                resultBox.classList.add('visible');
+            }
+        }
+        
+        function resetUnderstanding() {
+            initUnderstanding();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.getAttribute('onclick')) {
+                        return true;
+                    }
+                });
+            });
+            
+            console.log('صفحة سورة الكوثر جاهزة');
+        });
+    </script>
+</body>
+</html>
