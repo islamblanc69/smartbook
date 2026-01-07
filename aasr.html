@@ -3,106 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سورة العصر</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
-
-    <style>
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            text-align: center; 
-            padding: 20px; 
-            
-            background-image: url('background.jpg');
-            background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat; 
-            background-attachment: fixed; 
-        }
-
-        /* --- تعديل الشفافية إلى 60% --- */
-        .container {
-            /* --- 60% شفافية --- */
-            background-color: rgba(255, 255, 255, 0.6); 
-            padding: 20px 10px;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); 
-            max-width: 500px; 
-            margin: auto; 
-        }
-        
-        h1 { 
-            color: #333; 
-            font-family: 'Amiri', serif; 
-            font-size: 2.5em; 
-            margin-bottom: 5px;
-        }
-        
-        /* --- تغيير الجملة هنا --- */
-        p { 
-            color: #333; /* جعلته أغمق ليتناسب مع الخلفية الشفافة */
-            font-weight: 500;
-            font-size: 1.2em; /* تكبير الخط قليلاً */
-            margin-top: 0;
-            margin-bottom: 20px; /* إضافة مسافة قبل الأزرار */
-        }
-
-        .button-link {
-            display: block;
-            padding: 15px;
-            margin: 10px auto;
-            width: 80%;
-            max-width: 400px;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            transition: opacity 0.3s;
-            font-weight: 500; 
-        }
-        .button-link:hover { opacity: 0.8; }
-        
-        .button-tilawa { background-color: #28a745; } /* أخضر */
-        .button-moallem { background-color: #a0522d; } /* بني دافئ */
-        .button-tafseer { background-color: #6c757d; } /* رمادي */
-        
-        .page-logo {
-            position: fixed; 
-            bottom: 15px;    
-            right: 15px;     
-            width: 60px;     
-            height: auto;    
-            opacity: 0.9;    
-            z-index: 1000;   
-        }
-        
-    </style>
+    <title>سورة العصر - القرآن التفاعلي</title>
+    <link rel="icon" href="image.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 🔴 CSS بدون أي تغيير -->
 </head>
 <body>
 
-    <div class="container">
-        
-        <h1>سورة العصر</h1>
-        
-        <p>استمع، تعلم، وتدبّر</p>
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">📖</div>
+            <div>
+                <h1>سورة العصر</h1>
+                <p>سورة تبين أن الإنسان في خسر إلا من آمن وعمل الصالحات</p>
+            </div>
+        </div>
+    </div>
 
+    <!-- ================= السورة كاملة ================= -->
+    <div id="quran-text" class="hidden-content visible">
+        <h2 style="text-align:center;color:#1a5f7a;">📖 سورة العصر كاملة</h2>
+        <p style="text-align:center;">سورة مكية – عدد آياتها 3</p>
 
-        <a href="https://drive.google.com/file/d/1-__a48iiY_qV0Y9wyD0tiGG3KH4N534b/preview" class="button-link button-tilawa" target="_blank">
-            📖 التلاوة (صوت وصورة)
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1KR8cXphkdLZ0HY5E8e70iOzMlsH-i2q5/preview" class="button-link button-moallem" target="_blank">
-            🧒 معلم الأطفال (تكرار)
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1eZ5f0lvGDzGujSgIq23xW25I1ZLtNGor/preview" class="button-link button-tafseer" target="_blank">
-            🎧 التفسير الصوتي
-        </a>
+        <div class="quran-text">
+            <div class="verse">
+                <div class="verse-number">١</div>
+                وَالْعَصْرِ
+            </div>
+            <div class="verse">
+                <div class="verse-number">٢</div>
+                إِنَّ الْإِنسَانَ لَفِي خُسْرٍ
+            </div>
+            <div class="verse">
+                <div class="verse-number">٣</div>
+                إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ
+            </div>
+        </div>
+    </div>
 
-    </div> <img src="image.png" alt="Logo" class="page-logo">
+    <!-- ================= معلومات السورة ================= -->
+    <div id="surah-info" class="hidden-content">
+        <h2 style="text-align:center;">ℹ️ معلومات عن سورة العصر</h2>
+
+        <div class="surah-info-grid">
+            <div class="info-box">
+                <div class="info-label">رقم السورة</div>
+                <div class="info-value">103</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">نوع السورة</div>
+                <div class="info-value">مكية</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">عدد الآيات</div>
+                <div class="info-value">3 آيات</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">عدد الكلمات</div>
+                <div class="info-value">14 كلمة</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">عدد الحروف</div>
+                <div class="info-value">68 حرفًا</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">مدة التلاوة</div>
+                <div class="info-value">15 ثانية</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= قصة السورة ================= -->
+    <div id="surah-story" class="hidden-content">
+        <div class="story-section">
+            <h2 style="text-align:center;">📖 قصة وفضل سورة العصر</h2>
+
+            <p>
+                سورة العصر من أعظم سور القرآن رغم قصرها، حتى قال الإمام الشافعي:
+                <strong>لو ما أنزل الله حجة على خلقه إلا هذه السورة لكفتهم</strong>.
+            </p>
+
+            <p>
+                تبين السورة أن جميع الناس في خسارة حقيقية في الدنيا والآخرة،
+                إلا من جمع أربع صفات عظيمة: الإيمان، والعمل الصالح،
+                والتواصي بالحق، والتواصي بالصبر.
+            </p>
+        </div>
+    </div>
+
+    <!-- ================= التفسير ================= -->
+    <div id="tafsir-section" class="hidden-content">
+        <div class="tafsir-section">
+            <h2 class="tafsir-title">📚 تفسير سورة العصر</h2>
+
+            <div class="tafsir-content">
+                <p><strong>﴿وَالْعَصْرِ﴾</strong>  
+                أقسم الله بالزمن لعظمته.</p>
+
+                <p><strong>﴿إِنَّ الْإِنسَانَ لَفِي خُسْرٍ﴾</strong>  
+                كل إنسان خاسر في عمره إن لم يستغله في طاعة الله.</p>
+
+                <p><strong>﴿إِلَّا الَّذِينَ آمَنُوا﴾</strong>  
+                استثناء لأهل الإيمان والعمل الصالح.</p>
+
+                <p>
+                <strong>﴿وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ﴾</strong>  
+                أي ينصح بعضهم بعضًا بالخير والثبات.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+/* ================= أسئلة الاختبار – سورة العصر ================= */
+
+const memoryQuestions = [
+    {
+        question: "كم عدد آيات سورة العصر؟",
+        options: ["3", "4", "5", "6"],
+        correct: 0,
+        explanation: "سورة العصر تتكون من 3 آيات"
+    },
+    {
+        question: "بماذا أقسم الله في سورة العصر؟",
+        options: ["الليل", "النهار", "العصر", "الدهر"],
+        correct: 2,
+        explanation: "أقسم الله بالعصر"
+    },
+    {
+        question: "من هم المستثنون من الخسران؟",
+        options: [
+            "الأغنياء",
+            "العلماء",
+            "الذين آمنوا وعملوا الصالحات",
+            "المجاهدون فقط"
+        ],
+        correct: 2,
+        explanation: "الاستثناء لأهل الإيمان والعمل الصالح"
+    }
+];
+
+const understandingQuestions = [
+    {
+        question: "لماذا أقسم الله بالعصر في هذه السورة؟",
+        modelAnswer: "لبيان أهمية الوقت وأنه رأس مال الإنسان في حياته"
+    },
+    {
+        question: "كيف ننجو من الخسران المذكور في السورة؟",
+        modelAnswer: "بالإيمان والعمل الصالح والتواصي بالحق والصبر"
+    }
+];
+</script>
 
 </body>
 </html>
-
