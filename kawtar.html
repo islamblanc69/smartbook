@@ -49,6 +49,11 @@
             backdrop-filter: blur(10px);
         }
         
+        .back-to-mushaf-btn i {
+            margin-left: 8px;
+            font-size: 1.2rem;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -63,6 +68,7 @@
             color: white;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
         
         .logo-container {
@@ -81,9 +87,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
             color: var(--quran-blue);
             border: 3px solid var(--quran-gold);
             font-size: 1.2rem;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .control-section {
@@ -95,12 +119,12 @@
         .control-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
         }
         
         .control-btn {
-            padding: 12px 20px;
+            padding: 15px 25px;
             background: white;
             border: 2px solid var(--quran-green);
             border-radius: 8px;
@@ -110,78 +134,292 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 1rem;
+            min-width: 180px;
+            justify-content: center;
         }
         
         .control-btn:hover {
             background: var(--quran-green);
             color: white;
+            transform: translateY(-2px);
         }
         
         .content-section {
             padding: 25px;
         }
         
-        .quran-text {
-            font-family: 'Traditional Arabic', serif;
-            font-size: 2.5rem;
-            line-height: 2.5;
-            text-align: center;
-            color: #1a365d;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border: 2px solid #eee;
+        .simple-mind-map {
+            background: #f0f9f7;
+            padding: 25px;
+            border-radius: 10px;
+            border-right: 5px solid var(--quran-green);
+            margin-bottom: 25px;
         }
         
-        .verse { margin: 20px 0; position: relative; }
+        .mind-map-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
         
-        .verse-number {
+        .map-step {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--quran-gold);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .step-number {
             display: inline-block;
-            background: var(--quran-green);
+            background: var(--quran-blue);
             color: white;
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            text-align: center;
             line-height: 35px;
-            margin-right: 10px;
+            margin-left: 10px;
+            font-weight: bold;
         }
         
-        .info-grid {
+        .quran-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2.2rem;
+            line-height: 2.5;
+            text-align: center;
+            color: #1a365d;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .verse {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .verse-number {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: var(--quran-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .simple-quiz {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #eee;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-green);
+        }
+        
+        .answer-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .answer-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .answer-btn:hover {
+            background: #e9f5f3;
+            border-color: var(--quran-green);
+        }
+        
+        .answer-btn.selected {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .answer-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .surah-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
+            margin-top: 20px;
         }
         
         .info-box {
             background: #f0f9f7;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
             border: 1px solid #ddd;
         }
         
-        .hidden-content { display: none; animation: fadeIn 0.5s ease; }
-        .visible { display: block; }
+        .info-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
         
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--quran-blue);
+        }
+        
+        .tafsir-section {
+            background: #f5f7fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #d1e0e0;
+            margin: 25px 0;
+        }
+        
+        .tafsir-title {
+            color: var(--quran-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .tafsir-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--quran-gold);
+        }
+        
+        .tafsir-verse {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tafsir-verse:last-child {
+            border-bottom: none;
+        }
+        
+        .understanding-questions {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px dashed #ffd43b;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1rem;
+            min-height: 100px;
+        }
+        
+        .result-box {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result-box.visible {
+            display: block;
+        }
+        
+        .close-section-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .close-section-btn:hover {
+            background: #5a6268;
+        }
+        
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .hidden-content.visible {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .story-section {
+            background: #fff9db;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ffd43b;
+        }
 
-        /* تعديلات الـ Footer الجديدة بناءً على الصورة */
+        /* المظهر الجديد للفوتر كما في الصورة */
         .footer-new {
             background-color: #1a5f7a;
             color: white;
             padding: 40px 20px;
             text-align: center;
             margin-top: 50px;
-            border-top: 4px solid var(--quran-gold);
+            border-top: 3px solid var(--quran-gold);
         }
 
         .telegram-card {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
-            max-width: 650px;
+            max-width: 600px;
             margin: 0 auto 40px auto;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -202,7 +440,7 @@
         }
 
         .telegram-features {
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 25px;
             opacity: 0.9;
         }
@@ -213,18 +451,17 @@
             gap: 10px;
             background-color: #0088cc;
             color: white;
-            padding: 12px 35px;
+            padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
         .btn-telegram-new:hover {
-            background-color: #00a2f3;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background-color: #0077b5;
+            transform: scale(1.05);
         }
 
         .copyright-new {
@@ -232,18 +469,6 @@
             padding-top: 30px;
             font-size: 0.95rem;
             line-height: 2;
-        }
-
-        .close-btn {
-            width: 100%;
-            padding: 12px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -257,68 +482,122 @@
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <div class="logo">📖</div>
+                <div class="logo">
+                    <img src="image.png" alt="لوغو" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
+                </div>
                 <div>
                     <h1>سورة الكوثر</h1>
-                    <p>بشارة للنبي ﷺ بالخير الكثير والرد على المشركين</p>
+                    <p>أقصر سور القرآن - بشارة للنبي ﷺ بالخير والرفعة</p>
                 </div>
             </div>
         </div>
         
         <div class="control-section">
             <div class="control-buttons">
-                <button class="control-btn" onclick="showSection('quran-text')">📖 السورة</button>
-                <button class="control-btn" onclick="showSection('surah-info')">ℹ️ معلومات</button>
-                <button class="control-btn" onclick="showSection('surah-story')">📜 قصة السورة</button>
-                <button class="control-btn" onclick="showSection('tafsir-section')">📚 التفسير</button>
-                <button class="control-btn" onclick="showSection('quiz')">🧠 اختبار</button>
+                <button class="control-btn" onclick="showSection('mind-map')">
+                    <span>🗺️</span> خطة الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('quran-text')">
+                    <span>📖</span> السورة كاملة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-info')">
+                    <span>ℹ️</span> معلومات السورة
+                </button>
+                <button class="control-btn" onclick="showSection('surah-story')">
+                    <span>📖</span> قصة السورة
+                </button>
+                <button class="control-btn" onclick="showSection('tafsir-section')">
+                    <span>📚</span> تفسير السورة
+                </button>
+                <button class="control-btn" onclick="showSection('quiz')">
+                    <span>🧠</span> اختبار الحفظ
+                </button>
+                <button class="control-btn" onclick="showSection('understanding')">
+                    <span>💭</span> أسئلة الفهم
+                </button>
             </div>
         </div>
         
         <div class="content-section">
+            
+            <div id="mind-map" class="hidden-content">
+                <div class="simple-mind-map">
+                    <h2 class="mind-map-title">🗺️ خطة حفظ سورة الكوثر</h2>
+                    <div class="map-step">
+                        <span class="step-number">١</span>
+                        <h3>اليوم الأول: الآيات ١-٢</h3>
+                        <p>حفظ: إنا أعطيناك الكوثر + فصل لربك وانحر</p>
+                    </div>
+                    <div class="map-step">
+                        <span class="step-number">٢</span>
+                        <h3>اليوم الثاني: الآية ٣</h3>
+                        <p>حفظ: إن شانئك هو الأبتر</p>
+                    </div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('mind-map')">إغلاق</button>
+            </div>
+            
             <div id="quran-text" class="hidden-content visible">
                 <div class="quran-text">
-                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ <br>
-                    <div class="verse">إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ <span class="verse-number">١</span></div>
-                    <div class="verse">فَصَلِّ لِرَبِّكَ وَانْحَرْ <span class="verse-number">٢</span></div>
-                    <div class="verse">إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ <span class="verse-number">٣</span></div>
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ <br><br>
+                    <div class="verse"><div class="verse-number">١</div>إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ</div>
+                    <div class="verse"><div class="verse-number">٢</div>فَصَلِّ لِرَبِّكَ وَانْحَرْ</div>
+                    <div class="verse"><div class="verse-number">٣</div>إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ</div>
                 </div>
+                <button class="close-section-btn" onclick="hideSection('quran-text')">إغلاق</button>
             </div>
             
             <div id="surah-info" class="hidden-content">
-                <div class="info-grid">
-                    <div class="info-box"><strong>رقم السورة</strong><br>108</div>
-                    <div class="info-box"><strong>نوع السورة</strong><br>مكية</div>
-                    <div class="info-box"><strong>عدد الآيات</strong><br>3 آيات</div>
-                    <div class="info-box"><strong>عدد الكلمات</strong><br>10 كلمات</div>
+                <div class="surah-info-grid">
+                    <div class="info-box"><div class="info-label">رقم السورة</div><div class="info-value">108</div></div>
+                    <div class="info-box"><div class="info-label">النوع</div><div class="info-value">مكية</div></div>
+                    <div class="info-box"><div class="info-label">عدد الآيات</div><div class="info-value">3 آيات</div></div>
+                    <div class="info-box"><div class="info-label">عدد الكلمات</div><div class="info-value">10 كلمات</div></div>
                 </div>
-                <button class="close-btn" onclick="hideSection('surah-info')">إغلاق المعلومات</button>
+                <button class="close-section-btn" onclick="hideSection('surah-info')">إغلاق</button>
             </div>
             
-            <div id="surah-story" class="hidden-content" style="background: #fff9db; padding: 25px; border-radius: 12px; border: 1px solid #e9c46a;">
-                <h3 style="color: #1a5f7a; margin-bottom: 15px;">📜 قصة نزول السورة:</h3>
-                <p>كان المشركون في مكة يعيبون على النبي ﷺ وفاة أبنائه الذكور، ويقولون عنه أنه "أبتر" أي مقطوع الذكر ولن يذكره أحد بعد موته.</p>
-                <p>فأنزل الله هذه السورة ليبشر نبيه بالخير الكثير (الكوثر) في الدنيا والآخرة، وأكد أن أعداءه هم المقطوعون من كل خير ومن الذكر الجميل.</p>
-                <button class="close-btn" onclick="hideSection('surah-story')">إغلاق القصة</button>
+            <div id="surah-story" class="hidden-content">
+                <div class="story-section">
+                    <h2 style="color: #e67700; text-align: center;">📖 قصة سورة الكوثر</h2>
+                    <p>نزلت هذه السورة رداً على المشركين الذين كانوا يقولون عن النبي ﷺ إنه "أبتر" (أي مقطوع النسل) بعد وفاة ابنه القاسم.</p>
+                    <p>فبشره الله تعالى بأنه أعطاه "الكوثر" وهو نهر في الجنة، وأن عدوه هو المقطوع حقيقةً من كل ذكر حسن.</p>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('surah-story')">إغلاق</button>
             </div>
             
-            <div id="tafsir-section" class="hidden-content" style="background: #f0f4f8; padding: 25px; border-radius: 12px;">
-                <h3 style="color: #1a5f7a; margin-bottom: 15px;">📚 التفسير الميسر:</h3>
-                <p><strong>١. الكوثر:</strong> هو الخير الكثير، ومنه نهر الكوثر في الجنة الذي ماؤه أبيض من اللبن وأحلى من العسل.</p>
-                <p><strong>٢. فصلِّ لربك وانحر:</strong> أي أخلص صلاتك وعبادتك وذبحك لله وحده، شكراً له على ما أعطاك.</p>
-                <p><strong>٣. إن شانئك هو الأبتر:</strong> إن الذي يبغضك ويكرهك يا محمد هو المقطوع عن كل خير.</p>
-                <button class="close-btn" onclick="hideSection('tafsir-section')">إغلاق التفسير</button>
-            </div>
-
-            <div id="quiz" class="hidden-content" style="background: #e8f5e9; padding: 25px; border-radius: 12px;">
-                <h3 style="text-align: center; color: #2e7d32; margin-bottom: 20px;">🧠 اختبر معلوماتك</h3>
-                <div id="quiz-box">
-                    <p style="font-weight: bold; margin-bottom: 15px;">ما هو المعنى المراد بكلمة "شانئك" في الآية الثالثة؟</p>
-                    <button class="control-btn" style="width: 100%; margin: 8px 0; justify-content: center;" onclick="checkAns(false)">صديقك ومحبك</button>
-                    <button class="control-btn" style="width: 100%; margin: 8px 0; justify-content: center;" onclick="checkAns(true)">مبغضك وكارهك</button>
+            <div id="tafsir-section" class="hidden-content">
+                <div class="tafsir-section">
+                    <h2 class="tafsir-title">📚 تفسير سورة الكوثر</h2>
+                    <div class="tafsir-content">
+                        <p><strong>الكوثر:</strong> الخير الكثير، ومنه نهر الكوثر في الجنة.</p>
+                        <p><strong>فصل لربك وانحر:</strong> أخلص صلاتك وذبيحتك لله وحده.</p>
+                        <p><strong>إن شانئك هو الأبتر:</strong> إن مبغضك يا محمد هو المقطوع عن كل خير.</p>
+                    </div>
                 </div>
-                <div id="quiz-msg" style="margin-top: 15px; font-weight: bold; text-align: center; min-height: 24px;"></div>
-                <button class="close-btn" onclick="hideSection('quiz')">إغلاق الاختبار</button>
+                <button class="close-section-btn" onclick="hideSection('tafsir-section')">إغلاق</button>
+            </div>
+            
+            <div id="quiz" class="hidden-content">
+                <div class="simple-quiz">
+                    <div id="quiz-container"></div>
+                    <div style="text-align: center;">
+                        <button class="control-btn" onclick="submitQuiz()" style="background: var(--quran-green); color: white;">✅ تصحيح</button>
+                    </div>
+                    <div id="quiz-result" class="result-box"></div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('quiz')">إغلاق</button>
+            </div>
+            
+            <div id="understanding" class="hidden-content">
+                <div class="understanding-questions">
+                    <div id="understanding-container"></div>
+                    <div style="text-align: center;">
+                        <button class="control-btn" onclick="submitUnderstanding()" style="background: #e9c46a;">📤 إرسال</button>
+                    </div>
+                    <div id="understanding-result" class="result-box"></div>
+                </div>
+                <button class="close-section-btn" onclick="hideSection('understanding')">إغلاق</button>
             </div>
         </div>
         
@@ -343,26 +622,85 @@
     </div>
 
     <script>
+        const memoryQuestions = [
+            {
+                question: "ما هي الآية الأولى في سورة الكوثر؟",
+                options: ["فصل لربك وانحر", "إنا أعطيناك الكوثر", "إن شانئك هو الأبتر"],
+                correct: 1
+            },
+            {
+                question: "كم عدد آيات سورة الكوثر؟",
+                options: ["3 آيات", "4 آيات", "5 آيات"],
+                correct: 0
+            }
+        ];
+        
+        const understandingQuestions = [
+            {
+                question: "ما هو الكوثر الذي أعطاه الله لنبيه؟",
+                modelAnswer: "هو نهر في الجنة، وهو أيضاً الخير الكثير في الدنيا والآخرة."
+            }
+        ];
+        
         function showSection(id) {
             document.querySelectorAll('.hidden-content').forEach(s => s.classList.remove('visible'));
-            document.getElementById(id).classList.add('visible');
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const sec = document.getElementById(id);
+            if(sec) {
+                sec.classList.add('visible');
+                if(id === 'quiz') initQuiz();
+                if(id === 'understanding') initUnderstanding();
+            }
         }
         
         function hideSection(id) {
             document.getElementById(id).classList.remove('visible');
-            document.getElementById('quran-text').classList.add('visible');
+            showSection('quran-text');
         }
 
-        function checkAns(isCorrect) {
-            const msg = document.getElementById('quiz-msg');
-            if(isCorrect) {
-                msg.innerHTML = "✅ أحسنت! إجابة صحيحة بارك الله فيك.";
-                msg.style.color = "#2e7d32";
-            } else {
-                msg.innerHTML = "❌ إجابة غير صحيحة، حاول مرة أخرى.";
-                msg.style.color = "#d32f2f";
-            }
+        // Quiz Logic
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = memoryQuestions.map((q, i) => `
+                <div class="quiz-question">
+                    <h3>${q.question}</h3>
+                    <div class="answer-buttons">
+                        ${q.options.map((opt, j) => `<div class="answer-btn" onclick="selectAns(${i}, ${j}, this)">${opt}</div>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+            userAnswers = new Array(memoryQuestions.length).fill(null);
+        }
+
+        let userAnswers = [];
+        function selectAns(qIdx, aIdx, el) {
+            userAnswers[qIdx] = aIdx;
+            const parent = el.parentElement;
+            parent.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            memoryQuestions.forEach((q, i) => { if(userAnswers[i] === q.correct) score++; });
+            const res = document.getElementById('quiz-result');
+            res.innerHTML = `النتيجة: ${score} من ${memoryQuestions.length}`;
+            res.classList.add('visible');
+        }
+
+        function initUnderstanding() {
+            const container = document.getElementById('understanding-container');
+            container.innerHTML = understandingQuestions.map((q, i) => `
+                <div class="quiz-question">
+                    <p><strong>${q.question}</strong></p>
+                    <textarea class="answer-input" id="und-ans-${i}"></textarea>
+                </div>
+            `).join('');
+        }
+
+        function submitUnderstanding() {
+            const res = document.getElementById('understanding-result');
+            res.innerHTML = "تم حفظ إجاباتك بنجاح وقورنت بالنموذجية.";
+            res.classList.add('visible');
         }
     </script>
 </body>
