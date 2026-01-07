@@ -25,15 +25,48 @@
             background-color: var(--quran-cream);
             color: #2c3e50;
             line-height: 1.6;
-            padding: 15px;
             min-height: 100vh;
+        }
+        
+        /* زر العودة للمصحف الرئيسي */
+        .top-button-container {
+            background: linear-gradient(135deg, #1a365d 0%, #2a9d8f 100%);
+            padding: 12px 20px;
+            text-align: center;
+            border-bottom: 2px solid #e9c46a;
+        }
+        
+        .back-to-mushaf-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-to-mushaf-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-color: #e9c46a;
+        }
+        
+        .back-to-mushaf-btn i {
+            margin-left: 8px;
+            font-size: 1.2rem;
         }
         
         .container {
             max-width: 1000px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
+            border-radius: 0 0 15px 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
@@ -389,6 +422,11 @@
             .surah-info-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .back-to-mushaf-btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
         }
         
         /* إخفاء المحتوى */
@@ -458,6 +496,13 @@
     </style>
 </head>
 <body>
+    <!-- زر العودة للمصحف الرئيسي -->
+    <div class="top-button-container">
+        <a href="index.html" class="back-to-mushaf-btn">
+            <i class="fas fa-quran"></i> المصحف الإلكتروني الذكي
+        </a>
+    </div>
+
     <div class="container">
         <!-- الهيدر مع اللوغو -->
         <div class="header">
