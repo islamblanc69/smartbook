@@ -4,143 +4,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سورة المجادلة - القرآن التفاعلي</title>
-    <link rel="icon" href="image.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --quran-green: #2a9d8f;
-            --quran-gold: #e9c46a;
-            --quran-blue: #1a5f7a;
-            --quran-cream: #fef9e7;
             --surah-color: #6a1b9a;
+            --quran-gold: #e9c46a;
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: var(--quran-cream);
-            color: #2c3e50;
+            background: #fef9e7;
+            color: #333;
             line-height: 1.6;
-            min-height: 100vh;
-        }
-        .top-button-container {
-            background: linear-gradient(135deg, #1a365d 0%, var(--surah-color) 100%);
-            padding: 12px 20px;
-            text-align: center;
-            border-bottom: 2px solid #e9c46a;
-        }
-        .back-to-mushaf-btn {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .back-to-mushaf-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border-color: #e9c46a;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
         .header {
-            background: linear-gradient(135deg, var(--surah-color) 0%, #9c27b0 100%);
+            background: linear-gradient(135deg, var(--surah-color), #8e24aa);
             color: white;
             padding: 20px;
             text-align: center;
-            position: relative;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--surah-color);
-            border: 3px solid var(--quran-gold);
         }
         .header h1 {
             font-size: 2rem;
             margin-bottom: 10px;
         }
-        .control-section {
+        .controls {
             padding: 20px;
-            background: #f8f9fa;
+            background: white;
             border-bottom: 2px solid #eee;
         }
         .control-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
         }
-        .control-btn {
-            padding: 15px 25px;
+        .btn {
+            padding: 12px 20px;
             background: white;
             border: 2px solid var(--surah-color);
             border-radius: 8px;
             color: var(--surah-color);
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            min-width: 180px;
+            gap: 8px;
+            min-width: 160px;
             justify-content: center;
         }
-        .control-btn:hover {
+        .btn:hover {
             background: var(--surah-color);
             color: white;
             transform: translateY(-2px);
         }
-        .content-section {
-            padding: 25px;
+        .content {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        .simple-mind-map, .story-section, .tafsir-section, .simple-quiz, .understanding-questions, .certificate-section {
-            background: #f3e5f5;
+        .section {
+            background: white;
             padding: 25px;
             border-radius: 10px;
+            margin-bottom: 20px;
             border-right: 5px solid var(--surah-color);
-            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             display: none;
         }
-        .simple-mind-map.visible, .story-section.visible, .tafsir-section.visible, 
-        .simple-quiz.visible, .understanding-questions.visible, .certificate-section.visible {
+        .section.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.5s;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .close-section-btn {
+        .quran-text {
+            font-family: 'Traditional Arabic', serif;
+            font-size: 2rem;
+            text-align: center;
+            color: #1a365d;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .verse {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+        }
+        .verse-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--surah-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .info-box {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .answer-btn {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .answer-btn:hover {
+            background: #f3e5f5;
+            border-color: var(--surah-color);
+        }
+        .certificate-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .btn { width: 100%; }
+        }
+        .certificate-preview {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 5px solid var(--surah-color);
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+        .certificate-preview.active {
+            display: block;
+        }
+        .certificate-header {
+            color: var(--surah-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .certificate-name {
+            font-size: 2.5rem;
+            color: var(--surah-color);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        .signature-box {
+            text-align: center;
+        }
+        .signature-line {
+            width: 200px;
+            height: 1px;
+            background: #333;
+            margin: 30px auto 10px;
+        }
+        .certificate-btn {
+            padding: 12px 25px;
+            background: var(--surah-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .footer {
+            background: var(--surah-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .close-btn {
             display: block;
             width: 100%;
             padding: 12px;
@@ -152,771 +241,267 @@
             cursor: pointer;
             font-weight: bold;
         }
-        .close-section-btn:hover {
-            background: #5a6268;
-        }
-        .quran-text {
-            font-family: 'Traditional Arabic', serif;
-            font-size: 2.2rem;
-            line-height: 3;
-            text-align: center;
-            color: #1a365d;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-        }
-        
-        /* شهادة الحفظ */
-        .certificate-form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--surah-color);
-        }
-        .form-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .form-input:focus {
-            border-color: var(--surah-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.1);
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            .control-btn {
-                width: 100%;
-                min-width: auto;
-            }
-        }
-        .certificate-preview {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            border: 5px solid var(--surah-color);
-            text-align: center;
-            margin-top: 30px;
-            display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            position: relative;
-            background-image: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.95));
-        }
-        .certificate-preview.visible {
-            display: block;
-        }
-        .certificate-header {
-            color: var(--surah-color);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-decoration: underline;
-            text-decoration-color: var(--quran-gold);
-            text-underline-offset: 10px;
-        }
-        .certificate-subtitle {
-            color: #666;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        .certificate-body {
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 2px solid #e9c46a;
-        }
-        .certificate-name {
-            font-size: 2.8rem;
-            color: var(--surah-color);
-            margin: 20px 0;
-            font-weight: bold;
-            font-family: 'Traditional Arabic', serif;
-        }
-        .certificate-text {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #444;
-            margin: 20px 0;
-        }
-        .certificate-date {
-            font-size: 1.2rem;
-            color: #666;
-            margin: 20px 0;
-        }
-        .certificate-footer {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-top: 20px;
-        }
-        .signature-box {
-            text-align: center;
-            flex: 1;
-        }
-        .signature-line {
-            width: 200px;
-            height: 2px;
-            background: #333;
-            margin: 40px auto 10px;
-        }
-        .signature-name {
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-        }
-        .signature-title {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        .certificate-stamp {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 120px;
-            height: 120px;
-            background: var(--surah-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.8rem;
-            border: 3px solid var(--quran-gold);
-            transform: rotate(5deg);
-        }
-        .certificate-seal {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 3rem;
-            color: var(--surah-color);
-        }
-        .certificate-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .certificate-btn {
-            padding: 15px 30px;
-            background: var(--surah-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-        }
-        .certificate-btn:hover {
-            background: #5e35b1;
-            transform: translateY(-2px);
-        }
-        .certificate-btn.secondary {
-            background: #6c757d;
-        }
-        .certificate-btn.success {
-            background: #28a745;
-        }
-        .footer {
-            background: var(--surah-color);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            margin-top: 30px;
-            border-top: 3px solid var(--quran-gold);
-        }
-        
-        /* رسالة التهنئة */
-        .congratulation-message {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            padding: 30px;
-            border-radius: 10px;
-            margin: 25px 0;
-            text-align: center;
-            border: 3px solid #28a745;
-            display: none;
-        }
-        .congratulation-message.visible {
-            display: block;
-            animation: bounceIn 0.8s ease;
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .progress-bar {
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--surah-color), #9c27b0);
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
     </style>
 </head>
 <body>
-    <div class="top-button-container">
-        <a href="index.html" class="back-to-mushaf-btn">
-            <i class="fas fa-quran"></i> المصحف الإلكتروني الذكي
-        </a>
+    <div class="header">
+        <h1>سورة المجادلة</h1>
+        <p>آخر سورة في مشروع حفظ 6 أحزاب</p>
     </div>
-    <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    📖
-                </div>
-                <div>
-                    <h1>سورة المجادلة</h1>
-                    <p>آخر سورة في مشروع حفظ 6 أحزاب - احصل على شهادة الختم</p>
-                </div>
-            </div>
+
+    <div class="controls">
+        <div class="control-buttons">
+            <button class="btn" onclick="showSection('text')">📖 السورة</button>
+            <button class="btn" onclick="showSection('info')">ℹ️ المعلومات</button>
+            <button class="btn" onclick="showSection('story')">📖 القصة</button>
+            <button class="btn" onclick="showSection('tafsir')">📚 التفسير</button>
+            <button class="btn" onclick="showSection('quiz')">🧠 اختبار</button>
+            <button class="btn" onclick="showSection('certificate')">🏆 الشهادة</button>
         </div>
-        <div class="control-section">
-            <div class="control-buttons">
-                <button class="control-btn" onclick="showSection('mind-map')">
-                    <span>🗺️</span> خطة الحفظ
-                </button>
-                <button class="control-btn" onclick="showSection('quran-text')">
-                    <span>📖</span> السورة كاملة
-                </button>
-                <button class="control-btn" onclick="showSection('surah-info')">
-                    <span>ℹ️</span> معلومات السورة
-                </button>
-                <button class="control-btn" onclick="showSection('surah-story')">
-                    <span>📖</span> قصة السورة
-                </button>
-                <button class="control-btn" onclick="showSection('tafsir-section')">
-                    <span>📚</span> تفسير السورة
-                </button>
-                <button class="control-btn" onclick="showSection('quiz')">
-                    <span>🧠</span> اختبار الحفظ
-                </button>
-                <button class="control-btn" onclick="showSection('understanding')">
-                    <span>💭</span> أسئلة الفهم
-                </button>
-                <button class="control-btn" onclick="showSection('certificate')">
-                    <span>🏆</span> شهادة ختم الحفظ
-                </button>
+    </div>
+
+    <div class="content">
+        <!-- نص السورة -->
+        <div id="text" class="section active">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">📖 سورة المجادلة</h2>
+            <div class="quran-text">
+                <div class="verse">
+                    <div class="verse-number">1</div>
+                    قَدْ سَمِعَ اللَّهُ قَوْلَ الَّتِي تُجَادِلُكَ فِي زَوْجِهَا وَتَشْتَكِي إِلَى اللَّهِ وَاللَّهُ يَسْمَعُ تَحَاوُرَكُمَا ۚ إِنَّ اللَّهَ سَمِيعٌ بَصِيرٌ
+                </div>
+                <div class="verse">
+                    <div class="verse-number">2</div>
+                    الَّذِينَ يُظَاهِرُونَ مِنْكُمْ مِنْ نِسَائِهِمْ مَا هُنَّ أُمَّهَاتِهِمْ ۖ إِنْ أُمَّهَاتِهِمْ إِلَّا اللَّائِي وَلَدْنَهُمْ ۚ وَإِنَّهُمْ لَيَقُولُونَ مُنْكَرًا مِنَ الْقَوْلِ وَزُورًا ۚ وَإِنَّ اللَّهَ لَعَفُوٌّ غَفُورٌ
+                </div>
+                <!-- باقي الآيات -->
+                <div class="verse">
+                    <div class="verse-number">22</div>
+                    لَا تَجِدُ قَوْمًا يُؤْمِنُونَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ يُوَادُّونَ مَنْ حَادَّ اللَّهَ وَرَسُولَهُ وَلَوْ كَانُوا آبَاءَهُمْ أَوْ أَبْنَاءَهُمْ أَوْ إِخْوَانَهُمْ أَوْ عَشِيرَتَهُمْ ۚ أُولَٰئِكَ كَتَبَ فِي قُلُوبِهِمُ الْإِيمَانَ وَأَيَّدَهُمْ بِرُوحٍ مِنْهُ ۖ وَيُدْخِلُهُمْ جَنَّاتٍ تَجْرِي مِنْ تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا ۚ رَضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ ۚ أُولَٰئِكَ حِزْبُ اللَّهِ ۖ أَلَا إِنَّ حِزْبُ اللَّهِ هُمُ الْمُفْلِحُونَ
+                </div>
             </div>
-        </div>
-        
-        <!-- شريط التقدم -->
-        <div style="padding: 0 25px;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="color: var(--surah-color); font-weight: bold;">تقدم مشروع حفظ 6 أحزاب</span>
-                <span id="progress-percentage" style="color: var(--surah-color); font-weight: bold;">100%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill" style="width: 100%"></div>
-            </div>
-            <div style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">
-                تهانينا! لقد أكملت حفظ 6 أحزاب من القرآن الكريم
-            </div>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
         </div>
 
-        <div class="content-section">
-            <!-- قسم خطة الحفظ -->
-            <div id="mind-map" class="simple-mind-map">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">🗺️ خطة حفظ سورة المجادلة</h2>
-                <p>سورة المجادلة من 22 آية، يمكن حفظها في 3 أيام:</p>
-                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">اليوم الأول: الآيات 1-10</h3>
-                    <p>حفظ الآيات من بداية السورة حتى "يوم يبعثهم الله جميعا"</p>
+        <!-- معلومات السورة -->
+        <div id="info" class="section">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">معلومات السورة</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <div style="color: #666;">رقم السورة</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">58</div>
                 </div>
-                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">اليوم الثاني: الآيات 11-18</h3>
-                    <p>حفظ الآيات من "ألم تر أن الله يعلم" حتى "وعلى الله فليتوكل المؤمنون"</p>
+                <div class="info-box">
+                    <div style="color: #666;">عدد الآيات</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">22</div>
                 </div>
-                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">اليوم الثالث: الآيات 19-22</h3>
-                    <p>حفظ خاتمة السورة والمراجعة الكاملة</p>
+                <div class="info-box">
+                    <div style="color: #666;">النوع</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">مدنية</div>
                 </div>
-                <button class="close-section-btn" onclick="hideSection('mind-map')">إغلاق</button>
-            </div>
-
-            <!-- قسم نص السورة -->
-            <div id="quran-text">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h2 style="color: var(--surah-color);">📖 سورة المجادلة كاملة</h2>
-                    <p style="color: #666; margin-top: 10px;">سورة مدنية - عدد آياتها: 22 آية</p>
-                </div>
-                <div class="quran-text">
-                    <div>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                    <div>قَدْ سَمِعَ اللَّهُ قَوْلَ الَّتِي تُجَادِلُكَ فِي زَوْجِهَا وَتَشْتَكِي إِلَى اللَّهِ وَاللَّهُ يَسْمَعُ تَحَاوُرَكُمَا ۚ إِنَّ اللَّهَ سَمِيعٌ بَصِيرٌ</div>
-                    <div>الَّذِينَ يُظَاهِرُونَ مِنْكُمْ مِنْ نِسَائِهِمْ مَا هُنَّ أُمَّهَاتِهِمْ ۖ إِنْ أُمَّهَاتِهِمْ إِلَّا اللَّائِي وَلَدْنَهُمْ ۚ وَإِنَّهُمْ لَيَقُولُونَ مُنْكَرًا مِنَ الْقَوْلِ وَزُورًا ۚ وَإِنَّ اللَّهَ لَعَفُوٌّ غَفُورٌ</div>
-                    <!-- باقي الآيات... -->
-                    <div>لَا تَجِدُ قَوْمًا يُؤْمِنُونَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ يُوَادُّونَ مَنْ حَادَّ اللَّهَ وَرَسُولَهُ وَلَوْ كَانُوا آبَاءَهُمْ أَوْ أَبْنَاءَهُمْ أَوْ إِخْوَانَهُمْ أَوْ عَشِيرَتَهُمْ ۚ أُولَٰئِكَ كَتَبَ فِي قُلُوبِهِمُ الْإِيمَانَ وَأَيَّدَهُمْ بِرُوحٍ مِنْهُ ۖ وَيُدْخِلُهُمْ جَنَّاتٍ تَجْرِي مِنْ تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا ۚ رَضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ ۚ أُولَٰئِكَ حِزْبُ اللَّهِ ۖ أَلَا إِنَّ حِزْبُ اللَّهِ هُمُ الْمُفْلِحُونَ</div>
+                <div class="info-box">
+                    <div style="color: #666;">الترتيب</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">105</div>
                 </div>
             </div>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
+        </div>
 
-            <!-- قسم معلومات السورة -->
-            <div id="surah-info" class="story-section">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">ℹ️ معلومات سورة المجادلة</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
-                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
-                        <div style="color: #666; font-size: 0.9rem;">رقم السورة</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">58</div>
+        <!-- قصة السورة -->
+        <div id="story" class="section">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">قصة السورة</h2>
+            <p>نزلت سورة المجادلة في قصة خولة بنت ثعلبة التي جاءت تشتكي إلى النبي ﷺ ظهار زوجها منها.</p>
+            <p>كان زوجها أوس بن الصامت قد ظاهر منها (قال لها: أنت علي كظهر أمي)، فجاءت إلى النبي ﷺ تشتكي.</p>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
+        </div>
+
+        <!-- التفسير -->
+        <div id="tafsir" class="section">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">تفسير السورة</h2>
+            <p>السورة تتحدث عن:</p>
+            <ul style="padding-right: 20px; margin: 15px 0;">
+                <li>حكم الظهار وكفارته</li>
+                <li>آداب المجالس والمناجاة</li>
+                <li>النهي عن موالاة أعداء الله</li>
+                <li>فضل حزب الله وأهل الإيمان</li>
+            </ul>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
+        </div>
+
+        <!-- اختبار الحفظ -->
+        <div id="quiz" class="section">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">اختبار الحفظ</h2>
+            <div class="quiz-question">
+                <h3>ما سبب نزول سورة المجادلة؟</h3>
+                <button class="answer-btn">قصة خولة بنت ثعلبة</button>
+                <button class="answer-btn">غزوة بدر</button>
+                <button class="answer-btn">حادثة الإفك</button>
+            </div>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
+        </div>
+
+        <!-- الشهادة -->
+        <div id="certificate" class="section">
+            <h2 style="color: var(--surah-color); text-align: center; margin-bottom: 20px;">شهادة ختم حفظ 6 أحزاب</h2>
+            
+            <div id="certificate-form">
+                <div class="certificate-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" class="form-input" id="name" placeholder="أدخل اسمك">
+                        </div>
+                        <div class="form-group">
+                            <label>تاريخ اليوم</label>
+                            <input type="date" class="form-input" id="date">
+                        </div>
                     </div>
-                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
-                        <div style="color: #666; font-size: 0.9rem;">عدد الآيات</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">22</div>
+                    <div class="form-group">
+                        <label>اسم المشرف</label>
+                        <input type="text" class="form-input" id="supervisor" placeholder="اسم الشيخ أو المعلم">
                     </div>
-                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
-                        <div style="color: #666; font-size: 0.9rem;">النوع</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--surah-color);">مدنية</div>
-                    </div>
-                </div>
-                <button class="close-section-btn" onclick="hideSection('surah-info')">إغلاق</button>
-            </div>
-
-            <!-- قسم قصة السورة -->
-            <div id="surah-story" class="story-section">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">📖 قصة سورة المجادلة</h2>
-                <p>سورة المجادلة نزلت في قصة خولة بنت ثعلبة التي جاءت تشتكي إلى النبي ﷺ ظهار زوجها منها.</p>
-                <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">قصة النزول:</h3>
-                    <p>كانت خولة بنت ثعلبة قد ظاهر منها زوجها أوس بن الصامت، والظهار هو قول الرجل لزوجته: "أنت علي كظهر أمي"، وكان هذا حراماً في الجاهلية، فجاءت تشتكي إلى النبي ﷺ.</p>
-                </div>
-                <button class="close-section-btn" onclick="hideSection('surah-story')">إغلاق</button>
-            </div>
-
-            <!-- قسم التفسير -->
-            <div id="tafsir-section" class="tafsir-section">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">📚 تفسير سورة المجادلة</h2>
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">الآيات 1-4:</h3>
-                    <p>تبدأ السورة بسماع الله لمجادلة خولة وبيان حكم الظهار وكفارته.</p>
-                </div>
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">الآيات 5-10:</h3>
-                    <p>تحذير الذين يحادون الله ورسوله وبيان عقوبتهم.</p>
-                </div>
-                <button class="close-section-btn" onclick="hideSection('tafsir-section')">إغلاق</button>
-            </div>
-
-            <!-- قسم الاختبار -->
-            <div id="quiz" class="simple-quiz">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">🧠 اختبار سورة المجادلة</h2>
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">سؤال 1: ما سبب نزول سورة المجادلة؟</h3>
-                    <div style="margin-top: 15px;">
-                        <button style="width: 100%; padding: 10px; margin: 5px 0; background: #f8f9fa; border: 2px solid #ddd; border-radius: 5px; cursor: pointer;">قصة خولة بنت ثعلبة</button>
-                        <button style="width: 100%; padding: 10px; margin: 5px 0; background: #f8f9fa; border: 2px solid #ddd; border-radius: 5px; cursor: pointer;">غزوة بدر</button>
+                    <div style="text-align: center;">
+                        <button class="certificate-btn" onclick="createCertificate()">إنشاء الشهادة</button>
                     </div>
                 </div>
-                <button class="close-section-btn" onclick="hideSection('quiz')">إغلاق</button>
             </div>
 
-            <!-- قسم أسئلة الفهم -->
-            <div id="understanding" class="understanding-questions">
-                <h2 style="color: var(--surah-color); margin-bottom: 20px; text-align: center;">💭 أسئلة فهم سورة المجادلة</h2>
-                <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <h3 style="color: var(--surah-color);">ما الحكمة من ذكر قصة المجادلة في القرآن؟</h3>
-                    <textarea style="width: 100%; padding: 10px; margin-top: 10px; border: 2px solid #ddd; border-radius: 5px;" rows="4" placeholder="اكتب إجابتك هنا..."></textarea>
+            <div id="certificate-view" class="certificate-preview">
+                <div style="position: absolute; top: 20px; left: 20px; font-size: 3rem;">📖</div>
+                <div style="position: absolute; top: 20px; right: 20px; background: var(--surah-color); color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold;">خـتـم</div>
+                
+                <h1 class="certificate-header">شهادة ختم حفظ 6 أحزاب</h1>
+                <p>من القرآن الكريم</p>
+                
+                <div style="padding: 30px; background: #f8f9fa; border-radius: 10px; margin: 20px 0;">
+                    <p>يُشهد أن</p>
+                    <h2 class="certificate-name" id="cert-name">الاسم</h2>
+                    <p>قد أتم بنجاح حفظ ستة أحزاب من القرآن الكريم</p>
+                    <p>وذلك في مشروع القرآن التفاعلي</p>
+                    <p style="margin-top: 20px;">
+                        <strong>التاريخ:</strong> <span id="cert-date">---</span><br>
+                        <strong>رقم الشهادة:</strong> <span id="cert-number">QUR-001</span>
+                    </p>
                 </div>
-                <button class="close-section-btn" onclick="hideSection('understanding')">إغلاق</button>
-            </div>
 
-            <!-- رسالة التهنئة -->
-            <div id="congratulations" class="congratulation-message">
-                <div style="font-size: 3rem; margin-bottom: 20px;">🎉</div>
-                <h2 style="color: #155724; margin-bottom: 15px;">مبروك! إنجاز عظيم</h2>
-                <p style="color: #0f5132; font-size: 1.2rem; line-height: 1.6;">
-                    لقد أتممت حفظ سورة المجادلة بنجاح، وهذا يعني أنك أكملت حفظ 6 أحزاب من القرآن الكريم.<br>
-                    أنت الآن مؤهل للحصول على شهادة ختم حفظ 6 أحزاب.<br>
-                    اضغط على زر "شهادة ختم الحفظ" لاستلام شهادتك.
-                </p>
+                <div class="certificate-footer">
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <p id="cert-supervisor">المشرف</p>
+                        <p>توقيع المشرف</p>
+                    </div>
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <p>مشروع القرآن التفاعلي</p>
+                        <p>مدير المشروع</p>
+                    </div>
+                </div>
+
                 <div style="margin-top: 30px;">
-                    <button class="certificate-btn" onclick="showSection('certificate')">
-                        <i class="fas fa-award"></i> احصل على شهادتك الآن
-                    </button>
+                    <button class="certificate-btn" onclick="printCertificate()">🖨️ طباعة</button>
+                    <button class="certificate-btn" style="background: #28a745;" onclick="saveCertificate()">💾 حفظ</button>
+                    <button class="certificate-btn" style="background: #6c757d;" onclick="showForm()">✏️ تعديل</button>
                 </div>
             </div>
 
-            <!-- قسم الشهادة -->
-            <div id="certificate" class="certificate-section">
-                <h2 style="text-align: center; color: var(--surah-color); margin-bottom: 30px;">
-                    🏆 شهادة ختم حفظ 6 أحزاب من القرآن الكريم
-                </h2>
-                
-                <div class="certificate-form" id="certificate-form">
-                    <h3 style="color: var(--surah-color); margin-bottom: 25px; text-align: center;">
-                        <i class="fas fa-user-edit"></i> معلومات الشهادة
-                    </h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">الاسم الكامل</label>
-                            <input type="text" class="form-input" id="student-name" placeholder="أدخل اسمك الكامل" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">تاريخ الإنجاز</label>
-                            <input type="date" class="form-input" id="completion-date" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">اسم المشرف</label>
-                            <input type="text" class="form-input" id="supervisor-name" placeholder="اسم الشيخ أو المعلم">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">رقم الشهادة</label>
-                            <input type="text" class="form-input" id="certificate-number" readonly>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="certificate-btn" onclick="generateCertificate()">
-                            <i class="fas fa-certificate"></i> إنشاء الشهادة
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- معاينة الشهادة -->
-                <div class="certificate-preview" id="certificate-preview">
-                    <div class="certificate-stamp">
-                        ختم
-                    </div>
-                    
-                    <div class="certificate-seal">
-                        📖
-                    </div>
-                    
-                    <h1 class="certificate-header">شهادة ختم حفظ 6 أحزاب</h1>
-                    <p class="certificate-subtitle">من القرآن الكريم</p>
-                    
-                    <div class="certificate-body">
-                        <p class="certificate-text">
-                            <strong>يُشهد أن</strong>
-                        </p>
-                        
-                        <h2 class="certificate-name" id="preview-name">الاسم الكامل</h2>
-                        
-                        <p class="certificate-text">
-                            قد أتم بنجاح حفظ ستة أحزاب من القرآن الكريم<br>
-                            خلال مشروع القرآن التفاعلي، وأظهر تفانياً<br>
-                            وإخلاصاً في تلاوة وحفظ كتاب الله تعالى.
-                        </p>
-                        
-                        <p class="certificate-date">
-                            <strong>تاريخ الختم:</strong> <span id="preview-date">--/--/----</span>
-                        </p>
-                        
-                        <p class="certificate-date">
-                            <strong>رقم الشهادة:</strong> <span id="preview-number">QUR-2024-001</span>
-                        </p>
-                    </div>
-                    
-                    <div class="certificate-footer">
-                        <div class="signature-box">
-                            <div class="signature-line"></div>
-                            <p class="signature-name" id="preview-supervisor">توقيع المشرف</p>
-                            <p class="signature-title">مشرف الحفظ</p>
-                        </div>
-                        
-                        <div class="signature-box">
-                            <div class="signature-line"></div>
-                            <p class="signature-name">مكتبة إسلام عنابة</p>
-                            <p class="signature-title">مدير المشروع</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- أزرار التحكم بالشهادة -->
-                <div class="certificate-actions" id="certificate-actions" style="display: none;">
-                    <button class="certificate-btn success" onclick="printCertificate()">
-                        <i class="fas fa-print"></i> طباعة الشهادة
-                    </button>
-                    <button class="certificate-btn" onclick="downloadCertificate()">
-                        <i class="fas fa-download"></i> تحميل كصورة
-                    </button>
-                    <button class="certificate-btn secondary" onclick="showCertificateForm()">
-                        <i class="fas fa-edit"></i> تعديل المعلومات
-                    </button>
-                </div>
-            </div>
+            <button class="close-btn" onclick="showSection('text')">إغلاق</button>
         </div>
+    </div>
 
-        <div class="footer">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3 style="margin-bottom: 15px;">🎉 احتفل بإنجازك</h3>
-                <p>لقد أكملت مشروع حفظ 6 أحزاب بنجاح. بارك الله فيك!</p>
-            </div>
-            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.9rem; opacity: 0.8;">
-                جميع الحقوق محفوظة © 2024 مشروع القرآن التفاعلي
-            </div>
-        </div>
+    <div class="footer">
+        <p>مبروك! لقد أكملت حفظ 6 أحزاب من القرآن الكريم</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">© 2024 مشروع القرآن التفاعلي</p>
     </div>
 
     <script>
-        // تهيئة الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // تعيين تاريخ اليوم
-            const today = new Date();
-            const formattedDate = today.toISOString().split('T')[0];
-            document.getElementById('completion-date').value = formattedDate;
-            
-            // توليد رقم شهادة
-            const certNumber = 'QUR-' + today.getFullYear() + '-' + 
-                String(Math.floor(Math.random() * 1000)).padStart(3, '0');
-            document.getElementById('certificate-number').value = certNumber;
-            
-            // إظهار رسالة التهنئة بعد 2 ثانية
-            setTimeout(() => {
-                document.getElementById('congratulations').classList.add('visible');
-            }, 2000);
-            
-            // إصلاح مشكلة الأزرار - إعادة تعريف الدوال
-            window.showSection = showSection;
-            window.hideSection = hideSection;
-            window.generateCertificate = generateCertificate;
-            window.printCertificate = printCertificate;
-            window.downloadCertificate = downloadCertificate;
-            window.showCertificateForm = showCertificateForm;
-        });
-
-        // وظائف التنقل بين الأقسام
+        // وظائف التنقل
         function showSection(sectionId) {
             // إخفاء جميع الأقسام
-            const sections = ['mind-map', 'surah-info', 'surah-story', 'tafsir-section', 
-                            'quiz', 'understanding', 'certificate'];
-            sections.forEach(id => {
-                const section = document.getElementById(id);
-                if (section) {
-                    section.classList.remove('visible');
-                }
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
             });
-            
-            // إخفاء نص السورة الرئيسي
-            document.getElementById('quran-text').style.display = 'none';
             
             // إظهار القسم المطلوب
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('visible');
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            document.getElementById(sectionId).classList.add('active');
             
-            // إخفاء رسالة التهنئة عند الانتقال
-            document.getElementById('congratulations').classList.remove('visible');
+            // التمرير للأعلى
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function hideSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.remove('visible');
-            }
-            // إظهار نص السورة الرئيسي
-            document.getElementById('quran-text').style.display = 'block';
-            document.getElementById('quran-text').scrollIntoView({ behavior: 'smooth' });
-        }
+        // تهيئة التاريخ
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+        });
 
-        // توليد الشهادة
-        function generateCertificate() {
-            const name = document.getElementById('student-name').value;
-            const date = document.getElementById('completion-date').value;
-            const supervisor = document.getElementById('supervisor-name').value;
-            const certNumber = document.getElementById('certificate-number').value;
+        // إنشاء الشهادة
+        function createCertificate() {
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+            const supervisor = document.getElementById('supervisor').value;
             
             if (!name) {
-                alert('الرجاء إدخال الاسم الكامل');
+                alert('الرجاء إدخال الاسم');
                 return;
             }
             
-            if (!date) {
-                alert('الرجاء إدخال تاريخ الإنجاز');
-                return;
-            }
+            // تحديث الشهادة
+            document.getElementById('cert-name').textContent = name;
+            document.getElementById('cert-date').textContent = new Date(date).toLocaleDateString('ar-SA');
+            document.getElementById('cert-supervisor').textContent = supervisor || 'المشرف';
+            document.getElementById('cert-number').textContent = 'QUR-' + Math.floor(Math.random() * 1000);
             
-            // تحديث معاينة الشهادة
-            document.getElementById('preview-name').textContent = name;
-            
-            // تنسيق التاريخ
-            const dateObj = new Date(date);
-            const formattedDate = dateObj.toLocaleDateString('ar-SA', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            document.getElementById('preview-date').textContent = formattedDate;
-            
-            document.getElementById('preview-number').textContent = certNumber;
-            document.getElementById('preview-supervisor').textContent = supervisor || 'توقيع المشرف';
-            
-            // إظهار معاينة الشهادة وأزرار التحكم
-            document.getElementById('certificate-preview').classList.add('visible');
-            document.getElementById('certificate-actions').style.display = 'flex';
+            // إظهار الشهادة وإخفاء النموذج
             document.getElementById('certificate-form').style.display = 'none';
-            
-            // التمرير إلى الشهادة
-            document.getElementById('certificate-preview').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'center'
-            });
+            document.getElementById('certificate-view').classList.add('active');
         }
 
         // طباعة الشهادة
         function printCertificate() {
-            const printContent = document.getElementById('certificate-preview').innerHTML;
+            const printContent = document.getElementById('certificate-view').innerHTML;
             const originalContent = document.body.innerHTML;
             
             document.body.innerHTML = `
-                <!DOCTYPE html>
-                <html dir="rtl" lang="ar">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>شهادة ختم حفظ 6 أحزاب</title>
-                    <style>
-                        body { 
-                            font-family: Arial, sans-serif; 
-                            margin: 0; 
-                            padding: 40px; 
-                            text-align: center;
-                            background: white;
-                        }
-                        .certificate { 
-                            border: 5px solid #6a1b9a; 
-                            padding: 40px; 
-                            border-radius: 15px;
-                            max-width: 800px;
-                            margin: 0 auto;
-                            position: relative;
-                        }
-                        .certificate-header { 
-                            color: #6a1b9a; 
-                            font-size: 32px; 
-                            margin-bottom: 20px; 
-                            text-decoration: underline;
-                            text-decoration-color: #e9c46a;
-                        }
-                        .certificate-name {
-                            font-size: 36px;
-                            color: #6a1b9a;
-                            margin: 20px 0;
-                            font-weight: bold;
-                        }
-                        .signature-line {
-                            width: 200px;
-                            height: 1px;
-                            background: #333;
-                            margin: 40px auto 10px;
-                        }
-                        @media print {
-                            body { padding: 20px; }
-                            .certificate { border: 5px solid #6a1b9a !important; }
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="certificate">
+                <div style="padding: 40px; text-align: center; font-family: Arial;">
+                    <div style="border: 5px solid #6a1b9a; padding: 40px; border-radius: 15px;">
                         ${printContent}
                     </div>
-                    <script>
-                        window.onload = function() {
-                            window.print();
-                            setTimeout(function() {
-                                window.close();
-                            }, 1000);
-                        };
-                    <\/script>
-                </body>
-                </html>
+                </div>
+                <script>
+                    window.onload = function() {
+                        window.print();
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    };
+                <\/script>
             `;
-            
-            window.print();
-            
-            // إعادة المحتوى الأصلي بعد الطباعة
-            setTimeout(() => {
-                document.body.innerHTML = originalContent;
-                // إعادة تحميل الصفحة
-                location.reload();
-            }, 1000);
         }
 
-        // تحميل الشهادة كصورة (نسخة مبسطة)
-        function downloadCertificate() {
-            const certificate = document.getElementById('certificate-preview');
+        // حفظ الشهادة
+        function saveCertificate() {
+            const name = document.getElementById('name').value;
+            const data = {
+                name: name,
+                date: document.getElementById('date').value,
+                certificate: document.getElementById('certificate-view').innerText
+            };
             
-            // إنشاء عنصر canvas
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // تعيين أبعاد Canvas
-            canvas.width = certificate.offsetWidth;
-            canvas.height = certificate.offsetHeight;
-            
-            // ملء الخلفية باللون الأبيض
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // رسم محتوى الشهادة (نسخة مبسطة)
-            ctx.font = 'bold 24px Arial';
-            ctx.fillStyle = '#6a1b9a';
-            ctx.textAlign = 'center';
-            ctx.fillText('شهادة ختم حفظ 6 أحزاب من القرآن الكريم', canvas.width/2, 100);
-            
-            ctx.font = '48px Arial';
-            ctx.fillText(document.getElementById('preview-name').textContent, canvas.width/2, 200);
-            
-            ctx.font = '20px Arial';
-            ctx.fillStyle = '#666';
-            ctx.fillText('تاريخ الختم: ' + document.getElementById('preview-date').textContent, canvas.width/2, 300);
-            
-            ctx.fillText('رقم الشهادة: ' + document.getElementById('preview-number').textContent, canvas.width/2, 330);
-            
-            // تحويل Canvas إلى صورة و تحميلها
-            const link = document.createElement('a');
-            link.download = 'شهادة_حفظ_6_أحزاب.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            
-            alert('تم إنشاء صورة الشهادة بنجاح!');
+            localStorage.setItem('quran_certificate', JSON.stringify(data));
+            alert('تم حفظ الشهادة بنجاح!');
         }
 
-        // إظهار نموذج التعديل
-        function showCertificateForm() {
+        // إظهار النموذج
+        function showForm() {
             document.getElementById('certificate-form').style.display = 'block';
-            document.getElementById('certificate-actions').style.display = 'none';
-            document.getElementById('certificate-preview').classList.remove('visible');
+            document.getElementById('certificate-view').classList.remove('active');
         }
+
+        // عند التحميل، إظهار رسالة تهنئة
+        window.onload = function() {
+            setTimeout(() => {
+                alert('🎉 مبروك! لقد أكملت حفظ 6 أحزاب من القرآن الكريم\nاضغط على زر الشهادة للحصول على شهادتك');
+            }, 1000);
+        };
     </script>
 </body>
 </html>
