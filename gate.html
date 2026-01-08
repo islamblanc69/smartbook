@@ -3,234 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفعيل المحتوى</title>
+    <title>مرحباً بكم - مكتبتنا الإسلامية</title>
     <style>
-        body { 
-            font-family: sans-serif; 
-            text-align: center; 
-            padding: 40px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            
-            /* --- هذا هو كود الخلفية --- */
-            background-image: url('background.jpg');
-            background-size: cover; /* ليغطي كامل الشاشة */
-            background-position: center; /* لتوسيط الصورة */
-            background-repeat: no-repeat; /* لمنع تكرار الصورة */
-            background-attachment: fixed; /* لتثبيت الخلفية */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        /* --- صندوق التفعيل بلون أبيض شبه شفاف ليظهر الخلفية --- */
-        #activation-form { 
-            background-color: rgba(255, 255, 255, 0.95); /* أبيض شبه شفاف */
-            padding: 30px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        body {
+            font-family: 'Segoe UI', 'Amiri', serif;
+            background: linear-gradient(135deg, #0c2461, #1e3799);
+            color: #f5f1e6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
         
-        input[type="text"] { 
-            width: 90%; 
-            padding: 12px; 
-            margin-bottom: 15px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px; 
-            font-size: 1.1em; 
-            text-align: center; 
+        .welcome-container {
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
         }
         
-        button { 
-            padding: 12px 25px; 
-            background-color: #28a745; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            font-size: 1.1em; 
-            cursor: pointer; 
+        .islamic-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,20 C60,20 70,30 70,40 C70,50 60,60 50,60 C40,60 30,50 30,40 C30,30 40,20 50,20 Z" fill="none" stroke="%23D4AF37" stroke-width="2" opacity="0.3"/></svg>');
+            opacity: 0.1;
+            z-index: -1;
         }
         
-        button:hover { 
-            background-color: #218838; 
+        .basmala-section {
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease-out;
         }
         
-        #loading-message { 
-            display: none; 
-            font-size: 1.2em; 
-            color: white; 
-            background-color: rgba(0,0,0,0.5); 
-            padding: 10px; 
-            border-radius: 5px; 
+        .basmala-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            color: #D4AF37;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
         
-        #error-message { 
-            color: red; 
-            margin-top: 10px; 
-            display: none; 
-            background-color: white; 
-            padding: 5px; 
-            border-radius: 3px;
+        .basmala-translation {
+            font-size: 1.2rem;
+            color: #a5b1c2;
+            font-style: italic;
         }
         
-        .success-message {
-            color: green;
-            margin-top: 10px;
-            display: none;
-            background-color: white;
-            padding: 5px;
-            border-radius: 3px;
+        .verse-section {
+            animation: slideUp 1.5s ease-out 2s both;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border-right: 5px solid #2E8B57;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .verse-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.8rem;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .verse-translation {
+            font-size: 1.3rem;
+            color: #dfe6e9;
+            margin-bottom: 10px;
+        }
+        
+        .verse-reference {
+            color: #74b9ff;
+            font-size: 1.1rem;
+        }
+        
+        .loader-section {
+            margin-top: 40px;
+            animation: pulse 2s infinite;
+        }
+        
+        .islamic-loader {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .islamic-loader:before {
+            content: "🕋";
+            font-size: 60px;
+            position: absolute;
+            animation: rotate 3s linear infinite;
+        }
+        
+        .loading-text {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #a5b1c2;
+        }
+        
+        .skip-button {
+            margin-top: 30px;
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .skip-button:hover {
+            background: #D4AF37;
+            color: #0c2461;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .basmala-arabic { font-size: 2.5rem; }
+            .verse-arabic { font-size: 2rem; }
         }
     </style>
 </head>
-<body onload="checkActivation()">
-
-    <div id="loading-message">
-        <p>✓ تم التحقق من التفعيل</p>
-        <p>يتم تحويلك الآن...</p>
-    </div>
-
-    <div id="activation-form" style="display:none;">
-        <h1>تفعيل الكتاب</h1>
-        <p>الرجاء إدخال كود التفعيل الموجود في كتابك</p>
-        <input type="text" id="activation-code" placeholder="أدخل الكود هنا">
-        <button onclick="handleActivation()">تفعيل</button>
-        <p id="error-message">الكود غير صحيح، يرجى المحاولة مرة أخرى.</p>
-        <p id="success-message" class="success-message">✓ تم التفعيل بنجاح!</p>
+<body>
+    <div class="islamic-pattern"></div>
+    
+    <div class="welcome-container">
+        <!-- البسملة -->
+        <div class="basmala-section">
+            <div class="basmala-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            <div class="basmala-translation">"In the name of Allah, the Most Gracious, the Most Merciful"</div>
+        </div>
+        
+        <!-- آية اقرأ -->
+        <div class="verse-section" id="verseSection">
+            <div class="verse-arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+            <div class="verse-translation">"Read in the name of your Lord who created"</div>
+            <div class="verse-reference">سورة العلق، الآية: 1</div>
+        </div>
+        
+        <!-- المحمل -->
+        <div class="loader-section" id="loaderSection">
+            <div class="islamic-loader"></div>
+            <div class="loading-text" id="loadingText">نفتح لك أبواب العلم والمعرفة...</div>
+        </div>
+        
+        <!-- زر التخطي -->
+        <button class="skip-button" onclick="skipWelcome()">تخطي المقدمة</button>
+        
+        <!-- الصوت -->
+        <audio id="ayahAudio" preload="auto">
+            <source src="https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/096.mp3#t=00:03" type="audio/mpeg">
+        </audio>
     </div>
 
     <script>
-        // --- هذا هو الكود السري الخاص بك ---
-        const secretCode = "IQ1423"; 
-
-        // دالة للتحقق من جميع مصادر التفعيل
-        function isActivated() {
-            // تحقق من 5 مصادر مختلفة
-            const sources = [
-                localStorage.getItem('bookActivated') === 'true',
-                localStorage.getItem('isBookActivated') === 'true',
-                sessionStorage.getItem('bookActivated') === 'true',
-                sessionStorage.getItem('isBookActivated') === 'true',
-                document.cookie.includes('book_activated=true'),
-                window.location.hash === '#activated',
-                window.location.hash === '#active'
-            ];
+        // تحكم في التسلسل الزمني
+        setTimeout(() => {
+            document.getElementById('verseSection').style.opacity = '1';
+            document.getElementById('verseSection').style.transform = 'translateY(0)';
             
-            return sources.some(source => source === true);
-        }
-
-        // دالة تعمل عند تحميل الصفحة مباشرة
-        function checkActivation() {
-            if (isActivated()) {
-                document.getElementById('activation-form').style.display = 'none';
-                document.getElementById('loading-message').style.display = 'block';
-                
-                // تجديد التخزين في جميع المصادر
-                updateActivationStorage();
-                
-                // الانتظار 2 ثانية ثم التوجيه
-                setTimeout(() => {
-                    redirectToContentPage();
-                }, 2000);
-            } else {
-                document.getElementById('activation-form').style.display = 'block';
-                document.getElementById('loading-message').style.display = 'none';
-            }
-        }
-
-        // دالة تعمل عند الضغط على زر "تفعيل"
-        function handleActivation() {
-            let userInput = document.getElementById('activation-code').value.trim();
+            // تشغيل الآية الصوتية بعد 0.5 ثانية
+            setTimeout(() => {
+                const audio = document.getElementById('ayahAudio');
+                audio.currentTime = 3; // بداية الآية
+                audio.play().catch(e => console.log("الصوت غير متاح:", e));
+            }, 500);
             
-            // التحقق من الكود المدخل (مع تجاهل حالة الأحرف والفراغات)
-            if (userInput.toUpperCase() === secretCode.toUpperCase()) {
-                // حفظ التفعيل في جميع المصادر
-                updateActivationStorage();
-                
-                // إظهار رسالة النجاح
-                document.getElementById('success-message').style.display = 'block';
-                document.getElementById('error-message').style.display = 'none';
-                
-                // الانتظار ثم التوجيه
-                setTimeout(() => {
-                    document.getElementById('activation-form').style.display = 'none';
-                    document.getElementById('loading-message').style.display = 'block';
-                    
-                    setTimeout(() => {
-                        redirectToContentPage();
-                    }, 1500);
-                }, 1000);
-                
-            } else {
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('success-message').style.display = 'none';
-            }
-        }
-
-        // دلة لحفظ التفعيل في جميع المصادر
-        function updateActivationStorage() {
-            // حفظ في localStorage (طويل الأمد)
-            localStorage.setItem('bookActivated', 'true');
-            localStorage.setItem('isBookActivated', 'true');
-            localStorage.setItem('activationTime', new Date().getTime());
+        }, 2000);
+        
+        // التوجيه التلقائي
+        setTimeout(() => {
+            redirectToContent();
+        }, 7000); // 7 ثواني كاملة
+        
+        // دالة التوجيه
+        function redirectToContent() {
+            const loadingText = document.getElementById('loadingText');
+            loadingText.textContent = "✓ يتم تحويلك الآن للمحتوى...";
             
-            // حفظ في sessionStorage (للجلسة)
-            sessionStorage.setItem('bookActivated', 'true');
-            sessionStorage.setItem('isBookActivated', 'true');
-            
-            // حفظ في cookie (لمدة سنة)
-            const expiryDate = new Date();
-            expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-            document.cookie = `book_activated=true; expires=${expiryDate.toUTCString()}; path=/`;
-            
-            // إضافة hash للURL
-            if (!window.location.hash.includes('activated') && !window.location.hash.includes('active')) {
-                window.location.hash = '#activated';
-            }
+            setTimeout(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const pageName = urlParams.get('page') || 'content';
+                window.location.href = `${pageName}.html`;
+            }, 1500);
         }
-
-        // دالة التوجيه الذكية
-        function redirectToContentPage() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const pageName = urlParams.get('page'); 
-
-            if (pageName) {
-                // التحقق من أن الصفحة موجودة
-                const pageUrl = pageName + '.html';
-                
-                // سيحول إلى "nas.html" أو "falaq.html" الخ
-                window.location.replace(pageUrl);
-            } else {
-                // إذا لم يكن هناك page محدد، جرب الحصول من localStorage
-                const savedPage = localStorage.getItem('lastPage');
-                if (savedPage) {
-                    window.location.replace(savedPage);
-                } else {
-                    // صفحة افتراضية
-                    document.getElementById('loading-message').innerHTML = 
-                        '<p>✓ تم التفعيل بنجاح!</p>' +
-                        '<p>الرجاء استخدام رابط الكتاب للوصول للمحتوى</p>';
-                }
-            }
+        
+        // دالة التخطي
+        function skipWelcome() {
+            document.getElementById('loadingText').textContent = "يتم التحميل...";
+            redirectToContent();
         }
-
-        // دالة للاستماع إلى ضغط المفتاح Enter في حقل الإدخال
-        document.getElementById('activation-code').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleActivation();
-            }
+        
+        // بدء تسلسل الأنيميشن
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1';
         });
-
-        // دالة لتجنب مشاكل localStorage في بعض المتصفحات
-        function setLocalStorageSafe(key, value) {
-            try {
-                localStorage.setItem(key, value);
-                return true;
-            } catch (e) {
-                // إذا فشل localStorage، استخدم sessionStorage
-                sessionStorage.setItem(key, value);
-                return false;
-            }
-        }
     </script>
 </body>
 </html>
