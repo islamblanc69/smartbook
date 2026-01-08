@@ -3,639 +3,938 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>القرآن الكريم - قسم التلاوة</title>
+    <title>المصحف الإلكتروني الذكي - مكتبة إسلام عنابة</title>
+    <link rel="icon" href="image.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         :root {
             --quran-green: #2a9d8f;
             --quran-gold: #e9c46a;
             --quran-blue: #1a5f7a;
             --quran-cream: #fef9e7;
+            --primary-color: #1a5f7a;
+            --secondary-color: #2a9d8f;
         }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Arial', 'Segoe UI', sans-serif;
         }
-        
         body {
-            background-color: var(--quran-cream);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #2c3e50;
             line-height: 1.6;
-            padding: 15px;
+            min-height: 100vh;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        
-        /* الهيدر */
-        .main-header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, var(--quran-blue) 0%, var(--quran-green) 100%);
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(26, 95, 122, 0.3);
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .main-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .main-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* زر الرجوع */
-        .back-btn-header {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 30px;
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             background: white;
-            color: var(--quran-blue);
-            text-decoration: none;
-            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            transition: all 0.3s ease;
+            color: var(--primary-color);
+            border: 3px solid var(--quran-gold);
+            font-size: 1.2rem;
         }
-        
-        .back-btn-header:hover {
-            background: var(--quran-gold);
-            transform: scale(1.05);
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
-        
-        /* فهرس السور */
-        .surah-index {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .section-title {
-            color: var(--quran-blue);
-            margin-bottom: 25px;
-            text-align: center;
+        .site-title {
+            color: white;
+            margin: 0;
             font-size: 1.8rem;
         }
-        
-        .search-box {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--quran-green);
-            border-radius: 50px;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            text-align: center;
+        .site-subtitle {
+            color: #e9c46a;
+            font-size: 0.9rem;
+            margin: 0;
         }
-        
-        .surah-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            max-height: 500px;
-            overflow-y: auto;
-            padding: 10px;
-        }
-        
-        .surah-item {
-            background: #f8f9fa;
+        .main-container {
+            max-width: 1400px;
+            margin: 30px auto;
             padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
         }
-        
-        .surah-item:hover {
+        .search-container {
             background: white;
-            border-color: var(--quran-green);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
-        
-        .surah-number {
-            background: var(--quran-green);
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+            outline: none;
+        }
+        .search-btn {
+            padding: 15px 30px;
+            background: var(--secondary-color);
             color: white;
-            width: 40px;
-            height: 40px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .search-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .surah-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .surah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--quran-gold);
+        }
+        .surah-number {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
             font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: 15px;
         }
-        
-        .surah-name {
+        .surah-name-arabic {
+            font-size: 2rem;
             font-weight: bold;
-            color: var(--quran-blue);
+            color: #1a365d;
             margin-bottom: 5px;
-            font-size: 1.2rem;
+            font-family: 'Traditional Arabic', serif;
         }
-        
-        .surah-details {
-            font-size: 0.85rem;
+        .surah-info {
             color: #666;
+            font-size: 0.9rem;
         }
-        
-        /* نافذة القراء */
-        .surah-reciter-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        .reciters-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
-        
-        .surah-reciter-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        
-        .reciter-option {
+        .reciter-btn {
+            padding: 8px 15px;
             background: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .reciter-option:hover {
-            background: #e9f5f3;
-            border-color: var(--quran-green);
-            transform: translateY(-2px);
-        }
-        
-        .reciter-option a {
-            display: block;
-            padding: 12px;
-            background: #ff0000;
-            color: white;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            color: #333;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        
-        .reciter-option a:hover {
-            background: #cc0000;
+        .reciter-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
         }
-        
-        /* زر الرجوع لسورة الفاتحة */
-        .back-to-surah {
-            text-align: center;
-            margin-top: 30px;
+        .juz-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
-        
-        .back-btn {
+        .juz-title {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--quran-gold);
+            text-align: center;
+        }
+        .juz-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        .juz-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .juz-card:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            transform: translateY(-5px);
+            border-color: var(--quran-gold);
+        }
+        .juz-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .juz-card:hover .juz-number {
+            color: white;
+        }
+        .juz-surahs {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .juz-card:hover .juz-surahs {
+            opacity: 1;
+        }
+        .stats-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a365d 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        .telegram-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .telegram-btn {
             display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, var(--quran-green) 0%, var(--quran-blue) 100%);
+            padding: 12px 30px;
+            background: #0088cc;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.1rem;
+            margin-top: 10px;
             transition: all 0.3s ease;
         }
-        
-        .back-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(42, 157, 143, 0.3);
+        .telegram-btn:hover {
+            background: #006699;
+            transform: scale(1.05);
+            color: white;
         }
-        
-        /* التجاوب */
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        .quick-nav {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 100;
+        }
+        .quick-nav-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: none;
+        }
+        .quick-nav-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: 3px solid var(--quran-gold);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        .modal-body {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .close-btn {
+            color: white;
+            opacity: 0.8;
+        }
+        .close-btn:hover {
+            color: var(--quran-gold);
+        }
         @media (max-width: 768px) {
-            .main-header h1 {
-                font-size: 2rem;
-            }
-            
-            .surah-list {
+            .juz-cards {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
-            
-            .section-title {
-                font-size: 1.5rem;
+            .search-box {
+                flex-direction: column;
             }
-            
-            .surah-reciter-content {
-                padding: 20px;
+            .reciters-container {
+                justify-content: center;
             }
+            .quick-nav {
+                left: 10px;
+                bottom: 10px;
+            }
+            .quick-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .loading.active {
+            display: block;
+        }
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .surah-details-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        .surah-details-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 25px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        .filter-btn:hover {
+            background: #e9ecef;
+        }
+        .filter-btn.active:hover {
+            background: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- الهيدر الرئيسي -->
-        <header class="main-header">
-            <h1>🌙 القرآن الكريم - قسم التلاوة</h1>
-            <p>اختر سورة للاستماع إلى تلاوتها مباشرة على يوتيوب</p>
-            <a href="al-fatihah.html" class="back-btn-header">
-                ↩️ العودة لسورة الفاتحة
-            </a>
-        </header>
-        
-        <!-- فهرس السور -->
-        <section class="surah-index">
-            <h2 class="section-title">📚 اختر سورة للاستماع</h2>
-            
-            <input type="text" class="search-box" placeholder="🔍 ابحث عن سورة..." id="search-input" onkeyup="searchSurahs()">
-            
-            <div class="surah-list" id="surah-list">
-                <!-- السور ستضاف هنا بواسطة JavaScript -->
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="image.png" alt="لوغو مكتبة إسلام عنابة" onerror="this.style.display='none'; this.parentElement.innerHTML='📖';">
+                        </div>
+                        <div>
+                            <h1 class="site-title">المصحف الإلكتروني الذكي</h1>
+                            <p class="site-subtitle">كتاب تتبع القرآن الكريم بخط اليد</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
+                        <i class="fab fa-telegram"></i> انضم لمجموعتنا
+                    </a>
+                </div>
             </div>
-        </section>
-        
-        <!-- زر الرجوع لسورة الفاتحة -->
-        <div class="back-to-surah">
-            <a href="al-fatihah.html" class="back-btn">
-                ↩️ العودة لسورة الفاتحة التفاعلية
-            </a>
         </div>
-        
-        <!-- نافذة القراء عند اختيار سورة -->
-        <div class="surah-reciter-modal" id="surah-modal">
-            <div class="surah-reciter-content">
-                <button class="close-modal" onclick="closeModal()">✖</button>
-                <h2 id="modal-surah-name" style="color: var(--quran-blue); margin-bottom: 10px;"></h2>
-                <p style="color: #666; margin-bottom: 25px;" id="modal-surah-details"></p>
-                
-                <h3 style="color: var(--quran-green); margin-bottom: 20px;">🎵 اختر القارئ:</h3>
-                
-                <div class="reciter-option">
-                    <h4 style="color: var(--quran-blue);">محمود الحصري</h4>
-                    <a href="#" id="modal-reciter-1" target="_blank">
-                        ▶️ استمع على يوتيوب
-                    </a>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container main-container">
+        <!-- قسم البحث -->
+        <div class="search-container">
+            <h2 class="text-center mb-4" style="color: var(--primary-color);">
+                <i class="fas fa-search"></i> البحث عن السور والآيات
+            </h2>
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن اسم السورة أو رقم الآية أو كلمة في القرآن...">
+                <button class="search-btn" onclick="searchSurahs()">
+                    <i class="fas fa-search"></i> بحث
+                </button>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterSurahs('all')">الكل</button>
+                <button class="filter-btn" onclick="filterSurahs('makki')">المكية</button>
+                <button class="filter-btn" onclick="filterSurahs('madani')">المدنية</button>
+                <button class="filter-btn" onclick="filterSurahs('short')">القصار</button>
+                <button class="filter-btn" onclick="filterSurahs('long')">الطوال</button>
+            </div>
+        </div>
+
+        <!-- عرض السور -->
+        <div id="surahsContainer">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>جاري تحميل السور...</p>
+            </div>
+            <!-- السور سيتم عرضها هنا عبر JavaScript -->
+        </div>
+
+        <!-- الأجزاء -->
+        <div class="juz-container">
+            <h2 class="juz-title">
+                <i class="fas fa-book-open"></i> أجزاء القرآن الكريم
+            </h2>
+            <div class="juz-cards" id="juzContainer">
+                <!-- الأجزاء سيتم عرضها هنا عبر JavaScript -->
+            </div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div class="stats-container">
+            <h2 class="text-center mb-4" style="color: var(--primary-color);">
+                <i class="fas fa-chart-bar"></i> إحصائيات القرآن الكريم
+            </h2>
+            <div class="row">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-number">114</div>
+                        <div class="stat-label">سورة</div>
+                    </div>
                 </div>
-                
-                <div class="reciter-option">
-                    <h4 style="color: var(--quran-green);">ياسين الجزائري</h4>
-                    <a href="#" id="modal-reciter-2" target="_blank">
-                        ▶️ استمع على يوتيوب
-                    </a>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-number">30</div>
+                        <div class="stat-label">جزء</div>
+                    </div>
                 </div>
-                
-                <div class="reciter-option">
-                    <h4 style="color: #e76f51;">فارس عباد</h4>
-                    <a href="#" id="modal-reciter-3" target="_blank">
-                        ▶️ استمع على يوتيوب
-                    </a>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-number">6236</div>
+                        <div class="stat-label">آية</div>
+                    </div>
                 </div>
-                
-                <div style="background: #f0f9f7; padding: 15px; border-radius: 10px; margin-top: 20px;">
-                    <p style="color: #666; font-size: 0.9rem;">
-                        ⚠️ سيتم فتح رابط يوتيوب مباشر للتلاوة في نافذة جديدة
-                    </p>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">قراء</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="telegram-section">
+                <h3 style="margin-bottom: 15px;">📱 انضم إلى مجتمعنا</h3>
+                <p>انضم لمجموعة تلغرام الخاصة بمستخدمي الكتاب للاستفادة من:</p>
+                <p>• آخر التحديثات • نصائح الحفظ • مسابقات ودورات • دعم مباشر</p>
+                <a href="https://t.me/smartbookislam" target="_blank" class="telegram-btn">
+                    <i class="fab fa-telegram"></i> انضم لمجموعة تلغرام
+                </a>
+            </div>
+            <div class="copyright">
+                جميع الحقوق محفوظة © 2024 مكتبة إسلام عنابة
+                <br>
+                <small>القرآن التفاعلي - كتاب تتبع القرآن الكريم بخط اليد</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر التنقل السريع -->
+    <div class="quick-nav">
+        <button class="quick-nav-btn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- مودال اختيار القارئ -->
+    <div class="modal fade" id="reciterModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="reciterOptions"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // قاعدة بيانات روابط مباشرة لتلاوات السور على يوتيوب
-        const surahs = [
-            { 
-                number: 1, 
-                name: "الفاتحة", 
-                verses: 7, 
-                type: "مكية", 
-                page: 1,
-                // روابط مباشرة لتلاوات الفاتحة
-                hussary: "https://www.youtube.com/watch?v=0Z0eRCePZ_s",
-                aljazaery: "https://www.youtube.com/watch?v=hS7h3gK5Xoo",
-                fares: "https://www.youtube.com/watch?v=5J7jQb6q3_s"
+        // بيانات القراء
+        const reciters = [
+            {
+                id: 'fares',
+                name: 'فارس عباد',
+                color: '#4CAF50',
+                searchTerm: 'فارس عباد تلاوة'
             },
-            { 
-                number: 2, 
-                name: "البقرة", 
-                verses: 286, 
-                type: "مدنية", 
-                page: 2,
-                hussary: "https://www.youtube.com/watch?v=GGh0q7X9f6k",
-                aljazaery: "https://www.youtube.com/watch?v=3v8Z2j5fG9w",
-                fares: "https://www.youtube.com/watch?v=8Z9t5n6fJ7k"
+            {
+                id: 'yassin',
+                name: 'ياسين الجزائري',
+                color: '#2196F3',
+                searchTerm: 'ياسين الجزائري تلاوة'
             },
-            { 
-                number: 3, 
-                name: "آل عمران", 
-                verses: 200, 
-                type: "مدنية", 
-                page: 50,
-                hussary: "https://www.youtube.com/watch?v=7K8pL2N3vJ4",
-                aljazaery: "https://www.youtube.com/watch?v=2B5rM8nL9V3",
-                fares: "https://www.youtube.com/watch?v=9H1jX6pR2N8"
+            {
+                id: 'hussary',
+                name: 'محمود الحصري',
+                color: '#9C27B0',
+                searchTerm: 'محمود الحصري تلاوة'
             },
-            { 
-                number: 4, 
-                name: "النساء", 
-                verses: 176, 
-                type: "مدنية", 
-                page: 77,
-                hussary: "https://www.youtube.com/watch?v=4G5nT7X9L2K",
-                aljazaery: "https://www.youtube.com/watch?v=5J6kM8N2V4L",
-                fares: "https://www.youtube.com/watch?v=6K7l9N3X5M2"
-            },
-            { 
-                number: 5, 
-                name: "المائدة", 
-                verses: 120, 
-                type: "مدنية", 
-                page: 106,
-                hussary: "https://www.youtube.com/watch?v=7L8mN4X6K5J",
-                aljazaery: "https://www.youtube.com/watch?v=8M9nO5X7L4K",
-                fares: "https://www.youtube.com/watch?v=9N0p6X8M5L3"
-            },
-            { 
-                number: 6, 
-                name: "الأنعام", 
-                verses: 165, 
-                type: "مكية", 
-                page: 128,
-                hussary: "https://www.youtube.com/watch?v=0L1M2N3O4P5",
-                aljazaery: "https://www.youtube.com/watch?v=1M2N3O4P5Q6",
-                fares: "https://www.youtube.com/watch?v=2N3O4P5Q6R7"
-            },
-            { 
-                number: 7, 
-                name: "الأعراف", 
-                verses: 206, 
-                type: "مكية", 
-                page: 151,
-                hussary: "https://www.youtube.com/watch?v=3O4P5Q6R7S8",
-                aljazaery: "https://www.youtube.com/watch?v=4P5Q6R7S8T9",
-                fares: "https://www.youtube.com/watch?v=5Q6R7S8T9U0"
-            },
-            { 
-                number: 8, 
-                name: "الأنفال", 
-                verses: 75, 
-                type: "مدنية", 
-                page: 177,
-                hussary: "https://www.youtube.com/watch?v=6R7S8T9U0V1",
-                aljazaery: "https://www.youtube.com/watch?v=7S8T9U0V1W2",
-                fares: "https://www.youtube.com/watch?v=8T9U0V1W2X3"
-            },
-            { 
-                number: 9, 
-                name: "التوبة", 
-                verses: 129, 
-                type: "مدنية", 
-                page: 187,
-                hussary: "https://www.youtube.com/watch?v=9U0V1W2X3Y4",
-                aljazaery: "https://www.youtube.com/watch?v=0V1W2X3Y4Z5",
-                fares: "https://www.youtube.com/watch?v=1W2X3Y4Z5A6"
-            },
-            { 
-                number: 10, 
-                name: "يونس", 
-                verses: 109, 
-                type: "مكية", 
-                page: 208,
-                hussary: "https://www.youtube.com/watch?v=2X3Y4Z5A6B7",
-                aljazaery: "https://www.youtube.com/watch?v=3Y4Z5A6B7C8",
-                fares: "https://www.youtube.com/watch?v=4Z5A6B7C8D9"
-            },
-            { 
-                number: 11, 
-                name: "هود", 
-                verses: 123, 
-                type: "مكية", 
-                page: 221,
-                hussary: "https://www.youtube.com/watch?v=5A6B7C8D9E0",
-                aljazaery: "https://www.youtube.com/watch?v=6B7C8D9E0F1",
-                fares: "https://www.youtube.com/watch?v=7C8D9E0F1G2"
-            },
-            { 
-                number: 12, 
-                name: "يوسف", 
-                verses: 111, 
-                type: "مكية", 
-                page: 235,
-                hussary: "https://www.youtube.com/watch?v=8D9E0F1G2H3",
-                aljazaery: "https://www.youtube.com/watch?v=9E0F1G2H3I4",
-                fares: "https://www.youtube.com/watch?v=0F1G2H3I4J5"
-            },
-            { 
-                number: 13, 
-                name: "الرعد", 
-                verses: 43, 
-                type: "مدنية", 
-                page: 249,
-                hussary: "https://www.youtube.com/watch?v=1G2H3I4J5K6",
-                aljazaery: "https://www.youtube.com/watch?v=2H3I4J5K6L7",
-                fares: "https://www.youtube.com/watch?v=3I4J5K6L7M8"
-            },
-            { 
-                number: 14, 
-                name: "إبراهيم", 
-                verses: 52, 
-                type: "مكية", 
-                page: 255,
-                hussary: "https://www.youtube.com/watch?v=4J5K6L7M8N9",
-                aljazaery: "https://www.youtube.com/watch?v=5K6L7M8N9O0",
-                fares: "https://www.youtube.com/watch?v=6L7M8N9O0P1"
-            },
-            { 
-                number: 15, 
-                name: "الحجر", 
-                verses: 99, 
-                type: "مكية", 
-                page: 262,
-                hussary: "https://www.youtube.com/watch?v=7M8N9O0P1Q2",
-                aljazaery: "https://www.youtube.com/watch?v=8N9O0P1Q2R3",
-                fares: "https://www.youtube.com/watch?v=9O0P1Q2R3S4"
-            },
-            { 
-                number: 16, 
-                name: "النحل", 
-                verses: 128, 
-                type: "مكية", 
-                page: 267,
-                hussary: "https://www.youtube.com/watch?v=0P1Q2R3S4T5",
-                aljazaery: "https://www.youtube.com/watch?v=1Q2R3S4T5U6",
-                fares: "https://www.youtube.com/watch?v=2Q2R3S4T5U6"
-            },
-            { 
-                number: 17, 
-                name: "الإسراء", 
-                verses: 111, 
-                type: "مكية", 
-                page: 282,
-                hussary: "https://www.youtube.com/watch?v=3R3S4T5U6V7",
-                aljazaery: "https://www.youtube.com/watch?v=4S4T5U6V7W8",
-                fares: "https://www.youtube.com/watch?v=5T5U6V7W8X9"
-            },
-            { 
-                number: 18, 
-                name: "الكهف", 
-                verses: 110, 
-                type: "مكية", 
-                page: 293,
-                hussary: "https://www.youtube.com/watch?v=6U6V7W8X9Y0",
-                aljazaery: "https://www.youtube.com/watch?v=7V7W8X9Y0Z1",
-                fares: "https://www.youtube.com/watch?v=8W8X9Y0Z1A2"
-            },
-            { 
-                number: 19, 
-                name: "مريم", 
-                verses: 98, 
-                type: "مكية", 
-                page: 305,
-                hussary: "https://www.youtube.com/watch?v=9X9Y0Z1A2B3",
-                aljazaery: "https://www.youtube.com/watch?v=0Y0Z1A2B3C4",
-                fares: "https://www.youtube.com/watch?v=1Z1A2B3C4D5"
-            },
-            { 
-                number: 20, 
-                name: "طه", 
-                verses: 135, 
-                type: "مكية", 
-                page: 312,
-                hussary: "https://www.youtube.com/watch?v=2A2B3C4D5E6",
-                aljazaery: "https://www.youtube.com/watch?v=3B3C4D5E6F7",
-                fares: "https://www.youtube.com/watch?v=4C4D5E6F7G8"
+            {
+                id: 'maher',
+                name: 'ماهر المعيقلي',
+                color: '#FF9800',
+                searchTerm: 'ماهر المعيقلي تلاوة'
             }
-            // يمكن إضافة باقي السور بنفس الطريقة...
         ];
 
-        // روابط افتراضية للقراء (للسور التي ليس لها روابط محددة)
-        const defaultReciterLinks = {
-            hussary: "https://www.youtube.com/results?search_query=محمود+الحصري+",
-            aljazaery: "https://www.youtube.com/results?search_query=ياسين+الجزائري+",
-            fares: "https://www.youtube.com/results?search_query=فارس+عباد+"
-        };
+        // بيانات السور
+        const surahs = [
+            { number: 1, name: 'الفاتحة', arabic: 'الفاتحة', verses: 7, type: 'مدنية', page: 1 },
+            { number: 2, name: 'البقرة', arabic: 'البقرة', verses: 286, type: 'مدنية', page: 2 },
+            { number: 3, name: 'آل عمران', arabic: 'آل عمران', verses: 200, type: 'مدنية', page: 50 },
+            { number: 4, name: 'النساء', arabic: 'النساء', verses: 176, type: 'مدنية', page: 77 },
+            { number: 5, name: 'المائدة', arabic: 'المائدة', verses: 120, type: 'مدنية', page: 106 },
+            { number: 6, name: 'الأنعام', arabic: 'الأنعام', verses: 165, type: 'مكية', page: 128 },
+            { number: 7, name: 'الأعراف', arabic: 'الأعراف', verses: 206, type: 'مكية', page: 151 },
+            { number: 8, name: 'الأنفال', arabic: 'الأنفال', verses: 75, type: 'مدنية', page: 177 },
+            { number: 9, name: 'التوبة', arabic: 'التوبة', verses: 129, type: 'مدنية', page: 187 },
+            { number: 10, name: 'يونس', arabic: 'يونس', verses: 109, type: 'مكية', page: 208 },
+            { number: 11, name: 'هود', arabic: 'هود', verses: 123, type: 'مكية', page: 221 },
+            { number: 12, name: 'يوسف', arabic: 'يوسف', verses: 111, type: 'مكية', page: 235 },
+            { number: 13, name: 'الرعد', arabic: 'الرعد', verses: 43, type: 'مدنية', page: 249 },
+            { number: 14, name: 'إبراهيم', arabic: 'ابراهيم', verses: 52, type: 'مكية', page: 255 },
+            { number: 15, name: 'الحجر', arabic: 'الحجر', verses: 99, type: 'مكية', page: 262 },
+            { number: 16, name: 'النحل', arabic: 'النحل', verses: 128, type: 'مكية', page: 267 },
+            { number: 17, name: 'الإسراء', arabic: 'الإسراء', verses: 111, type: 'مكية', page: 282 },
+            { number: 18, name: 'الكهف', arabic: 'الكهف', verses: 110, type: 'مكية', page: 293 },
+            { number: 19, name: 'مريم', arabic: 'مريم', verses: 98, type: 'مكية', page: 305 },
+            { number: 20, name: 'طه', arabic: 'طه', verses: 135, type: 'مكية', page: 312 },
+            { number: 58, name: 'المجادلة', arabic: 'المجادلة', verses: 22, type: 'مدنية', page: 542, hasPage: true },
+            { number: 67, name: 'الملك', arabic: 'الملك', verses: 30, type: 'مكية', page: 562, hasPage: true },
+            { number: 112, name: 'الإخلاص', arabic: 'الإخلاص', verses: 4, type: 'مكية', page: 604 },
+            { number: 113, name: 'الفلق', arabic: 'الفلق', verses: 5, type: 'مكية', page: 604 },
+            { number: 114, name: 'الناس', arabic: 'الناس', verses: 6, type: 'مكية', page: 604 }
+        ];
 
-        // تهيئة الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // عرض جميع السور
-            displaySurahs(surahs);
-        });
+        // بيانات الأجزاء
+        const juzList = [
+            { number: 1, start: 'الفاتحة', end: 'البقرة 141', surahs: 'الفاتحة، البقرة' },
+            { number: 2, start: 'البقرة 142', end: 'البقرة 252', surahs: 'البقرة' },
+            { number: 3, start: 'البقرة 253', end: 'آل عمران 92', surahs: 'البقرة، آل عمران' },
+            { number: 4, start: 'آل عمران 93', end: 'النساء 23', surahs: 'آل عمران، النساء' },
+            { number: 5, start: 'النساء 24', end: 'النساء 147', surahs: 'النساء' },
+            { number: 6, start: 'النساء 148', end: 'المائدة 81', surahs: 'النساء، المائدة' },
+            { number: 7, start: 'المائدة 82', end: 'الأنعام 110', surahs: 'المائدة، الأنعام' },
+            { number: 8, start: 'الأنعام 111', end: 'الأعراف 87', surahs: 'الأنعام، الأعراف' },
+            { number: 9, start: 'الأعراف 88', end: 'الأنفال 40', surahs: 'الأعراف، الأنفال' },
+            { number: 10, start: 'الأنفال 41', end: 'التوبة 92', surahs: 'الأنفال، التوبة' },
+            { number: 11, start: 'التوبة 93', end: 'هود 5', surahs: 'التوبة، يونس، هود' },
+            { number: 12, start: 'هود 6', end: 'يوسف 52', surahs: 'هود، يوسف' },
+            { number: 13, start: 'يوسف 53', end: 'إبراهيم 52', surahs: 'يوسف، الرعد، إبراهيم' },
+            { number: 14, start: 'الحجر 1', end: 'النحل 128', surahs: 'الحجر، النحل' },
+            { number: 15, start: 'الإسراء 1', end: 'الكهف 74', surahs: 'الإسراء، الكهف' },
+            { number: 16, start: 'الكهف 75', end: 'طه 135', surahs: 'الكهف، مريم، طه' },
+            { number: 17, start: 'الأنبياء 1', end: 'الحج 78', surahs: 'الأنبياء، الحج' },
+            { number: 18, start: 'المؤمنون 1', end: 'الفرقان 20', surahs: 'المؤمنون، النور، الفرقان' },
+            { number: 19, start: 'الفرقان 21', end: 'النمل 55', surahs: 'الفرقان، الشعراء، النمل' },
+            { number: 20, start: 'النمل 56', end: 'العنكبوت 45', surahs: 'النمل، القصص، العنكبوت' },
+            { number: 21, start: 'العنكبوت 46', end: 'الأحزاب 30', surahs: 'العنكبوت، الروم، لقمان، السجدة، الأحزاب' },
+            { number: 22, start: 'الأحزاب 31', end: 'يس 27', surahs: 'الأحزاب، سبأ، فاطر، يس' },
+            { number: 23, start: 'يس 28', end: 'الزمر 31', surahs: 'يس، الصافات، ص، الزمر' },
+            { number: 24, start: 'الزمر 32', end: 'فصلت 46', surahs: 'الزمر، غافر، فصلت' },
+            { number: 25, start: 'فصلت 47', end: 'الجاثية 37', surahs: 'فصلت، الشورى، الزخرف، الدخان، الجاثية' },
+            { number: 26, start: 'الأحقاف 1', end: 'الذاريات 30', surahs: 'الأحقاف، محمد، الفتح، الحجرات، ق، الذاريات' },
+            { number: 27, start: 'الذاريات 31', end: 'الحديد 29', surahs: 'الذاريات، الطور، النجم، القمر، الرحمن، الواقعة، الحديد' },
+            { number: 28, start: 'المجادلة 1', end: 'التحريم 12', surahs: 'المجادلة، الحشر، الممتحنة، الصف، الجمعة، المنافقون، التغابن، الطلاق، التحريم' },
+            { number: 29, start: 'الملك 1', end: 'المرسلات 50', surahs: 'الملك، القلم، الحاقة، المعارج، نوح، الجن، المزمل، المدثر، القيامة، الإنسان، المرسلات' },
+            { number: 30, start: 'النبأ 1', end: 'الناس', surahs: 'النبأ، النازعات، عبس، التكوير، الانفطار، المطففين، الانشقاق، البروج، الطارق، الأعلى، الغاشية، الفجر، البلد، الشمس، الليل، الضحى، الشرح، التين، العلق، القدر، البينة، الزلزلة، العاديات، القارعة، التكاثر، العصر، الهمزة، الفيل، قريش، الماعون، الكوثر، الكافرون، النصر، المسد، الإخلاص، الفلق، الناس' }
+        ];
 
         // عرض السور
-        function displaySurahs(surahArray) {
-            const list = document.getElementById('surah-list');
-            list.innerHTML = '';
+        function displaySurahs(filteredSurahs = surahs) {
+            const container = document.getElementById('surahsContainer');
+            container.innerHTML = '';
             
-            surahArray.forEach(surah => {
-                const item = document.createElement('a');
-                item.className = 'surah-item';
-                item.href = '#'; // رابط مؤقت
-                item.onclick = (e) => {
-                    e.preventDefault();
-                    showRecitersForSurah(surah);
-                };
-                
-                item.innerHTML = `
-                    <div class="surah-number">${surah.number}</div>
-                    <div class="surah-name">${surah.name}</div>
-                    <div class="surah-details">
-                        ${surah.verses} آية<br>
-                        ${surah.type === 'مكية' ? '🕋' : '🕌'} ${surah.type}
+            filteredSurahs.forEach(surah => {
+                const surahCard = document.createElement('div');
+                surahCard.className = 'surah-card';
+                surahCard.innerHTML = `
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="surah-number">${surah.number}</div>
+                            <div>
+                                <div class="surah-name-arabic">${surah.arabic}</div>
+                                <div class="surah-info">
+                                    سورة ${surah.name} • ${surah.verses} آية • ${surah.type}
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="surah-details-btn" onclick="viewSurahDetails(${surah.number})">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </button>
+                        </div>
                     </div>
+                    <div class="reciters-container">
+                        ${reciters.map(reciter => `
+                            <a href="#" class="reciter-btn" 
+                               onclick="playRecitation(${surah.number}, '${reciter.id}', '${surah.arabic}', '${reciter.name}')"
+                               style="border-color: ${reciter.color}">
+                                <i class="fas fa-play-circle" style="color: ${reciter.color}"></i>
+                                ${reciter.name}
+                            </a>
+                        `).join('')}
+                    </div>
+                    ${surah.hasPage ? `
+                        <div class="mt-3">
+                            <a href="surah-${surah.number === 58 ? 'mujadila' : 'mulk'}.html" 
+                               class="reciter-btn" style="background: #9C27B0; color: white; border-color: #9C27B0;">
+                                <i class="fas fa-book-open"></i> صفحة السورة التفاعلية
+                            </a>
+                        </div>
+                    ` : ''}
                 `;
-                
-                list.appendChild(item);
+                container.appendChild(surahCard);
+            });
+            
+            // إخفاء شاشة التحميل
+            document.getElementById('loading').classList.remove('active');
+        }
+
+        // عرض الأجزاء
+        function displayJuz() {
+            const container = document.getElementById('juzContainer');
+            container.innerHTML = '';
+            
+            juzList.forEach(juz => {
+                const juzCard = document.createElement('div');
+                juzCard.className = 'juz-card';
+                juzCard.innerHTML = `
+                    <div class="juz-number">${juz.number}</div>
+                    <div>الجزء ${juz.number}</div>
+                    <div class="juz-surahs">${juz.start} - ${juz.end}</div>
+                `;
+                juzCard.onclick = () => viewJuzDetails(juz.number);
+                container.appendChild(juzCard);
             });
         }
 
-        // بحث السور
+        // البحث عن السور
         function searchSurahs() {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                displaySurahs(surahs);
+                return;
+            }
+            
             const filtered = surahs.filter(surah => 
                 surah.name.includes(searchTerm) || 
-                surah.number.toString().includes(searchTerm)
+                surah.arabic.includes(searchTerm) ||
+                surah.number.toString() === searchTerm ||
+                surah.type.includes(searchTerm)
             );
+            
+            displaySurahs(filtered);
+            
+            // إذا لم توجد نتائج
+            if (filtered.length === 0) {
+                const container = document.getElementById('surahsContainer');
+                container.innerHTML = `
+                    <div class="alert alert-info text-center">
+                        <i class="fas fa-search"></i> لم يتم العثور على نتائج لـ "${searchTerm}"
+                    </div>
+                `;
+            }
+        }
+
+        // تصفية السور
+        function filterSurahs(type) {
+            // تحديث أزرار الفلتر
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            let filtered;
+            switch(type) {
+                case 'makki':
+                    filtered = surahs.filter(s => s.type === 'مكية');
+                    break;
+                case 'madani':
+                    filtered = surahs.filter(s => s.type === 'مدنية');
+                    break;
+                case 'short':
+                    filtered = surahs.filter(s => s.verses <= 50);
+                    break;
+                case 'long':
+                    filtered = surahs.filter(s => s.verses > 100);
+                    break;
+                default:
+                    filtered = surahs;
+            }
             
             displaySurahs(filtered);
         }
 
-        // عرض القراء عند اختيار سورة
-        function showRecitersForSurah(surah) {
-            // تحديث معلومات السورة في النافذة
-            document.getElementById('modal-surah-name').textContent = `سورة ${surah.name}`;
-            document.getElementById('modal-surah-details').textContent = 
-                `${surah.verses} آية - ${surah.type === 'مكية' ? 'مكية' : 'مدنية'}`;
+        // تشغيل التلاوة
+        function playRecitation(surahNumber, reciterId, surahName, reciterName) {
+            const reciter = reciters.find(r => r.id === reciterId);
+            const surah = surahs.find(s => s.number === surahNumber);
             
-            // التحقق من وجود روابط مباشرة للسورة
-            let reciter1Link = surah.hussary || `${defaultReciterLinks.hussary}سورة+${surah.name}`;
-            let reciter2Link = surah.aljazaery || `${defaultReciterLinks.aljazaery}سورة+${surah.name}`;
-            let reciter3Link = surah.fares || `${defaultReciterLinks.fares}سورة+${surah.name}`;
+            if (!reciter || !surah) return;
             
-            // تحديث الروابط
-            document.getElementById('modal-reciter-1').href = reciter1Link;
-            document.getElementById('modal-reciter-2').href = reciter2Link;
-            document.getElementById('modal-reciter-3').href = reciter3Link;
+            // إنشاء عنوان البحث على يوتيوب
+            const searchQuery = encodeURIComponent(`${surahName} ${reciter.searchTerm} سورة`);
+            const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${searchQuery}`;
             
-            // تحديث نصوص الأزرار
-            document.getElementById('modal-reciter-1').innerHTML = `▶️ محمود الحصري`;
-            document.getElementById('modal-reciter-2').innerHTML = `▶️ ياسين الجزائري`;
-            document.getElementById('modal-reciter-3').innerHTML = `▶️ فارس عباد`;
-            
-            // إظهار النافذة
-            document.getElementById('surah-modal').style.display = 'flex';
+            // محاولة العثور على الفيديو الأول تلقائياً
+            try {
+                // نفتح صفحة البحث في نافذة جديدة
+                const newWindow = window.open(youtubeSearchUrl, '_blank');
+                
+                // يمكن إضافة محاولة لاستخراج أول فيديو باستخدام YouTube API
+                // ولكن هذا يتطلب مفتاح API من Google
+                
+                // في الوقت الحالي، نفتح صفحة البحث فقط
+                // يمكن للمستخدم اختيار الفيديو الذي يريده
+                
+            } catch (error) {
+                console.error('حدث خطأ:', error);
+                // فتح صفحة البحث بشكل عادي
+                window.open(youtubeSearchUrl, '_blank');
+            }
         }
 
-        // إغلاق النافذة
-        function closeModal() {
-            document.getElementById('surah-modal').style.display = 'none';
+        // عرض تفاصيل السورة
+        function viewSurahDetails(surahNumber) {
+            const surah = surahs.find(s => s.number === surahNumber);
+            if (!surah) return;
+            
+            // فتح صفحة السورة إذا كانت موجودة
+            if (surah.hasPage) {
+                if (surah.number === 58) {
+                    window.open('surah-mujadila.html', '_blank');
+                } else if (surah.number === 67) {
+                    window.open('surah-mulk.html', '_blank');
+                }
+            } else {
+                // عرض معلومات السورة في مودال
+                const modal = new bootstrap.Modal(document.getElementById('reciterModal'));
+                document.getElementById('modalTitle').textContent = `سورة ${surah.arabic}`;
+                
+                let content = `
+                    <div class="text-center mb-4">
+                        <h4 style="color: var(--primary-color);">${surah.arabic}</h4>
+                        <p>سورة ${surah.name} • ${surah.type} • ${surah.verses} آية</p>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> هذه السورة قيد التطوير، ستتوفر قريباً بإذن الله
+                    </div>
+                    <h5 class="mb-3">اختر القارئ:</h5>
+                    <div class="reciters-container">
+                        ${reciters.map(reciter => `
+                            <a href="#" class="reciter-btn" 
+                               onclick="playRecitation(${surah.number}, '${reciter.id}', '${surah.arabic}', '${reciter.name}')"
+                               style="border-color: ${reciter.color}">
+                                <i class="fas fa-play-circle" style="color: ${reciter.color}"></i>
+                                ${reciter.name}
+                            </a>
+                        `).join('')}
+                    </div>
+                `;
+                
+                document.getElementById('reciterOptions').innerHTML = content;
+                modal.show();
+            }
         }
 
-        // إغلاق النافذة عند النقر خارجها
-        document.getElementById('surah-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // عرض تفاصيل الجزء
+        function viewJuzDetails(juzNumber) {
+            const juz = juzList.find(j => j.number === juzNumber);
+            if (!juz) return;
+            
+            const modal = new bootstrap.Modal(document.getElementById('reciterModal'));
+            document.getElementById('modalTitle').textContent = `الجزء ${juzNumber}`;
+            
+            let content = `
+                <div class="text-center mb-4">
+                    <div class="juz-number" style="margin: 0 auto 15px; width: 70px; height: 70px; line-height: 70px; font-size: 2rem;">
+                        ${juz.number}
+                    </div>
+                    <h4 style="color: var(--primary-color);">الجزء ${juzNumber}</h4>
+                    <p>من ${juz.start} إلى ${juz.end}</p>
+                </div>
+                <div class="mb-4">
+                    <h5>السور الموجودة في هذا الجزء:</h5>
+                    <p>${juz.surahs}</p>
+                </div>
+                <div class="alert alert-success">
+                    <i class="fas fa-lightbulb"></i> نصيحة: يمكنك حفظ هذا الجزء في 20 يوم بمعدل صفحة ونصف يومياً
+                </div>
+            `;
+            
+            document.getElementById('reciterOptions').innerHTML = content;
+            modal.show();
+        }
+
+        // التمرير للأعلى
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // البحث عند الضغط على Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchSurahs();
             }
         });
 
-        // إغلاق النافذة بالزر Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySurahs();
+            displayJuz();
+            
+            // إظهار رسالة ترحيب
+            setTimeout(() => {
+                if (!localStorage.getItem('welcomeShown')) {
+                    alert('مرحباً بك في المصحف الإلكتروني الذكي\nيمكنك الاستماع لأي سورة بأصوات أشهر القراء');
+                    localStorage.setItem('welcomeShown', 'true');
+                }
+            }, 1000);
         });
+
+        // البحث عن أول فيديو على يوتيوب (نسخة متقدمة باستخدام YouTube API)
+        async function getFirstYouTubeVideo(searchQuery) {
+            // هذا يتطلب مفتاح YouTube API
+            // يمكن تطبيقه إذا حصلت على API Key من Google Cloud Console
+            
+            const apiKey = 'YOUR_YOUTUBE_API_KEY'; // يجب استبدالها بمفتاح حقيقي
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&key=${apiKey}&maxResults=1&type=video`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    const videoId = data.items[0].id.videoId;
+                    return `https://www.youtube.com/watch?v=${videoId}`;
+                }
+            } catch (error) {
+                console.error('Error fetching YouTube data:', error);
+            }
+            
+            return null;
+        }
     </script>
 </body>
 </html>
