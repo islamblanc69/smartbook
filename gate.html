@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفعيل المحتوى</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            text-align: center; 
+            padding: 40px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            
+            /* --- هذا هو كود الخلفية --- */
+            background-image: url('background.jpg');
+            background-size: cover; /* ليغطي كامل الشاشة */
+            background-position: center; /* لتوسيط الصورة */
+            background-repeat: no-repeat; /* لمنع تكرار الصورة */
+            background-attachment: fixed; /* لتثبيت الخلفية */
+        }
+        
+        /* --- صندوق التفعيل بلون أبيض شبه شفاف ليظهر الخلفية --- */
+        #activation-form { 
+            background-color: rgba(255, 255, 255, 0.95); /* أبيض شبه شفاف */
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        }
+        
+        input[type="text"] { 
+            width: 90%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            font-size: 1.1em; 
+            text-align: center; 
+        }
+        
+        button { 
+            padding: 12px 25px; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.1em; 
+            cursor: pointer; 
+        }
+        
+        button:hover { 
+            background-color: #218838; 
+        }
+        
+        #loading-message { 
+            display: none; 
+            font-size: 1.2em; 
+            color: white; 
+            background-color: rgba(0,0,0,0.5); 
+            padding: 10px; 
+            border-radius: 5px; 
+        }
+        
+        #error-message { 
+            color: red; 
+            margin-top: 10px; 
+            display: none; 
+            background-color: white; 
+            padding: 5px; 
+            border-radius: 3px;
+        }
+        
+        .success-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+            background-color: white;
+            padding: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body onload="checkActivation()">
+
+    <div id="loading-message">
+        <p>✓ تم التحقق من التفعيل</p>
+        <p>يتم تحويلك الآن...</p>
+    </div>
+
+    <div id="activation-form" style="display:none;">
+        <h1>تفعيل الكتاب</h1>
+        <p>الرجاء إدخال كود التفعيل الموجود في كتابك</p>
+        <input type="text" id="activation-code" placeholder="أدخل الكود هنا">
+        <button onclick="handleActivation()">تفعيل</button>
+        <p id="error-message">الكود غير صحيح، يرجى المحاولة مرة أخرى.</p>
+        <p id="success-message" class="success-message">✓ تم التفعيل بنجاح!</p>
+    </div>
+
+    <script>
+        // --- هذا هو الكود السري الخاص بك ---
+        const secretCode = "IQ1423"; 
+
+        // دالة للتحقق من جميع مصادر التفعيل
+        function isActivated() {
+            // تحقق من 5 مصادر مختلفة
+            const sources = [
+                localStorage.getItem('bookActivated') === 'true',
+                localStorage.getItem('isBookActivated') === 'true',
+                sessionStorage.getItem('bookActivated') === 'true',
+                sessionStorage.getItem('isBookActivated') === 'true',
+                document.cookie.includes('book_activated=true'),
+                window.location.hash === '#activated',
+                window.location.hash === '#active'
+            ];
+            
+            return sources.some(source => source === true);
+        }
+
+        // دالة تعمل عند تحميل الصفحة مباشرة
+        function checkActivation() {
+            if (isActivated()) {
+                document.getElementById('activation-form').style.display = 'none';
+                document.getElementById('loading-message').style.display = 'block';
+                
+                // تجديد التخزين في جميع المصادر
+                updateActivationStorage();
+                
+                // الانتظار 2 ثانية ثم التوجيه
+                setTimeout(() => {
+                    redirectToContentPage();
+                }, 2000);
+            } else {
+                document.getElementById('activation-form').style.display = 'block';
+                document.getElementById('loading-message').style.display = 'none';
+            }
+        }
+
+        // دالة تعمل عند الضغط على زر "تفعيل"
+        function handleActivation() {
+            let userInput = document.getElementById('activation-code').value.trim();
+            
+            // التحقق من الكود المدخل (مع تجاهل حالة الأحرف والفراغات)
+            if (userInput.toUpperCase() === secretCode.toUpperCase()) {
+                // حفظ التفعيل في جميع المصادر
+                updateActivationStorage();
+                
+                // إظهار رسالة النجاح
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('error-message').style.display = 'none';
+                
+                // الانتظار ثم التوجيه
+                setTimeout(() => {
+                    document.getElementById('activation-form').style.display = 'none';
+                    document.getElementById('loading-message').style.display = 'block';
+                    
+                    setTimeout(() => {
+                        redirectToContentPage();
+                    }, 1500);
+                }, 1000);
+                
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            }
+        }
+
+        // دلة لحفظ التفعيل في جميع المصادر
+        function updateActivationStorage() {
+            // حفظ في localStorage (طويل الأمد)
+            localStorage.setItem('bookActivated', 'true');
+            localStorage.setItem('isBookActivated', 'true');
+            localStorage.setItem('activationTime', new Date().getTime());
+            
+            // حفظ في sessionStorage (للجلسة)
+            sessionStorage.setItem('bookActivated', 'true');
+            sessionStorage.setItem('isBookActivated', 'true');
+            
+            // حفظ في cookie (لمدة سنة)
+            const expiryDate = new Date();
+            expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+            document.cookie = `book_activated=true; expires=${expiryDate.toUTCString()}; path=/`;
+            
+            // إضافة hash للURL
+            if (!window.location.hash.includes('activated') && !window.location.hash.includes('active')) {
+                window.location.hash = '#activated';
+            }
+        }
+
+        // دالة التوجيه الذكية
+        function redirectToContentPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pageName = urlParams.get('page'); 
+
+            if (pageName) {
+                // التحقق من أن الصفحة موجودة
+                const pageUrl = pageName + '.html';
+                
+                // سيحول إلى "nas.html" أو "falaq.html" الخ
+                window.location.replace(pageUrl);
+            } else {
+                // إذا لم يكن هناك page محدد، جرب الحصول من localStorage
+                const savedPage = localStorage.getItem('lastPage');
+                if (savedPage) {
+                    window.location.replace(savedPage);
+                } else {
+                    // صفحة افتراضية
+                    document.getElementById('loading-message').innerHTML = 
+                        '<p>✓ تم التفعيل بنجاح!</p>' +
+                        '<p>الرجاء استخدام رابط الكتاب للوصول للمحتوى</p>';
+                }
+            }
+        }
+
+        // دالة للاستماع إلى ضغط المفتاح Enter في حقل الإدخال
+        document.getElementById('activation-code').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleActivation();
+            }
+        });
+
+        // دالة لتجنب مشاكل localStorage في بعض المتصفحات
+        function setLocalStorageSafe(key, value) {
+            try {
+                localStorage.setItem(key, value);
+                return true;
+            } catch (e) {
+                // إذا فشل localStorage، استخدم sessionStorage
+                sessionStorage.setItem(key, value);
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
