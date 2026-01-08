@@ -3,395 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً بك في المكتبة الإسلامية</title>
+    <title>مكتبة القرآن الكريم</title>
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Amiri', 'Segoe UI', serif;
-            background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #0c2461 100%);
-            color: #f5f1e6;
+            font-family: 'Amiri', serif;
+            background: #0a192f;
+            color: #e6f1ff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            position: relative;
         }
         
-        /* النجوم */
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-        
-        .star {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-        
-        /* الهلال */
-        .moon-crescent {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 70% 50%, #F9F295 0%, #D4AF37 70%, transparent 71%);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-            z-index: -1;
-        }
-        
-        .welcome-container {
-            text-align: center;
-            max-width: 800px;
-            width: 90%;
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-        
-        .islamic-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 3px solid #D4AF37;
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
-            pointer-events: none;
+            padding: 40px 30px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* تأثير الضوء */
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
             z-index: -1;
         }
         
-        .basmala-section {
-            margin-bottom: 40px;
-            animation: fadeIn 2s ease-out;
-        }
-        
-        .basmala-arabic {
-            font-family: 'Amiri', serif;
-            font-size: 3.5rem;
-            color: #D4AF37;
+        .book-icon {
+            font-size: 4rem;
             margin-bottom: 20px;
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
-            line-height: 1.4;
-        }
-        
-        .verse-section {
-            animation: slideUp 1.5s ease-out 2s both;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 15px;
-            border-right: 5px solid #2E8B57;
-            margin: 25px 0;
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            transform: translateY(40px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .verse-arabic {
-            font-family: 'Amiri', serif;
-            font-size: 2.8rem;
-            color: #ffffff;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-        
-        .verse-reference {
-            color: #74b9ff;
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-        
-        .loader-section {
-            margin-top: 40px;
-            padding: 20px;
-        }
-        
-        .islamic-loader {
-            display: inline-block;
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-        
-        .islamic-loader:before {
-            content: "🕋";
-            font-size: 70px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            color: #64ffda;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
             animation: float 3s ease-in-out infinite;
         }
         
-        .loading-text {
-            margin-top: 20px;
-            font-size: 1.3rem;
-            color: #a5b1c2;
-            font-weight: bold;
+        .main-text {
+            margin: 30px 0;
         }
         
-        .skip-button {
-            margin-top: 30px;
-            padding: 12px 30px;
-            background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #D4AF37;
-            color: #D4AF37;
-            border-radius: 50px;
-            cursor: pointer;
+        .basmala {
+            font-size: 2.5rem;
+            color: #64ffda;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .verse {
+            font-size: 2.2rem;
+            color: #ccd6f6;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .reference {
+            color: #8892b0;
             font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .counter {
+            font-size: 1.5rem;
+            color: #64ffda;
+            margin: 20px 0;
             font-weight: bold;
-            transition: all 0.3s;
-            font-family: 'Amiri', serif;
         }
         
-        .skip-button:hover {
-            background: #D4AF37;
-            color: #0c2461;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-        
-        /* الرسالة النهائية */
-        .final-message {
-            background: rgba(46, 139, 87, 0.2);
-            padding: 20px;
-            border-radius: 10px;
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
             margin-top: 20px;
-            border: 1px solid #2E8B57;
-            display: none;
+        }
+        
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #64ffda, #4cc9f0);
+            border-radius: 2px;
+            transition: width 4s linear;
+        }
+        
+        .message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #8892b0;
+        }
+        
+        .skip-btn {
+            margin-top: 25px;
+            padding: 10px 25px;
+            background: transparent;
+            border: 1px solid #64ffda;
+            color: #64ffda;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .skip-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
         }
         
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
         @keyframes float {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-            50% { transform: translate(-50%, -50%) translateY(-15px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(0.98); }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .basmala-arabic { font-size: 2.5rem; }
-            .verse-arabic { font-size: 2.2rem; }
-            .verse-section { padding: 20px; }
-            .moon-crescent { width: 60px; height: 60px; }
+            .welcome-card { padding: 30px 20px; }
+            .basmala { font-size: 2rem; }
+            .verse { font-size: 1.8rem; }
+            .book-icon { font-size: 3rem; }
         }
         
         @media (max-width: 480px) {
-            .basmala-arabic { font-size: 2rem; }
-            .verse-arabic { font-size: 1.8rem; }
-            .welcome-container { width: 95%; padding: 10px; }
+            .welcome-card { padding: 25px 15px; }
+            .basmala { font-size: 1.8rem; }
+            .verse { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
-    <!-- النجوم -->
-    <div class="stars" id="starsContainer"></div>
-    
-    <!-- الهلال -->
-    <div class="moon-crescent"></div>
-    
-    <!-- المحتوى الرئيسي -->
-    <div class="welcome-container">
-        <div class="islamic-border"></div>
+    <div class="welcome-card">
+        <div class="book-icon">📖</div>
         
-        <!-- البسملة -->
-        <div class="basmala-section">
-            <div class="basmala-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+        <div class="main-text">
+            <div class="basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+            
+            <div class="verse">اقْرَأْ بِاسْمِ رَبِّكَ ٱلَّذِي خَلَقَ</div>
+            
+            <div class="reference">سورة العلق، الآية: 1</div>
         </div>
         
-        <!-- آية اقرأ -->
-        <div class="verse-section" id="verseSection">
-            <div class="verse-arabic">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
-            <div class="verse-reference">سورة العلق، الآية: 1</div>
+        <div class="counter" id="counter">4</div>
+        
+        <div class="loading-bar">
+            <div class="loading-progress" id="progressBar"></div>
         </div>
         
-        <!-- المحمل -->
-        <div class="loader-section" id="loaderSection">
-            <div class="islamic-loader"></div>
-            <div class="loading-text" id="loadingText">نفتح لك أبواب العلم والمعرفة...</div>
-        </div>
+        <div class="message" id="message">يتم تحويلك إلى المحتوى...</div>
         
-        <!-- الرسالة النهائية -->
-        <div class="final-message" id="finalMessage">
-            <p style="color:#D4AF37; font-size:1.2rem;">✓ تم التفعيل بنجاح</p>
-            <p>نورٌ على نور، يهدي الله لنوره من يشاء</p>
-        </div>
-        
-        <!-- زر التخطي -->
-        <button class="skip-button" onclick="skipWelcome()" id="skipBtn">تخطي المقدمة</button>
-        
-        <!-- الصوت المؤكد -->
-        <audio id="ayahAudio" preload="auto">
-            <source src="https://server8.mp3quran.net/afs/096.mp3" type="audio/mpeg">
-            <source src="https://download.quranicaudio.com/qur an/abdul_basit_murattal/096.mp3" type="audio/mpeg">
-        </audio>
+        <button class="skip-btn" onclick="skipWelcome()" id="skipBtn">تخطي</button>
     </div>
 
     <script>
-        // إنشاء النجوم
-        function createStars() {
-            const starsContainer = document.getElementById('starsContainer');
-            const starCount = 150;
+        let count = 4;
+        const counterElement = document.getElementById('counter');
+        const progressBar = document.getElementById('progressBar');
+        const messageElement = document.getElementById('message');
+        const skipBtn = document.getElementById('skipBtn');
+        
+        // بدء العد التنازلي
+        function startCountdown() {
+            progressBar.style.width = '100%';
             
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
+            const countdown = setInterval(() => {
+                count--;
+                counterElement.textContent = count;
                 
-                // مواقع عشوائية
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                
-                starsContainer.appendChild(star);
-            }
+                if (count <= 0) {
+                    clearInterval(countdown);
+                    redirectToContent();
+                }
+            }, 1000);
         }
         
-        // تشغيل الصوت المؤكد
-        function playAyah() {
-            const audio = document.getElementById('ayahAudio');
-            
-            // إعدادات الصوت
-            audio.volume = 0.7; // مستوى الصوت (70%)
-            audio.currentTime = 0; // من البداية
-            
-            // محاولة التشغيل مع ضمانات
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log("✓ الصوت يعمل بنجاح");
-                }).catch(error => {
-                    console.log("⚠️ تحتاج تفعيل الصوت يدوياً:", error);
-                    
-                    // رسالة للمستخدم
-                    document.getElementById('loadingText').innerHTML = 
-                        "🔇 الرجاء تفعيل الصوت في المتصفح<br>ثم أعد تحميل الصفحة";
-                });
-            }
-            
-            // عند انتهاء الصوت
-            audio.onended = function() {
-                console.log("✓ انتهت التلاوة");
-                document.getElementById('finalMessage').style.display = 'block';
-            };
-        }
-        
-        // التسلسل الزمني
-        setTimeout(() => {
-            // إظهار الآية
-            const verseSection = document.getElementById('verseSection');
-            verseSection.style.opacity = '1';
-            verseSection.style.transform = 'translateY(0)';
-            
-            // تشغيل الصوت بعد نصف ثانية
-            setTimeout(() => {
-                playAyah();
-            }, 500);
-            
-        }, 2000);
-        
-        // التوجيه التلقائي بعد 10 ثواني (بعد الصوت)
-        setTimeout(() => {
-            redirectToContent();
-        }, 10000);
-        
-        // دالة التوجيه للمحتوى
+        // التوجيه للمحتوى
         function redirectToContent() {
-            const loadingText = document.getElementById('loadingText');
-            loadingText.innerHTML = "✓ يتم تحويلك الآن للمحتوى...";
-            document.getElementById('skipBtn').style.display = 'none';
+            messageElement.textContent = "✓ جاري التحميل...";
+            messageElement.style.color = "#64ffda";
+            skipBtn.style.display = 'none';
             
-            // إخفاء الهلال والنجوم قبل التحويل
-            document.querySelector('.moon-crescent').style.opacity = '0';
-            document.getElementById('starsContainer').style.opacity = '0';
-            
+            // الانتظار 500ms ثم التحويل
             setTimeout(() => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const pageName = urlParams.get('page') || 'index';
-                
-                // إضافة تأكيد للتحويل
-                console.log(`🚀 التحويل إلى: ${pageName}.html`);
                 window.location.href = `${pageName}.html`;
-            }, 1500);
+            }, 500);
         }
         
-        // دالة التخطي
+        // تخطي الترحيب
         function skipWelcome() {
-            document.getElementById('loadingText').innerHTML = "⏩ يتم التحميل السريع...";
-            document.getElementById('skipBtn').style.display = 'none';
-            
-            // إيقاف الصوت إذا كان يعمل
-            const audio = document.getElementById('ayahAudio');
-            audio.pause();
-            audio.currentTime = 0;
-            
+            count = 1; // تخطي سريع
+            counterElement.textContent = "1";
+            progressBar.style.width = '100%';
+            messageElement.textContent = "⏩ تحميل سريع...";
             redirectToContent();
         }
         
-        // بدء العرض
+        // بدء العد عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            // إنشاء النجوم
-            createStars();
+            // تأثير ظهور
+            document.querySelector('.welcome-card').style.animation = 'fadeIn 0.8s ease-out';
             
-            // إظهار الصفحة
-            document.body.style.opacity = '1';
-            
-            // بدء التسلسل
-            console.log("✨ بدء الترحيب الإسلامي");
-        });
-        
-        // لضمان عمل الصوت على الهواتف
-        document.body.addEventListener('touchstart', function() {
-            // تفعيل الصوت عند اللمس (للهواتف)
-            const audio = document.getElementById('ayahAudio');
-            audio.volume = 0;
-            audio.play().then(() => {
-                audio.pause();
-                audio.currentTime = 0;
-                audio.volume = 0.7;
-            });
-        }, { once: true });
-        
-        // عند مغادرة الصفحة
-        window.addEventListener('beforeunload', function() {
-            const audio = document.getElementById('ayahAudio');
-            audio.pause();
+            // بدء العد التنازلي بعد تأخير بسيط
+            setTimeout(() => {
+                startCountdown();
+            }, 300);
         });
     </script>
 </body>
