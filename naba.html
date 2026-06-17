@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب التتبع الذكي - قسم البطل الصغير</title>
+    <title>المنصة الرقمية - كتاب التتبع الذكي</title>
     <style>
         :root {
-            --bg-color: #f0f4f8;
-            --primary-color: #2563eb;
-            --accent-color: #fbbf24;
-            --text-color: #1e293b;
+            --bg-color: #f1f5f9;
+            --primary-child: #2563eb;
+            --primary-adult: #0f766e;
+            --primary-parent: #10b981;
+            --accent-gold: #fbbf24;
+            --text-dark: #0f172a;
             --card-bg: #ffffff;
-            --success-color: #10b981;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-dark);
             margin: 0;
             padding: 15px;
             display: flex;
@@ -25,62 +26,24 @@
             align-items: center;
         }
 
-        /* شريط هيدر البطل */
-        .hero-header {
-            width: 100%;
-            max-width: 500px;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
-            border: 2px solid #bfdbfe;
-            box-sizing: border-box;
-        }
-
-        .avatar-zone {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar-pic {
-            width: 45px;
-            height: 45px;
-            background: #dbeafe;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .stats-zone {
-            display: flex;
-            gap: 15px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* حاوية صفحة المصحف */
+        /* حاوية المصحف الورقي والتحكم بالضباب ضد الغش */
         .quran-container {
             width: 100%;
             max-width: 500px;
             background: var(--card-bg);
             border-radius: 20px;
             padding: 10px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            position: relative;
             box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        /* كلاس لتطبيق الضباب على الصورة أثناء اللعب لحماية الإجابات */
+        .blur-active {
+            filter: blur(15px) grayscale(80%);
+            pointer-events: none;
         }
 
         .quran-image {
@@ -89,88 +52,40 @@
             display: block;
         }
 
-        /* منطقة الألعاب والتحديات */
-        .challenges-section {
+        /* لافتة التحذير المبتكرة ضد الغش */
+        .anti-cheat-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* التنسيقات المشتركة للهيدر والبطاقات */
+        .section-box {
             width: 100%;
             max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .challenge-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 2px;
-        }
-
-        /* نافذة اللعبة التفاعلية (تظهر عند الضغط على الزر) */
-        .game-box {
             background: var(--card-bg);
             border-radius: 15px;
             padding: 15px;
-            border: 2px solid #cbd5e1;
-            display: none; /* مخفية في البداية */
-            flex-direction: column;
-            gap: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            box-sizing: border-box;
         }
 
-        .lines-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        /* الأسطر التي يقوم الطفل بترتيبها */
-        .quran-line {
-            background: #f8fafc;
-            border: 2px dashed #94a3b8;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: grab;
-            text-align: center;
-            font-weight: bold;
-            font-size: 15px;
-            user-select: none;
-            transition: background 0.2s;
-        }
-
-        .quran-line:active {
-            cursor: grabbing;
-            background: #e2e8f0;
-        }
-
-        .btn-action {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .btn-action.success {
-            background: var(--success-color);
-        }
-
-        .result-message {
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        /* الأزرار الرئيسية */
-        .btn-challenge {
+        .btn-universal {
+            width: 100%;
             background: var(--card-bg);
             border: 2px solid #cbd5e1;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 12px 15px;
             font-size: 16px;
             font-weight: bold;
@@ -178,161 +93,242 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 10px;
             box-sizing: border-box;
         }
 
-        .btn-challenge:hover {
-            border-color: var(--primary-color);
-            background-color: #eff6ff;
+        .game-panel {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
         }
+
+        .btn-submit {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ستايل خيارات تحدي أنا الشيخ */
+        .quiz-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: right;
+            font-weight: 500;
+        }
+        .quiz-option:hover { border-color: #2563eb; background: #eff6ff; }
+
+        /* ستايل التلوين البصري السحري */
+        .blur-text {
+            background: #334155;
+            color: #334155;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        .reveal-active { background: #f0fdf4; color: #166534; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="hero-header">
-        <div class="avatar-zone">
-            <div class="avatar-pic">🦁</div>
-            <div>
-                <div style="font-size: 11px; color: #64748b;">البطل الحالي</div>
-                <div id="username-display" style="font-weight: bold;">محمد اسلام</div>
+    <div class="quran-container" id="main-quran-box">
+        <div class="anti-cheat-overlay" id="cheat-alert">🔒 تم إخفاء الصفحة ليعتمد البطل على حفظه!</div>
+        <img src="images/page001.png" class="quran-image" alt="صفحة المصحف الشريف" onerror="this.style.display='none'; document.getElementById('alt-txt').style.display='block';">
+        <div id="alt-txt" style="display:none; text-align:center; color:#64748b; padding:20px; font-weight:bold;">📖 [صورة صفحة المصحف الخاصة بك]</div>
+    </div>
+
+    <div id="child-interface" style="display: none; width:100%; max-width:500px;">
+        <div class="section-box" style="border: 2px solid #bfdbfe; display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:bold;">🦁 البطل: محمد اسلام</div>
+            <div style="font-weight:bold; color:var(--accent-gold);">💎 الجواهر: <span id="child-gems">150</span></div>
+        </div>
+        
+        <h3 style="color:var(--primary-child); text-align:center;">🎯 ألعاب التحدي الرقمي</h3>
+
+        <button class="btn-universal" onclick="openGame('sheikh-game')"><span>👨‍🏫 تحدي "أنا الشيخ" (اكتشف الخطأ)</span> <span>▼</span></button>
+        <div id="sheikh-game" class="game-panel">
+            <p style="font-weight:bold; color:#1e3a8a;">الشيخ أخطأ في قراءة الآية التالية، أين الخطأ؟</p>
+            <p style="font-size:18px; text-align:center; background:white; padding:10px; border-radius:8px;">"عَمَّ يَتَسَاءَلُونَ * عَنِ النَّبَإِ <span style="color:#ef4444; font-weight:bold;">الْقَدِيمِ</span>"</p>
+            <div class="quiz-option" onclick="checkSheikhAnswer(false)">الخطأ في كلمة "يَتَسَاءَلُونَ"</div>
+            <div class="quiz-option" onclick="checkSheikhAnswer(true)">الخطأ في كلمة "الْقَدِيمِ" والصواب هو "الْعَظِيمِ"</div>
+            <div id="sheikh-res" style="text-align:center; font-weight:bold;"></div>
+        </div>
+
+        <button class="btn-universal" onclick="openGame('color-game')"><span>🎨 التلوين البصري (المس واكشف الآية)</span> <span>▼</span></button>
+        <div id="color-game" class="game-panel">
+            <p>اقرأ غيباً واضغط على الكلمة المغطاة لتتأكد من حفظك وتلوّنها بالأخضر:</p>
+            <p style="font-size:18px; line-height:2; text-align:center;">
+                عَمَّ <span class="blur-text" onclick="this.classList.toggle('reveal-active')">يَتَسَاءَلُونَ</span> 
+                عَنِ <span class="blur-text" onclick="this.classList.toggle('reveal-active')">النَّبَإِ</span> الْعَظِيمِ 
+                الَّذِي هُمْ فِيهِ <span class="blur-text" onclick="this.classList.toggle('reveal-active')">مُخْتَلِفُونَ</span>
+            </p>
+            <button class="btn-submit" style="background:#10b981;" onclick="finishColorGame()">أكملت التحقق والتلوين بنجاح! 🌟</button>
+            <div id="color-res" style="text-align:center; font-weight:bold;"></div>
+        </div>
+
+        <button class="btn-universal" onclick="openGame('puzzle-game')"><span>🧩 أحجية ترتيب الآيات الكريمة</span> <span>▼</span></button>
+        <div id="puzzle-game" class="game-panel">
+            <p>اضغط على الآية الأولى ثم الثانية لتبديل الأماكن وترتيبها صحيحاً:</p>
+            <div id="puzzle-space" style="display:flex; flex-direction:column; gap:8px;">
+                </div>
+            <button class="btn-submit" onclick="checkPuzzleOrder()">تحقق من صحة الترتيب 🧐</button>
+            <div id="puzzle-res" style="text-align:center; font-weight:bold;"></div>
+        </div>
+    </div>
+
+    <div id="adult-interface" style="display: none; width:100%; max-width:500px;">
+        <div class="section-box" style="border-right: 5px solid var(--primary-adult);">
+            <h4 style="margin:0; color:var(--primary-adult);">لوحة المتابعة والإنتاجية للبالغين</h4>
+            <p style="font-size:14px; margin:5px 0 0 0;">خطة الحفظ: صفحة واحدة يومياً • نسبة الثبات الحالي: 94%</p>
+        </div>
+
+        <div class="section-box">
+            <h4 style="margin-top:0; color:var(--primary-adult);">💡 التفسير الميسر والروابط الموضوعية</h4>
+            <p style="background:#f0fdf4; padding:10px; border-radius:8px; font-size:14px; line-height:1.6;">
+                <strong>الروابط الموضوعية للقرآن (من الآية 1 إلى 5):</strong> تفتتح السورة بالتساؤل الإنكاري من كفار قريش حول يوم البعث والقيامة الذي يختلفون في وقوعه، متوعداً إياهم بأنهم سيعلمون حقيقته يقيناً قريباً.
+            </p>
+        </div>
+
+        <button class="btn-universal" style="border-color:var(--primary-adult);" onclick="alert('تفعيل نظام المحاسبة الذاتية والتذكير بالمراجعة الفاصلة الزوجية Spaced Repetition')">
+            <span>🃏 بطاقات التسميع الذاتي الاحترافية</span> <span style="color:var(--primary-adult);">◀</span>
+        </button>
+    </div>
+
+    <div id="parent-interface" style="display: none; width:100%; max-width:500px;">
+        <div class="section-box" style="border: 2px solid var(--primary-parent); text-align:center;">
+            <h3 style="margin:0; color:var(--primary-parent);">👨‍👩‍👦 لوحة تحكم ومتابعة الولي</h3>
+            <p style="margin:5px 0 0 0; font-size:14px;">إشعار: أكمل ابنك "محمد اسلام" جميع التحديات الرقمية لهذه الصفحة.</p>
+        </div>
+
+        <div class="section-box" style="text-align:center;">
+            <p style="font-weight:bold;">استمع الآن لتسميع ابنك غيباً من الكتاب الورقي، ثم اعتمد الحفظ:</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn-submit" style="background:var(--primary-parent); width:45%;" onclick="alert('تم اعتماد حفظ الصفحة بنجاح! سيتم إخطار الطفل بجائزته الكبرى ونقلها لدفتر الإنجازات الأخضر.')">تم الحفظ بنجاح 🟢</button>
+                <button class="btn-submit" style="background:#ef4444; width:45%;" onclick="alert('تم الرفض وتوجيه الحساب لإعادة التسميع والمراجعة الرقمية.')">يحتاج إعادة مراجعة 🔴</button>
             </div>
         </div>
-        <div class="stats-zone">
-            <div class="stat-item" style="color: #ef4444;">🔥 <span id="streak-val">5 أيام</span></div>
-            <div class="stat-item" style="color: var(--accent-color);">💎 <span id="gems-val">150</span></div>
-        </div>
-    </div>
-
-    <div class="quran-container">
-        <img src="images/page001.png" alt="صفحة القرآن الكريم" class="quran-image" onerror="this.style.display='none'; document.getElementById('placeholder-text').style.display='block';">
-        <div id="placeholder-text" style="display:none; text-align:center; color:#64748b; padding: 20px; font-weight:bold;">📖 [هنا تظهر صورة صفحة المصحف الخاصة بك]</div>
-    </div>
-
-    <div class="challenges-section">
-        <div class="challenge-title">🎯 ألعاب التحدي الذكي للآيات</div>
-        
-        <button class="btn-challenge" onclick="toggleGame()">
-            <span class="avatar-zone"><span>🧩</span> أحجية ترتيب الآيات</span>
-            <span id="arrow-status" style="color: var(--primary-color);">▼</span>
-        </button>
-
-        <div id="puzzle-game" class="game-box">
-            <p style="margin:0; font-size:14px; color:#64748b; text-align:center;">رتب الآيات الكريمة ترتيباً صحيحاً بالسحب والإفلات (أو بالضغط والتبديل):</p>
-            
-            <div class="lines-container" id="lines-space">
-                </div>
-
-            <button class="btn-action" onclick="checkOrder()">تحقق من صحة الترتيب الفعلي 🌟</button>
-            <div id="game-res" class="result-message"></div>
-        </div>
-
-        <button class="btn-challenge" style="opacity: 0.7;" onclick="alert('تحدي أنا الشيخ سنبرمجه في الخطوة القادمة!')">
-            <span class="avatar-zone"><span>👨‍🏫</span> تحدي "أنا الشيخ"</span>
-            <span>◀</span>
-        </button>
-
-        <button class="btn-challenge" style="opacity: 0.7;" onclick="alert('التلوين البصري السحري سنبرمجه بعد إنهاء تحدي الترتيب!')">
-            <span class="avatar-zone"><span>🎨</span> التلوين البصري السحري</span>
-            <span>◀</span>
-        </button>
     </div>
 
     <script>
-        // الآيات الصحيحة مرتبة (مثال من سورة النبأ)
-        const correctOrder = [
-            "عَمَّ يَتَسَاءَلُونَ",
-            "عَنِ النَّبَإِ الْعَظِيمِ",
-            "الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ",
-            "كَلَّا سَيَعْلَمُونَ"
-        ];
+        // 1. نظام قراءة الـ URL لتحديد من يفتح الصفحة وتحويل المحتوى بالكامل
+        const urlParams = new URLSearchParams(window.location.search);
+        const userRole = urlParams.get('role') || 'child'; // الافتراضي هو الطفل إذا لم يحدد
 
-        // مصفوفة للخلط (البداية مبعثرة)
-        let scrambledOrder = [...correctOrder].sort(() => Math.random() - 0.5);
-        let draggedItem = null;
+        if (userRole === 'child') document.getElementById('child-interface').style.display = 'block';
+        if (userRole === 'adult') document.getElementById('adult-interface').style.display = 'block';
+        if (userRole === 'parent') document.getElementById('parent-interface').style.display = 'block';
 
-        function initGame() {
-            const container = document.getElementById('lines-space');
-            container.innerHTML = '';
-            
-            scrambledOrder.forEach((lineText, index) => {
-                const lineDiv = document.createElement('div');
-                lineDiv.className = 'quran-line';
-                lineDiv.innerText = lineText;
-                lineDiv.setAttribute('draggable', 'true');
-                lineDiv.setAttribute('data-index', index);
+        // 2. إدارة فتح الألعاب وقفل/تغطية المصحف لمنع الغش
+        function openGame(gameId) {
+            const panels = document.querySelectorAll('.game-panel');
+            const quranBox = document.getElementById('main-quran-box');
+            const cheatAlert = document.getElementById('cheat-alert');
+            const targetPanel = document.getElementById(gameId);
 
-                // أحداث السحب والإفلات للهواتف والحواسب
-                lineDiv.addEventListener('dragstart', function() {
-                    draggedItem = this;
-                });
+            // إغلاق كل النوافذ الأخرى أولاً
+            panels.forEach(p => p.style.display = 'none');
 
-                lineDiv.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                });
+            if (targetPanel.style.display === 'none' || targetPanel.style.display === '') {
+                targetPanel.style.display = 'flex';
+                // تفعيل خاصية منع الغش الرقمية: حجب صورة المصحف تماماً بـ Blur ولافتة قفل
+                quranBox.classList.add('blur-active');
+                cheatAlert.style.display = 'block';
+                if(gameId === 'puzzle-game') initPuzzle();
+            } else {
+                targetPanel.style.display = 'none';
+                // إلغاء الحجب بعد إغلاق اللعبة
+                quranBox.classList.remove('blur-active');
+                cheatAlert.style.display = 'none';
+            }
+        }
 
-                lineDiv.addEventListener('drop', function() {
-                    if (draggedItem !== this) {
-                        let currentText = this.innerText;
-                        this.innerText = draggedItem.innerText;
-                        draggedItem.innerText = currentText;
-                    }
-                });
+        // 3. برمجة وتحديث منطق لعبة "أنا الشيخ"
+        function checkSheikhAnswer(isCorrect) {
+            const res = document.getElementById('sheikh-res');
+            if(isCorrect) {
+                res.style.color = '#10b981';
+                res.innerText = "🎉 بطل غادق الذكاء! اكتشفت خطأ الشيخ، زادت جواهرك +50! 💎";
+                addGems(50);
+            } else {
+                res.style.color = '#ef4444';
+                res.innerText = "❌ ركز جيداً يا بطل، الشيخ لم يخطئ في هذه الكلمة!";
+            }
+        }
 
-                // دعم بسيط للمس السريع على الهواتف (تبديل بالنقرات)
-                lineDiv.addEventListener('click', function() {
-                    if(!draggedItem) {
-                        draggedItem = this;
+        // 4. برمجة لعبة التلوين السحري
+        function finishColorGame() {
+            document.getElementById('color-res').style.color = '#10b981';
+            document.getElementById('color-res').innerText = "🎨 رائع جداً! قمت بكشف وتلوين الآيات من حفظك، حصلت على +30 جوهرة! 💎";
+            addGems(30);
+        }
+
+        // 5. برمجة لعبة الترتيب الذكية (تفاعلية بالضغط والتبديل للموبايل)
+        const puzzleAnswers = ["عَمَّ يَتَسَاءَلُونَ", "عَنِ النَّبَإِ الْعَظِيمِ", "الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ", "كَلَّا سَيَعْلَمُونَ"];
+        let scrambled = [...puzzleAnswers].sort(() => Math.random() - 0.5);
+        let selectedLine = null;
+
+        function initPuzzle() {
+            const space = document.getElementById('puzzle-space');
+            space.innerHTML = '';
+            scrambled.forEach(txt => {
+                const item = document.createElement('div');
+                item.className = 'quiz-option';
+                item.style.textAlign = 'center';
+                item.innerText = txt;
+                item.onclick = function() {
+                    if (!selectedLine) {
+                        selectedLine = this;
                         this.style.background = '#dbeafe';
                         this.style.borderColor = '#2563eb';
                     } else {
                         let temp = this.innerText;
-                        this.innerText = draggedItem.innerText;
-                        draggedItem.innerText = temp;
-                        draggedItem.style.background = '#f8fafc';
-                        draggedItem.style.borderColor = '#94a3b8';
-                        draggedItem = null;
+                        this.innerText = selectedLine.innerText;
+                        selectedLine.innerText = temp;
+                        selectedLine.style.background = 'white';
+                        selectedLine.style.borderColor = '#e2e8f0';
+                        selectedLine = null;
                     }
-                });
-
-                container.appendChild(lineDiv);
+                };
+                space.appendChild(item);
             });
         }
 
-        function toggleGame() {
-            const gameBox = document.getElementById('puzzle-game');
-            const arrow = document.getElementById('arrow-status');
-            if(gameBox.style.display === 'none' || gameBox.style.display === '') {
-                gameBox.style.display = 'flex';
-                arrow.innerText = '▲';
-                initGame();
+        function checkPuzzleOrder() {
+            const currentItems = document.querySelectorAll('#puzzle-space .quiz-option');
+            let success = true;
+            currentItems.forEach((item, index) => {
+                if(item.innerText !== puzzleAnswers[index]) success = false;
+            });
+
+            const res = document.getElementById('puzzle-res');
+            if(success) {
+                res.style.color = '#10b981';
+                res.innerText = "🎉 ترتيب معجز وصحيح! خذ +50 جوهرة إضافية لثباتك! 💎";
+                addGems(50);
             } else {
-                gameBox.style.display = 'none';
-                arrow.innerText = '▼';
+                res.style.color = '#ef4444';
+                res.innerText = "❌ الترتيب ما زال يحتاج لتعديل، واصل المحاولة!";
             }
         }
 
-        function checkOrder() {
-            const currentLines = document.querySelectorAll('.quran-line');
-            let isCorrect = true;
-            
-            currentLines.forEach((line, idx) => {
-                if(line.innerText !== correctOrder[idx]) {
-                    isCorrect = false;
-                }
-            });
-
-            const resDiv = document.getElementById('game-res');
-            if(isCorrect) {
-                resDiv.style.color = 'var(--success-color)';
-                resDiv.innerText = '🎉 أحسنت يا بطل! الترتيب صحيح تماماً وتم منحك +50 جوهرة! 💎';
-                
-                // تحديث الجواهر محلياً في الواجهة فوراً
-                let currentGems = parseInt(document.getElementById('gems-val').innerText);
-                document.getElementById('gems-val').innerText = currentGems + 50;
-            } else {
-                resDiv.style.color = '#ef4444';
-                resDiv.innerText = '❌ الترتيب غير صحيح بعد، حاول مرة أخرى وركز في تسلسل الآيات!';
-            }
+        // دالة زيادة الجواهر التلقائية في واجهة العميل محلياً
+        function addGems(amount) {
+            const gemSpan = document.getElementById('child-gems');
+            gemSpan.innerText = parseInt(gemSpan.innerText) + amount;
         }
     </script>
 </body>
