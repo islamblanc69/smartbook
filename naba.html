@@ -37,7 +37,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* نظام التبويبين */
         .tabs-container {
             width: 100%;
             max-width: 600px;
@@ -81,7 +80,6 @@
             display: block;
         }
 
-        /* ستايل القوائم المنسدلة */
         .accordion-item {
             background: var(--card-bg);
             border-radius: 10px;
@@ -143,7 +141,6 @@
             background: #fef2f2;
         }
 
-        /* ستايل الاختبار */
         .info-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -151,6 +148,17 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             margin-bottom: 15px;
             border-right: 4px solid var(--primary-color);
+        }
+
+        .exercise-title {
+            background: #f0fdf4;
+            color: var(--primary-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-right: 3px solid var(--primary-color);
         }
 
         .quiz-question-box {
@@ -233,35 +241,42 @@
         <button class="tab-btn" onclick="switchTab(event, 'tab-evaluation')">قسم الاختبار والتقييم</button>
     </div>
 
+    <!-- 1️⃣ قسم التحفيظ والفهم -->
     <div id="tab-learning" class="tab-content active">
         
+        <!-- السورة كاملة -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-                <span>📖 السورة مكتوبة بالخط العثماني</span>
+                <span>📖 سورة النبأ كاملة بالخط العثماني</span>
                 <span>➕</span>
             </div>
             <div class="accordion-content">
-                <p style="font-size: 20px; line-height: 2.2; word-spacing: 4px; text-align: justify; padding: 10px 0;">
+                <p style="font-size: 20px; line-height: 2.3; word-spacing: 4px; text-align: justify; padding: 10px 0; color: #000;">
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>
-                    عَمَّ يَتَسَاءَلُونَ (1) عَنِ النَّبَإِ الْعَظِيمِ (2) الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ (3) كَلَّا سَيَعْلَمُونَ (4) ثُمَّ كَلَّا سَيَعْلَمُونَ (5) أَلَمْ نَجْعَلِ الْأَرْضَ مِهَادًا (6) وَالْجِبَالَ أَوْتَادًا (7) وَخَلَقْنَاكُمْ أَزْوَاجًا (8) وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا (9) وَجَعَلْنَا اللَّيْلَ لِبَاسًا (10) وَجَعَلْنَا النَّهَارَ مَعَاشًا (11) وَبَنَيْنَا فَوْقَكُمْ سَبْعًا شِدَادًا (12) وَجَعَلْنَا سِرَاجًا وَهَّاجًا (13) وَأَنزَلْنَا مِنَ الْمُعْصِرَاتِ مَاءً ثَجَّاجًا (14) لِّنُخْرِجَ بِهِ حَبًّا وَنَبَاتًا (15) وَجَنَّاتٍ أَلْفَافًا (16)...
+                    عَمَّ يَتَسَاءَلُونَ (1) عَنِ النَّبَإِ الْعَظِيمِ (2) الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ (3) كَلَّا سَيَعْلَمُونَ (4) ثُمَّ كَلَّا سَيَعْلَمُونَ (5) أَلَمْ نَجْعَلِ الْأَرْضَ مِهَادًا (6) وَالْجِبَالَ أَوْتَادًا (7) وَخَلَقْنَاكُمْ أَزْوَاجًا (8) وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا (9) وَجَعَلْنَا اللَّيْلَ لِبَاسًا (10) وَجَعَلْنَا النَّهَارَ مَعَاشًا (11) وَبَنَيْنَا فَوْقَكُمْ سَبْعًا شِدَادًا (12) وَجَعَلْنَا سِرَاجًا وَهَّاجًا (13) وَأَنزَلْنَا مِنَ الْمُعْصِرَاتِ مَاءً ثَجَّاجًا (14) لِّنُخْرِجَ بِهِ حَبًّا وَنَبَاتًا (15) وَجَنَّاتٍ أَلْفَافًا (16) إِنَّ يَوْمَ الْفَصْلِ كَانَ مِيقَاتًا (17) يَوْمَ يُنفَخُ فِي الصُّورِ فَتَأْتُونَ أَفْوَاجًا (18) وَفُتِحَتِ السَّمَاءُ فَكَانَتْ أَبْوَابًا (19) وَسُيِّرَتِ الْجِبَالُ فَكَانَتْ سَرَابًا (20) إِنَّ جَهَنَّمَ كَانَتْ مِرْصَادًا (21) لِّلطَّاغِينَ مَآبًا (22) لَّابِثِينَ فِيهَا أَحْقَابًا (23) لَّا يَذُوقُونَ فِيهَا بَرْدًا وَلَا شَرَابًا (24) إِلَّا حَمِيمًا وَغَسَّاقًا (25) جَزَاءً وِفَاقًا (26) إِنَّهُمْ كَانُوا لَا يَرْجُونَ حِسَابًا (27) وَكَذَّبُوا بِآيَاتِنَا كِذَّابًا (28) وَكُلَّ شَيْءٍ أَحْصَيْنَاهُ كِتَابًا (29) فَذُوقُوا فَلَن نَّزِيدَكُمْ إِلَّا عَذَابًا (30) إِنَّ لِلْمُتَّقِينَ مَفَازًا (31) حَدَائِقَ وَأَعْنَابًا (32) وَكَوَاعِبَ أَتْرَابًا (33) وَكَأْسًا دِهَاقًا (34) لَّا يَسْمَعُونَ فِيهَا لَغْوًا وَلَا كِذَّابًا (35) جَزَاءً مِّن رَّبِّكَ عَطَاءً حِسَابًا (36) رَّبِّ السَّمَاوَاتِ وَالْأَرْضِ وَمَا بَيْنَهُمَا الرَّحْمَٰنِ ۖ لَا يَمْلِكُونَ مِنْهُ خِطَابًا (37) يَوْمَ يَقُومُ الرُّوحُ وَالْمَلَائِكَةُ صَفًّا ۖ لَّا يَتَكَلَّمُونَ إِلَّا مَنْ أَذِنَ لَهُ الرَّحْمَٰنُ وَقَالَ صَوَابًا (38) ذَٰلِكَ الْيَوْمُ الْحَقُّ ۖ فَمَن شَاءَ اتَّخَذَ إِلَىٰ رَبِّهِ مَآبًا (39) إِنَّا أَنذَرْنَاكُمْ عَذَابًا قَرِيبًا يَوْمَ يَنظُرُ الْمَرْءُ مَا قَدَّمَتْ يَدَاهُ وَيَقُولُ الْكَافِرُ يَا لَيْتَنِي كُنتُ تُرَابًا (40)
                 </p>
             </div>
         </div>
 
+        <!-- التفسير كاملاً -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-                <span>💡 تفسير السورة الميسر</span>
+                <span>💡 تفسير السورة كاملاً ومبسطاً</span>
                 <span>➕</span>
             </div>
-            <div class="accordion-content">
-                <p style="line-height: 1.6; padding: 10px 0;">
-                    <strong>عَمَّ يَتَسَاءَلُونَ:</strong> عن أي شيء يتساءل كفار قريش ويعجبون؟<br>
-                    <strong>عَنِ النَّبَإِ الْعَظِيمِ:</strong> يتساءلون عن الخبر العظيم وهو القرآن والبعث بعد الموت.<br>
-                    <strong>أَلَمْ نَجْعَلِ الْأَرْضَ مِهَادًا:</strong> ألم نجعل الأرض ممهدة وصالحة لمعيشتكم مستقرة عليها؟
-                </p>
+            <div class="accordion-content" style="max-height: 400px; overflow-y: auto; padding: 10px;">
+                <div style="line-height: 1.8; font-size: 15px;">
+                    <p><strong>[1-5]:</strong> يتساءل المشركون بإنكار عن الخبر العظيم وهو البعث، سيعلمون عاقبة تكذيبهم حتماً.</p>
+                    <p><strong>[6-16]:</strong> مظاهر قدرة الله بنعم الكون: الأرض الممهدة، الجبال الثابتة كالأتود، النوم للراحة، الليل الساتر، النهار للعمل، الشمس المتوهجة المضيئة، والأمطار الغزيرة لإنبات الزروع والجنات.</p>
+                    <p><strong>[17-20]:</strong> يوم القيامة هو ميعاد محدد يفصل الله فيه بين الخلق، ينفخ في الصور فيأتي الناس جماعات، وتتشقق السماء وتزول الجبال كأنها سراب.</p>
+                    <p><strong>[21-30]:</strong> عذاب الطغاة في جهنم، مكث طويل لا يذوقون برداً ولا شراباً طيباً إلا ماءً حاراً وصديداً، جزاءً عادلاً لتكذيبهم الحساب وإحصاء الله لأعمالهم.</p>
+                    <p><strong>[31-36]:</strong> ثواب المتقين الفائزين: حدائق وبساتين وأعناب، كؤوس ممتلئة بالشراب، لا لغو فيها ولا كذب، عطاءً جزيلاً من الله.</p>
+                    <p><strong>[37-40]:</strong> عظمة الله يوم يقوم جبريل والملائكة صفوفاً خاضعين لا يتكلمون إلا بالحق، والإنذار بالعذاب القريب حيث يرى المرء ما عمل، ويتمنى الكافر لو كان تراباً من شدة الهول.</p>
+                </div>
             </div>
         </div>
 
+        <!-- معلومات وقصة -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <span>📜 قصة السورة ومعلومات عنها</span>
@@ -269,24 +284,25 @@
             </div>
             <div class="accordion-content">
                 <p style="line-height: 1.6; padding: 10px 0;">
-                    <strong>نوع السورة:</strong> مكية وعدد آياتها 40 آية.<br><br>
+                    <strong>نوع السورة:</strong> مكية وعدد آياتها 40 آية وهي أول جزء عم.<br><br>
                     <strong>قصتها:</strong> عندما بدأ النبي ﷺ يدعو كفار قريش إلى الإسلام ويخبرهم بالبعث والجزاء، تعجبوا جداً وسخروا وقالوا: كيف نعود أحياءً بعد أن نصبح تراباً؟! فنزلت السورة لتثبت لهم بالدلائل ونعم الكون أن الله قادر على إعادتهم وحسابهم.
                 </p>
             </div>
         </div>
 
+        <!-- يوتيوب بجمل عربية مقروءة ومبسطة داخل الكود -->
         <div class="accordion-item">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <span>🎥 التعلم المرئي والتجويد (YouTube)</span>
                 <span>➕</span>
             </div>
             <div class="accordion-content" style="padding: 5px 15px;">
-                <p style="font-size: 13px; color:#64748b; margin-top:10px;">اضغط على أي زر لفتح بحث آمن وتوجيهي مباشر على يوتيوب:</p>
-                <a href="https://www.youtube.com/results?search_query=%D8%B3%D9%84%D8%B3%D9%84%D8%A9+%D8%AA%D8%AD%D9%81%D9%8A%D8%B8+%D8%B3%D9%88%D8%B1%D8%A9+%D9%8A%D9%88%D8%AA%D9%8A%D9%88%D8%A8+%D8%A7%D9%84%D9%86%D8%A8%D8%A3+%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84" target="_blank" class="yt-btn">
+                <p style="font-size: 13px; color:#64748b; margin-top:10px;">اضغط على أي زر لفتح بحث مباشر على يوتيوب:</p>
+                <a href="https://www.youtube.com/results?search_query=تحفيظ+سورة+النبأ+للأطفال" target="_blank" class="yt-btn">
                     <span>👶 سورة النبأ للأطفال (تكرار ومحاكاة)</span>
                     <span style="color:#ef4444;">◀</span>
                 </a>
-                <a href="https://www.youtube.com/results?search_query=%D8%AA%D8%B9%D9%84%D9%85+%D8%A7%D8%AD%D9%83%D8%A7%D9%85+%D8%AA%D8%AC%D9%88%D9%8A%D8%AF+%D8%B3%D9%88%D8%B1%D8%A9+%D8%A7%D9%84%D9%86%D9%8A%D8%A3" target="_blank" class="yt-btn">
+                <a href="https://www.youtube.com/results?search_query=تعلم+احكام+تجويد+سورة+النبأ" target="_blank" class="yt-btn">
                     <span>🕌 تعلم التجويد والأحكام الخاصة بالسورة</span>
                     <span style="color:#ef4444;">◀</span>
                 </a>
@@ -295,31 +311,40 @@
 
     </div>
 
+    <!-- 2️⃣ قسم الاختبار والتقييم بـ 3 تمارين متتالية وعشوائية -->
     <div id="tab-evaluation" class="tab-content">
         <div class="info-card" id="quiz-intro-box">
-            <h3>📝 ابدأ التقييم العشوائي الصارم</h3>
-            <p style="font-size: 14px; color:#64748b;">تنبيه: يتم توليد 5 أسئلة عشوائية ومختلفة في كل مرة لضمان الحفظ المتقن.</p>
+            <h3>📝 ابدأ التقييم الشامل (3 تمارين متغيرة)</h3>
+            <p style="font-size: 14px; color:#64748b;">يحتوي هذا الاختبار على 3 تمارين مختلفة يتم سحب أسئلتها عشوائياً لفحص الحفظ، الفهم، والمعلومات العامة للسورة.</p>
             <label style="font-weight: bold; display: block; margin-bottom: 8px;">اكتب اسم الطالب الكامل:</label>
             <input type="text" id="student-name-input" placeholder="مثال: محمد اسلام" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #cbd5e1; box-sizing: border-box; margin-bottom: 15px; font-size: 16px;">
-            <button class="btn-action" onclick="startQuiz()">توليد ورقة الاختبار الفورية 🚀</button>
+            <button class="btn-action" onclick="startQuiz()">توليد ورقة الاختبار الكاملة 🚀</button>
         </div>
 
         <div id="quiz-questions-area" style="display: none;">
-            <div id="dynamic-questions-container"></div>
-            <button class="btn-action" onclick="evaluateQuiz()">إرسال ورقة الإجابة للتصحيح 🧐</button>
+            
+            <div class="exercise-title">التمرين الأول: إكمال الآيات والمتشابهات (3 أسئلة عشوائية)</div>
+            <div id="ex1-container"></div>
+
+            <div class="exercise-title">التمرين الثاني: معاني الكلمات والتفسير (3 أسئلة عشوائية)</div>
+            <div id="ex2-container"></div>
+
+            <div class="exercise-title">التمرين الثالث: معلومات السورة العامة (2 أسئلة عشوائية)</div>
+            <div id="ex3-container"></div>
+
+            <button class="btn-action" style="margin-top: 20px;" onclick="evaluateQuiz()">إرسال ورقة الإجابة الكاملة للتصحيح 🧐</button>
         </div>
 
         <div class="result-box" id="quiz-result-box">
             <h2 id="score-text" style="margin-top:0;"></h2>
             <p id="feedback-text"></p>
             <a href="#" id="whatsapp-share-btn" target="_blank" class="btn-whatsapp">
-                💬 إرسال تقرير النتيجة للأستاذ عبر الواتساب
+                💬 إرسال تقرير التمارين الـ 3 للأستاذ عبر الواتساب
             </a>
         </div>
     </div>
 
     <script>
-        // دالة التبديل بين التبويبات
         function switchTab(evt, tabId) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -327,12 +352,10 @@
             evt.currentTarget.classList.add('active');
         }
 
-        // دالة الأكورديون الذكية: تفتح الحالية وتغلق البقية تلقائياً لمنع التداخل
         function toggleAccordion(element) {
             const currentContent = element.nextElementSibling;
             const currentIcon = element.querySelector('span:last-child');
             
-            // إغلاق أي قائمة أخرى مفتوحة قبل فتح القائمة الجديدة
             document.querySelectorAll('.accordion-content').forEach(content => {
                 if (content !== currentContent) {
                     content.style.maxHeight = '0px';
@@ -343,65 +366,74 @@
                 }
             });
 
-            // فتح أو إغلاق القائمة التي تم الضغط عليها
             if (currentContent.style.maxHeight && currentContent.style.maxHeight !== '0px') {
                 currentContent.style.maxHeight = '0px';
                 currentContent.style.paddingTop = '0px';
                 currentContent.style.paddingBottom = '0px';
                 currentIcon.innerText = '➕';
             } else {
-                currentContent.style.maxHeight = currentContent.scrollHeight + 40 + "px";
+                currentContent.style.maxHeight = "400px"; 
                 currentContent.style.paddingTop = '10px';
                 currentContent.style.paddingBottom = '15px';
                 currentIcon.innerText = '➖';
             }
         }
 
-        // بنك أسئلة سورة النبأ العشوائي المجدد
-        const questionBank = [
-            { q: "أكمل الآية: عَمَّ .........؟", options: ["يَتَدَبَّرُونَ", "يَتَسَاءَلُونَ", "يَخْتَلِفُونَ"], correct: 1 },
-            { q: "عَنِ النَّبَإِ الْعَظِيمِ، الَّذِي هُمْ فِيهِ .........؟", options: ["مُخْتَلِفُونَ", "مُعْرِضُونَ", "مُتَّفِقُونَ"], correct: 0 },
-            { q: "أكمل الآية: أَلَمْ نَجْعَلِ الْأَرْضَ .........؟", options: ["مِهَادًا", "بِنَاءً", "فِرَاشًا"], correct: 0 },
-            { q: "أكمل الآية: وَالْجِبَالَ .........؟", options: ["رَوَاسِيَ", "أَوْتَادًا", "قَائِمَةً"], correct: 1 },
-            { q: "وَخَلَقْنَاكُمْ .........؟", options: ["شُعُوبًا", "أَزْوَاجًا", "أَطْوَارًا"], correct: 1 },
+        const bankExercise1 = [
             { q: "وَجَعَلْنَا نَوْمَكُمْ .........؟", options: ["سُبَاتًا", "لِبَاسًا", "مَعَاشًا"], correct: 0 },
-            { q: "وَجَعَلْنَا اللَّيْلَ .........؟", options: ["سُبَاتًا", "لِبَاسًا", "مَعَاشًا"], correct: 1 },
-            { q: "وَجَعَلْنَا النَّهَارَ .........؟", options: ["سُبَاتًا", "لِبَاسًا", "مَعَاشًا"], correct: 2 },
+            { q: "أكمل الآية: وَالْجِبَالَ .........؟", options: ["رَوَاسِيَ", "أَوْتَادًا", "قَائِمَةً"], correct: 1 },
             { q: "وَبَنَيْنَا فَوْقَكُمْ سَبْعًا .........؟", options: ["شِدَادًا", "طِبَاقًا", "طَرَائِقَ"], correct: 0 },
             { q: "وَجَعَلْنَا سِرَاجًا .........?", options: ["مُنِيرًا", "وَهَّاجًا", "مُضِيئًا"], correct: 1 },
-            { q: "وَأَنزَلْنَا مِنَ الْمُعْصِرَاتِ مَاءً .........؟", options: ["ثَجَّاجًا", "طَهُورًا", "مُبَارَكًا"], correct: 0 },
             { q: "إِنَّ يَوْمَ الْفَصْلِ كَانَ .........؟", options: ["مِيقَاتًا", "مَعْلُومًا", "قَرِيبًا"], correct: 0 },
-            { q: "وَسُيِّرَتِ الْجِبَالُ فَكَانَتْ .........؟", options: ["دَكًّا", "هَبَاءً", "سَرَابًا"], correct: 2 },
-            { q: "إِنَّ جَهَنَّمَ كَانَتْ .........؟", options: ["مِرْصَادًا", "مَأْوًى", "نَزُلًا"], correct: 0 },
-            { q: "لَّابِثِينَ فِيهَا .........؟", options: ["أَحْقَابًا", "دَهْرًا", "أَيَّامًا"], correct: 0 },
-            { q: "إِلَّا حَمِيمًا وَغَسَّاقًا، جَزَاءً .........؟", options: ["وِفَاقًا", "عَادِلًا", "كَبِيرًا"], correct: 0 },
-            { q: "وَكُلَّ شَيْءٍ أَحْصَيْنَاهُ .........؟", options: ["كِتَابًا", "رَقْمًا", "عَدَدًا"], correct: 0 },
-            { q: "إِنَّ لِلْمُتَّقِينَ .........؟", options: ["جَنَّاتٍ", "مَفَازًا", "فَوْزًا"], correct: 1 },
-            { q: "وَكَأْسًا .........؟", options: ["دِهَاقًا", "مَلْأَى", "صَافِيَةً"], correct: 0 },
             { q: "وَيَقُولُ الْكَافِرُ يَا لَيْتَنِي كُنتُ .........؟", options: ["نِسْيًا", "تُرَابًا", "عِظَامًا"], correct: 1 }
         ];
 
-        let selectedQuestions = [];
+        const bankExercise2 = [
+            { q: "ما معنى كلمة (الْفَصْلِ) في قوله تعالى 'إنَّ يَوْمَ الْفَصْلِ'؟", options: ["يوم الحساب والتمييز بين الخلق", "يوم انشقاق الأرض", "وقت حصاد الزرع"], correct: 0 },
+            { q: "ما المقصود بـ (النَّبَإِ الْعَظِيمِ)؟", options: ["خبر البعث والقرآن الكريم", "هجرة المسلمين", "فتح مكة"], correct: 0 },
+            { q: "ما معنى كلمة (سُبَاتًا) في قوله تعالى 'وجعلنا نومكم سباتاً'؟", options: ["راحةً لأبدانكم وقاطعاً للعمل", "وقت التعبد", "مكاناً مظلماً"], correct: 0 },
+            { q: "ما معنى كلمة (دِهَاقًا) في آية 'وَكَأْسًا دِهَاقًا'؟", options: ["مملوءة صافية", "فارغة تماماً", "مكسورة"], correct: 0 },
+            { q: "المقصود بـ (المُعْصِرَاتِ) في السورة هي:", options: ["السَّحاب الممتلئ بالأمطار", "الفواكه", "الرياح القوية"], correct: 0 }
+        ];
+
+        const bankExercise3 = [
+            { q: "سورة النبأ هي سورة مكية، ما معنى مكية؟", options: ["نزلت قبل هجرة النبي ﷺ في مكة", "تتحدث عن الكعبة فقط", "نزلت بعد فتح مكة"], correct: 0 },
+            { q: "كم عدد آيات سورة النبأ كاملة؟", options: ["30 آية", "40 آية", "50 آية"], correct: 1 },
+            { q: "ما هو الترتيب الصحيح لسورة النبأ في المصحف الشريف؟", options: ["78 وهي أول جزء عم", "30", "114"], correct: 0 },
+            { q: "لماذا نزلت سورة النبأ؟", options: ["رداً على إنكار وتساؤل كفار قريش حول البعث", "لذكر قصة أصحاب الفيل", "لتوضيح أحكام الميراث"], correct: 0 }
+        ];
+
+        let selectedEx1 = [], selectedEx2 = [], selectedEx3 = [];
         let currentStudentName = "";
 
         function startQuiz() {
             const nameInput = document.getElementById('student-name-input').value.trim();
             if(!nameInput) {
-                alert("فضلًا، اكتب اسم الطالب أولاً لتوثيق التقرير الموجه للأستاذ!");
+                alert("فضلًا، اكتب اسم الطالب أولاً لتوثيق التقرير!");
                 return;
             }
             currentStudentName = nameInput;
 
-            const shuffled = [...questionBank].sort(() => Math.random() - 0.5);
-            selectedQuestions = shuffled.slice(0, 5);
+            selectedEx1 = [...bankExercise1].sort(() => Math.random() - 0.5).slice(0, 3);
+            selectedEx2 = [...bankExercise2].sort(() => Math.random() - 0.5).slice(0, 3);
+            selectedEx3 = [...bankExercise3].sort(() => Math.random() - 0.5).slice(0, 2);
 
-            const container = document.getElementById('dynamic-questions-container');
+            renderExercise('ex1-container', selectedEx1, 'ex1');
+            renderExercise('ex2-container', selectedEx2, 'ex2');
+            renderExercise('ex3-container', selectedEx3, 'ex3');
+
+            document.getElementById('quiz-intro-box').style.display = 'none';
+            document.getElementById('quiz-questions-area').style.display = 'block';
+            document.getElementById('quiz-result-box').style.display = 'none';
+        }
+
+        function renderExercise(containerId, questionsList, prefix) {
+            const container = document.getElementById(containerId);
             container.innerHTML = "";
-
-            selectedQuestions.forEach((qObj, qIdx) => {
+            questionsList.forEach((qObj, qIdx) => {
                 const qBox = document.createElement('div');
                 qBox.className = 'quiz-question-box';
-                qBox.innerHTML = `<p style="font-weight: bold; margin: 0 0 10px 0;">السؤال ${qIdx + 1}: ${qObj.q}</p>`;
+                qBox.innerHTML = `<p style="font-weight: bold; margin: 0 0 10px 0;">سؤال ${qIdx + 1}: ${qObj.q}</p>`;
 
                 const optionsList = document.createElement('div');
                 optionsList.className = 'quiz-options-list';
@@ -409,7 +441,7 @@
                 qObj.options.forEach((optText, optIdx) => {
                     optionsList.innerHTML += `
                         <label class="option-label">
-                            <input type="radio" name="q-${qIdx}" value="${optIdx}">
+                            <input type="radio" name="${prefix}-${qIdx}" value="${optIdx}">
                             <span>${optText}</span>
                         </label>
                     `;
@@ -417,26 +449,37 @@
                 qBox.appendChild(optionsList);
                 container.appendChild(qBox);
             });
-
-            document.getElementById('quiz-intro-box').style.display = 'none';
-            document.getElementById('quiz-questions-area').style.display = 'block';
-            document.getElementById('quiz-result-box').style.display = 'none';
         }
 
         function evaluateQuiz() {
-            let score = 0;
+            let scoreEx1 = 0, scoreEx2 = 0, scoreEx3 = 0;
             let answeredAll = true;
 
-            selectedQuestions.forEach((qObj, qIdx) => {
-                const selectedRadio = document.querySelector(`input[name="q-${qIdx}"]:checked`);
-                if(!selectedRadio) { answeredAll = false; }
-                else if(parseInt(selectedRadio.value) === qObj.correct) { score++; }
+            selectedEx1.forEach((qObj, qIdx) => {
+                const r = document.querySelector(`input[name="ex1-${qIdx}"]:checked`);
+                if(!r) answeredAll = false;
+                else if(parseInt(r.value) === qObj.correct) scoreEx1++;
+            });
+
+            selectedEx2.forEach((qObj, qIdx) => {
+                const r = document.querySelector(`input[name="ex2-${qIdx}"]:checked`);
+                if(!r) answeredAll = false;
+                else if(parseInt(r.value) === qObj.correct) scoreEx2++;
+            });
+
+            selectedEx3.forEach((qObj, qIdx) => {
+                const r = document.querySelector(`input[name="ex3-${qIdx}"]:checked`);
+                if(!r) answeredAll = false;
+                else if(parseInt(r.value) === qObj.correct) scoreEx3++;
             });
 
             if(!answeredAll) {
-                alert("تنبيه: فضلاً أجب على جميع الأسئلة المطروحة أولاً!");
+                alert("تنبيه: فضلاً أجب على جميع أسئلة التمارين الثلاثة قبل الإرسال!");
                 return;
             }
+
+            const totalScore = scoreEx1 + scoreEx2 + scoreEx3;
+            const totalQuestions = selectedEx1.length + selectedEx2.length + selectedEx3.length;
 
             document.getElementById('quiz-questions-area').style.display = 'none';
             const resBox = document.getElementById('quiz-result-box');
@@ -445,17 +488,19 @@
             const scoreTxt = document.getElementById('score-text');
             const feedbackTxt = document.getElementById('feedback-text');
 
-            scoreTxt.innerText = `النتيجة الإجمالية: ${score} من 5`;
+            scoreTxt.innerText = `النتيجة الكلية للتمارين: ${totalScore} من ${totalQuestions}`;
 
-            if(score >= 4) {
+            let detailMsg = `تفاصيل الأداء:\n- التمرين 1 (الآيات): ${scoreEx1}/3\n- التمرين 2 (التفسير): ${scoreEx2}/3\n- التمرين 3 (معلومات عامة): ${scoreEx3}/2`;
+            
+            if(totalScore >= 6) {
                 scoreTxt.style.color = 'var(--success-color)';
-                feedbackTxt.innerText = `🎉 ممتاز يا ${currentStudentName}! حفظك متقن وواثق.`;
+                feedbackTxt.innerHTML = `🎉 ممتاز جداً ومبارك يا ${currentStudentName}! حفظك راسخ وفهمك ممتاز للسورة كاملة.<br><br><small style="color:#64748b;">${detailMsg.replace(/\n/g, '<br>')}</small>`;
             } else {
                 scoreTxt.style.color = 'var(--error-color)';
-                feedbackTxt.innerText = `⚠️ يا ${currentStudentName}، تحتاج لمراجعة أواخر الآيات وتثبيت الحفظ مجدداً.`;
+                feedbackTxt.innerHTML = `⚠️ مجهود طيب يا ${currentStudentName}، ولكن تحتاج لإعادة مراجعة تفاصيل التفسير والحفظ مجدداً.<br><br><small style="color:#64748b;">${detailMsg.replace(/\n/g, '<br>')}</small>`;
             }
 
-            const msg = `السلام عليكم أستاذي الكريم،\nلقد أتممت التقييم العشوائي لـ *سورة النبأ*.\n\n👤 *الطالب:* ${currentStudentName}\n📊 *النتيجة:* ${score} / 5\n\nالحمد لله تم الحفظ والتقييم بنجاح!✨`;
+            const msg = `السلام عليكم أستاذي الكريم،\nلقد أتممت بنجاح الاختبار التقييمي الشامل والمكون من *3 تمارين* لـ *سورة النبأ كاملة*.\n\n👤 *اسم الطالب:* ${currentStudentName}\n📊 *النتيجة الإجمالية:* ${totalScore} / ${totalQuestions}\n\n📝 *تفاصيل التقييم:*\n1️⃣ تمرين المتشابهات: ${scoreEx1} / 3\n2️⃣ تمرين التفسير والمعاني: ${scoreEx2} / 3\n3️⃣ تمرين معلومات السورة: ${scoreEx3} / 2\n\nالحمد لله تم الاختبار بنجاح!✨`;
             document.getElementById('whatsapp-share-btn').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
         }
     </script>
