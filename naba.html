@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كتاب التتبع الذكي - قسم البطل الصغير</title>
     <style>
-        /* === 1. التنسيق العام والألوان (ثيم ألعاب مبهج للأطفال) === */
         :root {
             --bg-color: #f0f4f8;
-            --primary-color: #2563eb; /* أزرق مبهج */
-            --accent-color: #fbbf24;  /* أصفر ذهبي للجواهر */
+            --primary-color: #2563eb;
+            --accent-color: #fbbf24;
             --text-color: #1e293b;
             --card-bg: #ffffff;
+            --success-color: #10b981;
         }
 
         body {
@@ -19,25 +19,26 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* === 2. شريط هيدر البطل الصغير (الجواهر والشعلة) === */
+        /* شريط هيدر البطل */
         .hero-header {
             width: 100%;
             max-width: 500px;
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 15px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border: 2px solid #bfdbfe;
+            box-sizing: border-box;
         }
 
         .avatar-zone {
@@ -70,7 +71,7 @@
             gap: 5px;
         }
 
-        /* === 3. حاوية صفحة المصحف (الصور الخاصة بك) === */
+        /* حاوية صفحة المصحف */
         .quran-container {
             width: 100%;
             max-width: 500px;
@@ -78,62 +79,111 @@
             border-radius: 20px;
             padding: 10px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
         }
 
         .quran-image {
             width: 100%;
             border-radius: 15px;
             display: block;
-            /* هنا يمكنك التحكم في حجم عرض الصورة لتناسب شاشات الهواتف */
         }
 
-        /* === 4. قسم التحديات والألعاب التفاعلية === */
+        /* منطقة الألعاب والتحديات */
         .challenges-section {
             width: 100%;
             max-width: 500px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .challenge-title {
             text-align: center;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
+        /* نافذة اللعبة التفاعلية (تظهر عند الضغط على الزر) */
+        .game-box {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid #cbd5e1;
+            display: none; /* مخفية في البداية */
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .lines-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* الأسطر التي يقوم الطفل بترتيبها */
+        .quran-line {
+            background: #f8fafc;
+            border: 2px dashed #94a3b8;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: grab;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .quran-line:active {
+            cursor: grabbing;
+            background: #e2e8f0;
+        }
+
+        .btn-action {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .btn-action.success {
+            background: var(--success-color);
+        }
+
+        .result-message {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* الأزرار الرئيسية */
         .btn-challenge {
             background: var(--card-bg);
             border: 2px solid #cbd5e1;
             border-radius: 15px;
-            padding: 15px 20px;
-            font-size: 18px;
+            padding: 12px 15px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-sizing: border-box;
         }
 
-        /* تأثير عند تمرير الفأرة أو الضغط بالأصبع */
         .btn-challenge:hover {
             border-color: var(--primary-color);
             background-color: #eff6ff;
-            transform: translateY(-2px);
-        }
-
-        .btn-challenge .icon {
-            font-size: 24px;
-        }
-
-        .btn-challenge .arrow {
-            color: var(--primary-color);
-            font-size: 20px;
         }
     </style>
 </head>
@@ -143,38 +193,147 @@
         <div class="avatar-zone">
             <div class="avatar-pic">🦁</div>
             <div>
-                <div style="font-size: 12px; color: #64748b;">البطل الحالي</div>
-                <div style="font-weight: bold;">محمد اسلام</div>
+                <div style="font-size: 11px; color: #64748b;">البطل الحالي</div>
+                <div id="username-display" style="font-weight: bold;">محمد اسلام</div>
             </div>
         </div>
         <div class="stats-zone">
-            <div class="stat-item" style="color: #ef4444;">🔥 <span>5 أيام</span></div>
-            <div class="stat-item" style="color: var(--accent-color);">💎 <span>150</span></div>
+            <div class="stat-item" style="color: #ef4444;">🔥 <span id="streak-val">5 أيام</span></div>
+            <div class="stat-item" style="color: var(--accent-color);">💎 <span id="gems-val">150</span></div>
         </div>
     </div>
 
     <div class="quran-container">
-        <img src="images/page001.png" alt="صفحة القرآن الكريم" class="quran-image" onerror="this.src='https://via.placeholder.com/400x550/f8fafc/1e4d2b?text=%D8%B5%D9%85%D9%88%D8%AF+%D8%B5%D9%81%D8%AD%D8%A9+%D8%A7%D9%84%D9%85%D8%B5%D8%AD%D9%81'">
+        <img src="images/page001.png" alt="صفحة القرآن الكريم" class="quran-image" onerror="this.style.display='none'; document.getElementById('placeholder-text').style.display='block';">
+        <div id="placeholder-text" style="display:none; text-align:center; color:#64748b; padding: 20px; font-weight:bold;">📖 [هنا تظهر صورة صفحة المصحف الخاصة بك]</div>
     </div>
 
     <div class="challenges-section">
         <div class="challenge-title">🎯 ألعاب التحدي الذكي للآيات</div>
         
-        <button class="btn-challenge" onclick="alert('قريباً: سيتم فتح لعبة التفتيش عن أخطاء الشيخ التشكيلية!')">
-            <span class="avatar-zone"><span class="icon">👨‍🏫</span> تحدي "أنا الشيخ"</span>
-            <span class="arrow">◀</span>
+        <button class="btn-challenge" onclick="toggleGame()">
+            <span class="avatar-zone"><span>🧩</span> أحجية ترتيب الآيات</span>
+            <span id="arrow-status" style="color: var(--primary-color);">▼</span>
         </button>
 
-        <button class="btn-challenge" onclick="alert('قريباً: سيتم فتح تحدي إزالة الضباب البصري عن الآيات لتختبر حفظك ذاتياً!')">
-            <span class="avatar-zone"><span class="icon">🎨</span> التلوين البصري السحري</span>
-            <span class="arrow">◀</span>
+        <div id="puzzle-game" class="game-box">
+            <p style="margin:0; font-size:14px; color:#64748b; text-align:center;">رتب الآيات الكريمة ترتيباً صحيحاً بالسحب والإفلات (أو بالضغط والتبديل):</p>
+            
+            <div class="lines-container" id="lines-space">
+                </div>
+
+            <button class="btn-action" onclick="checkOrder()">تحقق من صحة الترتيب الفعلي 🌟</button>
+            <div id="game-res" class="result-message"></div>
+        </div>
+
+        <button class="btn-challenge" style="opacity: 0.7;" onclick="alert('تحدي أنا الشيخ سنبرمجه في الخطوة القادمة!')">
+            <span class="avatar-zone"><span>👨‍🏫</span> تحدي "أنا الشيخ"</span>
+            <span>◀</span>
         </button>
 
-        <button class="btn-challenge" onclick="alert('قريباً: سيتم فتح لعبة ترتيب أسطر الآيات بالسحب والإفلات!')">
-            <span class="avatar-zone"><span class="icon">🧩</span> أحجية ترتيب الآيات</span>
-            <span class="arrow">◀</span>
+        <button class="btn-challenge" style="opacity: 0.7;" onclick="alert('التلوين البصري السحري سنبرمجه بعد إنهاء تحدي الترتيب!')">
+            <span class="avatar-zone"><span>🎨</span> التلوين البصري السحري</span>
+            <span>◀</span>
         </button>
     </div>
 
+    <script>
+        // الآيات الصحيحة مرتبة (مثال من سورة النبأ)
+        const correctOrder = [
+            "عَمَّ يَتَسَاءَلُونَ",
+            "عَنِ النَّبَإِ الْعَظِيمِ",
+            "الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ",
+            "كَلَّا سَيَعْلَمُونَ"
+        ];
+
+        // مصفوفة للخلط (البداية مبعثرة)
+        let scrambledOrder = [...correctOrder].sort(() => Math.random() - 0.5);
+        let draggedItem = null;
+
+        function initGame() {
+            const container = document.getElementById('lines-space');
+            container.innerHTML = '';
+            
+            scrambledOrder.forEach((lineText, index) => {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'quran-line';
+                lineDiv.innerText = lineText;
+                lineDiv.setAttribute('draggable', 'true');
+                lineDiv.setAttribute('data-index', index);
+
+                // أحداث السحب والإفلات للهواتف والحواسب
+                lineDiv.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                });
+
+                lineDiv.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                lineDiv.addEventListener('drop', function() {
+                    if (draggedItem !== this) {
+                        let currentText = this.innerText;
+                        this.innerText = draggedItem.innerText;
+                        draggedItem.innerText = currentText;
+                    }
+                });
+
+                // دعم بسيط للمس السريع على الهواتف (تبديل بالنقرات)
+                lineDiv.addEventListener('click', function() {
+                    if(!draggedItem) {
+                        draggedItem = this;
+                        this.style.background = '#dbeafe';
+                        this.style.borderColor = '#2563eb';
+                    } else {
+                        let temp = this.innerText;
+                        this.innerText = draggedItem.innerText;
+                        draggedItem.innerText = temp;
+                        draggedItem.style.background = '#f8fafc';
+                        draggedItem.style.borderColor = '#94a3b8';
+                        draggedItem = null;
+                    }
+                });
+
+                container.appendChild(lineDiv);
+            });
+        }
+
+        function toggleGame() {
+            const gameBox = document.getElementById('puzzle-game');
+            const arrow = document.getElementById('arrow-status');
+            if(gameBox.style.display === 'none' || gameBox.style.display === '') {
+                gameBox.style.display = 'flex';
+                arrow.innerText = '▲';
+                initGame();
+            } else {
+                gameBox.style.display = 'none';
+                arrow.innerText = '▼';
+            }
+        }
+
+        function checkOrder() {
+            const currentLines = document.querySelectorAll('.quran-line');
+            let isCorrect = true;
+            
+            currentLines.forEach((line, idx) => {
+                if(line.innerText !== correctOrder[idx]) {
+                    isCorrect = false;
+                }
+            });
+
+            const resDiv = document.getElementById('game-res');
+            if(isCorrect) {
+                resDiv.style.color = 'var(--success-color)';
+                resDiv.innerText = '🎉 أحسنت يا بطل! الترتيب صحيح تماماً وتم منحك +50 جوهرة! 💎';
+                
+                // تحديث الجواهر محلياً في الواجهة فوراً
+                let currentGems = parseInt(document.getElementById('gems-val').innerText);
+                document.getElementById('gems-val').innerText = currentGems + 50;
+            } else {
+                resDiv.style.color = '#ef4444';
+                resDiv.innerText = '❌ الترتيب غير صحيح بعد، حاول مرة أخرى وركز في تسلسل الآيات!';
+            }
+        }
+    </script>
 </body>
 </html>
